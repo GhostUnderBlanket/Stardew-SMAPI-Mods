@@ -6,9 +6,9 @@ using StardewValley.Menus;
 
 namespace FishingAssistant2.Framework.Components
 {
-    /// This code is edited version of CJBok and Pathoschild CheatsOptionsButton in CJBCheatsMenu repository
-    /// https://github.com/CJBok/SDV-Mods/blob/master/CJBCheatsMenu/Framework/Components/CheatsOptionsButton.cs
+    /// This code is copied from CJBok/SDV-Mods repository
     /// available under the MIT License. See that repository for the latest version.
+    /// https://github.com/CJBok/SDV-Mods
     
     /// <summary>A button which invokes a callback when clicked.</summary>
     internal class ButtonOptionsElement : BaseOptionsElement

@@ -8,9 +8,9 @@ using StardewValley.Menus;
 
 namespace FishingAssistant2.Framework.Components
 {
-    /// This code is edited version of CJBok and Pathoschild CheatsOptionsKeyListener in CJBCheatsMenu repository
-    /// https://github.com/CJBok/SDV-Mods/blob/master/CJBCheatsMenu/Framework/Components/CheatsOptionsKeyListener.cs
+    /// This code is copied from CJBok/SDV-Mods repository
     /// available under the MIT License. See that repository for the latest version.
+    /// https://github.com/CJBok/SDV-Mods
     
     /// <summary>A button which lets the user choose a key binding.</summary>
     internal class KeyListenerOptionsElement : BaseOptionsElement
@@ -82,7 +82,7 @@ namespace FishingAssistant2.Framework.Components
           : base(label, -1, -1, slotWidth + 1, 11 * Game1.pixelZoom)
         {
             this.Value = value;
-            this.PressNewKeyLabel = I18n.MenuConfig_PressNewKey();
+            this.PressNewKeyLabel = I18n.Menu_Config_PressNewKey();
             this.SetValue = setValue;
             this.SetButtonBounds = new Rectangle(slotWidth - 28 * Game1.pixelZoom, -1 + Game1.pixelZoom * 3, 21 * Game1.pixelZoom, 11 * Game1.pixelZoom);
             this.ClearToButton = clearToButton;

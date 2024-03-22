@@ -1,4 +1,5 @@
 using System;
+using FishingAssistant2.Framework.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
@@ -6,10 +7,9 @@ using StardewValley.Menus;
 
 namespace FishingAssistant2.Framework.Components
 {
-    /// This code is edited version of CJBok and Pathoschild BaseOptionsElement in CheatsOptionsSlider repository
-    /// https://github.com/CJBok/SDV-Mods/blob/master/CJBCheatsMenu/Framework/Components/CheatsOptionsSlider.cs
+    /// This code is copied from CJBok/SDV-Mods repository
     /// available under the MIT License. See that repository for the latest version.
-
+    /// https://github.com/CJBok/SDV-Mods
     
     /// <summary>A UI slider for selecting from a range of values.</summary>
     internal class SliderOptionsElement : BaseOptionsElement

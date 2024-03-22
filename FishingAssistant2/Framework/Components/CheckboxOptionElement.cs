@@ -6,9 +6,9 @@ using StardewValley.Menus;
 
 namespace FishingAssistant2.Framework.Components
 {
-    /// This code is edited version of CJBok and Pathoschild CheatsOptionsCheckbox in CJBCheatsMenu repository
-    /// https://github.com/CJBok/SDV-Mods/blob/master/CJBCheatsMenu/Framework/Components/CheatsOptionsCheckbox.cs
+    /// This code is copied from CJBok/SDV-Mods repository
     /// available under the MIT License. See that repository for the latest version.
+    /// https://github.com/CJBok/SDV-Mods
     
     /// <summary>A checkbox UI option.</summary>
     internal class CheckboxOptionElement : BaseOptionsElement

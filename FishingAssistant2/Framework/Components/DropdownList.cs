@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using FishingAssistant2.Framework.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
@@ -9,9 +10,9 @@ using StardewValley.Menus;
 
 namespace FishingAssistant2.Framework.Components
 {
-    /// This code is edited version of CJBok and Pathoschild DropdownList in SDV-Mods repository
-    /// https://github.com/CJBok/SDV-Mods/blob/master/Common/UI/DropdownList.cs
+    /// This code is copied from CJBok/SDV-Mods repository
     /// available under the MIT License. See that repository for the latest version.
+    /// https://github.com/CJBok/SDV-Mods
     
     /// <summary>A dropdown UI component which lets the player choose from a list of values.</summary>
     /// <typeparam name="TValue">The item value type.</typeparam>

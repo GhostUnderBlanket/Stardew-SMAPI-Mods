@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FishingAssistant2.Framework.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
@@ -8,10 +9,9 @@ using StardewValley.Menus;
 
 namespace FishingAssistant2.Framework.Components
 {
-    /// This code is edited version of CJBok and Pathoschild Dropdown in SDV-Mods repository
-    /// https://github.com/CJBok/SDV-Mods/blob/master/Common/UI/Dropdown.cs
+    /// This code is copied from CJBok/SDV-Mods repository
     /// available under the MIT License. See that repository for the latest version.
-
+    /// https://github.com/CJBok/SDV-Mods
     
     /// <summary>A button UI component which lets the player trigger a dropdown list.</summary>
     internal class DropdownOptionsElement<TItem> : ClickableComponent

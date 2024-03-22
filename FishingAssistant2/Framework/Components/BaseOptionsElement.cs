@@ -4,9 +4,9 @@ using StardewValley.Menus;
 
 namespace FishingAssistant2.Framework.Components
 {
-    /// This code is edited version of CJBok and Pathoschild BaseOptionsElement in CJBCheatsMenu repository
-    /// https://github.com/CJBok/SDV-Mods/blob/master/CJBCheatsMenu/Framework/Components/BaseOptionsElement.cs
+    /// This code is copied from CJBok/SDV-Mods repository
     /// available under the MIT License. See that repository for the latest version.
+    /// https://github.com/CJBok/SDV-Mods
     
     /// <summary>The base implementation for a cheat option element.</summary>
     internal abstract class BaseOptionsElement : OptionsElement

@@ -2,14 +2,17 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
 
-namespace FishingAssistant2.Framework
+namespace FishingAssistant2.Framework.Common
 {
-    /// This code is edited version of Pathoschild CommonHelper in StardewMods repository
-    /// https://github.com/Pathoschild/StardewMods/blob/develop/Common/CommonHelper.cs
+    /// This code is copied from CJBok/SDV-Mods repository
     /// available under the MIT License. See that repository for the latest version.
+    /// https://github.com/CJBok/SDV-Mods
     
     /// <summary>Simplifies access to the game's sprite sheets.</summary>
-    /// <remarks>Each sprite is represented by a rectangle, which specifies the coordinates and dimensions of the image in the sprite sheet.</remarks>
+    /// <remarks>
+    ///     Each sprite is represented by a rectangle, which specifies the coordinates and dimensions of the image in the
+    ///     sprite sheet.
+    /// </remarks>
     internal static class CommonSprites
     {
         /// <summary>Sprites used to draw a dropdown list.</summary>
