@@ -4,9 +4,6 @@ namespace FishingAssistant2
 {
     internal class ModConfig
     {
-        /// <summary>The default values.</summary>
-        public static ModConfig Defaults { get; } = new ModConfig();
-
         /// <summary>Button for toggle max or free fishing rod cast power</summary>
         public SButton EnableModButton { get; set; } = SButton.F5;
 
@@ -15,9 +12,6 @@ namespace FishingAssistant2
 
         /// <summary>Button for toggle catch or ignore treasure in fishing mini-game</summary>
         public SButton CatchTreasureButton { get; set; } = SButton.F7;
-
-        /// <summary>Button for reload config file</summary>
-        public SButton OpenMenuButton { get; set; } = SButton.F8;
 
         /// <summary>Whether the game should consider every catch to be perfectly executed, even if it wasn't.</summary>
         public bool AlwaysPerfect { get; set; } = false;
@@ -47,10 +41,10 @@ namespace FishingAssistant2
         public float FishDifficultyAdditive { get; set; } = 0;
 
         /// <summary>Make you catch double fish every time</summary>
-        public bool AlwaysCatchDoubleFish { get; set; } = false;
+        /// public bool AlwaysCatchDoubleFish { get; set; } = false;
 
         /// <summary>Position to display fish info when playing fishing mini-game</summary>
-        public string ModStatusDisplayPosition { get; set; } = "Right";
+        public string ModStatusDisplayPosition { get; set; } = "Left";
 
         /// <summary>Should mod show fish info while catching fish?</summary>
         public bool DisplayFishInfo { get; set; } = true;

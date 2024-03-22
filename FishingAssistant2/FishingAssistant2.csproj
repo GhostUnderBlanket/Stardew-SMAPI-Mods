@@ -16,8 +16,4 @@
       <AdditionalFiles Remove="i18n\default.json" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Menu\" />
-    </ItemGroup>
-
 </Project>
