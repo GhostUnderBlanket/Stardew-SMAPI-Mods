@@ -1,3 +1,17 @@
 {
-  "mod-name" : "Fishing Assistant 2"
+  "mod-name" : "Fishing Assistant 2",
+
+  "left" : "Left",
+  "right" : "Right",
+  "upper-left" : "Upper Left",
+  "upper-right" : "Upper Right",
+  "lower-left" : "Lower Left",
+  "lower-right" : "Lower Right",
+  
+  "config-menu.title.key-binding" : "Key Binding",
+  "config-menu.option.toggle-mod" : "Toggle Mod Button",
+  "config-menu.option.cast-power" : "Cast Power Button",
+  "config-menu.option.catch-treasure" : "Catch Treasure Button",
+  "config-menu.title.hud" : "HUD",
+  "config-menu.option.hud-position" : "HUD Position"
 }

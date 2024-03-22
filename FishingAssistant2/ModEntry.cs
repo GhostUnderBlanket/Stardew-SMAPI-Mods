@@ -133,17 +133,29 @@ namespace FishingAssistant2
             
             Register();
 
-            AddSectionTitle("Key Binding");
+            AddSectionTitle(I18n.ConfigMenu_Title_KeyBinding());
             
-            AddKeyBind("Enable Mod Button", () => _config.EnableModButton, button => _config.EnableModButton = button);
-            AddKeyBind("Cast Power Button", () => _config.CastPowerButton, button => _config.CastPowerButton = button);
-            AddKeyBind("Catch Treasure Button", () => _config.CatchTreasureButton, button => _config.CatchTreasureButton = button);
+            AddKeyBind(I18n.ConfigMenu_Option_ToggleMod(), () => _config.EnableModButton, button => _config.EnableModButton = button);
+            AddKeyBind(I18n.ConfigMenu_Option_CastPower(), () => _config.CastPowerButton, button => _config.CastPowerButton = button);
+            AddKeyBind(I18n.ConfigMenu_Option_CatchTreasure(), () => _config.CatchTreasureButton, button => _config.CatchTreasureButton = button);
 
-            AddSectionTitle("UI");
-            AddDropDown("Mod Status display Position",
+            AddSectionTitle(I18n.ConfigMenu_Title_Hud());
+            AddDropDown(I18n.ConfigMenu_Option_HudPosition(),
                 () => _config.ModStatusDisplayPosition,
-                pos => _config.ModStatusDisplayPosition = pos,
-                new[] { "Left", "Right" });
+                pos => _config.ModStatusDisplayPosition = GetDefaultVale(pos),
+                new[] { I18n.Left(), I18n.Right() });
+        }
+
+        private string GetDefaultVale(string text)
+        {
+            if (text == I18n.Left()) return "Left"; 
+            if (text == I18n.Right()) return "Right";
+            if (text == I18n.UpperLeft()) return "Upper Left";
+            if (text == I18n.UpperRight()) return "Upper Right";
+            if (text == I18n.LowerLeft()) return "Lower Left";
+            if (text == I18n.LowerRight()) return "Lower Right";
+            
+            else return string.Empty;
         }
 
         private void Register()
