@@ -1,17 +1,51 @@
 {
   "mod-name" : "Fishing Assistant 2",
 
+  "on" : "On",
+  "off" : "Off",
   "left" : "Left",
   "right" : "Right",
   "upper-left" : "Upper Left",
   "upper-right" : "Upper Right",
   "lower-left" : "Lower Left",
   "lower-right" : "Lower Right",
+  "default" : "Default",
+  "always" : "Always",
+  "never" : "Never",
   
   "config-menu.title.key-binding" : "Key Binding",
   "config-menu.option.toggle-mod" : "Toggle Mod Button",
-  "config-menu.option.cast-power" : "Cast Power Button",
   "config-menu.option.catch-treasure" : "Catch Treasure Button",
   "config-menu.title.hud" : "HUD",
-  "config-menu.option.hud-position" : "HUD Position"
+  "config-menu.option.hud-position" : "HUD Position",
+  
+  "config-menu.title.fishing" : "Fishing",
+  "config-menu.option.max-cast-power" : "Max Cast Power",
+  "config-menu.option.instant-fish-bite" : "Instant Fish Bite",
+  "config-menu.option.always-perfect" : "Always Perfect",
+  "config-menu.option.treasure-chance" : "Treasure Chance",
+  "config-menu.option.Instant-catch-fish" : "Instant Catch Fish",
+  "config-menu.option.Instant-catch-treasure" : "Instant Catch Treasure",
+  "config-menu.option.fish-difficulty-multiplier" : "Fish Difficulty Multiplier",
+  "config-menu.option.fish-difficulty-additive" : "Fish Difficulty Additive",
+
+  "config-menu.title.automation" : "Automation",
+  "config-menu.option.auto-cast-fishing-rod" : "Auto Cast FishingRod",
+  "config-menu.option.auto-hook-fish" : "Auto Hook Fish",
+  "config-menu.option.auto-play-mini-game" : "Auto Play MiniGame",
+  "config-menu.option.auto-close-popup" : "Auto Close Popup",
+  "config-menu.option.auto-loot-treasure" : "Auto Loot Treasure",
+  
+  "config-menu.title.enchantment" : "Enchantments",
+  "config-menu.option.add-autoHook-enchantment" : "Add AutoHook Enchantment",
+  "config-menu.option.add-efficient-enchantment" : "Add Efficient Enchantment",
+  "config-menu.option.add-master-enchantment" : "Add Master Enchantment",
+  "config-menu.option.add-preserving-enchantment" : "Add Preserving Enchantment",
+  "config-menu.option.remove-enchantments-when-unequipped" : "Remove When Unequipped",
+  
+  "hud-message.mod-enable" : "Fishing Assistant 2 is {0}",
+  "hud-message.max-cast-power" : "Max cast power is {0}",
+  "hud-message.catch-treasure" : "Catch treasure is {0}",
+  "hud-message.low-stamina" : "Low stamina",
+  "hud-message.inventory-full" : "Inventory Full",
 }

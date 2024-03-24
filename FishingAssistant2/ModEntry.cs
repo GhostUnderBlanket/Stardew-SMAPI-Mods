@@ -1,77 +1,128 @@
-using System;
-using GenericModConfigMenu;
+using ChibiKyu.StardewMods.Common;
+using ChibiKyu.StardewMods.FishingAssistant2.Frameworks;
+using FishingAssistant2;
+using FishingAssistant2.Frameworks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using StardewModdingAPI.Utilities;
 using StardewValley;
 using StardewValley.Menus;
+using StardewValley.Tools;
 
-namespace FishingAssistant2
+namespace ChibiKyu.StardewMods.FishingAssistant2
 {
     internal class ModEntry : Mod
     {
-        private ModConfig _config;
-        private IGenericModConfigMenuApi? _configMenu;
+        private ModConfig Config { get; set; }
+        private Assistant Assistant { get; set; }
+
+        public bool _modEnable;
+        public bool _catchTreasure;
         
-        private bool _modEnable;
-        private bool _maxCastPower;
-        private bool _catchTreasure;
+        public int _facingDirection;
+        public int _standingPosX;
+        public int _standingPosY;
         
         public override void Entry(IModHelper helper)
         {
-            _config = helper.ReadConfig<ModConfig>();
             I18n.Init(helper.Translation);
             
+            this.Config = helper.ReadConfig<ModConfig>();
+            
             helper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
+            helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
             helper.Events.Display.RenderingHud += this.OnRenderingHud;
+            helper.Events.Display.MenuChanged += this.OnMenuChanged;
             helper.Events.Input.ButtonPressed += this.OnButtonPressed;
+
+            Assistant = new Assistant(()=> this,() => Config);
         }
 
         private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
         {
-            InitializeModConfigMenu();
+            var configMenu = new ConfigMenu(this.Helper.ModRegistry, this.ModManifest, () => Config, () => Config = new ModConfig(), () => this.Helper.WriteConfig(Config));
+            configMenu.RegisterModConfigMenu();
+        }
+        
+        private void OnUpdateTicked(object? sender, UpdateTickedEventArgs e)
+        {
+            if (!Context.IsWorldReady) return;
+            
+            if (Game1.player.CurrentTool is not FishingRod)
+                Assistant.OnUnEquipFishingRod();
+            
+            if (!_modEnable) return;
+            
+            if (Game1.player.CurrentTool is FishingRod fishingRod)
+                Assistant.OnEquipFishingRod(fishingRod, _modEnable);
+            
+            Assistant.AutoPlayFishingMiniGame();
+            Assistant.AutoLootTreasure();
         }
 
         private void OnRenderingHud(object? sender, RenderingHudEventArgs e)
         {
             DrawModStatus();
         }
+        
+        private void OnMenuChanged(object? sender, MenuChangedEventArgs e)
+        {
+            if (e.NewMenu is BobberBar bobberBar)
+                Assistant.OnFishingMiniGameStart(bobberBar);
+            else if (e.OldMenu is BobberBar)
+                Assistant.OnFishingMiniGameEnd();
 
+            if (e.NewMenu is ItemGrabMenu { source: ItemGrabMenu.source_fishingChest } itemGrabMenu)
+                Assistant.OnTreasureMenuOpen(itemGrabMenu);
+        }
+        
         private void OnButtonPressed(object? sender, ButtonPressedEventArgs e)
         {
             if (!Context.IsWorldReady) return;
-            
-            if (e.Button == _config.EnableModButton)
-                _modEnable = !_modEnable;
-            
-            if (e.Button == _config.CastPowerButton)
+
+            if (e.Button == Config.EnableModButton)
             {
-                _maxCastPower = !_maxCastPower;
-                // if (Game1.isFestival())
-                // {
-                //     string status = maxCastPower ? I18n.Mod_Status_Enable() : I18n.Mod_Status_Disable();
-                //     AddHUDMessage(2, I18n.Hud_Message_Cast_Power(), status);
-                // }
+                _modEnable = !_modEnable;
+                Game1.playSound("coin");
+
+                if (!_modEnable) ForgetPlayerPosition();
             }
             
-            if (e.Button == _config.CatchTreasureButton)
+            if (e.Button == Config.CatchTreasureButton)
             {
                 _catchTreasure = !_catchTreasure;
-                // if (Game1.isFestival())
-                // {
-                //     string status = autoCatchTreasure ? I18n.Mod_Status_Enable() : I18n.Mod_Status_Disable();
-                //     AddHUDMessage(2, I18n.Hud_Message_Catch_Treasure(), status);
-                // }
+                Game1.playSound("dwop");
             }
+        }
+        
+        public void CachePlayerPosition()
+        {
+            _facingDirection = Game1.player.getDirection() != -1 ? Game1.player.getDirection() : Game1.player.FacingDirection;
+            _standingPosX = (int)Game1.player.getStandingPosition().X;
+            _standingPosY = (int)Game1.player.getStandingPosition().Y;
+        }
+
+        public void ForgetPlayerPosition()
+        {
+            _facingDirection = 0;
+            _standingPosX = 0;
+            _standingPosY = 0;
+        }
+        
+        public void ForceDisable()
+        {
+            Game1.playSound("coin");
+            _modEnable = false;
+            CommonHelper.PushToggleNotification(_modEnable, I18n.HudMessage_ModEnable());
         }
 
         private void DrawModStatus()
         {
-            if (Game1.eventUp || (!_modEnable && !_maxCastPower && !_catchTreasure)) return;
+            if (Game1.eventUp && !Game1.isFestival() || (!_modEnable && !_catchTreasure)) 
+                return;
             
-            float toolBarTransparency = 1;
+            float toolBarTransparency = 0;
             int toolBarWidth = 0;
             
             foreach (var menu in Game1.onScreenMenus)
@@ -83,34 +134,34 @@ namespace FishingAssistant2
                 break;
             }
             
-            Viewport viewport = Game1.graphics.GraphicsDevice.Viewport;
-            Point playerGlobalPos = Game1.player.GetBoundingBox().Center;
-            Vector2 playerLocalVec = Game1.GlobalToLocal(Game1.viewport, new Vector2(playerGlobalPos.X, playerGlobalPos.Y));
+            var viewport = Game1.graphics.GraphicsDevice.Viewport;
+            var playerGlobalPos = Game1.player.GetBoundingBox().Center;
+            var playerLocalVec = Game1.GlobalToLocal(Game1.viewport, new Vector2(playerGlobalPos.X, playerGlobalPos.Y));
             bool alignTop = !Game1.options.pinToolbarToggle && playerLocalVec.Y > (float)(viewport.Height / 2 + 64);
             
             const int boxSize = 96;
-            const int iconSize = 40;
+            const int iconSize = 20;
             const int screenMargin = 8;
             const int spacing = 2;
 
-            int toolbarOffset = _config.ModStatusDisplayPosition == "Left" ? -toolBarWidth - spacing : toolBarWidth + spacing;
+            int toolbarOffset = (toolBarTransparency == 0 || Assistant.IsInFishingMiniGame || Game1.isFestival()) ? 0 : 
+                Config.ModStatusPosition == "Left" ? -toolBarWidth - spacing : toolBarWidth + spacing;
             int boxPosX = viewport.Width / 2 + toolbarOffset - (boxSize / 2);
             int boxPosY = alignTop ? screenMargin : viewport.Height - screenMargin - boxSize;
             int boxCenterX = boxPosX + boxSize / 2;
             int boxCenterY = boxPosY + boxSize / 2;
+            int offset = boxSize / 4;
 
             var rectangles = new[]
             {
                 new Rectangle(0, 256, 60, 60), //Box Texture
                 new Rectangle(20, 428, 10, 10), // Fishing Texture
-                new Rectangle(545, 1921, 53, 19), // Max Texture
                 new Rectangle(137, 412, 10, 11)  // Treasure Texture
             };
             
             IClickableMenu.drawTextureBox(Game1.spriteBatch, Game1.menuTexture, rectangles[0], boxPosX, boxPosY, boxSize, boxSize, Color.White * toolBarTransparency, drawShadow: false);
-            DrawIcon(_modEnable, rectangles[1], boxCenterX - (boxSize / 4) - spacing, boxCenterY - (boxSize / 4) - spacing, 2f);
-            DrawIcon(_maxCastPower, rectangles[2], boxCenterX - (boxSize / 4), boxCenterY + (boxSize / 4) - (iconSize / 2) + spacing, 1f);
-            DrawIcon(_catchTreasure, rectangles[3], boxCenterX + (boxSize / 4) - (iconSize / 2) + spacing, boxCenterY - (boxSize / 4) - spacing, 2f);
+            DrawIcon(_modEnable, rectangles[1], boxCenterX - (iconSize / 2), boxPosY + offset, 2f);
+            DrawIcon(_catchTreasure, rectangles[2], boxCenterX - (iconSize / 2), boxPosY + boxSize - offset - iconSize, 2f);
 
             return;
 
@@ -121,79 +172,5 @@ namespace FishingAssistant2
                 icon.draw(Game1.spriteBatch, Color.White * toolBarTransparency * iconTransparency, 0);
             }
         }
-
-
-        #region Mod Config Menu
-
-        private void InitializeModConfigMenu()
-        {
-            _configMenu = this.Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
-            if (_configMenu is null)
-                return;
-            
-            Register();
-
-            AddSectionTitle(I18n.ConfigMenu_Title_KeyBinding());
-            
-            AddKeyBind(I18n.ConfigMenu_Option_ToggleMod(), () => _config.EnableModButton, button => _config.EnableModButton = button);
-            AddKeyBind(I18n.ConfigMenu_Option_CastPower(), () => _config.CastPowerButton, button => _config.CastPowerButton = button);
-            AddKeyBind(I18n.ConfigMenu_Option_CatchTreasure(), () => _config.CatchTreasureButton, button => _config.CatchTreasureButton = button);
-
-            AddSectionTitle(I18n.ConfigMenu_Title_Hud());
-            AddDropDown(I18n.ConfigMenu_Option_HudPosition(),
-                () => _config.ModStatusDisplayPosition,
-                pos => _config.ModStatusDisplayPosition = GetDefaultVale(pos),
-                new[] { I18n.Left(), I18n.Right() });
-        }
-
-        private string GetDefaultVale(string text)
-        {
-            if (text == I18n.Left()) return "Left"; 
-            if (text == I18n.Right()) return "Right";
-            if (text == I18n.UpperLeft()) return "Upper Left";
-            if (text == I18n.UpperRight()) return "Upper Right";
-            if (text == I18n.LowerLeft()) return "Lower Left";
-            if (text == I18n.LowerRight()) return "Lower Right";
-            
-            else return string.Empty;
-        }
-
-        private void Register()
-        {
-            _configMenu?.Register(
-                mod: this.ModManifest,
-                reset: () => _config = new ModConfig(),
-                save: () => this.Helper.WriteConfig(_config)
-            );
-        }
-
-        private void AddSectionTitle(string text)
-        {
-            _configMenu?.AddSectionTitle(
-                mod: this.ModManifest,
-                text: () => text);
-        }
-
-        private void AddKeyBind(string text, Func<SButton> getValue, Action<SButton> setValue)
-        {
-            _configMenu?.AddKeybind(
-                mod: this.ModManifest,
-                getValue: getValue,
-                setValue: setValue,
-                name: () => text);
-        }
-
-        private void AddDropDown(string name, Func<string> getValue, Action<string> setValue, string[] allowedValues = null)
-        {
-            _configMenu?.AddTextOption(
-                mod: this.ModManifest,
-                name: () => name,
-                getValue: getValue,
-                setValue: setValue,
-                allowedValues: allowedValues
-            );
-        }
-
-        #endregion
     }
 }
