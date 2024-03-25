@@ -1,6 +1,4 @@
-using FishingAssistant2.Frameworks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Enchantments;
@@ -23,7 +21,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         private int _autoCastDelay = 60;
         private int _autoClosePopupDelay = 30;
         
-        public AutoActionResponse DoAutoCastFishingRod(int playerFacingDirection, int standingPosX, int standingPosY)
+        public AutoActionResponse DoAutoCastFishingRod(int playerFacingDirection)
         {
             if (_autoCastDelay-- > 0)
                 return AutoActionResponse.OnDelay;
@@ -42,7 +40,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 return AutoActionResponse.LowStamina;
             
             Game1.player.faceDirection(playerFacingDirection);
-            Instance.beginUsing(Game1.currentLocation, standingPosX, standingPosY, Game1.player);
+            Game1.pressUseToolButton();
             
             return AutoActionResponse.CanDoAction;
         }

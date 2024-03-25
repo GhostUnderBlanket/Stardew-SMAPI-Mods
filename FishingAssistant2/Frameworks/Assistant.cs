@@ -1,9 +1,5 @@
 using ChibiKyu.StardewMods.Common;
 using FishingAssistant2;
-using FishingAssistant2.Frameworks;
-using Microsoft.Xna.Framework;
-using StardewModdingAPI;
-using StardewModdingAPI.Utilities;
 using StardewValley;
 using StardewValley.Enchantments;
 using StardewValley.Menus;
@@ -79,9 +75,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             if (_config.MaxCastPower) _fishingRod.Instance.castingPower = 1.01f;
 
-            if (_config.AutoCastFishingRod && _modEntry._modEnable)
+            if (_config.AutoCastFishingRod && _modEntry.ModEnable)
             {
-                var response = _fishingRod.DoAutoCastFishingRod(_modEntry._facingDirection, _modEntry._standingPosX, _modEntry._standingPosY);
+                var response = _fishingRod.DoAutoCastFishingRod(_modEntry.FacingDirection);
                 switch (response)
                 {
                     case AutoActionResponse.LowStamina:
@@ -97,9 +93,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             if (_config.InstantFishBite) _fishingRod.InstantFishBite();
             
-            if (_config.AutoHookFish && _modEntry._modEnable) _fishingRod.AutoHook();
+            if (_config.AutoHookFish && _modEntry.ModEnable) _fishingRod.AutoHook();
 
-            if (_config.AutoClosePopup && _modEntry._modEnable) _fishingRod.AutoCloseFishPopup();
+            if (_config.AutoClosePopup && _modEntry.ModEnable) _fishingRod.AutoCloseFishPopup();
         }
 
         #endregion
@@ -128,7 +124,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             _bobberBar.OverrideTreasureChance(_config.TreasureChance);
             
             if (_config.InstantCatchTreasure || _config.InstantCatchFish) 
-                _bobberBar.InstantCatchTreasure(_modEntry._catchTreasure);
+                _bobberBar.InstantCatchTreasure(_modEntry.CatchTreasure);
             
             if (_config.InstantCatchFish) _bobberBar.InstantCatchFish();
         }
@@ -139,7 +135,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         public void DoOnUpdateAssistantTask()
         {
-            if (!_modEntry._modEnable) return;
+            if (!_modEntry.ModEnable) return;
 
             if (IsInFishingMiniGame && _config.AutoPlayMiniGame) AutoPlayFishingMiniGame();
 
@@ -160,7 +156,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 _catchingTreasure = false;
                 fishPos = bar.bobberPosition;
             }
-            else if (_modEntry._catchTreasure && bar.treasure && !bar.treasureCaught && (bar.distanceFromCatching > 0.8f || _catchingTreasure))
+            else if (_modEntry.CatchTreasure && bar.treasure && !bar.treasureCaught && (bar.distanceFromCatching > 0.8f || _catchingTreasure))
             {
                 _catchingTreasure = true; 
                 fishPos = bar.treasurePosition;

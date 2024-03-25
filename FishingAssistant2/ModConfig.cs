@@ -1,5 +1,3 @@
-using ChibiKyu.StardewMods.FishingAssistant2.Frameworks;
-using FishingAssistant2.Frameworks;
 using StardewModdingAPI;
 
 namespace ChibiKyu.StardewMods.FishingAssistant2

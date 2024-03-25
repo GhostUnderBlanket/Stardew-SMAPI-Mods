@@ -1,4 +1,3 @@
-using FishingAssistant2.Frameworks;
 using Microsoft.Xna.Framework;
 using StardewValley;
 using StardewValley.Menus;

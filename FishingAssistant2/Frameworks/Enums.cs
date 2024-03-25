@@ -1,4 +1,4 @@
-namespace FishingAssistant2.Frameworks
+namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 {
     internal enum TreasureChance
     {

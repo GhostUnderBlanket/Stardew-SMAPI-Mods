@@ -1,9 +1,7 @@
 using ChibiKyu.StardewMods.Common;
 using ChibiKyu.StardewMods.FishingAssistant2.Frameworks;
 using FishingAssistant2;
-using FishingAssistant2.Frameworks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
@@ -17,13 +15,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         private ModConfig Config { get; set; }
         private Assistant Assistant { get; set; }
 
-        public bool _modEnable;
-        public bool _catchTreasure;
+        public bool ModEnable;
+        public bool CatchTreasure;
         
-        public int _facingDirection;
-        public int _standingPosX;
-        public int _standingPosY;
-        public bool _playerDataCached;
+        public int FacingDirection;
+        private bool _facingDirectionCached;
         
         public override void Entry(IModHelper helper)
         {
@@ -51,7 +47,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             if (!Context.IsWorldReady) return;
             
             if (Game1.player.CurrentTool is FishingRod fishingRod)
-                Assistant.OnEquipFishingRod(fishingRod, _modEnable);
+                Assistant.OnEquipFishingRod(fishingRod, ModEnable);
             if (Game1.player.CurrentTool is not FishingRod)
                 Assistant.OnUnEquipFishingRod();
 
@@ -80,50 +76,44 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
             if (e.Button == Config.EnableModButton)
             {
-                _modEnable = !_modEnable;
+                ModEnable = !ModEnable;
                 Game1.playSound("coin");
 
-                if (!_modEnable) ForgetPlayerPosition();
+                if (!ModEnable) ForgetPlayerPosition();
             }
             
             if (e.Button == Config.CatchTreasureButton)
             {
-                _catchTreasure = !_catchTreasure;
+                CatchTreasure = !CatchTreasure;
                 Game1.playSound("dwop");
             }
         }
         
         public void CachePlayerPosition()
         {
-            _facingDirection = Game1.player.getDirection() != -1 ? Game1.player.getDirection() : Game1.player.FacingDirection;
-            _standingPosX = (int)Game1.player.getStandingPosition().X;
-            _standingPosY = (int)Game1.player.getStandingPosition().Y;
-
-            _playerDataCached = true;
+            FacingDirection = Game1.player.getDirection() != -1 ? Game1.player.getDirection() : Game1.player.FacingDirection;
+            _facingDirectionCached = true;
         }
 
         public void ForgetPlayerPosition()
         {
-            if (_playerDataCached)
+            if (_facingDirectionCached)
             {
-                _facingDirection = 0;
-                _standingPosX = 0;
-                _standingPosY = 0;
-
-                _playerDataCached = false;
+                FacingDirection = 0;
+                _facingDirectionCached = false;
             }
         }
         
         public void ForceDisable()
         {
             Game1.playSound("coin");
-            _modEnable = false;
-            CommonHelper.PushToggleNotification(_modEnable, I18n.HudMessage_ModEnable());
+            ModEnable = false;
+            CommonHelper.PushToggleNotification(ModEnable, I18n.HudMessage_ModEnable());
         }
 
         private void DrawModStatus()
         {
-            if (Game1.eventUp && !Game1.isFestival() || (!_modEnable && !_catchTreasure)) 
+            if (Game1.eventUp && !Game1.isFestival() || (!ModEnable && !CatchTreasure)) 
                 return;
             
             float toolBarTransparency = 0;
@@ -164,8 +154,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             };
             
             IClickableMenu.drawTextureBox(Game1.spriteBatch, Game1.menuTexture, rectangles[0], boxPosX, boxPosY, boxSize, boxSize, Color.White * toolBarTransparency, drawShadow: false);
-            DrawIcon(_modEnable, rectangles[1], boxCenterX - (iconSize / 2), boxPosY + offset, 2f);
-            DrawIcon(_catchTreasure, rectangles[2], boxCenterX - (iconSize / 2), boxPosY + boxSize - offset - iconSize, 2f);
+            DrawIcon(ModEnable, rectangles[1], boxCenterX - (iconSize / 2), boxPosY + offset, 2f);
+            DrawIcon(CatchTreasure, rectangles[2], boxCenterX - (iconSize / 2), boxPosY + boxSize - offset - iconSize, 2f);
 
             return;
 
