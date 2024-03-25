@@ -16,17 +16,17 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             Register();
 
             AddSectionTitle(I18n.ConfigMenu_Title_KeyBinding());
-            AddKeyBind(I18n.ConfigMenu_Option_ToggleMod(), GetEnableModValue(), SetEnableModValue());
-            AddKeyBind(I18n.ConfigMenu_Option_CatchTreasure(), GetCatchTreasureValue(), SetCatchTreasureValue());
+            AddKeyBind(I18n.ConfigMenu_Option_ToggleMod(), () => config().EnableModButton, button => config().EnableModButton = button);
+            AddKeyBind(I18n.ConfigMenu_Option_CatchTreasure(), () => config().CatchTreasureButton, button => config().CatchTreasureButton = button);
 
             AddSectionTitle(I18n.ConfigMenu_Title_Hud());
-            AddDropDown(I18n.ConfigMenu_Option_HudPosition(), GetHudPositionValue(), SetHudPositionValue(), HudPositionOptions());
+            AddDropDown(I18n.ConfigMenu_Option_HudPosition(), () => config().ModStatusPosition, pos => config().ModStatusPosition = GetDefaultVale(pos), HudPositionOptions());
             
             AddSectionTitle(I18n.ConfigMenu_Title_Fishing());
             AddBool(I18n.ConfigMenu_Option_MaxCastPower(), () => config().MaxCastPower, b => config().MaxCastPower = b);
             AddBool(I18n.ConfigMenu_Option_InstantFishBite(), () => config().InstantFishBite, b => config().InstantFishBite = b);
             AddBool(I18n.ConfigMenu_Option_AlwaysPerfect(), () => config().AlwaysPerfect, b => config().AlwaysPerfect = b);
-            AddDropDown(I18n.ConfigMenu_Option_TreasureChance(), GetTreasureChanceValue(), SetTreasureChanceValue(), TreasureChanceOptions());
+            AddDropDown(I18n.ConfigMenu_Option_TreasureChance(), () => config().TreasureChance, chance => config().TreasureChance = GetDefaultVale(chance), TreasureChanceOptions());
             AddBool(I18n.ConfigMenu_Option_InstantCatchFish(), () => config().InstantCatchFish, b => config().InstantCatchFish = b);
             AddBool(I18n.ConfigMenu_Option_InstantCatchTreasure(), () => config().InstantCatchTreasure, b => config().InstantCatchTreasure = b);
             AddNumber(I18n.ConfigMenu_Option_FishDifficultyMultiplier(), () => config().FishDifficultyMultiplier, i => config().FishDifficultyMultiplier = i);
@@ -52,49 +52,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             return [I18n.Default(), I18n.Always(), I18n.Never()];
         }
 
-        private Action<string> SetTreasureChanceValue()
-        {
-            return chance => config().TreasureChance = GetDefaultVale(chance);
-        }
-
-        private Func<string> GetTreasureChanceValue()
-        {
-            return () => config().TreasureChance;
-        }
-
         private static string[] HudPositionOptions()
         {
             return [I18n.Left(), I18n.Right()];
-        }
-
-        private Action<string> SetHudPositionValue()
-        {
-            return pos => config().ModStatusPosition = GetDefaultVale(pos);
-        }
-
-        private Func<string> GetHudPositionValue()
-        {
-            return () => config().ModStatusPosition;
-        }
-
-        private Action<SButton> SetCatchTreasureValue()
-        {
-            return button => config().CatchTreasureButton = button;
-        }
-
-        private Func<SButton> GetCatchTreasureValue()
-        {
-            return () => config().CatchTreasureButton;
-        }
-
-        private Action<SButton> SetEnableModValue()
-        {
-            return button => config().EnableModButton = button;
-        }
-
-        private Func<SButton> GetEnableModValue()
-        {
-            return () => config().EnableModButton;
         }
 
         string GetDefaultVale(string text)

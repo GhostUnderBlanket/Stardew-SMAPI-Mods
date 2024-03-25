@@ -1,4 +1,5 @@
 using FishingAssistant2.Frameworks;
+using Microsoft.Xna.Framework;
 using StardewValley;
 using StardewValley.Menus;
 
@@ -34,10 +35,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             Instance.distanceFromCatching = 1.0f;
         }
-
-        public void AlwaysPerfect()
+        
+        public void AlwaysPerfect(bool alwaysPerfect)
         {
-            Instance.perfect = true;
+            if (alwaysPerfect)
+            {
+                Instance.perfect = true;
+                Instance.fishShake = Vector2.Zero;
+            }
         }
     }
 }

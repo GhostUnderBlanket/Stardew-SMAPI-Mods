@@ -2,6 +2,7 @@ using ChibiKyu.StardewMods.Common;
 using FishingAssistant2;
 using FishingAssistant2.Frameworks;
 using Microsoft.Xna.Framework;
+using StardewModdingAPI;
 using StardewModdingAPI.Utilities;
 using StardewValley;
 using StardewValley.Enchantments;
@@ -19,11 +20,13 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         
         private SBobberBar _bobberBar;
         private SFishingRod _fishingRod;
-        private bool _catchingTreasure;
-
-        private int _autoLootDelay = 30;
         private ItemGrabMenu? _treasureChestMenu;
-
+        
+        private int _autoLootDelay = 30;
+        private int _endMiniGameDelay = 15;
+        
+        private bool _catchingTreasure;
+        
         #region FishingRod
 
         public void OnEquipFishingRod(FishingRod fishingRod, bool isModEnable)
@@ -50,7 +53,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             _modEntry.ForgetPlayerPosition();
             
-            if (_config.RemoveEnchantmentWhenUnequipped) _fishingRod.Instance.ClearEnchantments();
+            if (_config.RemoveEnchantmentWhenUnequipped) _fishingRod.ClearAddedEnchantments();
+            
             _fishingRod = null;
         }
         
@@ -59,23 +63,23 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             _fishingRod = new SFishingRod(fishingRod);
 
             if (_config.AddAutoHookEnchantment && !fishingRod.hasEnchantmentOfType<AutoHookEnchantment>())
-                fishingRod.enchantments.Add(new AutoHookEnchantment());
+                _fishingRod.AddEnchantment(new AutoHookEnchantment());
 
             if (_config.AddEfficientEnchantment && !fishingRod.hasEnchantmentOfType<EfficientToolEnchantment>())
-                fishingRod.enchantments.Add(new EfficientToolEnchantment());
+                _fishingRod.AddEnchantment(new EfficientToolEnchantment());
 
             if (_config.AddMasterEnchantment && !fishingRod.hasEnchantmentOfType<MasterEnchantment>())
-                fishingRod.enchantments.Add(new MasterEnchantment());
+                _fishingRod.AddEnchantment(new MasterEnchantment());
 
             if (_config.AddPreservingEnchantment && !fishingRod.hasEnchantmentOfType<PreservingEnchantment>())
-                fishingRod.enchantments.Add(new PreservingEnchantment());
+                _fishingRod.AddEnchantment(new PreservingEnchantment());
         }
 
         private void DoFishingRodAssistantTask()
         {
             if (_config.MaxCastPower) _fishingRod.Instance.castingPower = 1.01f;
 
-            if (_config.AutoCastFishingRod)
+            if (_config.AutoCastFishingRod && _modEntry._modEnable)
             {
                 var response = _fishingRod.DoAutoCastFishingRod(_modEntry._facingDirection, _modEntry._standingPosX, _modEntry._standingPosY);
                 switch (response)
@@ -93,19 +97,21 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             if (_config.InstantFishBite) _fishingRod.InstantFishBite();
             
-            if (_config.AutoHookFish) _fishingRod.DoAutoHook();
+            if (_config.AutoHookFish && _modEntry._modEnable) _fishingRod.AutoHook();
 
-            if (_config.AutoClosePopup) _fishingRod.DoAutoCloseFishPopup();
+            if (_config.AutoClosePopup && _modEntry._modEnable) _fishingRod.AutoCloseFishPopup();
         }
 
         #endregion
-        
+
+        #region Bobber Bar
+
         public void OnFishingMiniGameStart(BobberBar bobberBar)
         {
             IsInFishingMiniGame = true;
-           _bobberBar = new SBobberBar(bobberBar);
+            _bobberBar = new SBobberBar(bobberBar);
 
-           DoBobberBarAssistantTask();
+            DoBobberBarAssistantTask();
         }
         
         public void OnFishingMiniGameEnd()
@@ -125,25 +131,31 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 _bobberBar.InstantCatchTreasure(_modEntry._catchTreasure);
             
             if (_config.InstantCatchFish) _bobberBar.InstantCatchFish();
-            
-            if (_config.AlwaysPerfect) _bobberBar.AlwaysPerfect();
+        }
+
+        #endregion
+
+        #region Update
+
+        public void DoOnUpdateAssistantTask()
+        {
+            if (!_modEntry._modEnable) return;
+
+            if (IsInFishingMiniGame && _config.AutoPlayMiniGame) AutoPlayFishingMiniGame();
+
+            if (_config.AutoLootTreasure && _treasureChestMenu != null) AutoLootTreasure();
         }
         
         public void AutoPlayFishingMiniGame()
         {
-            if (!IsInFishingMiniGame || !_config.AutoPlayMiniGame) return;
-            
             var bar = _bobberBar.Instance;
-            var rod = _fishingRod.Instance;
             
             float fishPos = bar.bobberPosition;
             int bobberBarCenter = (bar.bobberBarHeight / 2);
 
-            if (bar.distanceFromCatching >= 1.0f)
-            {
-                EndFishingMiniGame();
-            }
-            else if (_catchingTreasure && bar.distanceFromCatching < 0.2f)
+            _bobberBar.AlwaysPerfect(_config.AlwaysPerfect);
+            
+            if (_catchingTreasure && bar.distanceFromCatching < 0.2f)
             {
                 _catchingTreasure = false;
                 fishPos = bar.bobberPosition;
@@ -156,26 +168,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             fishPos += 25;
             bar.bobberBarSpeed = (fishPos - bar.bobberBarPos - bobberBarCenter) / 2;
-            
-            return;
-            
-            void EndFishingMiniGame()
-            {
-                if (Game1.isFestival())
-                    return;
-            
-                Game1.playSound("jingle1");
-            
-                string qualifiedItemId = Game1.player.CurrentTool is FishingRod currentTool ? currentTool.GetBait()?.QualifiedItemId : (string) null;
-                int numCaught = bar.bossFish || qualifiedItemId != "(O)774" || Game1.random.NextDouble() >= 0.25 + Game1.player.DailyLuck / 2.0 ? 1 : 2;
-                if (bar.challengeBaitFishes > 0)
-                    numCaught = bar.challengeBaitFishes;
-
-                rod.pullFishFromWater(bar.whichFish, bar.fishSize, bar.fishQuality, (int)bar.difficulty, bar.treasureCaught, bar.perfect, bar.fromFishPond, bar.setFlagOnCatch, bar.bossFish, numCaught);
-                Game1.exitActiveMenu();
-
-                Game1.setRichPresence("location", Game1.currentLocation.Name);
-            }
         }
 
         public void OnTreasureMenuOpen(ItemGrabMenu itemGrabMenu)
@@ -185,47 +177,47 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         public void AutoLootTreasure()
         {
-            if (_config.AutoLootTreasure && _treasureChestMenu != null)
-            {
-                if (_autoLootDelay-- > 0) return;
-                _autoLootDelay = 30;
+            if (_autoLootDelay-- > 0) return;
+            _autoLootDelay = 30;
 
-                IList<Item> actualInventory = _treasureChestMenu.ItemsToGrabMenu.actualInventory;
+            IList<Item> actualInventory = _treasureChestMenu.ItemsToGrabMenu.actualInventory;
+            
+            if (_treasureChestMenu.areAllItemsTaken())
+            {
+                _treasureChestMenu.exitThisMenu();
+                _treasureChestMenu = null;
+                _autoLootDelay = 30;
+            }
+            else
+            {
+                Item obj = actualInventory.First();
+                if (obj == null) return;
                 
-                if (_treasureChestMenu.areAllItemsTaken())
+                if (obj.QualifiedItemId == "(O)102")
                 {
-                    _treasureChestMenu.exitThisMenu();
-                    _treasureChestMenu = null;
-                    _autoLootDelay = 30;
+                    Game1.player.foundArtifact(obj.QualifiedItemId, 1);
+                    Game1.playSound("fireball");
                 }
                 else
                 {
-                    Item obj = actualInventory.First();
-                    if (obj == null) return;
-                    
-                    if (obj.QualifiedItemId == "(O)102")
+                    if (!Game1.player.addItemToInventoryBool(obj))
                     {
-                        Game1.player.foundArtifact(obj.QualifiedItemId, 1);
-                        Game1.playSound("fireball");
+                        _treasureChestMenu.DropRemainingItems();
+                        _treasureChestMenu.exitThisMenu();
+                        CommonHelper.PushErrorNotification(I18n.HudMessage_InventoryFull());
+                        _modEntry.ForceDisable();
                     }
                     else
                     {
-                        if (!Game1.player.addItemToInventoryBool(obj))
-                        {
-                            _treasureChestMenu.DropRemainingItems();
-                            CommonHelper.PushErrorNotification(I18n.HudMessage_InventoryFull());
-                            _modEntry.ForceDisable();
-                        }
-                        else
-                        {
-                            actualInventory.RemoveAt(0);
-                            _autoLootDelay = 10;
-                        }
-                            
-                        Game1.playSound("coin");
+                        actualInventory.RemoveAt(0);
+                        _autoLootDelay = 10;
                     }
+                        
+                    Game1.playSound("coin");
                 }
             }
         }
+
+        #endregion
     }
 }

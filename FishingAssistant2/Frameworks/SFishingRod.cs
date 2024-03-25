@@ -15,6 +15,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
     {
         public FishingRod Instance { get; set; } = instance;
         
+        private readonly int _defaultNumAttachmentSlots = instance.numAttachmentSlots.Value;
+        private readonly Object _defaultBait = instance.GetBait();
+        private readonly List<Object> _defaultTackles = instance.GetTackle();
+        private readonly List<BaseEnchantment> _addedEnchantments = new List<BaseEnchantment>();
+        
         private int _autoCastDelay = 60;
         private int _autoClosePopupDelay = 30;
         
@@ -42,7 +47,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             return AutoActionResponse.CanDoAction;
         }
 
-        public void DoAutoHook()
+        public void AutoHook()
         {
             if (IsRodCanHook())
             {
@@ -53,7 +58,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             }
         }
 
-        public void DoAutoCloseFishPopup()
+        public void AutoCloseFishPopup()
         {
             if (IsRodShowingFish() && !Game1.isFestival())
             {
@@ -69,6 +74,18 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             if (Instance.timeUntilFishingBite > 0)
                 Instance.timeUntilFishingBite = 0f;
+        }
+        
+        public void AddEnchantment(BaseEnchantment enchantment)
+        {
+            _addedEnchantments.Add(enchantment);
+            Instance.enchantments.Add(enchantment);
+        }
+
+        public void ClearAddedEnchantments()
+        {
+            foreach (BaseEnchantment enchantment in _addedEnchantments)
+                Instance.enchantments.Remove(enchantment);
         }
         
         private bool IsRodNotInUse()

@@ -23,6 +23,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         public int _facingDirection;
         public int _standingPosX;
         public int _standingPosY;
+        public bool _playerDataCached;
         
         public override void Entry(IModHelper helper)
         {
@@ -49,16 +50,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         {
             if (!Context.IsWorldReady) return;
             
-            if (Game1.player.CurrentTool is not FishingRod)
-                Assistant.OnUnEquipFishingRod();
-            
-            if (!_modEnable) return;
-            
             if (Game1.player.CurrentTool is FishingRod fishingRod)
                 Assistant.OnEquipFishingRod(fishingRod, _modEnable);
-            
-            Assistant.AutoPlayFishingMiniGame();
-            Assistant.AutoLootTreasure();
+            if (Game1.player.CurrentTool is not FishingRod)
+                Assistant.OnUnEquipFishingRod();
+
+            Assistant.DoOnUpdateAssistantTask();
         }
 
         private void OnRenderingHud(object? sender, RenderingHudEventArgs e)
@@ -101,13 +98,20 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             _facingDirection = Game1.player.getDirection() != -1 ? Game1.player.getDirection() : Game1.player.FacingDirection;
             _standingPosX = (int)Game1.player.getStandingPosition().X;
             _standingPosY = (int)Game1.player.getStandingPosition().Y;
+
+            _playerDataCached = true;
         }
 
         public void ForgetPlayerPosition()
         {
-            _facingDirection = 0;
-            _standingPosX = 0;
-            _standingPosY = 0;
+            if (_playerDataCached)
+            {
+                _facingDirection = 0;
+                _standingPosX = 0;
+                _standingPosY = 0;
+
+                _playerDataCached = false;
+            }
         }
         
         public void ForceDisable()
