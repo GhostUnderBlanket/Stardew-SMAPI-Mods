@@ -13,68 +13,90 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         /// <summary>Position to display fish info when playing fishing mini-game</summary>
         public string ModStatusPosition { get; set; } = "Left";
 
-        /// <summary>Make fish to bite instantly.</summary>
+        
         public bool MaxCastPower { get; set; } = true;
 
         /// <summary>Make fish to bite instantly.</summary>
         public bool InstantFishBite { get; set; } = false;
+        
+        
+        public string TreasureChance { get; set; } = "Default";
 
         /// <summary>Whether the game should consider every catch to be perfectly executed, even if it wasn't.</summary>
         public bool AlwaysPerfect { get; set; } = false;
-
-        /// <summary>Whether to always find treasure.</summary>
-        public string TreasureChance { get; set; } = "Default";
-
-    /// <summary>Whether to catch fish instantly.</summary>
-        public bool InstantCatchFish { get; set; } = false;
-
-        /// <summary>Whether to catch treasure instantly.</summary>
-        public bool InstantCatchTreasure { get; set; } = false;
         
-        /// <summary>Whether fishing tackles last forever.</summary>
-        public bool InfiniteTackle { get; set; } = false;
-
-        /// <summary>Whether fishing bait lasts forever.</summary>
-        public bool InfiniteBait { get; set; } = false;
-
         /// <summary>A multiplier applied to the fish difficulty. This can a number between 0 and 1 to lower difficulty, or more than 1 to increase it.</summary>
         public int FishDifficultyMultiplier { get; set; } = 1;
 
         /// <summary>A value added to the fish difficulty. This can be less than 0 to decrease difficulty, or more than 0 to increase it.</summary>
         public int FishDifficultyAdditive { get; set; } = 0;
+
+        /// <summary>Whether to catch fish instantly.</summary>
+        public bool InstantCatchFish { get; set; } = false;
+
+        /// <summary>Whether to catch treasure instantly.</summary>
+        public bool InstantCatchTreasure { get; set; } = false;
         
-        /// <summary>Auto cast fishing rod on custom preset</summary>
+        /// <summary>Let Fishing Assistant 2 auto cast fishing rod</summary>
         public bool AutoCastFishingRod { get; set; } = true;
 
-        /// <summary>Auto hook fish rod on custom preset</summary>
+        /// <summary>Let Fishing Assistant 2 auto hook fish rod</summary>
         public bool AutoHookFish { get; set; } = true;
 
-        /// <summary>Auto play fishing mini-game on custom preset</summary>
+        /// <summary>Let Fishing Assistant 2 auto play fishing mini-game</summary>
         public bool AutoPlayMiniGame { get; set; } = true;
 
-        /// <summary>Auto close fish popup on custom preset</summary>
+        /// <summary>Let Fishing Assistant 2 auto close fish popup</summary>
         public bool AutoClosePopup { get; set; } = true;
 
-        /// <summary>Auto loot treasure on custom preset</summary>
+        /// <summary>Let Fishing Assistant 2 auto loot treasure</summary>
         public bool AutoLootTreasure { get; set; } = true;
-
+        
         /// <summary>Should mod auto attach bait if possible.</summary>
         public bool AutoAttachBait { get; set; } = false;
-
-        /// <summary>Should mod auto attach bait if possible.</summary>
+        
+        
+        public string BaitToAttach { get; set; } = "Any";
+        
+        /// <summary>Whether fishing bait lasts forever.</summary>
+        public bool InfiniteBait { get; set; } = false;
+        
+        
+        public bool SpawnBaitIfDontHave { get; set; } = false;
+        
+        
+        public bool CreateBaitSlotIfDontHave { get; set; } = false;
+        
+        /// <summary>Should mod auto attach tackles if possible.</summary>
         public bool AutoAttachTackles { get; set; } = false;
+        
+        
+        public string TackleToAttachFirstSlot { get; set; } = "Any";
+        
+        
+        public string TackleToAttachSecondSlot { get; set; } = "Any";
+        
+        /// <summary>Whether fishing tackles last forever.</summary>
+        public bool InfiniteTackle { get; set; } = false;
+        
+        
+        public bool SpawnTacklesIfDontHave { get; set; } = false;
+        
+        
+        public bool CreateTacklesSlotIfDontHave { get; set; } = false;
 
+        
         /// <summary>Whether to pause fishing on given time</summary>
-        public bool EnableAutoPauseFishing { get; set; } = true;
+        public bool AutoPauseFishing { get; set; } = true;
 
         /// <summary>Time to stop fishing</summary>
         public int PauseFishingTime { get; set; } = 24;
 
         /// <summary>Whether to eat some food if need</summary>
-        public bool EnableAutoEatFood { get; set; } = false;
+        public bool AutoEatFood { get; set; } = false;
 
         /// <summary>Amount of energy in percent to find food to eat</summary>
-        public int EnergyPercentToEat { get; set; } = 10;
+        public int EnergyPercentToEat { get; set; } = 5;
 
         /// <summary>Allow to eat fish that you caught</summary>
         public bool AllowEatingFish { get; set; } = false;

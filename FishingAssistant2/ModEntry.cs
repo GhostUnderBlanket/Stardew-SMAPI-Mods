@@ -5,8 +5,10 @@ using Microsoft.Xna.Framework;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
+using StardewValley.GameData.Objects;
 using StardewValley.Menus;
 using StardewValley.Tools;
+using Object = StardewValley.Object;
 
 namespace ChibiKyu.StardewMods.FishingAssistant2
 {
@@ -15,6 +17,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         private ModConfig Config { get; set; }
         private Assistant Assistant { get; set; }
 
+        private readonly List<string> _availableBaits = new List<string>();
+        private readonly List<string> _availableTackles = new List<string>();
+        
         public bool ModEnable;
         public bool CatchTreasure;
         
@@ -38,7 +43,27 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
         private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
         {
-            var configMenu = new ConfigMenu(this.Helper.ModRegistry, this.ModManifest, () => Config, () => Config = new ModConfig(), () => this.Helper.WriteConfig(Config));
+            _availableBaits.Add("Any");
+            _availableTackles.Add("Any");
+            _availableTackles.Add("None");
+            
+            foreach (KeyValuePair<string, ObjectData> item in Game1.objectData)
+            {
+                if (item.Value.Category == Object.baitCategory)
+                    _availableBaits.Add(ItemRegistry.QualifyItemId(item.Key));
+                else if (item.Value.Category == Object.tackleCategory)
+                    _availableTackles.Add(ItemRegistry.QualifyItemId(item.Key));
+            }
+            
+            var configMenu = new ConfigMenu(
+                this.Helper.ModRegistry, 
+                this.ModManifest, 
+                () => Config, 
+                () => Config = new ModConfig(), 
+                () => this.Helper.WriteConfig(Config),
+                _availableBaits,
+                _availableTackles);
+            
             configMenu.RegisterModConfigMenu();
         }
         

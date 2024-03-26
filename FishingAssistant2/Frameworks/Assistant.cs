@@ -1,5 +1,6 @@
 using ChibiKyu.StardewMods.Common;
 using FishingAssistant2;
+using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Enchantments;
 using StardewValley.Menus;
@@ -53,14 +54,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             _fishingRod = null;
         }
-        
+
         private void OverrideFishingRod(FishingRod fishingRod)
         {
             _fishingRod = new SFishingRod(fishingRod);
-
+            
             if (_config.AddAutoHookEnchantment && !fishingRod.hasEnchantmentOfType<AutoHookEnchantment>())
                 _fishingRod.AddEnchantment(new AutoHookEnchantment());
-
+ 
             if (_config.AddEfficientEnchantment && !fishingRod.hasEnchantmentOfType<EfficientToolEnchantment>())
                 _fishingRod.AddEnchantment(new EfficientToolEnchantment());
 
@@ -77,7 +78,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
             if (_config.AutoCastFishingRod && _modEntry.ModEnable)
             {
-                var response = _fishingRod.DoAutoCastFishingRod(_modEntry.FacingDirection);
+                var response = _fishingRod.AutoCastFishingRod(_modEntry.FacingDirection);
                 switch (response)
                 {
                     case AutoActionResponse.LowStamina:

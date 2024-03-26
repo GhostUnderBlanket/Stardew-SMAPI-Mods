@@ -21,7 +21,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         private int _autoCastDelay = 60;
         private int _autoClosePopupDelay = 30;
         
-        public AutoActionResponse DoAutoCastFishingRod(int playerFacingDirection)
+        public AutoActionResponse AutoCastFishingRod(int playerFacingDirection)
         {
             if (_autoCastDelay-- > 0)
                 return AutoActionResponse.OnDelay;
