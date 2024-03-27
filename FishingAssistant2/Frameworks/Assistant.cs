@@ -15,14 +15,16 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         private readonly ModConfig _config = modConfig();
         private readonly ModEntry _modEntry = modEntry();
         
-        private SBobberBar _bobberBar;
-        private SFishingRod _fishingRod;
+        private SBobberBar? _bobberBar;
+        private SFishingRod? _fishingRod;
         private ItemGrabMenu? _treasureChestMenu;
         
         private int _autoLootDelay = 30;
         private int _endMiniGameDelay = 15;
         
         private bool _catchingTreasure;
+        
+        private IList<Item> excludeItems = new List<Item>();
         
         #region FishingRod
 
@@ -136,8 +138,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         public void DoOnUpdateAssistantTask()
         {
+            if (_config.AutoAttachBait) _fishingRod?.AutoAttachBait(_config.PreferBait, _config.InfiniteBait, _config.SpawnBaitIfDontHave);
+            
+            if (_config.AutoAttachTackles) _fishingRod?.AutoAttachTackles(_config.PreferTackle, _config.InfiniteTackle, _config.SpawnTackleIfDontHave);
+            
             if (!_modEntry.ModEnable) return;
-
+            
             if (IsInFishingMiniGame && _config.AutoPlayMiniGame) AutoPlayFishingMiniGame();
 
             if (_config.AutoLootTreasure && _treasureChestMenu != null) AutoLootTreasure();
@@ -171,8 +177,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             _treasureChestMenu = itemGrabMenu;
         }
-
-        private IList<Item> excludeItems = new List<Item>();
         
         public void AutoLootTreasure()
         {

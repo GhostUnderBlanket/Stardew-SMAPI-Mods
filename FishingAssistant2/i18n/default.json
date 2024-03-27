@@ -15,6 +15,7 @@
   "stop-loot" : "Stop Loot",
   "drop-remaining" : "Drop Remaining",
   "discard-remaining" : "Discard Remaining",
+  "any" : "Any",
   
   "config-menu.title.key-binding" : "Key Binding",
   "config-menu.option.toggle-mod" : "Toggle Mod Button",
@@ -42,16 +43,13 @@
 
   "config-menu.title.fishing-rod" : "Fishing Rod",
   "config-menu.option.auto-attach-bait" : "Auto Attach Bait",
-  "config-menu.option.bait-to-attach" : "Bait To Attach",
+  "config-menu.option.prefer-bait" : "Prefer Bait",
   "config-menu.option.infinite-bait" : "Infinite Bait",
   "config-menu.option.spawn-bait-if-dont-have" : "Spawn Bait If Dont Have",
-  "config-menu.option.create-bait-slot-if-dont-have" : "Create Bait Slot If Dont Have",
-  "config-menu.option.auto-attach-tackle" : "Auto Attach Tackle",
-  "config-menu.option.tackle-to-attach-first" : "Tackle To Attach First Slot",
-  "config-menu.option.tackle-to-attach-second" : "Tackle To Attach Second Slot",
+  "config-menu.option.auto-attach-tackles" : "Auto Attach Tackles",
+  "config-menu.option.prefer-tackle" : "Prefer Tackle",
   "config-menu.option.infinite-tackle" : "Infinite Tackle",
   "config-menu.option.spawn-tackle-if-dont-have" : "Spawn Tackle If Dont Have",
-  "config-menu.option.create-tackle-slot-if-dont-have" : "Create Tackle Slot If Dont Have",
   
   "config-menu.title.enchantment" : "Enchantments",
   "config-menu.option.add-autoHook-enchantment" : "Add AutoHook Enchantment",
@@ -65,4 +63,5 @@
   "hud-message.catch-treasure" : "Catch treasure is {0}",
   "hud-message.low-stamina" : "Low stamina",
   "hud-message.inventory-full" : "Inventory Full",
+  "hud-message.auto-attach" : "Auto Attach {0} To {1}",
 }

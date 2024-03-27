@@ -12,13 +12,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
         /// <summary>Position to display fish info when playing fishing mini-game</summary>
         public string ModStatusPosition { get; set; } = "Left";
-
         
         public bool MaxCastPower { get; set; } = true;
 
         /// <summary>Make fish to bite instantly.</summary>
         public bool InstantFishBite { get; set; } = false;
-        
         
         public string TreasureChance { get; set; } = "Default";
 
@@ -26,7 +24,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         public bool AlwaysPerfect { get; set; } = false;
         
         /// <summary>A multiplier applied to the fish difficulty. This can a number between 0 and 1 to lower difficulty, or more than 1 to increase it.</summary>
-        public int FishDifficultyMultiplier { get; set; } = 1;
+        public float FishDifficultyMultiplier { get; set; } = 1;
 
         /// <summary>A value added to the fish difficulty. This can be less than 0 to decrease difficulty, or more than 0 to increase it.</summary>
         public int FishDifficultyAdditive { get; set; } = 0;
@@ -52,42 +50,27 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         /// <summary>Let Fishing Assistant 2 auto loot treasure</summary>
         public bool AutoLootTreasure { get; set; } = true;
         
-        
         public string ActionIfInventoryFull { get; set; } = "Stop Loot";
         
         /// <summary>Should mod auto attach bait if possible.</summary>
         public bool AutoAttachBait { get; set; } = false;
         
-        
-        public string BaitToAttach { get; set; } = "Any";
+        public string PreferBait { get; set; } = "Any";
         
         /// <summary>Whether fishing bait lasts forever.</summary>
         public bool InfiniteBait { get; set; } = false;
         
-        
         public bool SpawnBaitIfDontHave { get; set; } = false;
-        
-        
-        public bool CreateBaitSlotIfDontHave { get; set; } = false;
         
         /// <summary>Should mod auto attach tackles if possible.</summary>
         public bool AutoAttachTackles { get; set; } = false;
         
-        
-        public string TackleToAttachFirstSlot { get; set; } = "Any";
-        
-        
-        public string TackleToAttachSecondSlot { get; set; } = "Any";
+        public string PreferTackle { get; set; } = "Any";
         
         /// <summary>Whether fishing tackles last forever.</summary>
         public bool InfiniteTackle { get; set; } = false;
         
-        
-        public bool SpawnTacklesIfDontHave { get; set; } = false;
-        
-        
-        public bool CreateTacklesSlotIfDontHave { get; set; } = false;
-
+        public bool SpawnTackleIfDontHave { get; set; } = false;
         
         /// <summary>Whether to pause fishing on given time</summary>
         public bool AutoPauseFishing { get; set; } = true;

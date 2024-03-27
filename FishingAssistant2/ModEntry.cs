@@ -45,7 +45,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         {
             _availableBaits.Add("Any");
             _availableTackles.Add("Any");
-            _availableTackles.Add("None");
             
             foreach (KeyValuePair<string, ObjectData> item in Game1.objectData)
             {
@@ -56,6 +55,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             }
             
             var configMenu = new ConfigMenu(
+                this.Helper,
                 this.Helper.ModRegistry, 
                 this.ModManifest, 
                 () => Config, 
