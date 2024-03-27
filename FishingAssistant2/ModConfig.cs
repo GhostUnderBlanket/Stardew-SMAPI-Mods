@@ -52,6 +52,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         /// <summary>Let Fishing Assistant 2 auto loot treasure</summary>
         public bool AutoLootTreasure { get; set; } = true;
         
+        
+        public string ActionIfInventoryFull { get; set; } = "Stop Loot";
+        
         /// <summary>Should mod auto attach bait if possible.</summary>
         public bool AutoAttachBait { get; set; } = false;
         

@@ -12,6 +12,9 @@
   "default" : "Default",
   "always" : "Always",
   "never" : "Never",
+  "stop-loot" : "Stop Loot",
+  "drop-remaining" : "Drop Remaining",
+  "discard-remaining" : "Discard Remaining",
   
   "config-menu.title.key-binding" : "Key Binding",
   "config-menu.option.toggle-mod" : "Toggle Mod Button",
@@ -35,6 +38,7 @@
   "config-menu.option.auto-play-mini-game" : "Auto Play MiniGame",
   "config-menu.option.auto-close-popup" : "Auto Close Popup",
   "config-menu.option.auto-loot-treasure" : "Auto Loot Treasure",
+  "config-menu.option.action-if-inventory-full" : "Action If Inventory Full",
 
   "config-menu.title.fishing-rod" : "Fishing Rod",
   "config-menu.option.auto-attach-bait" : "Auto Attach Bait",

@@ -38,6 +38,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_AutoPlayMiniGame, () => config().AutoPlayMiniGame, b => config().AutoPlayMiniGame = b);
             AddBool(I18n.ConfigMenu_Option_AutoClosePopup, () => config().AutoClosePopup, b => config().AutoClosePopup = b);
             AddBool(I18n.ConfigMenu_Option_AutoLootTreasure, () => config().AutoLootTreasure, b => config().AutoLootTreasure = b);
+            AddDropDown(I18n.ConfigMenu_Option_ActionIfInventoryFull, ActionOnInventoryFullOptions(), ParseActionOnInventoryFull, () => config().ActionIfInventoryFull, action => config().ActionIfInventoryFull = action);
             
             AddSectionTitle(I18n.ConfigMenu_Title_Enchantment);
             AddBool(I18n.ConfigMenu_Option_AddAutoHookEnchantment, () => config().AddAutoHookEnchantment, b => config().AddAutoHookEnchantment = b);
@@ -47,14 +48,28 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_RemoveEnchantmentsWhenUnequipped, () => config().RemoveEnchantmentWhenUnequipped, b => config().RemoveEnchantmentWhenUnequipped = b);
         }
 
+        private static string[] ActionOnInventoryFullOptions()
+        {
+            return Enum.GetNames(typeof(ActionOnInventoryFull));
+        }
+        
+        private string ParseActionOnInventoryFull(string rawText)
+        {
+            if (!Enum.TryParse(rawText, out ActionOnInventoryFull text))
+                return rawText;
+
+            return text switch
+            {
+                ActionOnInventoryFull.Stop => I18n.StopLoot(),
+                ActionOnInventoryFull.Drop => I18n.DropRemaining(),
+                ActionOnInventoryFull.Discard => I18n.DiscardRemaining(),
+                _ => text.ToString()
+            };
+        }
+        
         private static string[] TreasureChanceOptions()
         {
             return Enum.GetNames(typeof(TreasureChance));
-        }
-
-        private static string[] HudPositionOptions()
-        {
-            return ["Left", "Right"];
         }
 
         private string ParseTreasureChance(string rawText)
@@ -71,13 +86,21 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             };
         }
         
-        private string ParseHudPosition(string text)
+        private static string[] HudPositionOptions()
         {
+            return Enum.GetNames(typeof(HudPosition));
+        }
+        
+        private string ParseHudPosition(string rawText)
+        {
+            if (!Enum.TryParse(rawText, out HudPosition text))
+                return rawText;
+
             return text switch
             {
-                "Left" => I18n.Left(),
-                "Right" => I18n.Right(),
-                _ => text
+                HudPosition.Left => I18n.Left(),
+                HudPosition.Right => I18n.Right(),
+                _ => text.ToString()
             };
         }
 

@@ -172,6 +172,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             _treasureChestMenu = itemGrabMenu;
         }
 
+        private IList<Item> excludeItems = new List<Item>();
+        
         public void AutoLootTreasure()
         {
             if (_autoLootDelay-- > 0) return;
@@ -179,38 +181,57 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
             IList<Item> actualInventory = _treasureChestMenu.ItemsToGrabMenu.actualInventory;
             
-            if (_treasureChestMenu.areAllItemsTaken())
+            if (actualInventory.Count == excludeItems.Count)
             {
-                _treasureChestMenu.exitThisMenu();
-                _treasureChestMenu = null;
-                _autoLootDelay = 30;
-            }
-            else
-            {
-                Item obj = actualInventory.First();
-                if (obj == null) return;
+                excludeItems.Clear();
                 
-                if (obj.QualifiedItemId == "(O)102")
+                if (actualInventory.Count == 0)
                 {
-                    Game1.player.foundArtifact(obj.QualifiedItemId, 1);
-                    Game1.playSound("fireball");
+                    _treasureChestMenu.exitThisMenu();
+                    _treasureChestMenu = null;
                 }
                 else
                 {
-                    if (!Game1.player.addItemToInventoryBool(obj))
+                    if (_config.ActionIfInventoryFull == ActionOnInventoryFull.Drop.ToString())
                     {
                         _treasureChestMenu.DropRemainingItems();
                         _treasureChestMenu.exitThisMenu();
-                        CommonHelper.PushErrorNotification(I18n.HudMessage_InventoryFull());
-                        _modEntry.ForceDisable();
+                    }
+                    else if (_config.ActionIfInventoryFull == ActionOnInventoryFull.Discard.ToString())
+                    {
+                        _treasureChestMenu.exitThisMenu();
+                    }
+
+                    _treasureChestMenu = null;
+
+                    CommonHelper.PushErrorNotification(I18n.HudMessage_InventoryFull());
+                    _modEntry.ForceDisable();
+                }
+            }
+            else
+            {
+                Item obj = actualInventory[excludeItems.Count];
+                if (obj != null)
+                {
+                    if (obj.QualifiedItemId == "(O)102")
+                    {
+                        Game1.player.foundArtifact(obj.QualifiedItemId, 1);
+                        Game1.playSound("fireball");
                     }
                     else
                     {
-                        actualInventory.RemoveAt(0);
-                        _autoLootDelay = 10;
+                        if (Game1.player.addItemToInventoryBool(obj))
+                        {
+                            Game1.playSound("coin");
+                        }
+                        else
+                        {
+                            excludeItems.Add(obj);
+                        }
                     }
-                        
-                    Game1.playSound("coin");
+                    
+                    actualInventory.RemoveAt(excludeItems.Count);
+                    _autoLootDelay = 10;
                 }
             }
         }
