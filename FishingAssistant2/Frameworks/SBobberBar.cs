@@ -6,16 +6,16 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 {
     internal class SBobberBar(BobberBar bobberBar)
     {
-        public BobberBar Instance { get; set; } = bobberBar;
+        internal BobberBar Instance { get; set; } = bobberBar;
         
-        public void OverrideFishDifficult(float difficultyMultiplier, float difficultyAdditive)
+        internal void OverrideFishDifficult(float difficultyMultiplier, float difficultyAdditive)
         {
             Instance.difficulty *= difficultyMultiplier;
             Instance.difficulty += difficultyAdditive;
             if (Instance.difficulty < 0) Instance.difficulty = 0;
         }
 
-        public void OverrideTreasureChance(string treasureChance)
+        internal void OverrideTreasureChance(string treasureChance)
         {
             if (Game1.isFestival()) return;
             
@@ -25,17 +25,17 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 Instance.treasure = false;
         }
 
-        public void InstantCatchTreasure(bool catchTreasure)
+        internal void InstantCatchTreasure(bool catchTreasure)
         {
             if (Instance.treasure) Instance.treasureCaught = catchTreasure;
         }
         
-        public void InstantCatchFish()
+        internal void InstantCatchFish()
         {
             Instance.distanceFromCatching = 1.0f;
         }
         
-        public void AlwaysPerfect(bool alwaysPerfect)
+        internal void AlwaysPerfect(bool alwaysPerfect)
         {
             if (alwaysPerfect)
             {

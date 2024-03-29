@@ -93,6 +93,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
             if (e.NewMenu is ItemGrabMenu { source: ItemGrabMenu.source_fishingChest } itemGrabMenu)
                 Assistant.OnTreasureMenuOpen(itemGrabMenu);
+            else if (e.OldMenu is ItemGrabMenu { source: ItemGrabMenu.source_fishingChest })
+                Assistant.OnTreasureMenuClose();
         }
         
         private void OnButtonPressed(object? sender, ButtonPressedEventArgs e)

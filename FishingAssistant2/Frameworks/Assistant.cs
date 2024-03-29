@@ -1,5 +1,6 @@
 using ChibiKyu.StardewMods.Common;
 using FishingAssistant2;
+using Microsoft.Xna.Framework.Input;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Enchantments;
@@ -10,7 +11,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 {
     internal class Assistant(Func<ModEntry> modEntry, Func<ModConfig> modConfig)
     {
-        public bool IsInFishingMiniGame;
+        internal bool IsInFishingMiniGame;
+        private bool _isInTreasureChestMenu;
         
         private readonly ModConfig _config = modConfig();
         private readonly ModEntry _modEntry = modEntry();
@@ -18,13 +20,13 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         private SBobberBar? _bobberBar;
         private SFishingRod? _fishingRod;
         private ItemGrabMenu? _treasureChestMenu;
+        private IList<Item> excludeItems = new List<Item>();
         
         private int _autoLootDelay = 30;
-        private int _endMiniGameDelay = 15;
-        
+        private int _autoClosePopupDelay = 30;
         private bool _catchingTreasure;
         
-        private IList<Item> excludeItems = new List<Item>();
+        private readonly IReflectedField<MouseState>? _currentMouseState = modEntry().Helper.Reflection.GetField<MouseState>(Game1.input, "_currentMouseState");
         
         #region FishingRod
 
@@ -77,8 +79,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         private void DoFishingRodAssistantTask()
         {
             if (_config.MaxCastPower) _fishingRod.Instance.castingPower = 1.01f;
+            
+            if (_config.InstantFishBite) _fishingRod.InstantFishBite();
 
-            if (_config.AutoCastFishingRod && _modEntry.ModEnable)
+            if (!_modEntry.ModEnable) return;
+            
+            if (_config.AutoCastFishingRod)
             {
                 var response = _fishingRod.AutoCastFishingRod(_modEntry.FacingDirection);
                 switch (response)
@@ -94,18 +100,16 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 }
             }
             
-            if (_config.InstantFishBite) _fishingRod.InstantFishBite();
+            if (_config.AutoHookFish) _fishingRod.AutoHook();
             
-            if (_config.AutoHookFish && _modEntry.ModEnable) _fishingRod.AutoHook();
-
-            if (_config.AutoClosePopup && _modEntry.ModEnable) _fishingRod.AutoCloseFishPopup();
+            
         }
 
         #endregion
 
         #region Bobber Bar
 
-        public void OnFishingMiniGameStart(BobberBar bobberBar)
+        internal void OnFishingMiniGameStart(BobberBar bobberBar)
         {
             IsInFishingMiniGame = true;
             _bobberBar = new SBobberBar(bobberBar);
@@ -113,7 +117,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             DoBobberBarAssistantTask();
         }
         
-        public void OnFishingMiniGameEnd()
+        internal void OnFishingMiniGameEnd()
         {
             IsInFishingMiniGame = false;
             _bobberBar = null;
@@ -136,7 +140,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         #region Update
 
-        public void DoOnUpdateAssistantTask()
+        internal void DoOnUpdateAssistantTask()
         {
             if (_config.AutoAttachBait) _fishingRod?.AutoAttachBait(_config.PreferBait, _config.InfiniteBait, _config.SpawnBaitIfDontHave);
             
@@ -145,11 +149,13 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             if (!_modEntry.ModEnable) return;
             
             if (IsInFishingMiniGame && _config.AutoPlayMiniGame) AutoPlayFishingMiniGame();
+            
+            if (_config.AutoClosePopup) AutoCloseFishPopup();
 
-            if (_config.AutoLootTreasure && _treasureChestMenu != null) AutoLootTreasure();
+            if (_isInTreasureChestMenu && _config.AutoLootTreasure) AutoLootTreasure();
         }
-        
-        public void AutoPlayFishingMiniGame()
+
+        private void AutoPlayFishingMiniGame()
         {
             var bar = _bobberBar.Instance;
             
@@ -173,12 +179,61 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             bar.bobberBarSpeed = (fishPos - bar.bobberBarPos - bobberBarCenter) / 2;
         }
 
-        public void OnTreasureMenuOpen(ItemGrabMenu itemGrabMenu)
+        private void AutoCloseFishPopup()
+        {
+            if (_fishingRod != null && _fishingRod.IsRodShowingFish() && !Game1.isFestival())
+            {
+                if (_autoClosePopupDelay-- > 0)
+                    return;
+                _autoClosePopupDelay = 30;
+
+                SimulateLeftMouseClick();
+                _fishingRod.Instance.tickUpdate(Game1.currentGameTime, Game1.player);
+            }
+
+            return;
+
+            void SimulateLeftMouseClick()
+            {
+                if (_currentMouseState == null) return;
+            
+                foreach (var button in Game1.options.useToolButton)
+                {
+                    if (button.key != Keys.None) 
+                    {
+                        Game1.oldKBState = new KeyboardState(button.key); 
+                    }
+                    
+                    if (button.mouseLeft)
+                    {
+                        _currentMouseState.SetValue(new MouseState(
+                            Game1.viewport.X / 2, 
+                            Game1.viewport.Y / 2, 
+                            0, 
+                            ButtonState.Pressed,
+                            ButtonState.Released, 
+                            ButtonState.Released,
+                            ButtonState.Released,
+                            ButtonState.Released,
+                            0));
+                    }
+                }
+            }
+        }
+
+        internal void OnTreasureMenuOpen(ItemGrabMenu itemGrabMenu)
         {
             _treasureChestMenu = itemGrabMenu;
+            _isInTreasureChestMenu = true;
         }
         
-        public void AutoLootTreasure()
+        internal void OnTreasureMenuClose()
+        {
+            _isInTreasureChestMenu = false;
+            _treasureChestMenu = null;
+        }
+
+        private void AutoLootTreasure()
         {
             if (_autoLootDelay-- > 0) return;
             _autoLootDelay = 30;
