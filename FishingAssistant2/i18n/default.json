@@ -16,6 +16,10 @@
   "drop-remaining" : "Drop Remaining",
   "discard-remaining" : "Discard Remaining",
   "any" : "Any",
+  "none" : "None",
+  "silver" : "Silver",
+  "gold" : "Gold",
+  "iridium" : "Iridium",
   
   "config-menu.title.key-binding" : "Key Binding",
   "config-menu.option.toggle-mod" : "Toggle Mod Button",
@@ -27,6 +31,7 @@
   "config-menu.option.max-cast-power" : "Max Cast Power",
   "config-menu.option.instant-fish-bite" : "Instant Fish Bite",
   "config-menu.option.always-perfect" : "Always Perfect",
+  "config-menu.option.prefer-fish-quality" : "Prefer Fish Quality",
   "config-menu.option.treasure-chance" : "Treasure Chance",
   "config-menu.option.Instant-catch-fish" : "Instant Catch Fish",
   "config-menu.option.Instant-catch-treasure" : "Instant Catch Treasure",

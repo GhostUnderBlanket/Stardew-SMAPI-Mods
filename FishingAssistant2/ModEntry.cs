@@ -16,9 +16,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
     {
         private ModConfig Config { get; set; }
         private Assistant Assistant { get; set; }
-
-        private readonly List<string> _availableBaits = new List<string>();
-        private readonly List<string> _availableTackles = new List<string>();
         
         public bool ModEnable;
         public bool CatchTreasure;
@@ -43,26 +40,13 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
         private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
         {
-            _availableBaits.Add("Any");
-            _availableTackles.Add("Any");
-            
-            foreach (KeyValuePair<string, ObjectData> item in Game1.objectData)
-            {
-                if (item.Value.Category == Object.baitCategory)
-                    _availableBaits.Add(ItemRegistry.QualifyItemId(item.Key));
-                else if (item.Value.Category == Object.tackleCategory)
-                    _availableTackles.Add(ItemRegistry.QualifyItemId(item.Key));
-            }
-            
             var configMenu = new ConfigMenu(
                 this.Helper,
                 this.Helper.ModRegistry, 
                 this.ModManifest, 
                 () => Config, 
                 () => Config = new ModConfig(), 
-                () => this.Helper.WriteConfig(Config),
-                _availableBaits,
-                _availableTackles);
+                () => this.Helper.WriteConfig(Config));
             
             configMenu.RegisterModConfigMenu();
         }
@@ -166,7 +150,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             const int spacing = 2;
 
             int toolbarOffset = (toolBarTransparency == 0 || Assistant.IsInFishingMiniGame || Game1.isFestival()) ? 0 : 
-                Config.ModStatusPosition == "Left" ? -toolBarWidth - spacing : toolBarWidth + spacing;
+                Config.ModStatusPosition == HudPosition.Left.ToString() ? -toolBarWidth - spacing : toolBarWidth + spacing;
             int boxPosX = viewport.Width / 2 + toolbarOffset - (boxSize / 2);
             int boxPosY = alignTop ? screenMargin : viewport.Height - screenMargin - boxSize;
             int boxCenterX = boxPosX + boxSize / 2;

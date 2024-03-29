@@ -19,6 +19,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         public bool InstantFishBite { get; set; } = false;
         
         public string TreasureChance { get; set; } = "Default";
+        
+        public string PreferFishQuality { get; set; } = "Any";
 
         /// <summary>Whether the game should consider every catch to be perfectly executed, even if it wasn't.</summary>
         public bool AlwaysPerfect { get; set; } = false;

@@ -163,6 +163,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             int bobberBarCenter = (bar.bobberBarHeight / 2);
 
             _bobberBar.AlwaysPerfect(_config.AlwaysPerfect);
+            _bobberBar.OverrideFishQuality(_config.PreferFishQuality);
             
             if (_catchingTreasure && bar.distanceFromCatching < 0.2f)
             {

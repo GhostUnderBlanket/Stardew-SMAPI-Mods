@@ -19,9 +19,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             if (Game1.isFestival()) return;
             
-            if (treasureChance == "Always")
+            if (treasureChance == TreasureChance.Always.ToString())
                 Instance.treasure = true;
-            else if (treasureChance == "Never") 
+            else if (treasureChance == TreasureChance.Never.ToString()) 
                 Instance.treasure = false;
         }
 
@@ -41,6 +41,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             {
                 Instance.perfect = true;
                 Instance.fishShake = Vector2.Zero;
+            }
+        }
+
+        internal void OverrideFishQuality(string preferFishQuality)
+        {
+            if (preferFishQuality != FishQuality.Any.ToString())
+            {
+                Instance.fishQuality = (int)Enum.Parse(typeof(FishQuality), preferFishQuality);
             }
         }
     }

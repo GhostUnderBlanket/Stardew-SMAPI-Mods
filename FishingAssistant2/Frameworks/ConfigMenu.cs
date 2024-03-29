@@ -2,17 +2,33 @@ using ChibiKyu.StardewMods.Common;
 using FishingAssistant2;
 using StardewModdingAPI;
 using StardewValley;
+using StardewValley.GameData.Objects;
+using Object = StardewValley.Object;
 
 namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 {
-    internal class ConfigMenu(IModHelper modHelper, IModRegistry modRegistry, IManifest modManifest, Func<ModConfig> config, Action configReset, Action configSave, List<string> availableBaits, List<string> availableTackles)
+    internal class ConfigMenu(IModHelper modHelper, IModRegistry modRegistry, IManifest modManifest, Func<ModConfig> config, Action configReset, Action configSave)
     {
         private IGenericModConfigMenuApi? _configMenu;
+        
+        private readonly List<string> _availableBaits = new List<string>();
+        private readonly List<string> _availableTackles = new List<string>();
         
         public void RegisterModConfigMenu()
         {
             _configMenu = modRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
             if (_configMenu is null) return;
+            
+            _availableBaits.Add("Any");
+            _availableTackles.Add("Any");
+            
+            foreach (KeyValuePair<string, ObjectData> item in Game1.objectData)
+            {
+                if (item.Value.Category == Object.baitCategory)
+                    _availableBaits.Add(ItemRegistry.QualifyItemId(item.Key));
+                else if (item.Value.Category == Object.tackleCategory)
+                    _availableTackles.Add(ItemRegistry.QualifyItemId(item.Key));
+            }
             
             ModConfig modConfig = config();
             
@@ -28,6 +44,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddSectionTitle(I18n.ConfigMenu_Title_Fishing);
             AddBool(I18n.ConfigMenu_Option_MaxCastPower, () => modConfig.MaxCastPower, b => modConfig.MaxCastPower = b);
             AddBool(I18n.ConfigMenu_Option_InstantFishBite, () => modConfig.InstantFishBite, b => modConfig.InstantFishBite = b);
+            AddDropDown(I18n.ConfigMenu_Option_PreferFishQuality, FishQualityOptions(), ParseFishQuality, () => modConfig.PreferFishQuality, quality => modConfig.PreferFishQuality = quality);
             AddBool(I18n.ConfigMenu_Option_AlwaysPerfect, () => modConfig.AlwaysPerfect, b => modConfig.AlwaysPerfect = b);
             AddDropDown(I18n.ConfigMenu_Option_TreasureChance, TreasureChanceOptions(), ParseTreasureChance, () => modConfig.TreasureChance, chance => modConfig.TreasureChance = chance);
             AddBool(I18n.ConfigMenu_Option_InstantCatchFish, () => modConfig.InstantCatchFish, b => modConfig.InstantCatchFish = b);
@@ -45,12 +62,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             AddSectionTitle(I18n.ConfigMenu_Title_FishingRod);
             AddBool(I18n.ConfigMenu_Option_AutoAttachBait, () => modConfig.AutoAttachBait, b => modConfig.AutoAttachBait = b);
-            AddDropDown(I18n.ConfigMenu_Option_PreferBait, availableBaits.ToArray(), ParseItemName, () => modConfig.PreferBait, s => modConfig.PreferBait = s);
+            AddDropDown(I18n.ConfigMenu_Option_PreferBait, _availableBaits.ToArray(), ParseItemName, () => modConfig.PreferBait, s => modConfig.PreferBait = s);
             AddBool(I18n.ConfigMenu_Option_InfiniteBait, () => modConfig.InfiniteBait, b => modConfig.InfiniteBait = b);
             AddBool(I18n.ConfigMenu_Option_SpawnBaitIfDontHave, () => modConfig.SpawnBaitIfDontHave, b => modConfig.SpawnBaitIfDontHave = b);
             
             AddBool(I18n.ConfigMenu_Option_AutoAttachTackles, () => modConfig.AutoAttachTackles, b => modConfig.AutoAttachTackles = b);
-            AddDropDown(I18n.ConfigMenu_Option_PreferTackle, availableTackles.ToArray(), ParseItemName, () => modConfig.PreferTackle, s => modConfig.PreferTackle = s);
+            AddDropDown(I18n.ConfigMenu_Option_PreferTackle, _availableTackles.ToArray(), ParseItemName, () => modConfig.PreferTackle, s => modConfig.PreferTackle = s);
             AddBool(I18n.ConfigMenu_Option_InfiniteTackle, () => modConfig.InfiniteTackle, b => modConfig.InfiniteTackle = b);
             AddBool(I18n.ConfigMenu_Option_SpawnTackleIfDontHave, () => modConfig.SpawnTackleIfDontHave, b => modConfig.SpawnTackleIfDontHave = b);
             
@@ -61,7 +78,28 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_AddPreservingEnchantment, () => modConfig.AddPreservingEnchantment, b => modConfig.AddPreservingEnchantment = b);
             AddBool(I18n.ConfigMenu_Option_RemoveEnchantmentsWhenUnequipped, () => modConfig.RemoveEnchantmentWhenUnequipped, b => modConfig.RemoveEnchantmentWhenUnequipped = b);
         }
+        
+        private static string[] FishQualityOptions()
+        {
+            return Enum.GetNames(typeof(FishQuality));
+        }
+        
+        private string ParseFishQuality(string rawText)
+        {
+            if (!Enum.TryParse(rawText, out FishQuality text))
+                return rawText;
 
+            return text switch
+            {
+                FishQuality.Any => I18n.Any(),
+                FishQuality.None => I18n.None(),
+                FishQuality.Silver => I18n.Silver(),
+                FishQuality.Gold => I18n.Gold(),
+                FishQuality.Iridium => I18n.Iridium(),
+                _ => text.ToString()
+            };
+        }
+        
         private string ParseItemName(string rawText)
         {
             return rawText == "Any" ? I18n.Any() : ItemRegistry.GetData(rawText).DisplayName;

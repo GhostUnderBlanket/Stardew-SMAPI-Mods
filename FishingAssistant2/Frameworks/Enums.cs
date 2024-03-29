@@ -22,7 +22,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
     internal enum FishQuality
     {
-        Default,
+        Any = -1,
         None = 0,
         Silver = 1,
         Gold = 2,
