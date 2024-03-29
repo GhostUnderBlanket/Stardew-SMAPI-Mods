@@ -25,6 +25,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         /// <summary>Whether the game should consider every catch to be perfectly executed, even if it wasn't.</summary>
         public bool AlwaysPerfect { get; set; } = false;
         
+        public bool AlwaysMaxFishSize { get; set; } = false;
+        
         /// <summary>A multiplier applied to the fish difficulty. This can a number between 0 and 1 to lower difficulty, or more than 1 to increase it.</summary>
         public float FishDifficultyMultiplier { get; set; } = 1;
 

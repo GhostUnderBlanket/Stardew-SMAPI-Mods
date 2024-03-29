@@ -101,8 +101,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             }
             
             if (_config.AutoHookFish) _fishingRod.AutoHook();
-            
-            
         }
 
         #endregion
@@ -164,6 +162,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
             _bobberBar.AlwaysPerfect(_config.AlwaysPerfect);
             _bobberBar.OverrideFishQuality(_config.PreferFishQuality);
+            _bobberBar.OverrideFishSize(_config.AlwaysMaxFishSize);
             
             if (_catchingTreasure && bar.distanceFromCatching < 0.2f)
             {

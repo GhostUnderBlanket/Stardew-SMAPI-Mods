@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using StardewValley;
 using StardewValley.Menus;
+using StardewValley.Objects;
 
 namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 {
@@ -49,6 +50,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             if (preferFishQuality != FishQuality.Any.ToString())
             {
                 Instance.fishQuality = (int)Enum.Parse(typeof(FishQuality), preferFishQuality);
+            }
+        }
+        
+        internal void OverrideFishSize(bool alwaysMaxFishSize)
+        {
+            if (alwaysMaxFishSize)
+            {
+                Instance.fishSize = Instance.maxFishSize;
             }
         }
     }

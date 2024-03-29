@@ -46,6 +46,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_InstantFishBite, () => modConfig.InstantFishBite, b => modConfig.InstantFishBite = b);
             AddDropDown(I18n.ConfigMenu_Option_PreferFishQuality, FishQualityOptions(), ParseFishQuality, () => modConfig.PreferFishQuality, quality => modConfig.PreferFishQuality = quality);
             AddBool(I18n.ConfigMenu_Option_AlwaysPerfect, () => modConfig.AlwaysPerfect, b => modConfig.AlwaysPerfect = b);
+            AddBool(I18n.ConfigMenu_Option_AlwaysMaxFishSize, () => modConfig.AlwaysMaxFishSize, b => modConfig.AlwaysMaxFishSize = b);
             AddDropDown(I18n.ConfigMenu_Option_TreasureChance, TreasureChanceOptions(), ParseTreasureChance, () => modConfig.TreasureChance, chance => modConfig.TreasureChance = chance);
             AddBool(I18n.ConfigMenu_Option_InstantCatchFish, () => modConfig.InstantCatchFish, b => modConfig.InstantCatchFish = b);
             AddBool(I18n.ConfigMenu_Option_InstantCatchTreasure, () => modConfig.InstantCatchTreasure, b => modConfig.InstantCatchTreasure = b);
