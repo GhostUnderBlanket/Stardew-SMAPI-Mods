@@ -97,7 +97,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         {
             if (!Context.IsWorldReady) return;
 
-            if (e.Button == Config.EnableModButton)
+            if (e.Button == Config.EnableAutomationButton)
             {
                 ModEnable = !ModEnable;
                 Game1.playSound("coin");

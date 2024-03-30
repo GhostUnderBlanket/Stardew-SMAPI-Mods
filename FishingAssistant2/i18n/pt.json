@@ -34,7 +34,7 @@
   "config-menu.option.instant-fish-bite" : "Instant Fish Bite",
   "config-menu.option.always-perfect" : "Always Perfect",
   "config-menu.option.always-max-fish-size" : "Always Max Fish Size",
-  "config-menu.option.prefer-fish-quality" : "Prefer Fish Quality",
+  "config-menu.option.prefer-fish-quality" : "Preferred Fish Quality",
   "config-menu.option.treasure-chance" : "Treasure Chance",
   "config-menu.option.Instant-catch-fish" : "Instant Catch Fish",
   "config-menu.option.Instant-catch-treasure" : "Instant Catch Treasure",
@@ -56,11 +56,11 @@
 
   "config-menu.title.fishing-rod" : "Fishing Rod",
   "config-menu.option.auto-attach-bait" : "Auto Attach Bait",
-  "config-menu.option.prefer-bait" : "Prefer Bait",
+  "config-menu.option.prefer-bait" : "Preferred Bait",
   "config-menu.option.infinite-bait" : "Infinite Bait",
   "config-menu.option.spawn-bait-if-dont-have" : "Spawn Bait If Dont Have",
   "config-menu.option.auto-attach-tackles" : "Auto Attach Tackles",
-  "config-menu.option.prefer-tackle" : "Prefer Tackle",
+  "config-menu.option.prefer-tackle" : "Preferred Tackle",
   "config-menu.option.infinite-tackle" : "Infinite Tackle",
   "config-menu.option.spawn-tackle-if-dont-have" : "Spawn Tackle If Dont Have",
   

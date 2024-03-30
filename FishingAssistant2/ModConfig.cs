@@ -4,8 +4,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 {
     public class ModConfig
     {
-        /// <summary>Button for toggling max or free fishing rod cast power</summary>
-        public SButton EnableModButton { get; set; } = SButton.F5;
+        /// <summary>Button for toggling automation of this mod</summary>
+        public SButton EnableAutomationButton { get; set; } = SButton.F5;
 
         /// <summary>Button for toggling catch or ignore treasure in fishing mini-game</summary>
         public SButton CatchTreasureButton { get; set; } = SButton.F6;
@@ -37,16 +37,16 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         /// <summary>Value added to fish difficulty</summary>
         public int FishDifficultyAdditive { get; set; } = 0;
 
-        /// <summary>Toggle for instant fish catching</summary>
+        /// <summary>Instantly catch fish when fish hooked</summary>
         public bool InstantCatchFish { get; set; } = false;
 
-        /// <summary>Toggle for instant treasure catching</summary>
+        /// <summary>Instantly catch treasure when treasure appeared</summary>
         public bool InstantCatchTreasure { get; set; } = false;
         
-        /// <summary>Toggle for auto casting fishing rod</summary>
+        /// <summary>Should mod do auto cast fishing rod.</summary>
         public bool AutoCastFishingRod { get; set; } = true;
 
-        /// <summary>Toggle for auto hooking fish</summary>
+        /// <summary>Should mod do auto hook fish.</summary>
         public bool AutoHookFish { get; set; } = true;
 
         /// <summary>Toggle for auto playing fishing mini-game</summary>
@@ -67,7 +67,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         /// <summary>Preference for bait type</summary>
         public string PreferBait { get; set; } = "Any";
         
-        /// <summary>Toggle for infinite fishing bait</summary>
+        /// <summary>Make your fishing bait last long forever</summary>
         public bool InfiniteBait { get; set; } = false;
         
         /// <summary>Toggle for spawning bait if none is available</summary>
@@ -79,22 +79,22 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         /// <summary>Preference for tackle type</summary>
         public string PreferTackle { get; set; } = "Any";
         
-        /// <summary>Toggle for infinite fishing tackles</summary>
+        /// <summary>Make your tackle last long forever</summary>
         public bool InfiniteTackle { get; set; } = false;
         
-        /// <summary>Toggle for spawning tackles if none are available</summary>
+        /// <summary>Toggle for spawning tackle if none are available</summary>
         public bool SpawnTackleIfDontHave { get; set; } = false;
         
-        /// <summary>Toggle for pausing fishing at a certain time</summary>
+        /// <summary>Should mod auto pause fishing on night.</summary>
         public string AutoPauseFishing { get; set; } = "WarnAndPause";
 
         /// <summary>Time to stop fishing</summary>
         public int PauseFishingTime { get; set; } = 24;
         
-        /// <summary>Number of warnings before pausing fishing</summary>
+        /// <summary>Number of warnings after time reach</summary>
         public int NumToWarn { get; set; } = 1;
 
-        /// <summary>Toggle for auto eating food if needed</summary>
+        /// <summary>Whether to eat some food if need</summary>
         public bool AutoEatFood { get; set; } = false;
 
         /// <summary>Toggle for allowing eating of caught fish</summary>

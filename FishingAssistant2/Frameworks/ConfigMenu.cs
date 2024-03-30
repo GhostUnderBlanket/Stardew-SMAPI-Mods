@@ -35,7 +35,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             Register();
 
             AddSectionTitle(I18n.ConfigMenu_Title_KeyBinding);
-            AddKeyBind(I18n.ConfigMenu_Option_ToggleAutomation, () => modConfig.EnableModButton, button => modConfig.EnableModButton = button);
+            AddKeyBind(I18n.ConfigMenu_Option_ToggleAutomation, () => modConfig.EnableAutomationButton, button => modConfig.EnableAutomationButton = button);
             AddKeyBind(I18n.ConfigMenu_Option_CatchTreasure, () => modConfig.CatchTreasureButton, button => modConfig.CatchTreasureButton = button);
 
             AddSectionTitle(I18n.ConfigMenu_Title_Hud);

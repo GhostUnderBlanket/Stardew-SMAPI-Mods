@@ -2,7 +2,7 @@
   "Name": "Fishing Assistant 2",
   "Author": "ChibiKyu",
   "Version": "2.1.0",
-  "Description": "Stardew Valley Mod which allows you to automatically catching fish",
+  "Description": "Your personal fishing assistant. that will handle the tough, boring and tiring fishing for you.",
   "UniqueID": "ChibiKyu.FishingAssistant2",
   "EntryDll": "FishingAssistant2.dll",
   "MinimumApiVersion": "4.0.0",
