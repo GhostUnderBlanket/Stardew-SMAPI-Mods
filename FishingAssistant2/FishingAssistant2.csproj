@@ -8,12 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.1.1" />
-      <PackageReference Include="Pathoschild.Stardew.ModTranslationClassBuilder" Version="2.0.1" />
+      <AdditionalFiles Remove="i18n\default.json" />
     </ItemGroup>
 
     <ItemGroup>
-      <AdditionalFiles Remove="i18n\default.json" />
+      <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.1.1" />
+      <PackageReference Include="Pathoschild.Stardew.ModTranslationClassBuilder" Version="2.0.1" />
     </ItemGroup>
 
     <Import Project="..\Common\Common.projitems" Label="Shared" />

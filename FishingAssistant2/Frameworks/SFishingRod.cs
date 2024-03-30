@@ -18,8 +18,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         
         private readonly List<BaseEnchantment> _addedEnchantments = new List<BaseEnchantment>();
         
-        private int _autoCastDelay = 60;
-        
         internal void AutoAttachBait(string preferBait, bool infiniteBait, bool spawnBaitIfDontHave)
         {
             if (IsRodNotInUse() && !Game1.isFestival())
@@ -99,30 +97,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 }
             }
         }
-        
-        internal AutoActionResponse AutoCastFishingRod(int playerFacingDirection)
-        {
-            if (_autoCastDelay-- > 0)
-                return AutoActionResponse.OnDelay;
-            _autoCastDelay = 60;
-            
-            if (!IsRodNotInUse() || Game1.player.isRidingHorse() || Game1.isFestival())
-                return AutoActionResponse.CantDoAction;
-        
-            bool hasEnoughStamina = Game1.player.stamina > 8.0 - Game1.player.FishingLevel * 0.1;
-            bool hasEfficientEnchantment = Instance.hasEnchantmentOfType<EfficientToolEnchantment>();
-            bool isInventoryFull = Game1.player.isInventoryFull();
-
-            if (isInventoryFull)
-                return AutoActionResponse.InventoryFull;
-            if (!hasEnoughStamina && !hasEfficientEnchantment)
-                return AutoActionResponse.LowStamina;
-            
-            Game1.player.faceDirection(playerFacingDirection);
-            Game1.pressUseToolButton();
-            
-            return AutoActionResponse.CanDoAction;
-        }
 
         internal void AutoHook()
         {
@@ -153,7 +127,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 Instance.enchantments.Remove(enchantment);
         }
         
-        private bool IsRodNotInUse()
+        internal bool IsRodNotInUse()
         {
             return Context.CanPlayerMove && Game1.activeClickableMenu == null && !Instance.inUse();
         }

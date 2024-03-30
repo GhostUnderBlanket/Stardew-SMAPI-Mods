@@ -24,7 +24,7 @@
   "warn-and-pause" : "Warn And Pause",
   
   "config-menu.title.key-binding" : "Key Binding",
-  "config-menu.option.toggle-mod" : "Toggle Mod Button",
+  "config-menu.option.toggle-automation" : "Toggle Automation Button",
   "config-menu.option.catch-treasure" : "Catch Treasure Button",
   "config-menu.title.hud" : "HUD",
   "config-menu.option.hud-position" : "HUD Position",
@@ -51,6 +51,8 @@
   "config-menu.option.auto-pause-fishing" : "Auto Pause Fishing",
   "config-menu.option.auto-pause-fishing-time" : "Time To Pause",
   "config-menu.option.num-to-warn" : "Number Of Times To Warn",
+  "config-menu.option.auto-eat-food" : "Auto Eat Food",
+  "config-menu.option.allow-eating-fish" : "Allow Eating Fish",
 
   "config-menu.title.fishing-rod" : "Fishing Rod",
   "config-menu.option.auto-attach-bait" : "Auto Attach Bait",
@@ -75,4 +77,5 @@
   "hud-message.inventory-full" : "Inventory Full",
   "hud-message.auto-disable" : "It's already past {0}",
   "hud-message.auto-attach" : "Auto Attach {0} To {1}",
+  "hud-message.auto-eat-food" : "Auto Eat {0}",
 }

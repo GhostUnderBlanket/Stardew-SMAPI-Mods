@@ -6,6 +6,7 @@ using StardewValley;
 using StardewValley.Enchantments;
 using StardewValley.Menus;
 using StardewValley.Tools;
+using Object = StardewValley.Object;
 
 namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 {
@@ -23,8 +24,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         private ItemGrabMenu? _treasureChestMenu;
         private IList<Item> excludeItems = new List<Item>();
         
-        private int _autoLootDelay = 30;
+        private int _autoCastDelay = 60;
         private int _autoClosePopupDelay = 30;
+        private int _autoLootDelay = 30;
         private bool _catchingTreasure;
         
         private readonly IReflectedField<MouseState>? _currentMouseState = modEntry().Helper.Reflection.GetField<MouseState>(Game1.input, "_currentMouseState");
@@ -82,26 +84,81 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             if (_config.MaxCastPower) _fishingRod.Instance.castingPower = 1.01f;
             
             if (_config.InstantFishBite) _fishingRod.InstantFishBite();
+            
+            if (_config.AutoAttachBait) _fishingRod?.AutoAttachBait(_config.PreferBait, _config.InfiniteBait, _config.SpawnBaitIfDontHave);
+            
+            if (_config.AutoAttachTackles) _fishingRod?.AutoAttachTackles(_config.PreferTackle, _config.InfiniteTackle, _config.SpawnTackleIfDontHave);
 
             if (!_modEntry.ModEnable) return;
             
-            if (_config.AutoCastFishingRod)
+            if (_config.AutoCastFishingRod) AutoCastFishingRod(_modEntry.FacingDirection);
+            
+            if (_config.AutoHookFish) _fishingRod.AutoHook();
+        }
+
+        private void AutoCastFishingRod(int playerFacingDirection)
+        {
+            if (!_fishingRod.IsRodNotInUse() || Game1.player.isRidingHorse() || Game1.isFestival())
+                return;
+            
+            if (_autoCastDelay-- > 0)
+                return;
+            _autoCastDelay = 60;
+            
+            bool lowStamina = Game1.player.Stamina <= 8.0 - Game1.player.FishingLevel * 0.1;
+            bool hasEnchantment = _fishingRod.Instance.hasEnchantmentOfType<EfficientToolEnchantment>();
+            bool isInventoryFull = Game1.player.isInventoryFull();
+            
+            if (lowStamina && !hasEnchantment)
             {
-                var response = _fishingRod.AutoCastFishingRod(_modEntry.FacingDirection);
-                switch (response)
+                if (!_config.AutoEatFood || _config.AutoEatFood && !AutoEatFood())
                 {
-                    case AutoActionResponse.LowStamina:
-                        CommonHelper.PushErrorNotification(I18n.HudMessage_LowStamina());
-                        _modEntry.ForceDisable();
-                        break;
-                    case AutoActionResponse.InventoryFull:
-                        CommonHelper.PushErrorNotification(I18n.HudMessage_InventoryFull());
-                        _modEntry.ForceDisable();
-                        break;
+                    CommonHelper.PushErrorNotification(I18n.HudMessage_LowStamina());
+                    _modEntry.ForceDisable();
                 }
             }
             
-            if (_config.AutoHookFish) _fishingRod.AutoHook();
+            if (isInventoryFull)
+            {
+                CommonHelper.PushErrorNotification(I18n.HudMessage_InventoryFull());
+                _modEntry.ForceDisable();
+            }
+            
+            if ((!lowStamina || hasEnchantment) && !isInventoryFull)
+            {
+                Game1.player.faceDirection(playerFacingDirection);
+                Game1.pressUseToolButton();
+            }
+        }
+        
+        private bool AutoEatFood()
+        {
+            var player = Game1.player;
+            if (!player.isEating && _fishingRod.IsRodNotInUse())
+            {
+                IEnumerable<Object> items = player.Items.OfType<Object>();
+                Object bestItem = null;
+                
+                foreach (var item in items)
+                {
+                    if (item.Edibility <= 0 || (item.Category == -4 && !_config.AllowEatingFish))
+                        continue;
+
+                    if (bestItem == null || bestItem.Edibility / bestItem.salePrice() < item.Edibility / item.salePrice())
+                        bestItem = item;
+                }
+
+                if (bestItem != null)
+                {
+                    player.eatObject(bestItem);
+                    bestItem.Stack--;
+                    if (bestItem.Stack == 0) player.removeItemFromInventory(bestItem);
+
+                    CommonHelper.PushWarnNotification(I18n.HudMessage_AutoEatFood(), ItemRegistry.GetData(bestItem.QualifiedItemId).DisplayName);
+                    return true;
+                }
+            }
+            return false;
         }
 
         #endregion
@@ -141,10 +198,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         internal void DoOnUpdateAssistantTask()
         {
-            if (_config.AutoAttachBait) _fishingRod?.AutoAttachBait(_config.PreferBait, _config.InfiniteBait, _config.SpawnBaitIfDontHave);
-            
-            if (_config.AutoAttachTackles) _fishingRod?.AutoAttachTackles(_config.PreferTackle, _config.InfiniteTackle, _config.SpawnTackleIfDontHave);
-            
             if (!_modEntry.ModEnable) return;
             
             if (IsInFishingMiniGame && _config.AutoPlayMiniGame) AutoPlayFishingMiniGame();
@@ -187,9 +240,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 if (_autoClosePopupDelay-- > 0)
                     return;
                 _autoClosePopupDelay = 30;
-
+                
                 SimulateLeftMouseClick();
                 _fishingRod.Instance.tickUpdate(Game1.currentGameTime, Game1.player);
+                _currentMouseState?.SetValue(new MouseState());
+                Game1.oldKBState = new KeyboardState(); 
+                _modEntry.Monitor.Log("Close popup");
             }
 
             return;

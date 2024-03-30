@@ -35,7 +35,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             Register();
 
             AddSectionTitle(I18n.ConfigMenu_Title_KeyBinding);
-            AddKeyBind(I18n.ConfigMenu_Option_ToggleMod, () => modConfig.EnableModButton, button => modConfig.EnableModButton = button);
+            AddKeyBind(I18n.ConfigMenu_Option_ToggleAutomation, () => modConfig.EnableModButton, button => modConfig.EnableModButton = button);
             AddKeyBind(I18n.ConfigMenu_Option_CatchTreasure, () => modConfig.CatchTreasureButton, button => modConfig.CatchTreasureButton = button);
 
             AddSectionTitle(I18n.ConfigMenu_Title_Hud);
@@ -63,6 +63,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddDropDown(I18n.ConfigMenu_Option_AutoPauseFishing, PauseFishingOptions(), ParsePauseFishing, () => modConfig.AutoPauseFishing, s => modConfig.AutoPauseFishing = s);
             AddNumber(I18n.ConfigMenu_Option_AutoPauseFishingTime, () => modConfig.PauseFishingTime, i => modConfig.PauseFishingTime = i, 6, 25, 1,value => Game1.getTimeOfDayString(value * 100));
             AddNumber(I18n.ConfigMenu_Option_NumToWarn, () => modConfig.NumToWarn, i => modConfig.NumToWarn = i, 1, 5, 1);
+            AddBool(I18n.ConfigMenu_Option_AutoEatFood, () => modConfig.AutoEatFood, b => modConfig.AutoEatFood = b);
+            AddBool(I18n.ConfigMenu_Option_AllowEatingFish, () => modConfig.AllowEatingFish, b => modConfig.AllowEatingFish = b);
             
             AddSectionTitle(I18n.ConfigMenu_Title_FishingRod);
             AddBool(I18n.ConfigMenu_Option_AutoAttachBait, () => modConfig.AutoAttachBait, b => modConfig.AutoAttachBait = b);

@@ -48,7 +48,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
                 this.ModManifest, 
                 () => Config, 
                 () => Config = new ModConfig(), 
-                () => this.Helper.WriteConfig(Config));
+                () => Helper.WriteConfig(Config));
             
             configMenu.RegisterModConfigMenu();
         }
@@ -114,8 +114,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         
         public void CachePlayerPosition()
         {
-            FacingDirection = Game1.player.getDirection() != -1 ? Game1.player.getDirection() : Game1.player.FacingDirection;
-            _facingDirectionCached = true;
+            if (!_facingDirectionCached)
+            {
+                FacingDirection = Game1.player.getDirection() != -1 ? Game1.player.getDirection() : Game1.player.FacingDirection;
+                _facingDirectionCached = true;
+                Monitor.Log("Cached");
+            }
         }
 
         public void ForgetPlayerPosition()
@@ -124,6 +128,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             {
                 FacingDirection = 0;
                 _facingDirectionCached = false;
+                Monitor.Log("Forget");
             }
         }
         
