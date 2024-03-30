@@ -37,4 +37,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         InventoryFull,
         LowStamina
     }
+    
+    internal enum PauseFishingBehaviour
+    {
+        Off,
+        WarnOnly,
+        WarnAndPause
+    }
 }

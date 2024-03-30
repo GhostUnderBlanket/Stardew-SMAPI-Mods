@@ -44,12 +44,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddSectionTitle(I18n.ConfigMenu_Title_Fishing);
             AddBool(I18n.ConfigMenu_Option_MaxCastPower, () => modConfig.MaxCastPower, b => modConfig.MaxCastPower = b);
             AddBool(I18n.ConfigMenu_Option_InstantFishBite, () => modConfig.InstantFishBite, b => modConfig.InstantFishBite = b);
+            AddBool(I18n.ConfigMenu_Option_InstantCatchFish, () => modConfig.InstantCatchFish, b => modConfig.InstantCatchFish = b);
+            AddBool(I18n.ConfigMenu_Option_InstantCatchTreasure, () => modConfig.InstantCatchTreasure, b => modConfig.InstantCatchTreasure = b);
+            AddDropDown(I18n.ConfigMenu_Option_TreasureChance, TreasureChanceOptions(), ParseTreasureChance, () => modConfig.TreasureChance, chance => modConfig.TreasureChance = chance);
             AddDropDown(I18n.ConfigMenu_Option_PreferFishQuality, FishQualityOptions(), ParseFishQuality, () => modConfig.PreferFishQuality, quality => modConfig.PreferFishQuality = quality);
             AddBool(I18n.ConfigMenu_Option_AlwaysPerfect, () => modConfig.AlwaysPerfect, b => modConfig.AlwaysPerfect = b);
             AddBool(I18n.ConfigMenu_Option_AlwaysMaxFishSize, () => modConfig.AlwaysMaxFishSize, b => modConfig.AlwaysMaxFishSize = b);
-            AddDropDown(I18n.ConfigMenu_Option_TreasureChance, TreasureChanceOptions(), ParseTreasureChance, () => modConfig.TreasureChance, chance => modConfig.TreasureChance = chance);
-            AddBool(I18n.ConfigMenu_Option_InstantCatchFish, () => modConfig.InstantCatchFish, b => modConfig.InstantCatchFish = b);
-            AddBool(I18n.ConfigMenu_Option_InstantCatchTreasure, () => modConfig.InstantCatchTreasure, b => modConfig.InstantCatchTreasure = b);
             AddNumber(I18n.ConfigMenu_Option_FishDifficultyMultiplier, () => modConfig.FishDifficultyMultiplier, i => modConfig.FishDifficultyMultiplier = i);
             AddNumber(I18n.ConfigMenu_Option_FishDifficultyAdditive, () => modConfig.FishDifficultyAdditive, i => modConfig.FishDifficultyAdditive = i);
 
@@ -60,6 +60,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_AutoClosePopup, () => modConfig.AutoClosePopup, b => modConfig.AutoClosePopup = b);
             AddBool(I18n.ConfigMenu_Option_AutoLootTreasure, () => modConfig.AutoLootTreasure, b => modConfig.AutoLootTreasure = b);
             AddDropDown(I18n.ConfigMenu_Option_ActionIfInventoryFull, ActionOnInventoryFullOptions(), ParseActionOnInventoryFull, () => modConfig.ActionIfInventoryFull, action => modConfig.ActionIfInventoryFull = action);
+            AddDropDown(I18n.ConfigMenu_Option_AutoPauseFishing, PauseFishingOptions(), ParsePauseFishing, () => modConfig.AutoPauseFishing, s => modConfig.AutoPauseFishing = s);
+            AddNumber(I18n.ConfigMenu_Option_AutoPauseFishingTime, () => modConfig.PauseFishingTime, i => modConfig.PauseFishingTime = i, 6, 25, 1,value => Game1.getTimeOfDayString(value * 100));
+            AddNumber(I18n.ConfigMenu_Option_NumToWarn, () => modConfig.NumToWarn, i => modConfig.NumToWarn = i, 1, 5, 1);
             
             AddSectionTitle(I18n.ConfigMenu_Title_FishingRod);
             AddBool(I18n.ConfigMenu_Option_AutoAttachBait, () => modConfig.AutoAttachBait, b => modConfig.AutoAttachBait = b);
@@ -78,6 +81,25 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_AddMasterEnchantment, () => modConfig.AddMasterEnchantment, b => modConfig.AddMasterEnchantment = b);
             AddBool(I18n.ConfigMenu_Option_AddPreservingEnchantment, () => modConfig.AddPreservingEnchantment, b => modConfig.AddPreservingEnchantment = b);
             AddBool(I18n.ConfigMenu_Option_RemoveEnchantmentsWhenUnequipped, () => modConfig.RemoveEnchantmentWhenUnequipped, b => modConfig.RemoveEnchantmentWhenUnequipped = b);
+        }
+        
+        private static string[] PauseFishingOptions()
+        {
+            return Enum.GetNames(typeof(PauseFishingBehaviour));
+        }
+        
+        private string ParsePauseFishing(string rawText)
+        {
+            if (!Enum.TryParse(rawText, out PauseFishingBehaviour text))
+                return rawText;
+
+            return text switch
+            {
+                PauseFishingBehaviour.Off => I18n.Off(),
+                PauseFishingBehaviour.WarnOnly => I18n.WarnOnly(),
+                PauseFishingBehaviour.WarnAndPause => I18n.WarnAndPause(),
+                _ => text.ToString()
+            };
         }
         
         private static string[] FishQualityOptions()
@@ -208,22 +230,30 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 setValue: setValue);
         }
 
-        private void AddNumber(Func<string> name, Func<int> getValue, Action<int> setValue)
+        private void AddNumber(Func<string> name, Func<int> getValue, Action<int> setValue, int? min = null, int? max = null, int? interval = null, Func<int, string> formatValue = null)
         {
             _configMenu?.AddNumberOption(
                 mod: modManifest,
                 getValue: getValue,
                 setValue: setValue,
-                name: name);
+                name: name,
+                min: min,
+                max: max,
+                interval: interval,
+                formatValue: formatValue);
         }
         
-        private void AddNumber(Func<string> name, Func<float> getValue, Action<float> setValue)
+        private void AddNumber(Func<string> name, Func<float> getValue, Action<float> setValue, float? min = null, float? max = null, float? interval = null, Func<float, string> formatValue = null)
         {
             _configMenu?.AddNumberOption(
                 mod: modManifest,
                 getValue: getValue,
                 setValue: setValue,
-                name: name);
+                name: name,
+                min: min,
+                max: max,
+                interval: interval,
+                formatValue: formatValue);
         }
     }
 }

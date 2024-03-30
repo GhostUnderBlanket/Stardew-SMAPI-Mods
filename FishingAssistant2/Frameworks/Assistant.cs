@@ -11,6 +11,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 {
     internal class Assistant(Func<ModEntry> modEntry, Func<ModConfig> modConfig)
     {
+        internal int NumWarnThisDay = 0;
         internal bool IsInFishingMiniGame;
         private bool _isInTreasureChestMenu;
         
@@ -262,7 +263,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                     }
 
                     _treasureChestMenu = null;
-
                     CommonHelper.PushErrorNotification(I18n.HudMessage_InventoryFull());
                     _modEntry.ForceDisable();
                 }
@@ -291,6 +291,31 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                     
                     actualInventory.RemoveAt(excludeItems.Count);
                     _autoLootDelay = 10;
+                }
+            }
+        }
+
+        #endregion
+
+        #region On Time Changed
+
+        public void DoOnTimeChangedAssistantTask()
+        {
+            if (!_modEntry.ModEnable) return;
+            
+            if (_config.AutoPauseFishing != PauseFishingBehaviour.Off.ToString()) AutoPauseFishing(_config.AutoPauseFishing, _config.NumToWarn);
+        }
+        
+        private void AutoPauseFishing(string autoPauseFishing, int numToWarn)
+        {
+            if (Game1.timeOfDay >= _config.PauseFishingTime * 100 && NumWarnThisDay < numToWarn)
+            {
+                NumWarnThisDay++;
+                CommonHelper.PushErrorNotification(I18n.HudMessage_AutoDisable(), Game1.getTimeOfDayString(Game1.timeOfDay));
+                if (autoPauseFishing == PauseFishingBehaviour.WarnAndPause.ToString())
+                {
+                    _modEntry.ForceDisable();
+                    if (!Game1.IsMultiplayer) Game1.activeClickableMenu = new GameMenu();
                 }
             }
         }

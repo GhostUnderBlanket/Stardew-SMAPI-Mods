@@ -30,14 +30,16 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             this.Config = helper.ReadConfig<ModConfig>();
             
             helper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
+            helper.Events.GameLoop.DayStarted += OnDayStarted;
             helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
+            helper.Events.GameLoop.TimeChanged += OnTimeChanged;
             helper.Events.Display.RenderingHud += this.OnRenderingHud;
             helper.Events.Display.MenuChanged += this.OnMenuChanged;
             helper.Events.Input.ButtonPressed += this.OnButtonPressed;
 
             Assistant = new Assistant(()=> this,() => Config);
         }
-
+        
         private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
         {
             var configMenu = new ConfigMenu(
@@ -49,6 +51,16 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
                 () => this.Helper.WriteConfig(Config));
             
             configMenu.RegisterModConfigMenu();
+        }
+        
+        private void OnDayStarted(object? sender, DayStartedEventArgs e)
+        {
+            Assistant.NumWarnThisDay = 0;
+        }
+        
+        private void OnTimeChanged(object? sender, TimeChangedEventArgs e)
+        {
+            Assistant.DoOnTimeChangedAssistantTask();
         }
         
         private void OnUpdateTicked(object? sender, UpdateTickedEventArgs e)
@@ -119,7 +131,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         {
             Game1.playSound("coin");
             ModEnable = false;
-            CommonHelper.PushToggleNotification(ModEnable, I18n.HudMessage_ModEnable());
+            CommonHelper.PushToggleNotification(ModEnable, I18n.HudMessage_AutomationToggle());
         }
 
         private void DrawModStatus()

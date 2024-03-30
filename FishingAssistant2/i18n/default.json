@@ -20,6 +20,8 @@
   "silver" : "Silver",
   "gold" : "Gold",
   "iridium" : "Iridium",
+  "warn-only" : "Warn Only",
+  "warn-and-pause" : "Warn And Pause",
   
   "config-menu.title.key-binding" : "Key Binding",
   "config-menu.option.toggle-mod" : "Toggle Mod Button",
@@ -46,6 +48,9 @@
   "config-menu.option.auto-close-popup" : "Auto Close Popup",
   "config-menu.option.auto-loot-treasure" : "Auto Loot Treasure",
   "config-menu.option.action-if-inventory-full" : "Action If Inventory Full",
+  "config-menu.option.auto-pause-fishing" : "Auto Pause Fishing",
+  "config-menu.option.auto-pause-fishing-time" : "Time To Pause",
+  "config-menu.option.num-to-warn" : "Number Of Times To Warn",
 
   "config-menu.title.fishing-rod" : "Fishing Rod",
   "config-menu.option.auto-attach-bait" : "Auto Attach Bait",
@@ -64,10 +69,10 @@
   "config-menu.option.add-preserving-enchantment" : "Add Preserving Enchantment",
   "config-menu.option.remove-enchantments-when-unequipped" : "Remove When Unequipped",
   
-  "hud-message.mod-enable" : "Fishing Assistant 2 is {0}",
-  "hud-message.max-cast-power" : "Max cast power is {0}",
-  "hud-message.catch-treasure" : "Catch treasure is {0}",
+  "hud-message.automation-toggle" : "Fishing Assistant 2 is {0}",
+  "hud-message.catch-treasure-toggle" : "Catch treasure is {0}",
   "hud-message.low-stamina" : "Low stamina",
   "hud-message.inventory-full" : "Inventory Full",
+  "hud-message.auto-disable" : "It's already past {0}",
   "hud-message.auto-attach" : "Auto Attach {0} To {1}",
 }
