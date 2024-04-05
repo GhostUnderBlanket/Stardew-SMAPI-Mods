@@ -85,6 +85,14 @@ Toggle for making fish bite instantly.
 Chance of finding treasure while fishing.
 ```
 
+### PreferFishAmount
+**Default value:** `1`
+**Possible values:** `1 - 3`
+
+```
+Preference for fish amount.
+```
+
 ### PreferFishQuality
 **Default value:** `Any`
 **Possible values:** `Any | None | Silver | Gold | Iridium`
@@ -219,6 +227,14 @@ Make your fishing bait last long forever.
 
 ```
 Toggle for spawning bait if none is available.
+```
+
+### BaitAmountToSpawn
+**Default value:** `10`
+**Possible values:** `1 - 999`
+
+```
+Amount of bait when spawned.
 ```
 
 ### AutoAttachTackles
