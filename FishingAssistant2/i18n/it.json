@@ -34,6 +34,7 @@
   "config-menu.option.instant-fish-bite" : "Instant Fish Bite", //New
   "config-menu.option.always-perfect" : "Always Perfect", //New
   "config-menu.option.always-max-fish-size" : "Always Max Fish Size", //New
+  "config-menu.option.prefer-fish-amount" : "Preferred Fish Amount", //New
   "config-menu.option.prefer-fish-quality" : "Preferred Fish Quality", //New
   "config-menu.option.treasure-chance" : "Treasure Chance", //New
   "config-menu.option.Instant-catch-fish" : "Instant Catch Fish", //New

@@ -22,6 +22,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         /// <summary>Chance of finding treasure while fishing</summary>
         public string TreasureChance { get; set; } = "Default";
         
+        /// <summary>Preference for fish amount</summary>
+        public int PreferFishAmount { get; set; } = 1;
+        
         /// <summary>Preference for fish quality</summary>
         public string PreferFishQuality { get; set; } = "Any";
 
@@ -73,7 +76,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         /// <summary>Toggle for spawning bait if none is available</summary>
         public bool SpawnBaitIfDontHave { get; set; } = false;
         
-        /// <summary>Toggle for spawning bait if none is available</summary>
+        /// <summary>Amount of bait when spawned</summary>
         public int BaitAmountToSpawn { get; set; } = 10;
         
         /// <summary>Toggle for auto attaching tackles if possible</summary>

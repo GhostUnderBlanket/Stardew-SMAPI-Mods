@@ -209,14 +209,46 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         private void AutoPlayFishingMiniGame()
         {
-            var bar = _bobberBar.Instance;
+            var bar = _bobberBar?.Instance;
+            var rod = _fishingRod?.Instance;
             
             float fishPos = bar.bobberPosition;
             int bobberBarCenter = (bar.bobberBarHeight / 2);
-
-            _bobberBar.AlwaysPerfect(_config.AlwaysPerfect);
-            _bobberBar.OverrideFishQuality(_config.PreferFishQuality);
-            _bobberBar.OverrideFishSize(_config.AlwaysMaxFishSize);
+            
+            if (bar is { fadeOut: true, scale: <= 0.1f })
+            {
+                _bobberBar?.AlwaysPerfect(_config.AlwaysPerfect);
+                _bobberBar?.OverrideFishQuality(_config.PreferFishQuality);
+                _bobberBar?.OverrideFishSize(_config.AlwaysMaxFishSize);
+                
+                bar.scale = 0.0f;
+                bar.fadeOut = false;
+                string qualifiedItemId = Game1.player.CurrentTool is FishingRod currentTool ? currentTool.GetBait()?.QualifiedItemId : (string) null;
+                int numCaught = bar.bossFish ? 1 : qualifiedItemId == "(O)774" && Game1.random.NextDouble() < 0.25 + Game1.player.DailyLuck / 2.0 ? 2 : _config.PreferFishAmount;
+                if (bar.challengeBaitFishes > 0)
+                    numCaught = bar.challengeBaitFishes;
+                if (bar.distanceFromCatching > 0.8999999761581421 && rod != null)
+                {
+                    rod.pullFishFromWater(
+                        bar.whichFish,
+                        bar.fishSize,
+                        bar.fishQuality,
+                        (int) bar.difficulty,
+                        bar.treasureCaught,
+                        bar.perfect,
+                        bar.fromFishPond,
+                        bar.setFlagOnCatch,
+                        bar.bossFish,
+                        numCaught);
+                }
+                else
+                {
+                    Game1.player.completelyStopAnimatingOrDoingAction();
+                    rod?.doneFishing(Game1.player, true);
+                }
+                Game1.exitActiveMenu();
+                Game1.setRichPresence("location", Game1.currentLocation.Name);
+            }
             
             if (_catchingTreasure && bar.distanceFromCatching < 0.2f)
             {

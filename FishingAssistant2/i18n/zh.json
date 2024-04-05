@@ -34,6 +34,7 @@
   "config-menu.option.instant-fish-bite" : "立刻上钩",
   "config-menu.option.always-perfect" : "永远完美",
   "config-menu.option.always-max-fish-size" : "最大鱼尺寸",
+  "config-menu.option.prefer-fish-amount" : "Preferred Fish Amount", //New
   "config-menu.option.prefer-fish-quality" : "首先鱼质量",
   "config-menu.option.treasure-chance" : "宝箱概率",
   "config-menu.option.Instant-catch-fish" : "瞬间捕鱼",

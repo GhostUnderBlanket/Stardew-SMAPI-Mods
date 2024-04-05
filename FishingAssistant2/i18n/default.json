@@ -34,6 +34,7 @@
   "config-menu.option.instant-fish-bite" : "Instant Fish Bite",
   "config-menu.option.always-perfect" : "Always Perfect",
   "config-menu.option.always-max-fish-size" : "Always Max Fish Size",
+  "config-menu.option.prefer-fish-amount" : "Preferred Fish Amount", //New
   "config-menu.option.prefer-fish-quality" : "Preferred Fish Quality",
   "config-menu.option.treasure-chance" : "Treasure Chance",
   "config-menu.option.Instant-catch-fish" : "Instant Catch Fish",
@@ -59,7 +60,7 @@
   "config-menu.option.prefer-bait" : "Preferred Bait",
   "config-menu.option.infinite-bait" : "Infinite Bait",
   "config-menu.option.spawn-bait-if-dont-have" : "Spawn Bait If Dont Have",
-  "config-menu.option.bait-amount-to-spawn" : "Bait Amount To Spawn",
+  "config-menu.option.bait-amount-to-spawn" : "Bait Amount To Spawn", //New
   "config-menu.option.auto-attach-tackles" : "Auto Attach Tackles",
   "config-menu.option.prefer-tackle" : "Preferred Tackle",
   "config-menu.option.infinite-tackle" : "Infinite Tackle",
