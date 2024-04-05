@@ -63,6 +63,7 @@
   "config-menu.option.bait-amount-to-spawn" : "Bait Amount To Spawn", //New
   "config-menu.option.auto-attach-tackles" : "Auto Attach Tackles",
   "config-menu.option.prefer-tackle" : "Preferred Tackle",
+  "config-menu.option.prefer-advanced-iridium-tackle" : "Preferred Adv. Iridium Tackle", //New
   "config-menu.option.infinite-tackle" : "Infinite Tackle",
   "config-menu.option.spawn-tackle-if-dont-have" : "Spawn Tackle If Dont Have",
   

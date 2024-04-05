@@ -63,6 +63,7 @@
   "config-menu.option.bait-amount-to-spawn" : "Bait Amount To Spawn", //New
   "config-menu.option.auto-attach-tackles" : "自动挂鱼钩",
   "config-menu.option.prefer-tackle" : "首选鱼钩",
+  "config-menu.option.prefer-advanced-iridium-tackle" : "Preferred Adv. Iridium Tackle", //New
   "config-menu.option.infinite-tackle" : "无限鱼钩耐久",
   "config-menu.option.spawn-tackle-if-dont-have" : "没有鱼钩时凭空生成",
   

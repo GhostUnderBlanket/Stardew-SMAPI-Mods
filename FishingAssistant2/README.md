@@ -253,6 +253,14 @@ Toggle for auto attaching tackles if possible.
 Preference for tackle type.
 ```
 
+### PreferAdvIridiumTackle
+**Default value:** `Any`
+**Possible values:** `Any | Tackle Qualified Item ID`
+
+```
+Tackle type preference for Advance Iridium Rod.
+```
+
 ### InfiniteTackle
 **Default value:** `false`
 **Possible values:** `true | false`

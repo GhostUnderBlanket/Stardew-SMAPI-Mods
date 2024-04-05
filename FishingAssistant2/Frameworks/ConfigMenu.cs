@@ -78,6 +78,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             AddBool(I18n.ConfigMenu_Option_AutoAttachTackles, () => config().AutoAttachTackles, b => config().AutoAttachTackles = b);
             AddDropDown(I18n.ConfigMenu_Option_PreferTackle, _availableTackles.ToArray(), ParseItemName, () => config().PreferTackle, s => config().PreferTackle = s);
+            AddDropDown(I18n.ConfigMenu_Option_PreferAdvancedIridiumTackle, _availableTackles.ToArray(), ParseItemName, () => config().PreferAdvIridiumTackle, s => config().PreferAdvIridiumTackle = s);
             AddBool(I18n.ConfigMenu_Option_InfiniteTackle, () => config().InfiniteTackle, b => config().InfiniteTackle = b);
             AddBool(I18n.ConfigMenu_Option_SpawnTackleIfDontHave, () => config().SpawnTackleIfDontHave, b => config().SpawnTackleIfDontHave = b);
             

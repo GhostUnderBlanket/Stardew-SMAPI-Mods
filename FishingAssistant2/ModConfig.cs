@@ -85,6 +85,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         /// <summary>Preference for tackle type</summary>
         public string PreferTackle { get; set; } = "Any";
         
+        /// <summary>Preference for tackle type</summary>
+        public string PreferAdvIridiumTackle { get; set; } = "Any";
+        
         /// <summary>Make your tackle last long forever</summary>
         public bool InfiniteTackle { get; set; } = false;
         

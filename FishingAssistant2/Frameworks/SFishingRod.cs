@@ -69,7 +69,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             }
         }
 
-        internal void AutoAttachTackles(string preferTackle, bool infiniteTackle, bool spawnTackleIfDontHave)
+        internal void AutoAttachTackles(string[] preferTackle, bool infiniteTackle, bool spawnTackleIfDontHave)
         {
             if (IsRodNotInUse() && !Game1.isFestival())
             {
@@ -82,7 +82,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                     {
                         // Category value for tackle is -22.
                         // Source: https://github.com/veywrn/StardewValley/blob/master/StardewValley/Item.cs
-                        if (item?.Category == -22 && (preferTackle == "Any" || item.QualifiedItemId == preferTackle))
+                        if (item?.Category == -22 && (preferTackle[0] == "Any" || item.QualifiedItemId == preferTackle[0]))
                         {
                             Instance.attachments[1] = (Object)item;
                             Game1.player.removeItemFromInventory(item);
@@ -91,9 +91,29 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                         }
                     }
 
-                    if (spawnTackleIfDontHave && preferTackle != "Any") Instance.attachments[1] = ItemRegistry.Create<Object>(preferTackle);
+                    if (spawnTackleIfDontHave && preferTackle[0] != "Any") Instance.attachments[1] = ItemRegistry.Create<Object>(preferTackle[0]);
                     
                     if (Instance.attachments[1] != null && infiniteTackle) Instance.attachments[1].uses.Value = 0;
+                }
+                
+                if (Instance.UpgradeLevel == 4 && Instance.attachments[2] == null)
+                {
+                    foreach (Item item in items)
+                    {
+                        // Category value for tackle is -22.
+                        // Source: https://github.com/veywrn/StardewValley/blob/master/StardewValley/Item.cs
+                        if (item?.Category == -22 && (preferTackle[1] == "Any" || item.QualifiedItemId == preferTackle[1]))
+                        {
+                            Instance.attachments[2] = (Object)item;
+                            Game1.player.removeItemFromInventory(item);
+                            CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), ItemRegistry.GetData(item.QualifiedItemId).DisplayName, ItemRegistry.GetData(Instance.QualifiedItemId).DisplayName);
+                            break;
+                        }
+                    }
+
+                    if (spawnTackleIfDontHave && preferTackle[1] != "Any") Instance.attachments[2] = ItemRegistry.Create<Object>(preferTackle[1]);
+                    
+                    if (Instance.attachments[2] != null && infiniteTackle) Instance.attachments[2].uses.Value = 0;
                 }
             }
         }
