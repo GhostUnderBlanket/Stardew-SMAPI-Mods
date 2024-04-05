@@ -2,7 +2,7 @@ using StardewModdingAPI;
 
 namespace ChibiKyu.StardewMods.FishingAssistant2
 {
-    public class ModConfig
+    internal class ModConfig
     {
         /// <summary>Button for toggling automation of this mod</summary>
         public SButton EnableAutomationButton { get; set; } = SButton.F5;
@@ -72,6 +72,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         
         /// <summary>Toggle for spawning bait if none is available</summary>
         public bool SpawnBaitIfDontHave { get; set; } = false;
+        
+        /// <summary>Toggle for spawning bait if none is available</summary>
+        public int BaitAmountToSpawn { get; set; } = 10;
         
         /// <summary>Toggle for auto attaching tackles if possible</summary>
         public bool AutoAttachTackles { get; set; } = false;

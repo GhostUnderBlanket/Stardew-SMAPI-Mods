@@ -59,6 +59,7 @@
   "config-menu.option.prefer-bait" : "Preferred Bait",
   "config-menu.option.infinite-bait" : "Infinite Bait",
   "config-menu.option.spawn-bait-if-dont-have" : "Spawn Bait If Dont Have",
+  "config-menu.option.bait-amount-to-spawn" : "Bait Amount To Spawn",
   "config-menu.option.auto-attach-tackles" : "Auto Attach Tackles",
   "config-menu.option.prefer-tackle" : "Preferred Tackle",
   "config-menu.option.infinite-tackle" : "Infinite Tackle",

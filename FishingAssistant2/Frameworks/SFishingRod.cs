@@ -18,7 +18,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         
         private readonly List<BaseEnchantment> _addedEnchantments = new List<BaseEnchantment>();
         
-        internal void AutoAttachBait(string preferBait, bool infiniteBait, bool spawnBaitIfDontHave)
+        internal void AutoAttachBait(string preferBait, bool infiniteBait, bool spawnBaitIfDontHave, int baitAmountToSpawn)
         {
             if (IsRodNotInUse() && !Game1.isFestival())
             {
@@ -58,7 +58,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                             }
                         }
 
-                        if (spawnBaitIfDontHave && preferBait != "Any") Instance.attachments[0] = ItemRegistry.Create<Object>(preferBait);
+                        if (spawnBaitIfDontHave && preferBait != "Any") Instance.attachments[0] = ItemRegistry.Create<Object>(preferBait, baitAmountToSpawn);
                     }
 
                     if (Instance.attachments[0] != null && infiniteBait)

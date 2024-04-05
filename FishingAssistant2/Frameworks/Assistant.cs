@@ -85,7 +85,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             if (_config.InstantFishBite) _fishingRod.InstantFishBite();
             
-            if (_config.AutoAttachBait) _fishingRod?.AutoAttachBait(_config.PreferBait, _config.InfiniteBait, _config.SpawnBaitIfDontHave);
+            if (_config.AutoAttachBait) _fishingRod?.AutoAttachBait(_config.PreferBait, _config.InfiniteBait, _config.SpawnBaitIfDontHave, _config.BaitAmountToSpawn);
             
             if (_config.AutoAttachTackles) _fishingRod?.AutoAttachTackles(_config.PreferTackle, _config.InfiniteTackle, _config.SpawnTackleIfDontHave);
 

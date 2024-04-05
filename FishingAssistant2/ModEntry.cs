@@ -43,12 +43,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
         {
             var configMenu = new ConfigMenu(
-                this.Helper,
                 this.Helper.ModRegistry, 
                 this.ModManifest, 
-                () => Config, 
-                () => Config = new ModConfig(), 
-                () => Helper.WriteConfig(Config));
+                () => this.Config, 
+                () => this.Config = new ModConfig(), 
+                () => this.Helper.WriteConfig(this.Config));
             
             configMenu.RegisterModConfigMenu();
         }
