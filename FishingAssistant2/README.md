@@ -333,6 +333,22 @@ Energy percent to consider as low energy and find something to eat
 Toggle for allowing eating of caught fish.
 ```
 
+### AutoTrashJunk
+**Default value:** `false`
+**Possible values:** `true | false`
+
+```
+Toggle for auto trash junk item when get new item.
+```
+
+### JunkHighestPrice
+**Default value:** `10`
+**Possible values:** `higher than 0`
+
+```
+Toggle for auto trash junk item when get new item.
+```
+
 ### DisplayFishInfo
 **Default value:** `true`
 **Possible values:** `true | false`

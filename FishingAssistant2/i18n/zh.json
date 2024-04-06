@@ -1,6 +1,6 @@
 {
   "mod-name" : "钓鱼小帮手2",
-
+  
   "on" : "开启",
   "off" : "关闭",
   "left" : "左边",
@@ -42,7 +42,7 @@
   "config-menu.option.Instant-catch-treasure" : "立刻捕获宝箱",
   "config-menu.option.fish-difficulty-multiplier" : "钓鱼难度系数",
   "config-menu.option.fish-difficulty-additive" : "额外钓鱼难度",
-
+  
   "config-menu.title.automation" : "自动化",
   "config-menu.option.auto-cast-fishing-rod" : "自动抛竿",
   "config-menu.option.auto-hook-fish" : "自动收杆",
@@ -56,14 +56,16 @@
   "config-menu.option.auto-eat-food" : "自动进食",
   "config-menu.option.energy-percent-to-eat" : "Energy Percent To Eat", //New
   "config-menu.option.allow-eating-fish" : "允许吃鱼",
-
+  "config-menu.option.auto-trash-junk" : "Auto Trash Junk", //New
+  "config-menu.option.junk-highest-price" : "Junk Highest Price", //New
+  
   "config-menu.title.fish-preview" : "Fish Preview", //New
   "config-menu.option.display-fish-preview" : "Display Fish Preview", //New
   "config-menu.option.show-fish-name" : "Show Fish Name", //New
   "config-menu.option.show-treasure" : "Show Treasure", //New
   "config-menu.option.show-uncaught-fish-species" : "Show Uncaught Fish Species", //New
   "config-menu.option.always-show-legendary-fish" : "Always Show Legendary Fish", //New
-
+  
   "config-menu.title.fishing-rod" : "鱼竿",
   "config-menu.option.auto-attach-bait" : "自动挂鱼饵",
   "config-menu.option.prefer-bait" : "首选鱼饵",

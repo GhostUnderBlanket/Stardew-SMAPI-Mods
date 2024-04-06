@@ -33,6 +33,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             helper.Events.GameLoop.DayStarted += OnDayStarted;
             helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
             helper.Events.GameLoop.TimeChanged += OnTimeChanged;
+            helper.Events.Player.InventoryChanged += OnInventoryChanged;
             helper.Events.Display.RenderingHud += this.OnRenderingHud;
             helper.Events.Display.RenderedActiveMenu += this.OnRenderMenu;
             helper.Events.Display.MenuChanged += this.OnMenuChanged;
@@ -40,7 +41,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
             Assistant = new Assistant(()=> this,() => Config);
         }
-        
+
         private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
         {
             var configMenu = new ConfigMenu(
@@ -61,6 +62,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         private void OnTimeChanged(object? sender, TimeChangedEventArgs e)
         {
             Assistant.DoOnTimeChangedAssistantTask();
+        }
+        
+        private void OnInventoryChanged(object? sender, InventoryChangedEventArgs e)
+        {
+            Assistant.AutoTrashJunk(e);
         }
         
         private void OnUpdateTicked(object? sender, UpdateTickedEventArgs e)

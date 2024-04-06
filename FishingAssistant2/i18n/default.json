@@ -38,7 +38,7 @@
   "config-menu.option.always-max-fish-size" : "Always Max Fish Size",
   "config-menu.option.prefer-fish-amount" : "Preferred Fish Amount",
   "config-menu.option.prefer-fish-quality" : "Preferred Fish Quality",
- "config-menu.option.treasure-chance" : "Treasure Chance",
+  "config-menu.option.treasure-chance" : "Treasure Chance",
   "config-menu.option.golden-treasure-chance" : "Golden Treasure Chance",
   "config-menu.option.Instant-catch-fish" : "Instant Catch Fish",
   "config-menu.option.Instant-catch-treasure" : "Instant Catch Treasure",
@@ -56,8 +56,10 @@
   "config-menu.option.auto-pause-fishing-time" : "Time To Pause",
   "config-menu.option.num-to-warn" : "Number Of Times To Warn",
   "config-menu.option.auto-eat-food" : "Auto Eat Food",
-"config-menu.option.energy-percent-to-eat" : "Energy Percent To Eat",
+  "config-menu.option.energy-percent-to-eat" : "Energy Percent To Eat",
   "config-menu.option.allow-eating-fish" : "Allow Eating Fish",
+  "config-menu.option.auto-trash-junk" : "Auto Trash Junk",
+  "config-menu.option.junk-highest-price" : "Junk Highest Price",
 
   "config-menu.title.fish-preview" : "Fish Preview",
   "config-menu.option.display-fish-preview" : "Display Fish Preview",
@@ -92,4 +94,5 @@
   "hud-message.auto-disable" : "It's already past {0}",
   "hud-message.auto-attach" : "Auto Attach {0} To {1}",
   "hud-message.auto-eat-food" : "Auto Eat {0}",
+  "hud-message.auto-trash-junk" : "Auto Trash {0} x{1}",
 }

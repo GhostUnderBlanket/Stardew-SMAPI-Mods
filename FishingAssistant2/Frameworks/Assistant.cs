@@ -2,6 +2,7 @@ using ChibiKyu.StardewMods.Common;
 using FishingAssistant2;
 using Microsoft.Xna.Framework.Input;
 using StardewModdingAPI;
+using StardewModdingAPI.Events;
 using StardewValley;
 using StardewValley.Enchantments;
 using StardewValley.Menus;
@@ -370,12 +371,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                     {
                         Game1.player.foundArtifact(obj.QualifiedItemId, 1);
                         Game1.playSound("fireball");
+                        actualInventory.RemoveAt(excludeItems.Count);
                     }
                     else
                     {
                         if (Game1.player.addItemToInventoryBool(obj))
                         {
                             Game1.playSound("coin");
+                            actualInventory.RemoveAt(excludeItems.Count);
                         }
                         else
                         {
@@ -383,7 +386,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                         }
                     }
                     
-                    actualInventory.RemoveAt(excludeItems.Count);
                     _autoLootDelay = 10;
                 }
             }
@@ -393,7 +395,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         #region On Time Changed
 
-        public void DoOnTimeChangedAssistantTask()
+        internal void DoOnTimeChangedAssistantTask()
         {
             if (!_modEntry.ModEnable) return;
             
@@ -410,6 +412,32 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 {
                     _modEntry.ForceDisable();
                     if (!Game1.IsMultiplayer) Game1.activeClickableMenu = new GameMenu();
+                }
+            }
+        }
+
+        #endregion
+
+        #region On Inventory Changed
+
+        internal void AutoTrashJunk(InventoryChangedEventArgs e)
+        {
+            if (!_config.AutoTrashJunk) return;
+
+            List<Item> changedItems = new List<Item>();
+            changedItems.AddRange(e.Added);
+            changedItems.AddRange(e.QuantityChanged.Select(newStacks => newStacks.Item));
+            
+            foreach (Item newItem in changedItems)
+            {
+                int sellToStorePrice = Utility.getSellToStorePriceOfItem(newItem, false);
+                
+                // Category value for trash is -20. Source: https://github.com/veywrn/StardewValley/blob/master/StardewValley/Item.cs
+                if (newItem.canBeTrashed() && (newItem.Category == -20 || sellToStorePrice < _config.JunkHighestPrice))
+                {
+                    Utility.trashItem(newItem);
+                    e.Player.removeItemFromInventory(newItem);
+                    CommonHelper.PushWarnNotification(I18n.HudMessage_AutoTrashJunk(), newItem.DisplayName, newItem.Stack);
                 }
             }
         }

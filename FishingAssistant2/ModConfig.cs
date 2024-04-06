@@ -114,6 +114,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
         /// <summary>Toggle for allowing eating of caught fish</summary>
         public bool AllowEatingFish { get; set; } = false;
+        
+        /// <summary>Toggle for auto trash junk item when get new item</summary>
+        public bool AutoTrashJunk { get; set; } = false;
+        
+        /// <summary>The item that price below this will consider as junk</summary>
+        public int JunkHighestPrice { get; set; } = 10;
 
         /// <summary>Toggle for displaying fish info while catching fish</summary>
         public bool DisplayFishPreview { get; set; } = true;

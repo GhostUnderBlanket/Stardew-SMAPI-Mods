@@ -71,6 +71,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_AutoEatFood, () => config().AutoEatFood, b => config().AutoEatFood = b);
             AddNumber(I18n.ConfigMenu_Option_EnergyPercentToEat, () => config().EnergyPercentToEat, i => config().EnergyPercentToEat = i, 1, 99, 1);
             AddBool(I18n.ConfigMenu_Option_AllowEatingFish, () => config().AllowEatingFish, b => config().AllowEatingFish = b);
+            AddBool(I18n.ConfigMenu_Option_AutoTrashJunk, () => config().AutoTrashJunk, b => config().AutoTrashJunk = b);
+            AddNumber(I18n.ConfigMenu_Option_JunkHighestPrice, () => config().JunkHighestPrice, i => config().JunkHighestPrice = i, 1);
             
             AddSectionTitle(I18n.ConfigMenu_Title_FishPreview);
             AddBool(I18n.ConfigMenu_Option_DisplayFishPreview, () => config().DisplayFishPreview, b => config().DisplayFishPreview = b);
