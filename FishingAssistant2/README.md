@@ -309,6 +309,14 @@ Number of warnings after time reach.
 Whether to eat some food if need.
 ```
 
+### EnergyPercentToEat
+**Default value:** `10`
+**Possible values:** `1 - 99`
+
+```
+Energy percent to consider as low energy and find something to eat
+```
+
 ### AllowEatingFish
 **Default value:** `false`
 **Possible values:** `true | false`

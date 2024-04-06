@@ -105,13 +105,15 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 return;
             _autoCastDelay = 60;
             
-            bool lowStamina = Game1.player.Stamina <= 8.0 - Game1.player.FishingLevel * 0.1;
+            bool lowStamina = Game1.player.Stamina <= 8.0 - Game1.player.FishingLevel * 0.1
+                              || Game1.player.Stamina <= Game1.player.MaxStamina * (float)(_config.EnergyPercentToEat / 100f);
+            
             bool hasEnchantment = _fishingRod.Instance.hasEnchantmentOfType<EfficientToolEnchantment>();
             bool isInventoryFull = Game1.player.isInventoryFull();
             
             if (lowStamina && !hasEnchantment)
             {
-                if (!_config.AutoEatFood || _config.AutoEatFood && !AutoEatFood())
+                if (!_config.AutoEatFood || _config.AutoEatFood && !TryAutoEatFood())
                 {
                     CommonHelper.PushErrorNotification(I18n.HudMessage_LowStamina());
                     _modEntry.ForceDisable();
@@ -131,7 +133,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             }
         }
         
-        private bool AutoEatFood()
+        private bool TryAutoEatFood()
         {
             var player = Game1.player;
             if (!player.isEating && _fishingRod.IsRodNotInUse())

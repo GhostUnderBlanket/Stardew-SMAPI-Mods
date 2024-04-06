@@ -53,6 +53,7 @@
   "config-menu.option.auto-pause-fishing-time" : "暂停钓鱼的时间",
   "config-menu.option.num-to-warn" : "警告次数",
   "config-menu.option.auto-eat-food" : "自动进食",
+  "config-menu.option.energy-percent-to-eat" : "Energy Percent To Eat", //New
   "config-menu.option.allow-eating-fish" : "允许吃鱼",
 
   "config-menu.title.fish-preview" : "Fish Preview", //New

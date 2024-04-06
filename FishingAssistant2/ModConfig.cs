@@ -105,6 +105,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
         /// <summary>Whether to eat some food if need</summary>
         public bool AutoEatFood { get; set; } = false;
+        
+        /// <summary>Whether to eat some food if need</summary>
+        public int EnergyPercentToEat { get; set; } = 10;
 
         /// <summary>Toggle for allowing eating of caught fish</summary>
         public bool AllowEatingFish { get; set; } = false;
