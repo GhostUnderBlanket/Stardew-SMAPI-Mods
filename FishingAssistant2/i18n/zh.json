@@ -37,6 +37,7 @@
   "config-menu.option.prefer-fish-amount" : "Preferred Fish Amount", //New
   "config-menu.option.prefer-fish-quality" : "首先鱼质量",
   "config-menu.option.treasure-chance" : "宝箱概率",
+  "config-menu.option.golden-treasure-chance" : "Golden Treasure Chance", //New
   "config-menu.option.Instant-catch-fish" : "瞬间捕鱼",
   "config-menu.option.Instant-catch-treasure" : "立刻捕获宝箱",
   "config-menu.option.fish-difficulty-multiplier" : "钓鱼难度系数",

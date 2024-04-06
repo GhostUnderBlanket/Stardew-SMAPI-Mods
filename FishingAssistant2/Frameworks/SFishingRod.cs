@@ -130,6 +130,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             if (Instance.timeUntilFishingBite > 0)
                 Instance.timeUntilFishingBite = 0f;
         }
+
+        internal void OverrideGoldenTreasureChance(string goldenTreasureChance)
+        {
+            if (goldenTreasureChance == TreasureChance.Always.ToString())
+                Instance.goldenTreasure = true;
+            else if (goldenTreasureChance == TreasureChance.Never.ToString()) 
+                Instance.goldenTreasure = false;
+        }
         
         internal void AddEnchantment(BaseEnchantment enchantment)
         {

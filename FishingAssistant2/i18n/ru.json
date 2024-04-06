@@ -38,7 +38,8 @@
   "config-menu.option.always-max-fish-size" : "Always Max Fish Size", //New
   "config-menu.option.prefer-fish-amount" : "Preferred Fish Amount", //New
   "config-menu.option.prefer-fish-quality" : "Preferred Fish Quality", //New
-  "config-menu.option.treasure-chance" : "Treasure Chance", //New
+"config-menu.option.treasure-chance" : "Treasure Chance", //New
+"config-menu.option.golden-treasure-chance" : "Golden Treasure Chance", //New
   "config-menu.option.Instant-catch-fish" : "Instant Catch Fish", //New
   "config-menu.option.Instant-catch-treasure" : "Instant Catch Treasure", //New
   "config-menu.option.fish-difficulty-multiplier" : "Fish Difficulty Multiplier", //New

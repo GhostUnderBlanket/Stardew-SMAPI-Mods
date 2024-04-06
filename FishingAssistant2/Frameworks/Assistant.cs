@@ -89,6 +89,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             if (_config.AutoAttachTackles) _fishingRod?.AutoAttachTackles(new []{_config.PreferTackle, _config.PreferAdvIridiumTackle} , _config.InfiniteTackle, _config.SpawnTackleIfDontHave);
 
+            if (_bobberBar != null && _bobberBar.Instance.treasure) _fishingRod?.OverrideGoldenTreasureChance(_config.GoldenTreasureChance);
+            
             if (!_modEntry.ModEnable) return;
             
             if (_config.AutoCastFishingRod) AutoCastFishingRod(_modEntry.FacingDirection);
@@ -105,8 +107,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 return;
             _autoCastDelay = 60;
             
-            bool lowStamina = Game1.player.Stamina <= 8.0 - Game1.player.FishingLevel * 0.1
-                              || Game1.player.Stamina <= Game1.player.MaxStamina * (float)(_config.EnergyPercentToEat / 100f);
+            bool lowStamina = Game1.player.Stamina <= 8.0 - Game1.player.FishingLevel * 0.1 
+                              || _config.AutoEatFood && (Game1.player.Stamina <= Game1.player.MaxStamina * (float)(_config.EnergyPercentToEat / 100f));
             
             bool hasEnchantment = _fishingRod.Instance.hasEnchantmentOfType<EfficientToolEnchantment>();
             bool isInventoryFull = Game1.player.isInventoryFull();
@@ -188,7 +190,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             _bobberBar.OverrideFishDifficult(_config.FishDifficultyMultiplier, _config.FishDifficultyAdditive);
             
-            _bobberBar.OverrideTreasureChance(_config.TreasureChance);
+            _bobberBar.OverrideTreasureChance(_config.TreasureChance, _config.GoldenTreasureChance);
             
             if (_config.InstantCatchTreasure || _config.InstantCatchFish) 
                 _bobberBar.InstantCatchTreasure(_modEntry.CatchTreasure);

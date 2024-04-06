@@ -85,6 +85,14 @@ Toggle for making fish bite instantly.
 Chance of finding treasure while fishing.
 ```
 
+### GoldenTreasureChance
+**Default value:** `Default`
+**Possible values:** `Default | Always | Never`
+
+```
+Chance of finding golden treasure while fishing.
+```
+
 ### PreferFishAmount
 **Default value:** `1`
 **Possible values:** `1 - 3`

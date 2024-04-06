@@ -15,7 +15,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             if (Instance.difficulty < 0) Instance.difficulty = 0;
         }
 
-        internal void OverrideTreasureChance(string treasureChance)
+        internal void OverrideTreasureChance(string treasureChance, string goldenTreasureChance)
         {
             if (Game1.isFestival()) return;
             
@@ -23,6 +23,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 Instance.treasure = true;
             else if (treasureChance == TreasureChance.Never.ToString()) 
                 Instance.treasure = false;
+
+            if (Instance.treasure)
+            {
+                if (goldenTreasureChance == TreasureChance.Always.ToString())
+                    Instance.goldenTreasure = true;
+                else if (goldenTreasureChance == TreasureChance.Never.ToString()) 
+                    Instance.goldenTreasure = false;
+            }
         }
 
         internal void InstantCatchTreasure(bool catchTreasure)

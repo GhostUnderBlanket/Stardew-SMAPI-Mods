@@ -123,7 +123,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             {
                 FacingDirection = Game1.player.getDirection() != -1 ? Game1.player.getDirection() : Game1.player.FacingDirection;
                 _facingDirectionCached = true;
-                Monitor.Log("Cached");
             }
         }
 
@@ -133,7 +132,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             {
                 FacingDirection = 0;
                 _facingDirectionCached = false;
-                Monitor.Log("Forget");
             }
         }
         
@@ -234,8 +232,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             void GetFishData(out bool showFish, out bool showText)
             {
                 var metadata = ItemRegistry.GetMetadata(bar.whichFish);
-                
-                this.Monitor.Log($"Currently catching{(bar.bossFish ? " legendary " : " ")}fish: {metadata.GetParsedData().DisplayName}", LogLevel.Trace);
 
                 if (_fishPreviewId != bar.whichFish || _fishSprite == null)
                 {

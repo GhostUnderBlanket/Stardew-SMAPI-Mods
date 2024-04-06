@@ -22,6 +22,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         /// <summary>Chance of finding treasure while fishing</summary>
         public string TreasureChance { get; set; } = "Default";
         
+        /// <summary>Chance of finding golden treasure while fishing</summary>
+        public string GoldenTreasureChance { get; set; } = "Default";
+        
         /// <summary>Preference for fish amount</summary>
         public int PreferFishAmount { get; set; } = 1;
         
