@@ -28,15 +28,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         Gold = 2,
         Iridium = 4
     }
-
-    internal enum AutoActionResponse
-    {
-        OnDelay,
-        CanDoAction,
-        CantDoAction,
-        InventoryFull,
-        LowStamina
-    }
     
     internal enum PauseFishingBehaviour
     {
