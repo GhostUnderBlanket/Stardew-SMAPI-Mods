@@ -198,8 +198,8 @@ Toggle for auto looting treasure.
 ```
 
 ### ActionIfInventoryFull
-**Default value:** `Stop Loot`
-**Possible values:** `Stop Loot | Drop Remaining | Discard Remaining`
+**Default value:** `Stop`
+**Possible values:** `Stop | Drop | Discard`
 
 ```
 Action to take if inventory is full.
