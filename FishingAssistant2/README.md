@@ -346,7 +346,7 @@ Toggle for auto trash junk item when get new item.
 **Possible values:** `higher than 0`
 
 ```
-Toggle for auto trash junk item when get new item.
+The item that price below this will consider as junk.
 ```
 
 ### DisplayFishInfo
