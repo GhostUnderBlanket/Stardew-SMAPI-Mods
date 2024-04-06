@@ -1,12 +1,8 @@
 using ChibiKyu.StardewMods.Common;
 using FishingAssistant2;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Enchantments;
-using StardewValley.Menus;
-using StardewValley.SpecialOrders;
 using StardewValley.Tools;
 using Object = StardewValley.Object;
 

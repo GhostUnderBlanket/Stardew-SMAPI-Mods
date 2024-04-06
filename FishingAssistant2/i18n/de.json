@@ -5,6 +5,8 @@
   "off" : "Off", //New
   "left" : "Left", //New
   "right" : "Right", //New
+  "top" : "Top", //New
+  "bottom" : "Bottom", //New
   "upper-left" : "Upper Left", //New
   "upper-right" : "Upper Right", //New
   "lower-left" : "Lower Left", //New
@@ -54,6 +56,13 @@
   "config-menu.option.num-to-warn" : "Number Of Times To Warn", //New
   "config-menu.option.auto-eat-food" : "Auto Eat Food", //New
   "config-menu.option.allow-eating-fish" : "Allow Eating Fish", //New
+
+  "config-menu.title.fish-preview" : "Fish Preview", //New
+  "config-menu.option.display-fish-preview" : "Display Fish Preview", //New
+  "config-menu.option.show-fish-name" : "Show Fish Name", //New
+  "config-menu.option.show-treasure" : "Show Treasure", //New
+  "config-menu.option.show-uncaught-fish-species" : "Show Uncaught Fish Species", //New
+  "config-menu.option.always-show-legendary-fish" : "Always Show Legendary Fish", //New
 
   "config-menu.title.fishing-rod" : "Fishing Rod", //New
   "config-menu.option.auto-attach-bait" : "Auto Attach Bait", //New

@@ -1,7 +1,6 @@
 using Microsoft.Xna.Framework;
 using StardewValley;
 using StardewValley.Menus;
-using StardewValley.Objects;
 
 namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 {
@@ -58,6 +57,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             if (alwaysMaxFishSize)
             {
                 Instance.fishSize = Instance.maxFishSize;
+            }
+        }
+
+        internal void HandleFishPreview(bool displayFishPreview)
+        {
+            if (displayFishPreview && Instance.challengeBaitFishes > -1)
+            {
+                if (!Instance.bobbers.Contains("(O)SonarBobber")) Instance.bobbers.Add("(O)SonarBobber");
             }
         }
     }

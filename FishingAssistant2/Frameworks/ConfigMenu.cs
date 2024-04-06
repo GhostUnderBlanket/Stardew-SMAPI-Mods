@@ -70,6 +70,13 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_AutoEatFood, () => config().AutoEatFood, b => config().AutoEatFood = b);
             AddBool(I18n.ConfigMenu_Option_AllowEatingFish, () => config().AllowEatingFish, b => config().AllowEatingFish = b);
             
+            AddSectionTitle(I18n.ConfigMenu_Title_FishPreview);
+            AddBool(I18n.ConfigMenu_Option_DisplayFishPreview, () => config().DisplayFishPreview, b => config().DisplayFishPreview = b);
+            AddBool(I18n.ConfigMenu_Option_ShowFishName, () => config().ShowFishName, b => config().ShowFishName = b);
+            AddBool(I18n.ConfigMenu_Option_ShowTreasure, () => config().ShowTreasure, b => config().ShowTreasure = b);
+            AddBool(I18n.ConfigMenu_Option_ShowUncaughtFishSpecies, () => config().ShowUncaughtFishSpecies, b => config().ShowUncaughtFishSpecies = b);
+            AddBool(I18n.ConfigMenu_Option_AlwaysShowLegendaryFish, () => config().AlwaysShowLegendaryFish, b => config().AlwaysShowLegendaryFish = b);
+            
             AddSectionTitle(I18n.ConfigMenu_Title_FishingRod);
             AddBool(I18n.ConfigMenu_Option_AutoAttachBait, () => config().AutoAttachBait, b => config().AutoAttachBait = b);
             AddDropDown(I18n.ConfigMenu_Option_PreferBait, _availableBaits.ToArray(), ParseItemName, () => config().PreferBait, s => config().PreferBait = s);

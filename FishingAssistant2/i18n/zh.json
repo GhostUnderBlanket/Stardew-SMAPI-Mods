@@ -55,6 +55,13 @@
   "config-menu.option.auto-eat-food" : "自动进食",
   "config-menu.option.allow-eating-fish" : "允许吃鱼",
 
+  "config-menu.title.fish-preview" : "Fish Preview", //New
+  "config-menu.option.display-fish-preview" : "Display Fish Preview", //New
+  "config-menu.option.show-fish-name" : "Show Fish Name", //New
+  "config-menu.option.show-treasure" : "Show Treasure", //New
+  "config-menu.option.show-uncaught-fish-species" : "Show Uncaught Fish Species", //New
+  "config-menu.option.always-show-legendary-fish" : "Always Show Legendary Fish", //New
+
   "config-menu.title.fishing-rod" : "鱼竿",
   "config-menu.option.auto-attach-bait" : "自动挂鱼饵",
   "config-menu.option.prefer-bait" : "首选鱼饵",

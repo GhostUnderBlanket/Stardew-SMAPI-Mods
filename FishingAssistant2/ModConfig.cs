@@ -110,10 +110,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         public bool AllowEatingFish { get; set; } = false;
 
         /// <summary>Toggle for displaying fish info while catching fish</summary>
-        public bool DisplayFishInfo { get; set; } = true;
-
-        /// <summary>Position to display fish info while playing fishing mini-game</summary>
-        public string FishInfoDisplayPosition { get; set; } = "UpperRight";
+        public bool DisplayFishPreview { get; set; } = true;
 
         /// <summary>Toggle for showing fish name with fish info</summary>
         public bool ShowFishName { get; set; } = true;

@@ -2,10 +2,10 @@ using ChibiKyu.StardewMods.Common;
 using ChibiKyu.StardewMods.FishingAssistant2.Frameworks;
 using FishingAssistant2;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
-using StardewValley.GameData.Objects;
 using StardewValley.Menus;
 using StardewValley.Tools;
 using Object = StardewValley.Object;
@@ -34,6 +34,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
             helper.Events.GameLoop.TimeChanged += OnTimeChanged;
             helper.Events.Display.RenderingHud += this.OnRenderingHud;
+            helper.Events.Display.RenderedActiveMenu += this.OnRenderMenu;
             helper.Events.Display.MenuChanged += this.OnMenuChanged;
             helper.Events.Input.ButtonPressed += this.OnButtonPressed;
 
@@ -77,6 +78,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         private void OnRenderingHud(object? sender, RenderingHudEventArgs e)
         {
             DrawModStatus();
+        }
+        
+        private void OnRenderMenu(object? sender, RenderedActiveMenuEventArgs e)
+        {
+            DrawFishPreview();
         }
         
         private void OnMenuChanged(object? sender, MenuChangedEventArgs e)
@@ -191,6 +197,116 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
                 float iconTransparency = value ? 1 : 0.2f;
                 var icon = new ClickableTextureComponent(new Rectangle(x, y, iconSize, iconSize), Game1.mouseCursors, source, scale);
                 icon.draw(Game1.spriteBatch, Color.White * toolBarTransparency * iconTransparency, 0);
+            }
+        }
+        
+        private string _fishPreviewId = "";
+        private Object? _fishSprite;
+        private Object? _treasureSprite;
+        private string? _textValue;
+        private Vector2 _textSize;
+        
+        private int _boxWidth;
+        private int _boxHeight;
+        private const int Margin = 10;
+        private const float TextScale = 0.5f;
+        private const int TreasureOffsetX = 20;
+        private const int TreasureOffsetY = 15;
+
+        private void DrawFishPreview()
+        {
+            if (Game1.player == null || !Game1.player.IsLocalPlayer || !Config.DisplayFishPreview)
+                return;
+
+            if (Game1.activeClickableMenu is BobberBar bar && Assistant.IsInFishingMiniGame)
+            {
+                // stop drawing when bar play fadeOut animation
+                if (bar.scale < 1) return;
+
+                // check if fish has changed somehow. If yes, re-make the fish sprite and its display text.
+                GetFishData(out bool showFish, out bool showText);
+
+                // call a function to position and draw the box
+                DrawFishDisplay(showFish, showText);
+            }
+            return;
+            
+            void GetFishData(out bool showFish, out bool showText)
+            {
+                var metadata = ItemRegistry.GetMetadata(bar.whichFish);
+                
+                this.Monitor.Log($"Currently catching{(bar.bossFish ? " legendary " : " ")}fish: {metadata.GetParsedData().DisplayName}", LogLevel.Trace);
+
+                if (_fishPreviewId != bar.whichFish || _fishSprite == null)
+                {
+                    _fishPreviewId = bar.whichFish;
+                    // save fish object to use in drawing // check for errors?
+                    _fishSprite = new Object(bar.whichFish, 1);
+                }
+
+                // determine if species has been caught before
+                Game1.player.fishCaught.TryGetValue(metadata.QualifiedItemId, out int[] numArray);
+                bool caughtSpecies = numArray != null && numArray.Length > 0 && numArray[0] > 0;
+
+                // determine value of showFish value
+                showFish = Config.ShowUncaughtFishSpecies || caughtSpecies || (Config.AlwaysShowLegendaryFish && bar.bossFish);
+
+                // determine value of showText value
+                showText = Config.ShowFishName;
+
+                // determine text to show if true
+                _textValue = showText && showFish ? metadata.GetParsedData().DisplayName : "???";
+                
+                // determine size of textValue
+                _textSize = Game1.dialogueFont.MeasureString(_textValue) * TextScale;
+                
+                // determine width and height of display box
+                _boxWidth = 128; _boxHeight = 90;
+                
+                if (showText && showFish) _boxWidth = Math.Max(_boxWidth, (int)_textSize.X + Margin * 2);
+                
+                _boxHeight += (int)_textSize.Y;
+            }
+            
+            void DrawFishDisplay(bool showFish, bool showText)
+            {
+                // determine the x and y coords
+                int x = (int)((bar.xPositionOnScreen + bar.width + 80) * (Game1.options.zoomLevel / Game1.options.uiScale));
+                int y = (int)(bar.yPositionOnScreen * (Game1.options.zoomLevel / Game1.options.uiScale));
+
+                float spriteScale = 1f;
+                int spriteSize = (int)(64 * spriteScale);
+                int spriteCenter = (int)(spriteSize / 2);
+                int boxCenterX = (int)(_boxWidth / 2);
+                int boxCenterY = (int)(_boxHeight / 2);
+                int textCenter = (int)(_textSize.X / 2);
+                
+                // draw box of height and width at location
+                IClickableMenu.drawTextureBox(Game1.spriteBatch, Game1.menuTexture, new Rectangle(0, 256, 60, 60), x, y, _boxWidth, _boxHeight, Color.White, 1f, false);
+
+                Vector2 drawFishPos;
+                if (showText)
+                {
+                    //Calculate draw position for fish and draw at calculated position
+                    drawFishPos = new Vector2(x + boxCenterX - spriteCenter, y + boxCenterY - spriteCenter - Margin);
+                    _fishSprite?.drawInMenu(Game1.spriteBatch, drawFishPos, spriteScale, 1.0f, 1.0f, StackDrawType.Hide, showFish ? Color.White : Color.Black * 0.8f, false);
+                    
+                    // if showText, center the text x below the fish
+                    Game1.spriteBatch.DrawString(Game1.dialogueFont, _textValue, new Vector2(x + boxCenterX - textCenter, drawFishPos.Y + spriteSize), Color.Black, 0f, Vector2.Zero, TextScale, SpriteEffects.None, 0f);
+                }
+                else
+                {
+                    //Calculate draw position for fish and draw at calculated position
+                    drawFishPos = new Vector2(x + boxCenterX - spriteCenter, y + boxCenterY - spriteCenter - (int)(Margin / 2));
+                    _fishSprite?.drawInMenu(Game1.spriteBatch, drawFishPos, spriteScale, 1.0f, 1.0f, StackDrawType.Hide, showFish ? Color.White : Color.Black * 0.8f, false);
+                }
+
+                // if show treasure draw treasure with fish icon
+                if (Config.ShowTreasure && bar.treasure && !bar.treasureCaught)
+                {
+                    _treasureSprite ??= new Object("693", 1);
+                    _treasureSprite.drawInMenu(Game1.spriteBatch, new Vector2(drawFishPos.X + TreasureOffsetX, drawFishPos.Y + TreasureOffsetY), 0.75f, 1.0f, 1.0f, StackDrawType.Hide, Color.White, false);
+                }
             }
         }
     }

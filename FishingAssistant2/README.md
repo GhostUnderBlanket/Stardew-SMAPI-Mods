@@ -325,14 +325,6 @@ Toggle for allowing eating of caught fish.
 Should mod show fish info while catching fish?
 ```
 
-### FishInfoDisplayPosition
-**Default value:** `"UpperRight"`
-**Possible values:** `"Top" | "UpperRight" | "UpperLeft" | "Bottom" | "LowerRight" | "LowerLeft"`
-
-```
-Position to display fish info when playing a fishing minigame.
-```
-
 ### ShowFishName
 **Default value:** `true`
 **Possible values:** `true | false`

@@ -182,6 +182,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         private void DoBobberBarAssistantTask()
         {
+            _bobberBar.HandleFishPreview(_config.DisplayFishPreview);
+            
             _bobberBar.OverrideFishDifficult(_config.FishDifficultyMultiplier, _config.FishDifficultyAdditive);
             
             _bobberBar.OverrideTreasureChance(_config.TreasureChance);
