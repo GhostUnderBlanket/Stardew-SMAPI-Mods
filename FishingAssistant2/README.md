@@ -10,7 +10,7 @@ List of currently available mod features
 - Modify equipped fishing rod (add/remove enchantment)
 - Prevent players from fishing when stamina is low.
 - Auto-stop fishing at night (time can be changed in the config file).
-- ~~Preview current fish and show you if this round has a treasure.~~
+- Preview current fish and show you if this round has a treasure.
 - Configurable cheat in a config file.
 
 ## Requirements
@@ -27,7 +27,6 @@ List of currently available mod features
 When first run, the mod includes a default configuration that disables all cheats. You can enable this mod while in-game by pressing the F5 button on the keyboard and catch or ignore treasure by pressing the F6 button.
 
 To further tweak the fishing mechanics, you need to edit the Mod configuration file located in the mod's directory. This file is created automatically once the game has been launched at least once with the mod installed. Please refer to the Configuration section for details on how to further tweak the mod.
-
 
 ## Remarks
 - This mod doesn't affect the achievements you can get through Steam; fish counts will still increment as normal when a fish is reeled.
@@ -428,3 +427,7 @@ Toggle for add Preserving enchantment to fishing rod.
 ```
 Toggle for removing enchantment when fishing rod is unequipped.
 ```
+
+## See Also
+- The Fishing Assistant 2 source code is available with an MIT license on GitHub page.
+- Translations are welcome! You can go to the i18n folder on GitHub to translate my mod I already prepared a translation file for you. After that, create a pull request or you can send me the translated file directly via DM. If you prefer to upload the translated file yourself, please make sure that the file you upload contains only the translated content.
