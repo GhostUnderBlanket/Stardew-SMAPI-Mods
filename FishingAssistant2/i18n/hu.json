@@ -56,7 +56,7 @@
   "config-menu.option.auto-pause-fishing-time" : "Time To Pause", //New
   "config-menu.option.num-to-warn" : "Number Of Times To Warn", //New
   "config-menu.option.auto-eat-food" : "Auto Eat Food", //New
-"config-menu.option.energy-percent-to-eat" : "Energy Percent To Eat", //New //New
+"config-menu.option.energy-percent-to-eat" : "Energy Percent To Eat", //New
   "config-menu.option.allow-eating-fish" : "Allow Eating Fish", //New
 
   "config-menu.title.fish-preview" : "Fish Preview", //New
