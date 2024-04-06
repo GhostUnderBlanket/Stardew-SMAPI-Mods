@@ -65,7 +65,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         public bool AutoLootTreasure { get; set; } = true;
         
         /// <summary>Action to take if inventory is full</summary>
-        public string ActionIfInventoryFull { get; set; } = "Stop Loot";
+        public string ActionIfInventoryFull { get; set; } = "Stop";
         
         /// <summary>Toggle for auto attaching bait if possible</summary>
         public bool AutoAttachBait { get; set; } = false;
