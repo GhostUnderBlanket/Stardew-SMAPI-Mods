@@ -107,8 +107,10 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             if (_autoCastDelay-- > 0)
                 return;
             _autoCastDelay = 60;
-            
-            bool lowStamina = Game1.player.Stamina <= Game1.player.MaxStamina * (float)(_config.EnergyPercentToEat / 100f);
+
+            bool lowStamina = _config.AutoEatFood
+                ? (Game1.player.Stamina <= Game1.player.MaxStamina * (float)(_config.EnergyPercentToEat / 100f))
+                : Game1.player.Stamina <= 8.0 - Game1.player.FishingLevel * 0.1;
             bool hasEnchantment = _fishingRod.Instance.hasEnchantmentOfType<EfficientToolEnchantment>();
             bool isInventoryFull = Game1.player.isInventoryFull();
             
