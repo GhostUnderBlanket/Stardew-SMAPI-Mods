@@ -7,4 +7,4 @@ Your personal fishing assistant. that will handle the tough, boring and tiring f
 
 for more information see [here](FishingAssistant2/README.md)
 
-![FishingAssistant](FishingAssistant2/Image/FishingAssistant.gif)
+![FishingAssistant](FishingAssistant2/Image/FishingAssistant2.gif)
