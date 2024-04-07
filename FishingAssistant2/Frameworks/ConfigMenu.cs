@@ -44,20 +44,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddSectionTitle(I18n.ConfigMenu_Title_Hud);
             AddDropDown(I18n.ConfigMenu_Option_HudPosition, HudPositionOptions(), ParseHudPosition, () => config().ModStatusPosition, pos => config().ModStatusPosition = pos);
             
-            AddSectionTitle(I18n.ConfigMenu_Title_Fishing);
-            AddBool(I18n.ConfigMenu_Option_MaxCastPower, () => config().MaxCastPower, b => config().MaxCastPower = b);
-            AddBool(I18n.ConfigMenu_Option_InstantFishBite, () => config().InstantFishBite, b => config().InstantFishBite = b);
-            AddBool(I18n.ConfigMenu_Option_InstantCatchFish, () => config().InstantCatchFish, b => config().InstantCatchFish = b);
-            AddBool(I18n.ConfigMenu_Option_InstantCatchTreasure, () => config().InstantCatchTreasure, b => config().InstantCatchTreasure = b);
-            AddDropDown(I18n.ConfigMenu_Option_TreasureChance, TreasureChanceOptions(), ParseTreasureChance, () => config().TreasureChance, chance => config().TreasureChance = chance);
-            AddDropDown(I18n.ConfigMenu_Option_GoldenTreasureChance, TreasureChanceOptions(), ParseTreasureChance, () => config().GoldenTreasureChance, chance => config().GoldenTreasureChance = chance);
-            AddNumber(I18n.ConfigMenu_Option_PreferFishAmount, () => config().PreferFishAmount, i => config().PreferFishAmount = i, 1, 3);
-            AddDropDown(I18n.ConfigMenu_Option_PreferFishQuality, FishQualityOptions(), ParseFishQuality, () => config().PreferFishQuality, quality => config().PreferFishQuality = quality);
-            AddBool(I18n.ConfigMenu_Option_AlwaysPerfect, () => config().AlwaysPerfect, b => config().AlwaysPerfect = b);
-            AddBool(I18n.ConfigMenu_Option_AlwaysMaxFishSize, () => config().AlwaysMaxFishSize, b => config().AlwaysMaxFishSize = b);
-            AddNumber(I18n.ConfigMenu_Option_FishDifficultyMultiplier, () => config().FishDifficultyMultiplier, i => config().FishDifficultyMultiplier = i);
-            AddNumber(I18n.ConfigMenu_Option_FishDifficultyAdditive, () => config().FishDifficultyAdditive, i => config().FishDifficultyAdditive = i);
-
             AddSectionTitle(I18n.ConfigMenu_Title_Automation);
             AddBool(I18n.ConfigMenu_Option_AutoCastFishingRod, () => config().AutoCastFishingRod, b => config().AutoCastFishingRod = b);
             AddBool(I18n.ConfigMenu_Option_AutoHookFish, () => config().AutoHookFish, b => config().AutoHookFish = b);
@@ -65,14 +51,28 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_AutoClosePopup, () => config().AutoClosePopup, b => config().AutoClosePopup = b);
             AddBool(I18n.ConfigMenu_Option_AutoLootTreasure, () => config().AutoLootTreasure, b => config().AutoLootTreasure = b);
             AddDropDown(I18n.ConfigMenu_Option_ActionIfInventoryFull, ActionOnInventoryFullOptions(), ParseActionOnInventoryFull, () => config().ActionIfInventoryFull, action => config().ActionIfInventoryFull = action);
+            AddBool(I18n.ConfigMenu_Option_AutoTrashJunk, () => config().AutoTrashJunk, b => config().AutoTrashJunk = b);
+            AddNumber(I18n.ConfigMenu_Option_JunkHighestPrice, () => config().JunkHighestPrice, i => config().JunkHighestPrice = i, 1);
             AddDropDown(I18n.ConfigMenu_Option_AutoPauseFishing, PauseFishingOptions(), ParsePauseFishing, () => config().AutoPauseFishing, s => config().AutoPauseFishing = s);
             AddNumber(I18n.ConfigMenu_Option_AutoPauseFishingTime, () => config().PauseFishingTime, i => config().PauseFishingTime = i, 6, 25, 1,value => Game1.getTimeOfDayString(value * 100));
             AddNumber(I18n.ConfigMenu_Option_NumToWarn, () => config().NumToWarn, i => config().NumToWarn = i, 1, 5, 1);
             AddBool(I18n.ConfigMenu_Option_AutoEatFood, () => config().AutoEatFood, b => config().AutoEatFood = b);
             AddNumber(I18n.ConfigMenu_Option_EnergyPercentToEat, () => config().EnergyPercentToEat, i => config().EnergyPercentToEat = i, 1, 99, 1);
             AddBool(I18n.ConfigMenu_Option_AllowEatingFish, () => config().AllowEatingFish, b => config().AllowEatingFish = b);
-            AddBool(I18n.ConfigMenu_Option_AutoTrashJunk, () => config().AutoTrashJunk, b => config().AutoTrashJunk = b);
-            AddNumber(I18n.ConfigMenu_Option_JunkHighestPrice, () => config().JunkHighestPrice, i => config().JunkHighestPrice = i, 1);
+
+            AddSectionTitle(I18n.ConfigMenu_Title_Fishing);
+            AddBool(I18n.ConfigMenu_Option_MaxCastPower, () => config().MaxCastPower, b => config().MaxCastPower = b);
+            AddBool(I18n.ConfigMenu_Option_InstantFishBite, () => config().InstantFishBite, b => config().InstantFishBite = b);
+            AddBool(I18n.ConfigMenu_Option_InstantCatchFish, () => config().InstantCatchFish, b => config().InstantCatchFish = b);
+            AddNumber(I18n.ConfigMenu_Option_PreferFishAmount, () => config().PreferFishAmount, i => config().PreferFishAmount = i, 1, 3);
+            AddDropDown(I18n.ConfigMenu_Option_PreferFishQuality, FishQualityOptions(), ParseFishQuality, () => config().PreferFishQuality, quality => config().PreferFishQuality = quality);
+            AddBool(I18n.ConfigMenu_Option_AlwaysPerfect, () => config().AlwaysPerfect, b => config().AlwaysPerfect = b);
+            AddBool(I18n.ConfigMenu_Option_AlwaysMaxFishSize, () => config().AlwaysMaxFishSize, b => config().AlwaysMaxFishSize = b);
+            AddNumber(I18n.ConfigMenu_Option_FishDifficultyMultiplier, () => config().FishDifficultyMultiplier, i => config().FishDifficultyMultiplier = i);
+            AddNumber(I18n.ConfigMenu_Option_FishDifficultyAdditive, () => config().FishDifficultyAdditive, i => config().FishDifficultyAdditive = i);
+            AddBool(I18n.ConfigMenu_Option_InstantCatchTreasure, () => config().InstantCatchTreasure, b => config().InstantCatchTreasure = b);
+            AddDropDown(I18n.ConfigMenu_Option_TreasureChance, TreasureChanceOptions(), ParseTreasureChance, () => config().TreasureChance, chance => config().TreasureChance = chance);
+            AddDropDown(I18n.ConfigMenu_Option_GoldenTreasureChance, TreasureChanceOptions(), ParseTreasureChance, () => config().GoldenTreasureChance, chance => config().GoldenTreasureChance = chance);
             
             AddSectionTitle(I18n.ConfigMenu_Title_FishPreview);
             AddBool(I18n.ConfigMenu_Option_DisplayFishPreview, () => config().DisplayFishPreview, b => config().DisplayFishPreview = b);
@@ -86,7 +86,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddDropDown(I18n.ConfigMenu_Option_PreferBait, _availableBaits.ToArray(), ParseItemName, () => config().PreferBait, s => config().PreferBait = s);
             AddBool(I18n.ConfigMenu_Option_InfiniteBait, () => config().InfiniteBait, b => config().InfiniteBait = b);
             AddBool(I18n.ConfigMenu_Option_SpawnBaitIfDontHave, () => config().SpawnBaitIfDontHave, b => config().SpawnBaitIfDontHave = b);
-            
+            AddNumber(I18n.ConfigMenu_Option_BaitAmountToSpawn, () => config().BaitAmountToSpawn, i => config().BaitAmountToSpawn = i, 1, 999, 1);
             AddBool(I18n.ConfigMenu_Option_AutoAttachTackles, () => config().AutoAttachTackles, b => config().AutoAttachTackles = b);
             AddDropDown(I18n.ConfigMenu_Option_PreferTackle, _availableTackles.ToArray(), ParseItemName, () => config().PreferTackle, s => config().PreferTackle = s);
             AddDropDown(I18n.ConfigMenu_Option_PreferAdvancedIridiumTackle, _availableTackles.ToArray(), ParseItemName, () => config().PreferAdvIridiumTackle, s => config().PreferAdvIridiumTackle = s);

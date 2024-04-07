@@ -60,6 +60,118 @@ Button for toggling catch or ignore treasure in fishing mini-game.
 Position to display mod status.
 ```
 
+### AutoCastFishingRod
+**Default value:** `true`
+**Possible values:** `true | false`
+
+```
+Toggle for auto cast fishing rod.
+```
+
+### AutoHookFish
+**Default value:** `true`
+**Possible values:** `true | false`
+
+```
+Toggle for auto hook fish.
+```
+
+### AutoPlayMiniGame
+**Default value:** `true`
+**Possible values:** `true | false`
+
+```
+Toggle for auto playing fishing mini-game.
+```
+
+### AutoClosePopup
+**Default value:** `true`
+**Possible values:** `true | false`
+
+```
+Toggle for auto closing fish popup.
+```
+
+### AutoLootTreasure
+**Default value:** `true`
+**Possible values:** `true | false`
+
+```
+Toggle for auto looting treasure.
+```
+
+### ActionIfInventoryFull
+**Default value:** `Stop`
+**Possible values:** `Stop | Drop | Discard`
+
+```
+Action to take if inventory is full.
+```
+
+### AutoTrashJunk
+**Default value:** `false`
+**Possible values:** `true | false`
+
+```
+Toggle for auto trash junk item when get new item.
+```
+
+### JunkHighestPrice
+**Default value:** `10`
+**Possible values:** `higher than 0`
+
+```
+The item that price that less than or equal to this will consider as junk.
+```
+
+### AutoPauseFishing
+**Default value:** `WarnAndPause`
+**Possible values:** `Off | WarnOnly | WarnAndPause`
+
+```
+Should mod auto pause fishing on night.
+```
+
+### PauseFishingTime
+**Default value:** `24`
+**Possible values:** `6 - 25`
+
+```
+Time to stop fishing.
+```
+
+### NumToWarn
+**Default value:** `1`
+**Possible values:** `1 - 5`
+
+```
+Number of warnings after time reach.
+```
+
+### AutoEatFood
+**Default value:** `false`
+**Possible values:** `true | false`
+
+```
+Whether to eat some food if need.
+```
+
+### EnergyPercentToEat
+**Default value:** `10`
+**Possible values:** `1 - 99`
+
+```
+Energy percent to consider as low energy and find something to eat.
+```
+
+### AllowEatingFish
+**Default value:** `false`
+**Possible values:** `true | false`
+
+```
+Toggle for allowing eating of caught fish.
+```
+
 ### MaxCastPower
 **Default value:** `true`
 **Possible values:** `true | false`
@@ -76,20 +188,12 @@ Toggle for enabling max cast power.
 Toggle for making fish bite instantly.
 ```
 
-### TreasureChance
-**Default value:** `Default`
-**Possible values:** `Default | Always | Never`
+### InstantCatchFish
+**Default value:** `false`
+**Possible values:** `true | false`
 
 ```
-Chance of finding treasure while fishing.
-```
-
-### GoldenTreasureChance
-**Default value:** `Default`
-**Possible values:** `Default | Always | Never`
-
-```
-Chance of finding golden treasure while fishing.
+Instantly catch fish when fish hooked.
 ```
 
 ### PreferFishAmount
@@ -140,14 +244,6 @@ A multiplier applied to the fish difficulty.
 A value added to the fish difficulty.
 ```
 
-### InstantCatchFish
-**Default value:** `false`
-**Possible values:** `true | false`
-
-```
-Instantly catch fish when fish hooked.
-```
-
 ### InstantCatchTreasure
 **Default value:** `false`
 **Possible values:** `true | false`
@@ -156,52 +252,60 @@ Instantly catch fish when fish hooked.
 Instantly catch treasure when treasure appeared.
 ```
 
-### AutoCastFishingRod
+### TreasureChance
+**Default value:** `Default`
+**Possible values:** `Default | Always | Never`
+
+```
+Chance of finding treasure while fishing.
+```
+
+### GoldenTreasureChance
+**Default value:** `Default`
+**Possible values:** `Default | Always | Never`
+
+```
+Chance of finding golden treasure while fishing.
+```
+
+### DisplayFishPreview
 **Default value:** `true`
 **Possible values:** `true | false`
 
 ```
-Toggle for auto cast fishing rod.
+Toggle for displaying fish info while catching fish.
 ```
 
-### AutoHookFish
+### ShowFishName
 **Default value:** `true`
 **Possible values:** `true | false`
 
 ```
-Toggle for auto hook fish.
+Toggle for showing fish name with fish info.
 ```
 
-### AutoPlayMiniGame
+### ShowTreasure
 **Default value:** `true`
 **Possible values:** `true | false`
 
 ```
-Toggle for auto playing fishing mini-game.
+Toggle for showing treasure with fish info.
 ```
 
-### AutoClosePopup
-**Default value:** `true`
+### ShowUncaughtFishSpecies
+**Default value:** `false`
 **Possible values:** `true | false`
 
 ```
-Toggle for auto closing fish popup.
+Show a preview for all fish species, even ones you have never caught.
 ```
 
-### AutoLootTreasure
-**Default value:** `true`
+### AlwaysShowLegendaryFish
+**Default value:** `false`
 **Possible values:** `true | false`
 
 ```
-Toggle for auto looting treasure.
-```
-
-### ActionIfInventoryFull
-**Default value:** `Stop`
-**Possible values:** `Stop | Drop | Discard`
-
-```
-Action to take if inventory is full.
+Toggle for always showing fish info if current fish is legendary.
 ```
 
 ### AutoAttachBait
@@ -284,110 +388,6 @@ Make your tackle last long forever.
 Toggle for spawning tackle if none is available.
 ```
 
-### AutoPauseFishing
-**Default value:** `WarnAndPause`
-**Possible values:** `Off | WarnOnly | WarnAndPause`
-
-```
-Should mod auto pause fishing on night.
-```
-
-### PauseFishingTime
-**Default value:** `24`
-**Possible values:** `6 - 25`
-
-```
-Time to stop fishing.
-```
-
-### NumToWarn
-**Default value:** `1`
-**Possible values:** `1 - 5`
-
-```
-Number of warnings after time reach.
-```
-
-### AutoEatFood
-**Default value:** `false`
-**Possible values:** `true | false`
-
-```
-Whether to eat some food if need.
-```
-
-### EnergyPercentToEat
-**Default value:** `10`
-**Possible values:** `1 - 99`
-
-```
-Energy percent to consider as low energy and find something to eat
-```
-
-### AllowEatingFish
-**Default value:** `false`
-**Possible values:** `true | false`
-
-```
-Toggle for allowing eating of caught fish.
-```
-
-### AutoTrashJunk
-**Default value:** `false`
-**Possible values:** `true | false`
-
-```
-Toggle for auto trash junk item when get new item.
-```
-
-### JunkHighestPrice
-**Default value:** `10`
-**Possible values:** `higher than 0`
-
-```
-The item that price below this will consider as junk.
-```
-
-### DisplayFishInfo
-**Default value:** `true`
-**Possible values:** `true | false`
-
-```
-Should mod show fish info while catching fish?
-```
-
-### ShowFishName
-**Default value:** `true`
-**Possible values:** `true | false`
-
-```
-Shows the text of the fish name under the icon.
-```
-
-### ShowTreasure
-**Default value:** `true`
-**Possible values:** `true | false`
-
-```
-Show treasure icon with fish info.
-```
-
-### ShowUncaughtFishSpecies
-**Default value:** `false`
-**Possible values:** `true | false`
-
-```
-Show a preview for all fish species, even ones you have never caught.
-```
-
-### AlwaysShowLegendaryFish
-**Default value:** `false`
-**Possible values:** `true | false`
-
-```
-Show a preview for legendary fish.
-```
-
 ### AddAutoHookEnchantment
 **Default value:** `false`
 **Possible values:** `true | false`
@@ -428,6 +428,6 @@ Toggle for add Preserving enchantment to fishing rod.
 Toggle for removing enchantment when fishing rod is unequipped.
 ```
 
-## See Also
+## Thank you
 - The Fishing Assistant 2 source code is available with an MIT license on GitHub page.
 - Translations are welcome! You can go to the i18n folder on GitHub to translate my mod I already prepared a translation file for you. After that, create a pull request or you can send me the translated file directly via DM. If you prefer to upload the translated file yourself, please make sure that the file you upload contains only the translated content.
