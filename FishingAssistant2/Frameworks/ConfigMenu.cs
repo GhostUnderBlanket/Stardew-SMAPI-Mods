@@ -38,26 +38,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             }
 
             AddSectionTitle(I18n.ConfigMenu_Title_GoToPage);
-            _configMenu?.AddPageLink(
-                mod: modManifest,
-                pageId: "chibiKyu.FishingAssistant2.General",
-                I18n.ConfigMenu_Page_General);
+            AddPageLink(I18n.ConfigMenu_Page_General,"General");
+            AddPageLink(I18n.ConfigMenu_Page_MiniGame,"MiniGame");
+            AddPageLink(I18n.ConfigMenu_Page_FishingRod,"FishingRod");
             
-            _configMenu?.AddPageLink(
-                mod: modManifest,
-                pageId: "chibiKyu.FishingAssistant2.MiniGame",
-                I18n.ConfigMenu_Page_MiniGame);
-            
-            _configMenu?.AddPageLink(
-                mod: modManifest,
-                pageId: "chibiKyu.FishingAssistant2.FishingRod",
-                I18n.ConfigMenu_Page_FishingRod);
-            
-            _configMenu?.AddPage(
-                mod: modManifest,
-                pageId: "chibiKyu.FishingAssistant2.General",
-                I18n.ConfigMenu_Page_General);
-            
+            // General Page
+            AddPage(I18n.ConfigMenu_Page_General,"General");
             AddSectionTitle(I18n.ConfigMenu_Title_KeyBinding);
             AddKeyBind(I18n.ConfigMenu_Option_ToggleAutomation, () => config().EnableAutomationButton, button => config().EnableAutomationButton = button);
             AddKeyBind(I18n.ConfigMenu_Option_CatchTreasure, () => config().CatchTreasureButton, button => config().CatchTreasureButton = button);
@@ -82,14 +68,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddNumber(I18n.ConfigMenu_Option_EnergyPercentToEat, () => config().EnergyPercentToEat, i => config().EnergyPercentToEat = i, 5, 95, 5);
             AddBool(I18n.ConfigMenu_Option_AllowEatingFish, () => config().AllowEatingFish, b => config().AllowEatingFish = b);
             
-            _configMenu?.AddPage(
-                mod: modManifest,
-                pageId: "chibiKyu.FishingAssistant2.MiniGame",
-                I18n.ConfigMenu_Page_MiniGame);
-            
+            // MiniGame Page
+            AddPage(I18n.ConfigMenu_Page_General,"MiniGame");
             AddSectionTitle(I18n.ConfigMenu_Title_Fishing);
             AddDropDown(I18n.ConfigMenu_Option_SkipFishingMiniGame, SkipMiniGameOptions(),ParseSkipMiniGame, () => config().SkipFishingMiniGame, option => config().SkipFishingMiniGame = option);
-            AddBool(I18n.ConfigMenu_Option_MaxCastPower, () => config().MaxCastPower, b => config().MaxCastPower = b);
+            AddNumber(I18n.ConfigMenu_Option_CastPowerPercent, () => config().CastPowerPercent, i => config().CastPowerPercent = i, 0, 100, 5);
             AddBool(I18n.ConfigMenu_Option_InstantFishBite, () => config().InstantFishBite, b => config().InstantFishBite = b);
             AddBool(I18n.ConfigMenu_Option_InstantCatchFish, () => config().InstantCatchFish, b => config().InstantCatchFish = b);
             AddNumber(I18n.ConfigMenu_Option_PreferFishAmount, () => config().PreferFishAmount, i => config().PreferFishAmount = i, 1, 3);
@@ -109,11 +92,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_ShowUncaughtFishSpecies, () => config().ShowUncaughtFishSpecies, b => config().ShowUncaughtFishSpecies = b);
             AddBool(I18n.ConfigMenu_Option_AlwaysShowLegendaryFish, () => config().AlwaysShowLegendaryFish, b => config().AlwaysShowLegendaryFish = b);
             
-            _configMenu?.AddPage(
-                mod: modManifest,
-                pageId: "chibiKyu.FishingAssistant2.FishingRod",
-                I18n.ConfigMenu_Page_FishingRod);
-            
+            // FishingRod Page
+            AddPage(I18n.ConfigMenu_Page_General,"FishingRod");
             AddSectionTitle(I18n.ConfigMenu_Title_FishingRod);
             AddBool(I18n.ConfigMenu_Option_AutoAttachBait, () => config().AutoAttachBait, b => config().AutoAttachBait = b);
             AddDropDown(I18n.ConfigMenu_Option_PreferBait, _availableBaits.ToArray(), ParseItemName, () => config().PreferBait, s => config().PreferBait = s);
@@ -254,6 +234,22 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             };
         }
 
+        private void AddPage(Func<string> text, string pageTitle)
+        {
+            _configMenu?.AddPage(
+                mod: modManifest,
+                pageId: $"chibiKyu.FishingAssistant2.{pageTitle}",
+                pageTitle: text);
+        }
+        
+        private void AddPageLink(Func<string> text, string pageTitle)
+        {
+            _configMenu?.AddPageLink(
+                mod: modManifest,
+                pageId: $"chibiKyu.FishingAssistant2.{pageTitle}",
+                text: text);
+        }
+        
         private void AddSectionTitle(Func<string> text)
         {
             _configMenu?.AddSectionTitle(

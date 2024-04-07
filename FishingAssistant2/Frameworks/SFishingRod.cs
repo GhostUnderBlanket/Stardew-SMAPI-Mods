@@ -146,6 +146,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 Rumble.rumble(0.95f, 200f);
             }
         }
+
+        internal void OverrideCastPower(int castPower)
+        {
+            Instance.castingPower = (castPower / 100.0f) + 0.01f;
+        }
         
         internal void InstantFishBite()
         {

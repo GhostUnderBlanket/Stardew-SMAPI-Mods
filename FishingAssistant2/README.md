@@ -169,6 +169,14 @@ Toggle for skip fishing mini-game instantly.
 Toggle for enabling max cast power.
 ```
 
+### CastPowerPercent
+**Default value:** `50`
+**Possible values:** `0 - 100`
+
+```
+Preference for cast power if 'MaxCastPower' is off
+```
+
 ### InstantFishBite
 **Default value:** `false`
 **Possible values:** `true | false`

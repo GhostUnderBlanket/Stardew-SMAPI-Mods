@@ -39,7 +39,7 @@
   "config-menu.option.hud-position" : "HUD Position", //New
   
   "config-menu.title.fishing" : "Fishing", //New
-  "config-menu.option.max-cast-power" : "Max Cast Power", //New
+  "config-menu.option.cast-power-percent" : "Cast Power Percent", //New
   "config-menu.option.instant-fish-bite" : "Instant Fish Bite", //New
   "config-menu.option.skip-fishing-mini-game" : "Skip Fishing Mini-Game", //New
   "config-menu.option.always-perfect" : "Always Perfect", //New

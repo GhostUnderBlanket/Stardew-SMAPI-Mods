@@ -37,7 +37,7 @@
   "config-menu.option.hud-position" : "HUD位置",
   
   "config-menu.title.fishing" : "钓鱼",
-  "config-menu.option.max-cast-power" : "最大抛竿",
+  "config-menu.option.cast-power-percent" : "Cast Power Percent", //New
   "config-menu.option.instant-fish-bite" : "立刻上钩",
   "config-menu.option.skip-fishing-mini-game" : "Skip Fishing Mini-Game", //New
   "config-menu.option.always-perfect" : "总是完美",

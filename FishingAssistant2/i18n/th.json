@@ -39,8 +39,8 @@
   "config-menu.option.hud-position" : "ตำแหน่ง HUD",
   
   "config-menu.title.fishing" : "การตกปลา",
-  "config-menu.option.max-cast-power" : "แรงเหวี่ยงเบ็ดเต็ม",
-  "config-menu.option.instant-fish-bite" : "ปลาตอดทันที",
+  "config-menu.option.cast-power-percent" : "ความแรงเมื่อเหวี่ยงเบ็ด",
+  "config-menu.option.instant-fish-bite" : "ปลากินเบ็ดทันที",
   "config-menu.option.skip-fishing-mini-game" : "ข้ามมินิเกมทันที",
   "config-menu.option.always-perfect" : "สมบูรณ์แบบเสมอ",
   "config-menu.option.always-max-fish-size" : "ขนาดปลาใหญ่สุดเสมอ",

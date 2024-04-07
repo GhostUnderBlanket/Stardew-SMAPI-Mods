@@ -82,7 +82,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         private void DoFishingRodAssistantTask()
         {
-            if (_config.MaxCastPower) _fishingRod.Instance.castingPower = 1.01f;
+            _fishingRod.OverrideCastPower(_config.CastPowerPercent);
             
             if (_config.InstantFishBite) _fishingRod.InstantFishBite();
             
