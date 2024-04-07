@@ -72,42 +72,48 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 IList<Item> items = Game1.player.Items;
                 
                 // Check the tackle slot.
-                if (Instance.UpgradeLevel >= 3 && Instance.attachments[1] == null)
+                if (Instance.UpgradeLevel >= 3)
                 {
-                    foreach (Item item in items)
+                    if (Instance.attachments[1] == null)
                     {
-                        // Category value for tackle is -22.
-                        // Source: https://github.com/veywrn/StardewValley/blob/master/StardewValley/Item.cs
-                        if (item?.Category == -22 && (preferTackle[0] == "Any" || item.QualifiedItemId == preferTackle[0]))
+                        foreach (Item item in items)
                         {
-                            Instance.attachments[1] = (Object)item;
-                            Game1.player.removeItemFromInventory(item);
-                            CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), ItemRegistry.GetData(item.QualifiedItemId).DisplayName, ItemRegistry.GetData(Instance.QualifiedItemId).DisplayName);
-                            break;
+                            // Category value for tackle is -22.
+                            // Source: https://github.com/veywrn/StardewValley/blob/master/StardewValley/Item.cs
+                            if (item?.Category == -22 && (preferTackle[0] == "Any" || item.QualifiedItemId == preferTackle[0]))
+                            {
+                                Instance.attachments[1] = (Object)item;
+                                Game1.player.removeItemFromInventory(item);
+                                CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), ItemRegistry.GetData(item.QualifiedItemId).DisplayName, ItemRegistry.GetData(Instance.QualifiedItemId).DisplayName);
+                                break;
+                            }
                         }
+                        
+                        if (spawnTackleIfDontHave && preferTackle[0] != "Any") Instance.attachments[1] = ItemRegistry.Create<Object>(preferTackle[0]);
                     }
-
-                    if (spawnTackleIfDontHave && preferTackle[0] != "Any") Instance.attachments[1] = ItemRegistry.Create<Object>(preferTackle[0]);
                     
                     if (Instance.attachments[1] != null && infiniteTackle) Instance.attachments[1].uses.Value = 0;
                 }
                 
-                if (Instance.UpgradeLevel == 4 && Instance.attachments[2] == null)
+                if (Instance.UpgradeLevel == 4)
                 {
-                    foreach (Item item in items)
+                    if (Instance.attachments[2] == null)
                     {
-                        // Category value for tackle is -22.
-                        // Source: https://github.com/veywrn/StardewValley/blob/master/StardewValley/Item.cs
-                        if (item?.Category == -22 && (preferTackle[1] == "Any" || item.QualifiedItemId == preferTackle[1]))
+                        foreach (Item item in items)
                         {
-                            Instance.attachments[2] = (Object)item;
-                            Game1.player.removeItemFromInventory(item);
-                            CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), ItemRegistry.GetData(item.QualifiedItemId).DisplayName, ItemRegistry.GetData(Instance.QualifiedItemId).DisplayName);
-                            break;
+                            // Category value for tackle is -22.
+                            // Source: https://github.com/veywrn/StardewValley/blob/master/StardewValley/Item.cs
+                            if (item?.Category == -22 && (preferTackle[1] == "Any" || item.QualifiedItemId == preferTackle[1]))
+                            {
+                                Instance.attachments[2] = (Object)item;
+                                Game1.player.removeItemFromInventory(item);
+                                CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), ItemRegistry.GetData(item.QualifiedItemId).DisplayName, ItemRegistry.GetData(Instance.QualifiedItemId).DisplayName);
+                                break;
+                            }
                         }
-                    }
 
-                    if (spawnTackleIfDontHave && preferTackle[1] != "Any") Instance.attachments[2] = ItemRegistry.Create<Object>(preferTackle[1]);
+                        if (spawnTackleIfDontHave && preferTackle[1] != "Any") Instance.attachments[2] = ItemRegistry.Create<Object>(preferTackle[1]);
+                    }
                     
                     if (Instance.attachments[2] != null && infiniteTackle) Instance.attachments[2].uses.Value = 0;
                 }
