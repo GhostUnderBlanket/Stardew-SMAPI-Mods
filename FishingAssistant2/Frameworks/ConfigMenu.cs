@@ -52,7 +52,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_AutoLootTreasure, () => config().AutoLootTreasure, b => config().AutoLootTreasure = b);
             AddDropDown(I18n.ConfigMenu_Option_ActionIfInventoryFull, ActionOnInventoryFullOptions(), ParseActionOnInventoryFull, () => config().ActionIfInventoryFull, action => config().ActionIfInventoryFull = action);
             AddBool(I18n.ConfigMenu_Option_AutoTrashJunk, () => config().AutoTrashJunk, b => config().AutoTrashJunk = b);
-            AddNumber(I18n.ConfigMenu_Option_JunkHighestPrice, () => config().JunkHighestPrice, i => config().JunkHighestPrice = i, 1);
+            AddNumber(I18n.ConfigMenu_Option_JunkHighestPrice, () => config().JunkHighestPrice, i => config().JunkHighestPrice = i, 0);
+            AddBool(I18n.ConfigMenu_Option_AllowTrashFish, () => config().AllowTrashFish, b => config().AllowTrashFish = b);
             AddDropDown(I18n.ConfigMenu_Option_AutoPauseFishing, PauseFishingOptions(), ParsePauseFishing, () => config().AutoPauseFishing, s => config().AutoPauseFishing = s);
             AddNumber(I18n.ConfigMenu_Option_AutoPauseFishingTime, () => config().PauseFishingTime, i => config().PauseFishingTime = i, 6, 25, 1,value => Game1.getTimeOfDayString(value * 100));
             AddNumber(I18n.ConfigMenu_Option_NumToWarn, () => config().NumToWarn, i => config().NumToWarn = i, 1, 5, 1);

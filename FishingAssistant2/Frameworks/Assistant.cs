@@ -430,7 +430,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 int sellToStorePrice = Utility.getSellToStorePriceOfItem(newItem, false);
                 
                 // Category value for trash is -20. Source: https://github.com/veywrn/StardewValley/blob/master/StardewValley/Item.cs
-                if (newItem.canBeTrashed() && (newItem.Category == -20 || sellToStorePrice < _config.JunkHighestPrice))
+                if (newItem.canBeTrashed() && (newItem.Category == -20 
+                                               || (newItem.Category != -4 && sellToStorePrice <= _config.JunkHighestPrice) 
+                                               || (newItem.Category == -4 && sellToStorePrice <= _config.JunkHighestPrice && _config.AllowTrashFish)))
                 {
                     Utility.trashItem(newItem);
                     e.Player.removeItemFromInventory(newItem);

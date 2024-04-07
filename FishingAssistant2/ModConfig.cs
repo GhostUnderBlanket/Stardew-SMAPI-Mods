@@ -38,7 +38,10 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         public bool AutoTrashJunk { get; set; } = false;
         
         /// <summary>The item that price that less than or equal to this will consider as junk.</summary>
-        public int JunkHighestPrice { get; set; } = 10;
+        public int JunkHighestPrice { get; set; } = 0;
+        
+        /// <summary>Toggle for allowing to trashed fish that sale price is corresponding to 'JunkHighestPrice'.</summary>
+        public bool AllowTrashFish { get; set; } = false;
         
         /// <summary>Should mod auto pause fishing on night.</summary>
         public string AutoPauseFishing { get; set; } = "WarnAndPause";

@@ -60,6 +60,7 @@
   "config-menu.option.allow-eating-fish" : "Allow Eating Fish", //New
   "config-menu.option.auto-trash-junk" : "Auto Trash Junk", //New
   "config-menu.option.junk-highest-price" : "Junk Highest Price", //New
+  "config-menu.option.allow-trash-fish" : "Allow Trash Fish", //New
   
   "config-menu.title.fish-preview" : "Fish Preview", //New
   "config-menu.option.display-fish-preview" : "Display Fish Preview", //New

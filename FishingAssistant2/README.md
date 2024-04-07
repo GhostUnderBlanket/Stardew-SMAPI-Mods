@@ -90,11 +90,19 @@ Toggle for auto trash junk item when get new item.
 ```
 
 ### JunkHighestPrice
-**Default value:** `10`
-**Possible values:** `higher than 0`
+**Default value:** `0`
+**Possible values:** `higher or equal to 0`
 
 ```
 The item that price that less than or equal to this will consider as junk.
+```
+
+### AllowTrashFish
+**Default value:** `false`
+**Possible values:** `true | false`
+
+```
+Toggle for allowing to trashed fish that sale price is corresponding to 'JunkHighestPrice'.
 ```
 
 ### AutoPauseFishing
