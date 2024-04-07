@@ -56,9 +56,9 @@
   "config-menu.option.auto-eat-food" : "自动进食",
   "config-menu.option.energy-percent-to-eat" : "自动进食能量百分比", 
   "config-menu.option.allow-eating-fish" : "允许吃鱼",
-  "config-menu.option.auto-trash-junk" : "Auto Trash Junk", //New
-  "config-menu.option.junk-highest-price" : "Junk Highest Price", //New
-  "config-menu.option.allow-trash-fish" : "Allow Trash Fish", //New
+  "config-menu.option.auto-trash-junk" : "自动丢弃垃圾",
+  "config-menu.option.junk-highest-price" : "低于多少价值的垃圾(鱼)会被丢弃",
+  "config-menu.option.allow-trash-fish" : "允许自动丢弃鱼",
 
   "config-menu.title.fish-preview" : "钓鱼信息预览", 
   "config-menu.option.display-fish-preview" : "显示上钩的鱼",
