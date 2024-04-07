@@ -108,9 +108,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 return;
             _autoCastDelay = 60;
             
-            bool lowStamina = Game1.player.Stamina <= 8.0 - Game1.player.FishingLevel * 0.1 
-                              || _config.AutoEatFood && (Game1.player.Stamina <= Game1.player.MaxStamina * (float)(_config.EnergyPercentToEat / 100f));
-            
+            bool lowStamina = Game1.player.Stamina <= Game1.player.MaxStamina * (float)(_config.EnergyPercentToEat / 100f);
             bool hasEnchantment = _fishingRod.Instance.hasEnchantmentOfType<EfficientToolEnchantment>();
             bool isInventoryFull = Game1.player.isInventoryFull();
             
@@ -284,7 +282,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 _fishingRod.Instance.tickUpdate(Game1.currentGameTime, Game1.player);
                 _currentMouseState?.SetValue(new MouseState());
                 Game1.oldKBState = new KeyboardState(); 
-                _modEntry.Monitor.Log("Close popup");
             }
 
             return;
@@ -422,8 +419,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         internal void AutoTrashJunk(InventoryChangedEventArgs e)
         {
-            if (!_config.AutoTrashJunk) return;
-
+            if (!_modEntry.ModEnable || !_config.AutoTrashJunk) return;
+            
             List<Item> changedItems = new List<Item>();
             changedItems.AddRange(e.Added);
             changedItems.AddRange(e.QuantityChanged.Select(newStacks => newStacks.Item));

@@ -130,8 +130,8 @@ Whether to eat some food if need.
 ```
 
 ### EnergyPercentToEat
-**Default value:** `10`
-**Possible values:** `1 - 99`
+**Default value:** `5`
+**Possible values:** `5 - 95`
 
 ```
 Energy percent to consider as low energy and find something to eat.

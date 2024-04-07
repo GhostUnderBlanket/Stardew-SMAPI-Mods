@@ -53,7 +53,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         public bool AutoEatFood { get; set; } = false;
         
         /// <summary>Energy percent to consider as low energy and find something to eat.</summary>
-        public int EnergyPercentToEat { get; set; } = 10;
+        public int EnergyPercentToEat { get; set; } = 5;
 
         /// <summary>Toggle for allowing eating of caught fish</summary>
         public bool AllowEatingFish { get; set; } = false;
