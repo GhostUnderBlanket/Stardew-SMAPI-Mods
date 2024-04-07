@@ -1,6 +1,6 @@
 {
   "mod-name" : "钓鱼小帮手2",
-  
+
   "on" : "开启",
   "off" : "关闭",
   "left" : "左边",
@@ -13,7 +13,7 @@
   "always" : "总是",
   "never" : "从不",
   "stop-loot" : "停止搜刮",
-  "drop-remaining" : "丢下剩余的",
+  "drop-remaining" : "丢弃剩余的",
   "discard-remaining" : "删除剩余的",
   "any" : "任意",
   "none" : "无",
@@ -24,28 +24,28 @@
   "warn-and-pause" : "警告并暂停",
   
   "config-menu.title.key-binding" : "按键绑定",
-  "config-menu.option.toggle-mod" : "模组开关",
-  "config-menu.option.catch-treasure" : "宝箱开关",
+  "config-menu.option.toggle-automation" : "自动钓鱼开关",
+  "config-menu.option.catch-treasure" : "自动钓宝箱开关",
   "config-menu.title.hud" : "HUD",
   "config-menu.option.hud-position" : "HUD位置",
   
   "config-menu.title.fishing" : "钓鱼",
   "config-menu.option.max-cast-power" : "最大抛竿",
   "config-menu.option.instant-fish-bite" : "立刻上钩",
-  "config-menu.option.always-perfect" : "永远完美",
-  "config-menu.option.always-max-fish-size" : "最大鱼尺寸",
-  "config-menu.option.prefer-fish-amount" : "Preferred Fish Amount", //New
-  "config-menu.option.prefer-fish-quality" : "首先鱼质量",
+  "config-menu.option.always-perfect" : "总是完美",
+  "config-menu.option.always-max-fish-size" : "总是最大鱼尺寸",
+  "config-menu.option.prefer-fish-amount" : "首选鱼数量", 
+  "config-menu.option.prefer-fish-quality" : "首选鱼质量",
   "config-menu.option.treasure-chance" : "宝箱概率",
-  "config-menu.option.golden-treasure-chance" : "Golden Treasure Chance", //New
-  "config-menu.option.Instant-catch-fish" : "瞬间捕鱼",
+  "config-menu.option.golden-treasure-chance" : "黄金宝箱概率",
+  "config-menu.option.Instant-catch-fish" : "跳过小游戏",
   "config-menu.option.Instant-catch-treasure" : "立刻捕获宝箱",
   "config-menu.option.fish-difficulty-multiplier" : "钓鱼难度系数",
   "config-menu.option.fish-difficulty-additive" : "额外钓鱼难度",
-  
+
   "config-menu.title.automation" : "自动化",
   "config-menu.option.auto-cast-fishing-rod" : "自动抛竿",
-  "config-menu.option.auto-hook-fish" : "自动收杆",
+  "config-menu.option.auto-hook-fish" : "自动收竿",
   "config-menu.option.auto-play-mini-game" : "自动玩小游戏",
   "config-menu.option.auto-close-popup" : "自动关闭窗口",
   "config-menu.option.auto-loot-treasure" : "自动搜刮宝箱",
@@ -54,29 +54,27 @@
   "config-menu.option.auto-pause-fishing-time" : "暂停钓鱼的时间",
   "config-menu.option.num-to-warn" : "警告次数",
   "config-menu.option.auto-eat-food" : "自动进食",
-  "config-menu.option.energy-percent-to-eat" : "Energy Percent To Eat", //New
+  "config-menu.option.energy-percent-to-eat" : "自动进食能量百分比", 
   "config-menu.option.allow-eating-fish" : "允许吃鱼",
-  "config-menu.option.auto-trash-junk" : "Auto Trash Junk", //New
-  "config-menu.option.junk-highest-price" : "Junk Highest Price", //New
-  
-  "config-menu.title.fish-preview" : "Fish Preview", //New
-  "config-menu.option.display-fish-preview" : "Display Fish Preview", //New
-  "config-menu.option.show-fish-name" : "Show Fish Name", //New
-  "config-menu.option.show-treasure" : "Show Treasure", //New
-  "config-menu.option.show-uncaught-fish-species" : "Show Uncaught Fish Species", //New
-  "config-menu.option.always-show-legendary-fish" : "Always Show Legendary Fish", //New
-  
+
+  "config-menu.title.fish-preview" : "钓鱼信息预览", 
+  "config-menu.option.display-fish-preview" : "显示上钩的鱼",
+  "config-menu.option.show-fish-name" : "显示鱼的名字", 
+  "config-menu.option.show-treasure" : "显示宝箱", 
+  "config-menu.option.show-uncaught-fish-species" : "显示还没抓到的鱼", 
+  "config-menu.option.always-show-legendary-fish" : "总是显示鱼王", 
+
   "config-menu.title.fishing-rod" : "鱼竿",
-  "config-menu.option.auto-attach-bait" : "自动挂鱼饵",
+  "config-menu.option.auto-attach-bait" : "自动装备鱼饵(开启后关于鱼饵的修改才生效)",
   "config-menu.option.prefer-bait" : "首选鱼饵",
   "config-menu.option.infinite-bait" : "无限鱼饵",
-  "config-menu.option.spawn-bait-if-dont-have" : "没有鱼饵是凭空生成",
-  "config-menu.option.bait-amount-to-spawn" : "Bait Amount To Spawn", //New
-  "config-menu.option.auto-attach-tackles" : "自动挂鱼钩",
-  "config-menu.option.prefer-tackle" : "首选鱼钩",
-  "config-menu.option.prefer-advanced-iridium-tackle" : "Preferred Adv. Iridium Tackle", //New
-  "config-menu.option.infinite-tackle" : "无限鱼钩耐久",
-  "config-menu.option.spawn-tackle-if-dont-have" : "没有鱼钩时凭空生成",
+  "config-menu.option.spawn-bait-if-dont-have" : "没有鱼饵时凭空生成",
+  "config-menu.option.bait-amount-to-spawn" : "生成鱼饵的数量", 
+  "config-menu.option.auto-attach-tackles" : "自动装备钓具(开启后关于钓具的修改才生效)",
+  "config-menu.option.prefer-tackle" : "首选钓具",
+  "config-menu.option.prefer-advanced-iridium-tackle" : "高级铱金鱼竿额外钓具", 
+  "config-menu.option.infinite-tackle" : "无限钓具耐久",
+  "config-menu.option.spawn-tackle-if-dont-have" : "没有钓具时凭空生成",
   
   "config-menu.title.enchantment" : "附魔",
   "config-menu.option.add-autoHook-enchantment" : "自动上钩",
