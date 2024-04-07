@@ -404,7 +404,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             if (Game1.timeOfDay >= _config.PauseFishingTime * 100 && NumWarnThisDay < numToWarn)
             {
                 NumWarnThisDay++;
-                CommonHelper.PushErrorNotification(I18n.HudMessage_AutoDisable(), Game1.getTimeOfDayString(Game1.timeOfDay));
+                CommonHelper.PushErrorNotification(I18n.HudMessage_AutoDisable(), Game1.getTimeOfDayString(_config.PauseFishingTime * 100));
                 if (autoPauseFishing == PauseFishingBehaviour.WarnAndPause.ToString())
                 {
                     _modEntry.ForceDisable();
