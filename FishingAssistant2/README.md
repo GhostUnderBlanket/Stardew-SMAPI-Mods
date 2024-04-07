@@ -402,5 +402,3 @@ Toggle for removing enchantment when fishing rod is unequipped.
 ```
 
 ## Thank you
-- The Fishing Assistant 2 source code is available with an MIT license on GitHub page.
-- Translations are welcome! You can go to the i18n folder on GitHub to translate my mod I already prepared a translation file for you. After that, create a pull request or you can send me the translated file directly via DM. If you prefer to upload the translated file yourself, please make sure that the file you upload contains only the translated content.
