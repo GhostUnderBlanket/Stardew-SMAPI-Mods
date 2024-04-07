@@ -2,7 +2,7 @@
 
 Simple ```Stardew Valley Mod``` which allows you to ```automatically catching fish``` and customize fishing mechanics by making it easier or harder even cheating it. this mod comes with additional features like fish and treasure preview, auto-stop fishing at night or low stamina, and more.
 
-![FishingAssistant2](FishingAssistant2/Image/FishingAssistant2.gif)
+![FishingAssistant2](Image/FishingAssistant2.gif)
 
 Fore more information please visit [Nexus](https://www.nexusmods.com/stardewvalley/mods/5815?tab=description&BH=14) mod page
 
