@@ -144,7 +144,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 
                 foreach (var item in items)
                 {
-                    if (item.Edibility <= 0 || (item.Category == -4 && !_config.AllowEatingFish))
+                    if (item.Edibility <= 0 || (item.Category == Object.FishCategory && !_config.AllowEatingFish))
                         continue;
 
                     if (bestItem == null || bestItem.Edibility / bestItem.salePrice() < item.Edibility / item.salePrice())
@@ -429,10 +429,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             {
                 int sellToStorePrice = Utility.getSellToStorePriceOfItem(newItem, false);
                 
-                // Category value for trash is -20. Source: https://github.com/veywrn/StardewValley/blob/master/StardewValley/Item.cs
-                if (newItem.canBeTrashed() && (newItem.Category == -20 
-                                               || (newItem.Category != -4 && sellToStorePrice <= _config.JunkHighestPrice) 
-                                               || (newItem.Category == -4 && sellToStorePrice <= _config.JunkHighestPrice && _config.AllowTrashFish)))
+                if (newItem.canBeTrashed() && (newItem.Category == Object.junkCategory 
+                                               || (newItem.Category != Object.FishCategory && sellToStorePrice <= _config.JunkHighestPrice) 
+                                               || (newItem.Category == Object.FishCategory && sellToStorePrice <= _config.JunkHighestPrice && _config.AllowTrashFish)))
                 {
                     Utility.trashItem(newItem);
                     e.Player.removeItemFromInventory(newItem);

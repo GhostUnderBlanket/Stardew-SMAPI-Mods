@@ -27,8 +27,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                     {
                         foreach (Item item in items)
                         {
-                            // Category value for bait is -21. Source: https://github.com/veywrn/StardewValley/blob/master/StardewValley/Item.cs
-                            if (item?.Category == -21 && item.Name.Equals(Instance.attachments[0].Name))
+                            if (item?.Category == Object.baitCategory && item.Name.Equals(Instance.attachments[0].Name))
                             {
                                 int stackAdd = Math.Min(Instance.attachments[0].getRemainingStackSpace(), item.Stack);
                                 Instance.attachments[0].Stack += stackAdd;
@@ -36,7 +35,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
                                 if (item.Stack == 0) Game1.player.removeItemFromInventory(item);
 
-                                CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), ItemRegistry.GetData(item.QualifiedItemId).DisplayName, ItemRegistry.GetData(Instance.QualifiedItemId).DisplayName);
+                                CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), item.DisplayName, Instance.DisplayName);
                             }
                         }
                     }
@@ -45,16 +44,23 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                     {
                         foreach (Item item in items)
                         {
-                            if (item?.Category == -21 && (preferBait == "Any" || item.QualifiedItemId == preferBait))
+                            if (item?.Category == Object.baitCategory && (preferBait == "Any" || item.QualifiedItemId == preferBait))
                             {
                                 Instance.attachments[0] = (Object)item;
                                 Game1.player.removeItemFromInventory(item);
-                                CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), ItemRegistry.GetData(item.QualifiedItemId).DisplayName, ItemRegistry.GetData(Instance.QualifiedItemId).DisplayName);
+                                CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), item.DisplayName, Instance.DisplayName);
                                 break;
                             }
                         }
 
-                        if (spawnBaitIfDontHave && preferBait != "Any") Instance.attachments[0] = ItemRegistry.Create<Object>(preferBait, baitAmountToSpawn);
+                        if (spawnBaitIfDontHave && Instance.attachments[0] == null)
+                        {
+                            //Fallback if user doesn't set prefer bait
+                            if (preferBait == "Any") preferBait = "(O)685";
+                            Object baits = ItemRegistry.Create<Object>(preferBait, baitAmountToSpawn);
+                            Instance.attachments[0] = baits;
+                            CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttachSpawned(), baits.DisplayName, Instance.DisplayName);
+                        }
                     }
 
                     if (Instance.attachments[0] != null && infiniteBait)
@@ -78,18 +84,23 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                     {
                         foreach (Item item in items)
                         {
-                            // Category value for tackle is -22.
-                            // Source: https://github.com/veywrn/StardewValley/blob/master/StardewValley/Item.cs
-                            if (item?.Category == -22 && (preferTackle[0] == "Any" || item.QualifiedItemId == preferTackle[0]))
+                            if (item?.Category == Object.tackleCategory && (preferTackle[0] == "Any" || item.QualifiedItemId == preferTackle[0]))
                             {
                                 Instance.attachments[1] = (Object)item;
                                 Game1.player.removeItemFromInventory(item);
-                                CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), ItemRegistry.GetData(item.QualifiedItemId).DisplayName, ItemRegistry.GetData(Instance.QualifiedItemId).DisplayName);
+                                CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), item.DisplayName, Instance.DisplayName);
                                 break;
                             }
                         }
-                        
-                        if (spawnTackleIfDontHave && preferTackle[0] != "Any") Instance.attachments[1] = ItemRegistry.Create<Object>(preferTackle[0]);
+
+                        if (spawnTackleIfDontHave && Instance.attachments[1] == null)
+                        {
+                            //Fallback if user doesn't set prefer tackle
+                            if (preferTackle[0] == "Any") preferTackle[0] = "(O)686";
+                            Object tackle = ItemRegistry.Create<Object>(preferTackle[0]);
+                            Instance.attachments[1] = tackle;
+                            CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttachSpawned(), tackle.DisplayName, Instance.DisplayName);
+                        }
                     }
                     
                     if (Instance.attachments[1] != null && infiniteTackle) Instance.attachments[1].uses.Value = 0;
@@ -101,18 +112,23 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                     {
                         foreach (Item item in items)
                         {
-                            // Category value for tackle is -22.
-                            // Source: https://github.com/veywrn/StardewValley/blob/master/StardewValley/Item.cs
-                            if (item?.Category == -22 && (preferTackle[1] == "Any" || item.QualifiedItemId == preferTackle[1]))
+                            if (item?.Category == Object.tackleCategory && (preferTackle[1] == "Any" || item.QualifiedItemId == preferTackle[1]))
                             {
                                 Instance.attachments[2] = (Object)item;
                                 Game1.player.removeItemFromInventory(item);
-                                CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), ItemRegistry.GetData(item.QualifiedItemId).DisplayName, ItemRegistry.GetData(Instance.QualifiedItemId).DisplayName);
+                                CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), item.DisplayName, Instance.DisplayName);
                                 break;
                             }
                         }
 
-                        if (spawnTackleIfDontHave && preferTackle[1] != "Any") Instance.attachments[2] = ItemRegistry.Create<Object>(preferTackle[1]);
+                        if (spawnTackleIfDontHave && Instance.attachments[2] == null)
+                        {
+                            //Fallback if user doesn't set prefer tackle
+                            if (preferTackle[1] == "Any") preferTackle[1] = "(O)686";
+                            var tackle2 = ItemRegistry.Create<Object>(preferTackle[1]);
+                            Instance.attachments[2] = tackle2;
+                            CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttachSpawned(), tackle2.DisplayName, Instance.DisplayName);
+                        }
                     }
                     
                     if (Instance.attachments[2] != null && infiniteTackle) Instance.attachments[2].uses.Value = 0;

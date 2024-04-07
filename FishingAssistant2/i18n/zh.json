@@ -92,5 +92,6 @@
   "hud-message.inventory-full" : "背包已满",
   "hud-message.auto-disable" : "现在已经是 {0} 了，该回家了",
   "hud-message.auto-attach" : "自动将 {0} 挂到了 {1} 上",
+  "hud-message.auto-attach-spawned" : "Auto Attach Spawned {0} To {1}", //New
   "hud-message.auto-eat-food" : "自动吃掉了 {0}",
 }

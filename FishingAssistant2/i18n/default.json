@@ -94,6 +94,7 @@
   "hud-message.inventory-full" : "Inventory Full",
   "hud-message.auto-disable" : "It's already past {0}",
   "hud-message.auto-attach" : "Auto Attach {0} To {1}",
+  "hud-message.auto-attach-spawned" : "Auto Attach Spawned {0} To {1}",
   "hud-message.auto-eat-food" : "Auto Eat {0}",
   "hud-message.auto-trash-junk" : "Auto Trash {0} x{1}",
 }
