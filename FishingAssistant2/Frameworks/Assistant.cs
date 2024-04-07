@@ -222,8 +222,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             float fishPos = bar.bobberPosition;
             int bobberBarCenter = (bar.bobberBarHeight / 2);
             
-            if (bar is { fadeOut: true, scale: <= 0.1f })
+            if (bar is { fadeOut: true, scale: <= 0.1f } || ShouldSkipMiniGame())
             {
+                if (ShouldSkipMiniGame())
+                {
+                    _bobberBar?.InstantCatchFish();
+                    _bobberBar?.InstantCatchTreasure(_modEntry.CatchTreasure);
+                }
+                
                 _bobberBar?.AlwaysPerfect(_config.AlwaysPerfect);
                 _bobberBar?.OverrideFishQuality(_config.PreferFishQuality);
                 _bobberBar?.OverrideFishSize(_config.AlwaysMaxFishSize);
@@ -270,6 +276,16 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             fishPos += 25;
             bar.bobberBarSpeed = (fishPos - bar.bobberBarPos - bobberBarCenter) / 2;
+
+            bool ShouldSkipMiniGame()
+            {
+                if (_config.SkipFishingMiniGame == SkipFishingMiniGame.SkipAll.ToString())
+                {
+                    return true;
+                }
+                
+                return _config.SkipFishingMiniGame == SkipFishingMiniGame.SkipOnlyCaught.ToString() && AlreadyCaughtFish();
+            }
         }
 
         private void AutoCloseFishPopup()
@@ -443,5 +459,10 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         }
 
         #endregion
+
+        internal bool AlreadyCaughtFish(int minCaught = 1)
+        {
+            return _bobberBar.AlreadyCaughtFish(minCaught);
+        }
     }
 }

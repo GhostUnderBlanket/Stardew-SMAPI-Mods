@@ -22,6 +22,13 @@
   "iridium" : "铱星",
   "warn-only" : "警告",
   "warn-and-pause" : "警告并暂停",
+  "skip-all" : "Skip All",
+  "skip-only-caught" : "Skip Only Caught Fish",
+
+  "config-menu.page.general" : "General", //New
+  "config-menu.page.mini-game" : "Mini-Game", //New
+  "config-menu.page.fishing-rod" : "Fishing Rod", //New
+  "config-menu.title.go-to-page" : "Go To Pages", //New
   
   "config-menu.title.key-binding" : "按键绑定",
   "config-menu.option.toggle-automation" : "自动钓鱼开关",
@@ -32,6 +39,7 @@
   "config-menu.title.fishing" : "钓鱼",
   "config-menu.option.max-cast-power" : "最大抛竿",
   "config-menu.option.instant-fish-bite" : "立刻上钩",
+  "config-menu.option.skip-fishing-mini-game" : "Skip Fishing Mini-Game", //New
   "config-menu.option.always-perfect" : "总是完美",
   "config-menu.option.always-max-fish-size" : "总是最大鱼尺寸",
   "config-menu.option.prefer-fish-amount" : "首选鱼数量", 

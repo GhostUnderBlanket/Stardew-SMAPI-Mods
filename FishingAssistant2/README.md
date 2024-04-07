@@ -153,6 +153,14 @@ Energy percent to consider as low energy and find something to eat.
 Toggle for allowing eating of caught fish.
 ```
 
+### SkipFishingMiniGame
+**Default value:** `false`
+**Possible values:** `true | false`
+
+```
+Toggle for skip fishing mini-game instantly.
+```
+
 ### MaxCastPower
 **Default value:** `true`
 **Possible values:** `true | false`

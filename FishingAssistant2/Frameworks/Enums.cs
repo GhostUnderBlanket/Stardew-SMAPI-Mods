@@ -35,4 +35,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         WarnOnly,
         WarnAndPause
     }
+
+    internal enum SkipFishingMiniGame
+    {
+        Off,
+        SkipAll,
+        SkipOnlyCaught
+    }
 }

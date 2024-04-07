@@ -24,6 +24,13 @@
   "iridium" : "อิริเดียม",
   "warn-only" : "เตือนเท่านั้น",
   "warn-and-pause" : "เตือนและหยุด",
+  "skip-all" : "ข้ามทั้งหมด",
+  "skip-only-caught" : "ข้ามเฉพาะปลาที่เคยจับ",
+
+  "config-menu.page.general" : "ทั่วไป และ ระบบอัตโนมัติ",
+  "config-menu.page.mini-game" : "มินิเกม และ ตัวอย่างปลา",
+  "config-menu.page.fishing-rod" : "เบ็ดตกปลา และ การตีบวก",
+  "config-menu.title.go-to-page" : "ไปยังหน้า",
   
   "config-menu.title.key-binding" : "การตั้งค่าปุ่ม",
   "config-menu.option.toggle-automation" : "ปุ่มระบบอัตโนมัติ",
@@ -34,6 +41,7 @@
   "config-menu.title.fishing" : "การตกปลา",
   "config-menu.option.max-cast-power" : "แรงเหวี่ยงเบ็ดเต็ม",
   "config-menu.option.instant-fish-bite" : "ปลาตอดทันที",
+  "config-menu.option.skip-fishing-mini-game" : "ข้ามมินิเกมทันที",
   "config-menu.option.always-perfect" : "สมบูรณ์แบบเสมอ",
   "config-menu.option.always-max-fish-size" : "ขนาดปลาใหญ่สุดเสมอ",
   "config-menu.option.prefer-fish-amount" : "จำนวนปลาที่ต้องการ",

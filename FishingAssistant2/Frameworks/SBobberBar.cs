@@ -75,5 +75,16 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 if (!Instance.bobbers.Contains("(O)SonarBobber")) Instance.bobbers.Add("(O)SonarBobber");
             }
         }
+
+        internal bool AlreadyCaughtFish(int minCaught = 1)
+        {
+            if (Instance == null) return false;
+            
+            var metadata = ItemRegistry.GetMetadata(Instance.whichFish);
+            Game1.player.fishCaught.TryGetValue(metadata.QualifiedItemId, out int[] numArray);
+            bool caughtSpecies = numArray != null && numArray.Length > 0 && numArray[0] >= minCaught;
+
+            return caughtSpecies;
+        }
     }
 }

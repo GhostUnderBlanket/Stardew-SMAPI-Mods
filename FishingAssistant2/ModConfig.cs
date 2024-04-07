@@ -62,6 +62,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         public bool AllowEatingFish { get; set; } = false;
         
         /// FISHING ///
+        /// <summary>Toggle for skip fishing mini-game instantly</summary>
+        public string SkipFishingMiniGame { get; set; } = "Off";
+        
         /// <summary>Toggle for enabling max cast power.</summary>
         public bool MaxCastPower { get; set; } = true;
 

@@ -246,12 +246,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
                     _fishSprite = new Object(bar.whichFish, 1);
                 }
 
-                // determine if species has been caught before
-                Game1.player.fishCaught.TryGetValue(metadata.QualifiedItemId, out int[] numArray);
-                bool caughtSpecies = numArray != null && numArray.Length > 0 && numArray[0] > 0;
-
                 // determine value of showFish value
-                showFish = Config.ShowUncaughtFishSpecies || caughtSpecies || (Config.AlwaysShowLegendaryFish && bar.bossFish);
+                showFish = Config.ShowUncaughtFishSpecies || Assistant.AlreadyCaughtFish() || (Config.AlwaysShowLegendaryFish && bar.bossFish);
 
                 // determine value of showText value
                 showText = Config.ShowFishName;

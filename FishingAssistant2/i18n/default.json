@@ -24,6 +24,13 @@
   "iridium" : "Iridium",
   "warn-only" : "Warn Only",
   "warn-and-pause" : "Warn And Pause",
+  "skip-all" : "Skip All",
+  "skip-only-caught" : "Skip Only Caught Fish",
+
+  "config-menu.page.general" : "General",
+  "config-menu.page.mini-game" : "Mini-Game",
+  "config-menu.page.fishing-rod" : "Fishing Rod",
+  "config-menu.title.go-to-page" : "Go To Pages",
   
   "config-menu.title.key-binding" : "Key Binding",
   "config-menu.option.toggle-automation" : "Toggle Automation Button",
@@ -34,6 +41,7 @@
   "config-menu.title.fishing" : "Fishing",
   "config-menu.option.max-cast-power" : "Max Cast Power",
   "config-menu.option.instant-fish-bite" : "Instant Fish Bite",
+  "config-menu.option.skip-fishing-mini-game" : "Skip Fishing Mini-Game",
   "config-menu.option.always-perfect" : "Always Perfect",
   "config-menu.option.always-max-fish-size" : "Always Max Fish Size",
   "config-menu.option.prefer-fish-amount" : "Preferred Fish Amount",

@@ -37,6 +37,27 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 }
             }
 
+            AddSectionTitle(I18n.ConfigMenu_Title_GoToPage);
+            _configMenu?.AddPageLink(
+                mod: modManifest,
+                pageId: "chibiKyu.FishingAssistant2.General",
+                I18n.ConfigMenu_Page_General);
+            
+            _configMenu?.AddPageLink(
+                mod: modManifest,
+                pageId: "chibiKyu.FishingAssistant2.MiniGame",
+                I18n.ConfigMenu_Page_MiniGame);
+            
+            _configMenu?.AddPageLink(
+                mod: modManifest,
+                pageId: "chibiKyu.FishingAssistant2.FishingRod",
+                I18n.ConfigMenu_Page_FishingRod);
+            
+            _configMenu?.AddPage(
+                mod: modManifest,
+                pageId: "chibiKyu.FishingAssistant2.General",
+                I18n.ConfigMenu_Page_General);
+            
             AddSectionTitle(I18n.ConfigMenu_Title_KeyBinding);
             AddKeyBind(I18n.ConfigMenu_Option_ToggleAutomation, () => config().EnableAutomationButton, button => config().EnableAutomationButton = button);
             AddKeyBind(I18n.ConfigMenu_Option_CatchTreasure, () => config().CatchTreasureButton, button => config().CatchTreasureButton = button);
@@ -60,8 +81,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_AutoEatFood, () => config().AutoEatFood, b => config().AutoEatFood = b);
             AddNumber(I18n.ConfigMenu_Option_EnergyPercentToEat, () => config().EnergyPercentToEat, i => config().EnergyPercentToEat = i, 5, 95, 5);
             AddBool(I18n.ConfigMenu_Option_AllowEatingFish, () => config().AllowEatingFish, b => config().AllowEatingFish = b);
-
+            
+            _configMenu?.AddPage(
+                mod: modManifest,
+                pageId: "chibiKyu.FishingAssistant2.MiniGame",
+                I18n.ConfigMenu_Page_MiniGame);
+            
             AddSectionTitle(I18n.ConfigMenu_Title_Fishing);
+            AddDropDown(I18n.ConfigMenu_Option_SkipFishingMiniGame, SkipMiniGameOptions(),ParseSkipMiniGame, () => config().SkipFishingMiniGame, option => config().SkipFishingMiniGame = option);
             AddBool(I18n.ConfigMenu_Option_MaxCastPower, () => config().MaxCastPower, b => config().MaxCastPower = b);
             AddBool(I18n.ConfigMenu_Option_InstantFishBite, () => config().InstantFishBite, b => config().InstantFishBite = b);
             AddBool(I18n.ConfigMenu_Option_InstantCatchFish, () => config().InstantCatchFish, b => config().InstantCatchFish = b);
@@ -82,6 +109,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_ShowUncaughtFishSpecies, () => config().ShowUncaughtFishSpecies, b => config().ShowUncaughtFishSpecies = b);
             AddBool(I18n.ConfigMenu_Option_AlwaysShowLegendaryFish, () => config().AlwaysShowLegendaryFish, b => config().AlwaysShowLegendaryFish = b);
             
+            _configMenu?.AddPage(
+                mod: modManifest,
+                pageId: "chibiKyu.FishingAssistant2.FishingRod",
+                I18n.ConfigMenu_Page_FishingRod);
+            
             AddSectionTitle(I18n.ConfigMenu_Title_FishingRod);
             AddBool(I18n.ConfigMenu_Option_AutoAttachBait, () => config().AutoAttachBait, b => config().AutoAttachBait = b);
             AddDropDown(I18n.ConfigMenu_Option_PreferBait, _availableBaits.ToArray(), ParseItemName, () => config().PreferBait, s => config().PreferBait = s);
@@ -100,6 +132,25 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_AddMasterEnchantment, () => config().AddMasterEnchantment, b => config().AddMasterEnchantment = b);
             AddBool(I18n.ConfigMenu_Option_AddPreservingEnchantment, () => config().AddPreservingEnchantment, b => config().AddPreservingEnchantment = b);
             AddBool(I18n.ConfigMenu_Option_RemoveEnchantmentsWhenUnequipped, () => config().RemoveEnchantmentWhenUnequipped, b => config().RemoveEnchantmentWhenUnequipped = b);
+        }
+        
+        private static string[] SkipMiniGameOptions()
+        {
+            return Enum.GetNames(typeof(SkipFishingMiniGame));
+        }
+        
+        private string ParseSkipMiniGame(string rawText)
+        {
+            if (!Enum.TryParse(rawText, out SkipFishingMiniGame text))
+                return rawText;
+
+            return text switch
+            {
+                SkipFishingMiniGame.Off => I18n.Off(),
+                SkipFishingMiniGame.SkipAll => I18n.SkipAll(),
+                SkipFishingMiniGame.SkipOnlyCaught => I18n.SkipOnlyCaught(),
+                _ => text.ToString()
+            };
         }
         
         private static string[] PauseFishingOptions()
