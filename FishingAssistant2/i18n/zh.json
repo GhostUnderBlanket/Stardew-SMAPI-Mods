@@ -5,6 +5,8 @@
   "off" : "关闭",
   "left" : "左边",
   "right" : "右边",
+  "top" : "顶部",
+  "bottom" : "底端",
   "upper-left" : "左上",
   "upper-right" : "右上",
   "lower-left" : "左下",
