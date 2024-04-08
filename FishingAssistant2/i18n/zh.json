@@ -1,6 +1,7 @@
 {
   "mod-name" : "钓鱼小帮手2",
 
+  /// General ///
   "on" : "开启",
   "off" : "关闭",
   "left" : "左边",
@@ -27,31 +28,22 @@
   "skip-all" : "Skip All", //New
   "skip-only-caught" : "Skip Only Caught Fish", //New
 
+  /// Config Menu ///
   "config-menu.page.general" : "常规设置", 
   "config-menu.page.mini-game" : "小游戏设置", 
   "config-menu.page.fishing-rod" : "鱼竿设置", 
-  "config-menu.title.go-to-page" : "跳转页面", 
-  
+  "config-menu.title.go-to-page" : "跳转页面",
+
+  /// KEY BINDING ///
   "config-menu.title.key-binding" : "按键绑定",
   "config-menu.option.toggle-automation" : "自动钓鱼开关",
   "config-menu.option.catch-treasure" : "自动钓宝箱开关",
+  
+  /// HUD ///
   "config-menu.title.hud" : "HUD",
   "config-menu.option.hud-position" : "HUD位置",
-  
-  "config-menu.title.fishing" : "钓鱼",
-  "config-menu.option.cast-power-percent" : "抛竿力量百分比", 
-  "config-menu.option.instant-fish-bite" : "立刻上钩",
-  "config-menu.option.skip-fishing-mini-game" : "跳过小游戏", 
-  "config-menu.option.always-perfect" : "总是完美",
-  "config-menu.option.always-max-fish-size" : "总是最大鱼尺寸",
-  "config-menu.option.prefer-fish-amount" : "首选鱼数量", 
-  "config-menu.option.prefer-fish-quality" : "首选鱼质量",
-  "config-menu.option.treasure-chance" : "宝箱概率",
-  "config-menu.option.golden-treasure-chance" : "黄金宝箱概率",
-  "config-menu.option.Instant-catch-treasure" : "立刻捕获宝箱",
-  "config-menu.option.fish-difficulty-multiplier" : "钓鱼难度系数",
-  "config-menu.option.fish-difficulty-additive" : "额外钓鱼难度",
 
+  /// AUTOMATION ///
   "config-menu.title.automation" : "自动化",
   "config-menu.option.auto-cast-fishing-rod" : "自动抛竿",
   "config-menu.option.auto-hook-fish" : "自动收竿",
@@ -63,19 +55,36 @@
   "config-menu.option.time-to-pause" : "暂停钓鱼的时间",
   "config-menu.option.warn-count" : "警告次数",
   "config-menu.option.auto-eat-food" : "自动进食",
-  "config-menu.option.energy-percent-to-eat" : "自动进食能量百分比", 
+  "config-menu.option.energy-percent-to-eat" : "自动进食能量百分比",
   "config-menu.option.allow-eating-fish" : "允许吃鱼",
   "config-menu.option.auto-trash-junk" : "自动丢弃垃圾",
   "config-menu.option.junk-highest-price" : "低于多少价值的垃圾(鱼)会被丢弃",
   "config-menu.option.allow-trash-fish" : "允许自动丢弃鱼",
 
+  /// FISHING ///
+  "config-menu.title.fishing" : "钓鱼",
+  "config-menu.option.skip-fishing-mini-game" : "跳过小游戏",
+  "config-menu.option.cast-power-percent" : "抛竿力量百分比", 
+  "config-menu.option.instant-fish-bite" : "立刻上钩",
+  "config-menu.option.prefer-fish-amount" : "首选鱼数量",
+  "config-menu.option.prefer-fish-quality" : "首选鱼质量",
+  "config-menu.option.always-perfect" : "总是完美",
+  "config-menu.option.always-max-fish-size" : "总是最大鱼尺寸",
+  "config-menu.option.fish-difficulty-multiplier" : "钓鱼难度系数",
+  "config-menu.option.fish-difficulty-additive" : "额外钓鱼难度",
+  "config-menu.option.treasure-chance" : "宝箱概率",
+  "config-menu.option.golden-treasure-chance" : "黄金宝箱概率",
+  "config-menu.option.Instant-catch-treasure" : "立刻捕获宝箱",
+
+  /// FISH PREVIEW ///
   "config-menu.title.fish-preview" : "钓鱼信息预览", 
   "config-menu.option.display-fish-preview" : "显示上钩的鱼",
   "config-menu.option.show-fish-name" : "显示鱼的名字", 
   "config-menu.option.show-treasure" : "显示宝箱", 
   "config-menu.option.show-uncaught-fish" : "显示还没抓到的鱼", 
-  "config-menu.option.show-legendary-fish" : "总是显示鱼王", 
+  "config-menu.option.show-legendary-fish" : "总是显示鱼王",
 
+  /// FISHING ROD ///
   "config-menu.title.fishing-rod" : "鱼竿",
   "config-menu.option.auto-attach-bait" : "自动装备鱼饵(开启后关于鱼饵的修改才生效)",
   "config-menu.option.prefer-bait" : "首选鱼饵",
@@ -87,14 +96,16 @@
   "config-menu.option.prefer-advanced-iridium-tackle" : "高级铱金鱼竿额外钓具", 
   "config-menu.option.infinite-tackle" : "无限钓具耐久",
   "config-menu.option.spawn-tackle-if-dont-have" : "没有钓具时凭空生成",
-  
+
+  /// Enchantment ///
   "config-menu.title.enchantment" : "附魔",
   "config-menu.option.add-autoHook-enchantment" : "自动上钩",
   "config-menu.option.add-efficient-enchantment" : "省力（不消化体力）",
   "config-menu.option.add-master-enchantment" : "精通（钓鱼等级+1）",
   "config-menu.option.add-preserving-enchantment" : "耐用（50%概率鱼饵和渔具不消耗）",
   "config-menu.option.remove-enchantments-when-unequipped" : "未装备时移除附魔",
-  
+
+  /// MESSAGE ///
   "hud-message.automation-toggle" : "钓鱼小帮手！ {0}",
   "hud-message.catch-treasure-toggle" : "最大抛竿模式 {0}",
   "hud-message.low-stamina" : "体力不足",
