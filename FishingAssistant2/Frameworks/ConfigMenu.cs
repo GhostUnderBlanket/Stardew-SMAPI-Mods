@@ -45,73 +45,72 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             // General Page
             AddPage(I18n.ConfigMenu_Page_General,"General");
             AddSectionTitle(I18n.ConfigMenu_Title_KeyBinding);
-            AddKeyBind(I18n.ConfigMenu_Option_ToggleAutomation, () => config().EnableAutomationButton, button => config().EnableAutomationButton = button);
-            AddKeyBind(I18n.ConfigMenu_Option_CatchTreasure, () => config().CatchTreasureButton, button => config().CatchTreasureButton = button);
+            AddKeyBind(I18n.ConfigMenu_Option_ToggleAutomation, () => config().EnableAutomationButton, button => config().EnableAutomationButton = button, I18n.Tooltip_EnableAutomationButton);
+            AddKeyBind(I18n.ConfigMenu_Option_CatchTreasure, () => config().CatchTreasureButton, button => config().CatchTreasureButton = button, I18n.Tooltip_CatchTreasureButton);
 
             AddSectionTitle(I18n.ConfigMenu_Title_Hud);
-            AddDropDown(I18n.ConfigMenu_Option_HudPosition, HudPositionOptions(), ParseHudPosition, () => config().ModStatusPosition, pos => config().ModStatusPosition = pos);
+            AddDropDown(I18n.ConfigMenu_Option_HudPosition, I18n.Tooltip_ModStatusPosition, HudPositionOptions(), ParseHudPosition, () => config().ModStatusPosition, pos => config().ModStatusPosition = pos);
             
             AddSectionTitle(I18n.ConfigMenu_Title_Automation);
-            AddBool(I18n.ConfigMenu_Option_AutoCastFishingRod, () => config().AutoCastFishingRod, b => config().AutoCastFishingRod = b);
-            AddBool(I18n.ConfigMenu_Option_AutoHookFish, () => config().AutoHookFish, b => config().AutoHookFish = b);
-            AddBool(I18n.ConfigMenu_Option_AutoPlayMiniGame, () => config().AutoPlayMiniGame, b => config().AutoPlayMiniGame = b);
-            AddBool(I18n.ConfigMenu_Option_AutoClosePopup, () => config().AutoClosePopup, b => config().AutoClosePopup = b);
-            AddBool(I18n.ConfigMenu_Option_AutoLootTreasure, () => config().AutoLootTreasure, b => config().AutoLootTreasure = b);
-            AddDropDown(I18n.ConfigMenu_Option_ActionIfInventoryFull, ActionOnInventoryFullOptions(), ParseActionOnInventoryFull, () => config().ActionIfInventoryFull, action => config().ActionIfInventoryFull = action);
-            AddBool(I18n.ConfigMenu_Option_AutoTrashJunk, () => config().AutoTrashJunk, b => config().AutoTrashJunk = b);
-            AddNumber(I18n.ConfigMenu_Option_JunkHighestPrice, () => config().JunkHighestPrice, i => config().JunkHighestPrice = i, 0);
-            AddBool(I18n.ConfigMenu_Option_AllowTrashFish, () => config().AllowTrashFish, b => config().AllowTrashFish = b);
-            AddDropDown(I18n.ConfigMenu_Option_AutoPauseFishing, PauseFishingOptions(), ParsePauseFishing, () => config().AutoPauseFishing, s => config().AutoPauseFishing = s);
-            AddNumber(I18n.ConfigMenu_Option_AutoPauseFishingTime, () => config().PauseFishingTime, i => config().PauseFishingTime = i, 6, 25, 1,value => Game1.getTimeOfDayString(value * 100));
-            AddNumber(I18n.ConfigMenu_Option_NumToWarn, () => config().NumToWarn, i => config().NumToWarn = i, 1, 5, 1);
-            AddBool(I18n.ConfigMenu_Option_AutoEatFood, () => config().AutoEatFood, b => config().AutoEatFood = b);
-            AddNumber(I18n.ConfigMenu_Option_EnergyPercentToEat, () => config().EnergyPercentToEat, i => config().EnergyPercentToEat = i, 5, 95, 5);
-            AddBool(I18n.ConfigMenu_Option_AllowEatingFish, () => config().AllowEatingFish, b => config().AllowEatingFish = b);
+            AddBool(I18n.ConfigMenu_Option_AutoCastFishingRod,I18n.Tooltip_AutoCastFishingRod, () => config().AutoCastFishingRod, b => config().AutoCastFishingRod = b);
+            AddBool(I18n.ConfigMenu_Option_AutoHookFish, I18n.Tooltip_AutoHookFish, () => config().AutoHookFish, b => config().AutoHookFish = b);
+            AddBool(I18n.ConfigMenu_Option_AutoPlayMiniGame, I18n.Tooltip_AutoPlayMiniGame, () => config().AutoPlayMiniGame, b => config().AutoPlayMiniGame = b);
+            AddBool(I18n.ConfigMenu_Option_AutoClosePopup, I18n.Tooltip_AutoClosePopup, () => config().AutoClosePopup, b => config().AutoClosePopup = b);
+            AddBool(I18n.ConfigMenu_Option_AutoLootTreasure, I18n.Tooltip_AutoLootTreasure, () => config().AutoLootTreasure, b => config().AutoLootTreasure = b);
+            AddDropDown(I18n.ConfigMenu_Option_ActionIfInventoryFull,I18n.Tooltip_ActionIfInventoryFull, ActionOnInventoryFullOptions(), ParseActionOnInventoryFull, () => config().ActionIfInventoryFull, action => config().ActionIfInventoryFull = action);
+            AddBool(I18n.ConfigMenu_Option_AutoTrashJunk, I18n.Tooltip_AutoTrashJunk, () => config().AutoTrashJunk, b => config().AutoTrashJunk = b);
+            AddNumber(I18n.ConfigMenu_Option_JunkHighestPrice, I18n.Tooltip_JunkHighestPrice, () => config().JunkHighestPrice, i => config().JunkHighestPrice = i, min: 0);
+            AddBool(I18n.ConfigMenu_Option_AllowTrashFish, I18n.Tooltip_AllowTrashFish, () => config().AllowTrashFish, b => config().AllowTrashFish = b);
+            AddDropDown(I18n.ConfigMenu_Option_AutoPauseFishing, I18n.Tooltip_AutoPauseFishing, PauseFishingOptions(), ParsePauseFishing, () => config().AutoPauseFishing, s => config().AutoPauseFishing = s);
+            AddNumber(I18n.Tooltip_TimeToPause, I18n.Tooltip_TimeToPause, () => config().TimeToPause, i => config().TimeToPause = i, min: 6, max: 25, interval: 1,formatValue: value => Game1.getTimeOfDayString(value * 100));
+            AddNumber(I18n.ConfigMenu_Option_WarnCount, I18n.Tooltip_WarnCount, () => config().WarnCount, i => config().WarnCount = i, min: 1, max: 5, interval: 1);
+            AddBool(I18n.ConfigMenu_Option_AutoEatFood, I18n.Tooltip_AutoEatFood, () => config().AutoEatFood, b => config().AutoEatFood = b);
+            AddNumber(I18n.ConfigMenu_Option_EnergyPercentToEat, I18n.Tooltip_EnergyPercentToEat, () => config().EnergyPercentToEat, i => config().EnergyPercentToEat = i, min: 5, max: 95, interval: 5);
+            AddBool(I18n.ConfigMenu_Option_AllowEatingFish, I18n.Tooltip_AllowEatingFish, () => config().AllowEatingFish, b => config().AllowEatingFish = b);
             
             // MiniGame Page
             AddPage(I18n.ConfigMenu_Page_General,"MiniGame");
             AddSectionTitle(I18n.ConfigMenu_Title_Fishing);
-            AddDropDown(I18n.ConfigMenu_Option_SkipFishingMiniGame, SkipMiniGameOptions(),ParseSkipMiniGame, () => config().SkipFishingMiniGame, option => config().SkipFishingMiniGame = option);
-            AddNumber(I18n.ConfigMenu_Option_CastPowerPercent, () => config().CastPowerPercent, i => config().CastPowerPercent = i, 0, 100, 5);
-            AddBool(I18n.ConfigMenu_Option_InstantFishBite, () => config().InstantFishBite, b => config().InstantFishBite = b);
-            AddBool(I18n.ConfigMenu_Option_InstantCatchFish, () => config().InstantCatchFish, b => config().InstantCatchFish = b);
-            AddNumber(I18n.ConfigMenu_Option_PreferFishAmount, () => config().PreferFishAmount, i => config().PreferFishAmount = i, 1, 3);
-            AddDropDown(I18n.ConfigMenu_Option_PreferFishQuality, FishQualityOptions(), ParseFishQuality, () => config().PreferFishQuality, quality => config().PreferFishQuality = quality);
-            AddBool(I18n.ConfigMenu_Option_AlwaysPerfect, () => config().AlwaysPerfect, b => config().AlwaysPerfect = b);
-            AddBool(I18n.ConfigMenu_Option_AlwaysMaxFishSize, () => config().AlwaysMaxFishSize, b => config().AlwaysMaxFishSize = b);
-            AddNumber(I18n.ConfigMenu_Option_FishDifficultyMultiplier, () => config().FishDifficultyMultiplier, i => config().FishDifficultyMultiplier = i);
-            AddNumber(I18n.ConfigMenu_Option_FishDifficultyAdditive, () => config().FishDifficultyAdditive, i => config().FishDifficultyAdditive = i);
-            AddBool(I18n.ConfigMenu_Option_InstantCatchTreasure, () => config().InstantCatchTreasure, b => config().InstantCatchTreasure = b);
-            AddDropDown(I18n.ConfigMenu_Option_TreasureChance, TreasureChanceOptions(), ParseTreasureChance, () => config().TreasureChance, chance => config().TreasureChance = chance);
-            AddDropDown(I18n.ConfigMenu_Option_GoldenTreasureChance, TreasureChanceOptions(), ParseTreasureChance, () => config().GoldenTreasureChance, chance => config().GoldenTreasureChance = chance);
+            AddDropDown(I18n.ConfigMenu_Option_SkipFishingMiniGame, I18n.Tooltip_SkipFishingMiniGame, SkipMiniGameOptions(),ParseSkipMiniGame, () => config().SkipFishingMiniGame, option => config().SkipFishingMiniGame = option);
+            AddNumber(I18n.ConfigMenu_Option_CastPowerPercent, I18n.Tooltip_CastPowerPercent, () => config().CastPowerPercent, i => config().CastPowerPercent = i, min: 0, max: 100, interval: 5);
+            AddBool(I18n.ConfigMenu_Option_InstantFishBite, I18n.Tooltip_InstantFishBite, () => config().InstantFishBite, b => config().InstantFishBite = b);
+            AddNumber(I18n.ConfigMenu_Option_PreferFishAmount, I18n.Tooltip_PreferFishAmount, () => config().PreferFishAmount, i => config().PreferFishAmount = i, min: 1, max: 3);
+            AddDropDown(I18n.ConfigMenu_Option_PreferFishQuality, I18n.Tooltip_PreferFishQuality, FishQualityOptions(), ParseFishQuality, () => config().PreferFishQuality, quality => config().PreferFishQuality = quality);
+            AddBool(I18n.ConfigMenu_Option_AlwaysPerfect, I18n.Tooltip_AlwaysPerfect, () => config().AlwaysPerfect, b => config().AlwaysPerfect = b);
+            AddBool(I18n.ConfigMenu_Option_AlwaysMaxFishSize, I18n.Tooltip_AlwaysMaxFishSize, () => config().AlwaysMaxFishSize, b => config().AlwaysMaxFishSize = b);
+            AddNumber(I18n.ConfigMenu_Option_FishDifficultyMultiplier, I18n.Tooltip_FishDifficultyMultiplier, () => config().FishDifficultyMultiplier, i => config().FishDifficultyMultiplier = i);
+            AddNumber(I18n.ConfigMenu_Option_FishDifficultyAdditive, I18n.Tooltip_FishDifficultyAdditive, () => config().FishDifficultyAdditive, i => config().FishDifficultyAdditive = i);
+            AddBool(I18n.ConfigMenu_Option_InstantCatchTreasure, I18n.Tooltip_InstantCatchTreasure, () => config().InstantCatchTreasure, b => config().InstantCatchTreasure = b);
+            AddDropDown(I18n.ConfigMenu_Option_TreasureChance, I18n.Tooltip_TreasureChance, TreasureChanceOptions(), ParseTreasureChance, () => config().TreasureChance, chance => config().TreasureChance = chance);
+            AddDropDown(I18n.ConfigMenu_Option_GoldenTreasureChance, I18n.Tooltip_GoldenTreasureChance, TreasureChanceOptions(), ParseTreasureChance, () => config().GoldenTreasureChance, chance => config().GoldenTreasureChance = chance);
             
             AddSectionTitle(I18n.ConfigMenu_Title_FishPreview);
-            AddBool(I18n.ConfigMenu_Option_DisplayFishPreview, () => config().DisplayFishPreview, b => config().DisplayFishPreview = b);
-            AddBool(I18n.ConfigMenu_Option_ShowFishName, () => config().ShowFishName, b => config().ShowFishName = b);
-            AddBool(I18n.ConfigMenu_Option_ShowTreasure, () => config().ShowTreasure, b => config().ShowTreasure = b);
-            AddBool(I18n.ConfigMenu_Option_ShowUncaughtFishSpecies, () => config().ShowUncaughtFishSpecies, b => config().ShowUncaughtFishSpecies = b);
-            AddBool(I18n.ConfigMenu_Option_AlwaysShowLegendaryFish, () => config().AlwaysShowLegendaryFish, b => config().AlwaysShowLegendaryFish = b);
+            AddBool(I18n.ConfigMenu_Option_DisplayFishPreview, I18n.Tooltip_DisplayFishPreview, () => config().DisplayFishPreview, b => config().DisplayFishPreview = b);
+            AddBool(I18n.ConfigMenu_Option_ShowFishName, I18n.Tooltip_ShowFishName, () => config().ShowFishName, b => config().ShowFishName = b);
+            AddBool(I18n.ConfigMenu_Option_ShowTreasure, I18n.Tooltip_ShowTreasure, () => config().ShowTreasure, b => config().ShowTreasure = b);
+            AddBool(I18n.ConfigMenu_Option_ShowUncaughtFish, I18n.Tooltip_ShowUncaughtFish, () => config().ShowUncaughtFish, b => config().ShowUncaughtFish = b);
+            AddBool(I18n.ConfigMenu_Option_ShowLegendaryFish, I18n.Tooltip_ShowLegendaryFish, () => config().ShowLegendaryFish, b => config().ShowLegendaryFish = b);
             
             // FishingRod Page
             AddPage(I18n.ConfigMenu_Page_General,"FishingRod");
             AddSectionTitle(I18n.ConfigMenu_Title_FishingRod);
-            AddBool(I18n.ConfigMenu_Option_AutoAttachBait, () => config().AutoAttachBait, b => config().AutoAttachBait = b);
-            AddDropDown(I18n.ConfigMenu_Option_PreferBait, _availableBaits.ToArray(), ParseItemName, () => config().PreferBait, s => config().PreferBait = s);
-            AddBool(I18n.ConfigMenu_Option_InfiniteBait, () => config().InfiniteBait, b => config().InfiniteBait = b);
-            AddBool(I18n.ConfigMenu_Option_SpawnBaitIfDontHave, () => config().SpawnBaitIfDontHave, b => config().SpawnBaitIfDontHave = b);
-            AddNumber(I18n.ConfigMenu_Option_BaitAmountToSpawn, () => config().BaitAmountToSpawn, i => config().BaitAmountToSpawn = i, 1, 999, 1);
-            AddBool(I18n.ConfigMenu_Option_AutoAttachTackles, () => config().AutoAttachTackles, b => config().AutoAttachTackles = b);
-            AddDropDown(I18n.ConfigMenu_Option_PreferTackle, _availableTackles.ToArray(), ParseItemName, () => config().PreferTackle, s => config().PreferTackle = s);
-            AddDropDown(I18n.ConfigMenu_Option_PreferAdvancedIridiumTackle, _availableTackles.ToArray(), ParseItemName, () => config().PreferAdvIridiumTackle, s => config().PreferAdvIridiumTackle = s);
-            AddBool(I18n.ConfigMenu_Option_InfiniteTackle, () => config().InfiniteTackle, b => config().InfiniteTackle = b);
-            AddBool(I18n.ConfigMenu_Option_SpawnTackleIfDontHave, () => config().SpawnTackleIfDontHave, b => config().SpawnTackleIfDontHave = b);
+            AddBool(I18n.ConfigMenu_Option_AutoAttachBait, I18n.Tooltip_AutoAttachBait, () => config().AutoAttachBait, b => config().AutoAttachBait = b);
+            AddDropDown(I18n.ConfigMenu_Option_PreferBait, I18n.Tooltip_PreferredBait, _availableBaits.ToArray(), ParseItemName, () => config().PreferredBait, s => config().PreferredBait = s);
+            AddBool(I18n.ConfigMenu_Option_InfiniteBait, I18n.Tooltip_InfiniteBait, () => config().InfiniteBait, b => config().InfiniteBait = b);
+            AddBool(I18n.ConfigMenu_Option_SpawnBaitIfDontHave, I18n.Tooltip_SpawnBaitIfDontHave, () => config().SpawnBaitIfDontHave, b => config().SpawnBaitIfDontHave = b);
+            AddNumber(I18n.ConfigMenu_Option_BaitAmountToSpawn, I18n.Tooltip_BaitAmountToSpawn, () => config().BaitAmountToSpawn, i => config().BaitAmountToSpawn = i, min: 1, max: 999, interval: 1);
+            AddBool(I18n.ConfigMenu_Option_AutoAttachTackles, I18n.Tooltip_AutoAttachTackles, () => config().AutoAttachTackles, b => config().AutoAttachTackles = b);
+            AddDropDown(I18n.ConfigMenu_Option_PreferTackle, I18n.Tooltip_PreferredTackle, _availableTackles.ToArray(), ParseItemName, () => config().PreferredTackle, s => config().PreferredTackle = s);
+            AddDropDown(I18n.ConfigMenu_Option_PreferAdvancedIridiumTackle, I18n.Tooltip_PreferredAdvIridiumTackle, _availableTackles.ToArray(), ParseItemName, () => config().PreferredAdvIridiumTackle, s => config().PreferredAdvIridiumTackle = s);
+            AddBool(I18n.ConfigMenu_Option_InfiniteTackle, I18n.Tooltip_InfiniteTackle, () => config().InfiniteTackle, b => config().InfiniteTackle = b);
+            AddBool(I18n.ConfigMenu_Option_SpawnTackleIfDontHave, I18n.Tooltip_SpawnTackleIfDontHave, () => config().SpawnTackleIfDontHave, b => config().SpawnTackleIfDontHave = b);
             
             AddSectionTitle(I18n.ConfigMenu_Title_Enchantment);
-            AddBool(I18n.ConfigMenu_Option_AddAutoHookEnchantment, () => config().AddAutoHookEnchantment, b => config().AddAutoHookEnchantment = b);
-            AddBool(I18n.ConfigMenu_Option_AddEfficientEnchantment, () => config().AddEfficientEnchantment, b => config().AddEfficientEnchantment = b);
-            AddBool(I18n.ConfigMenu_Option_AddMasterEnchantment, () => config().AddMasterEnchantment, b => config().AddMasterEnchantment = b);
-            AddBool(I18n.ConfigMenu_Option_AddPreservingEnchantment, () => config().AddPreservingEnchantment, b => config().AddPreservingEnchantment = b);
-            AddBool(I18n.ConfigMenu_Option_RemoveEnchantmentsWhenUnequipped, () => config().RemoveEnchantmentWhenUnequipped, b => config().RemoveEnchantmentWhenUnequipped = b);
+            AddBool(I18n.ConfigMenu_Option_AddAutoHookEnchantment, I18n.Tooltip_AddAutoHookEnchantment, () => config().AddAutoHookEnchantment, b => config().AddAutoHookEnchantment = b);
+            AddBool(I18n.ConfigMenu_Option_AddEfficientEnchantment, I18n.Tooltip_AddEfficientEnchantment, () => config().AddEfficientEnchantment, b => config().AddEfficientEnchantment = b);
+            AddBool(I18n.ConfigMenu_Option_AddMasterEnchantment, I18n.Tooltip_AddMasterEnchantment, () => config().AddMasterEnchantment, b => config().AddMasterEnchantment = b);
+            AddBool(I18n.ConfigMenu_Option_AddPreservingEnchantment, I18n.Tooltip_AddPreservingEnchantment, () => config().AddPreservingEnchantment, b => config().AddPreservingEnchantment = b);
+            AddBool(I18n.ConfigMenu_Option_RemoveEnchantmentsWhenUnequipped, I18n.Tooltip_RemoveWhenUnequipped, () => config().RemoveWhenUnequipped, b => config().RemoveWhenUnequipped = b);
         }
         
         private static string[] SkipMiniGameOptions()
@@ -257,16 +256,18 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 text: text);
         }
 
-        private void AddKeyBind(Func<string> text, Func<SButton> getValue, Action<SButton> setValue)
+        private void AddKeyBind(Func<string> text, Func<SButton> getValue, Action<SButton> setValue, Func<string> tooltip)
         {
             _configMenu?.AddKeybind(
                 mod: modManifest,
                 getValue: getValue,
                 setValue: setValue,
-                name: text);
+                name: text,
+                tooltip: tooltip);
         }
 
-        private void AddDropDown(Func<string> name, string[] allowedValues, Func<string, string> formatAllowedValue, Func<string> getValue, Action<string> setValue)
+        private void AddDropDown(Func<string> name, Func<string> tooltip, string[] allowedValues, Func<string, string> formatAllowedValue,
+            Func<string> getValue, Action<string> setValue)
         {
             _configMenu?.AddTextOption(
                 mod: modManifest,
@@ -274,20 +275,24 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 getValue: getValue,
                 setValue: setValue,
                 allowedValues: allowedValues,
-                formatAllowedValue: formatAllowedValue
+                formatAllowedValue: formatAllowedValue,
+                tooltip: tooltip
             );
         }
 
-        private void AddBool(Func<string> name, Func<bool> getValue, Action<bool> setValue)
+        private void AddBool(Func<string> name, Func<string> tooltip, Func<bool> getValue, Action<bool> setValue)
         {
             _configMenu?.AddBoolOption(
                 mod: modManifest,
                 name: name,
                 getValue: getValue,
-                setValue: setValue);
+                setValue: setValue,
+                tooltip: tooltip
+                );
         }
 
-        private void AddNumber(Func<string> name, Func<int> getValue, Action<int> setValue, int? min = null, int? max = null, int? interval = null, Func<int, string> formatValue = null)
+        private void AddNumber(Func<string> name, Func<string> tooltip, Func<int> getValue, Action<int> setValue,
+            int? min = null, int? max = null, int? interval = null, Func<int, string> formatValue = null)
         {
             _configMenu?.AddNumberOption(
                 mod: modManifest,
@@ -297,10 +302,13 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 min: min,
                 max: max,
                 interval: interval,
-                formatValue: formatValue);
+                formatValue: formatValue,
+                tooltip: tooltip
+                );
         }
         
-        private void AddNumber(Func<string> name, Func<float> getValue, Action<float> setValue, float? min = null, float? max = null, float? interval = null, Func<float, string> formatValue = null)
+        private void AddNumber(Func<string> name, Func<string> tooltip, Func<float> getValue, Action<float> setValue,
+            float? min = null, float? max = null, float? interval = null, Func<float, string> formatValue = null)
         {
             _configMenu?.AddNumberOption(
                 mod: modManifest,
@@ -310,7 +318,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 min: min,
                 max: max,
                 interval: interval,
-                formatValue: formatValue);
+                formatValue: formatValue,
+                tooltip: tooltip
+            );
         }
     }
 }

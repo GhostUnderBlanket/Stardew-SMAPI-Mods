@@ -14,7 +14,7 @@ The configuration file is located in the mod's folder under the StardewValley in
 **Possible values:** See `Modding:Player Guide/Key Bindings` on Stardew valley wiki. [Here](https://stardewcommunitywiki.com/Modding:Player_Guide/Key_Bindings#Button_codes)
 
 ```
-Button for toggling automation of this mod.
+Button for toggling automation of this mod
 ```
 
 ### CatchTreasureButton
@@ -161,20 +161,12 @@ Toggle for allowing eating of caught fish.
 Toggle for skip fishing mini-game instantly.
 ```
 
-### MaxCastPower
-**Default value:** `true`
-**Possible values:** `true | false`
-
-```
-Toggle for enabling max cast power.
-```
-
 ### CastPowerPercent
 **Default value:** `50`
 **Possible values:** `0 - 100`
 
 ```
-Preference for cast power if 'MaxCastPower' is off
+Preference for fishing rood cast power.
 ```
 
 ### InstantFishBite

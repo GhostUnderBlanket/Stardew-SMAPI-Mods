@@ -247,7 +247,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
                 }
 
                 // determine value of showFish value
-                showFish = Config.ShowUncaughtFishSpecies || Assistant.AlreadyCaughtFish() || (Config.AlwaysShowLegendaryFish && bar.bossFish);
+                showFish = Config.ShowUncaughtFish || Assistant.AlreadyCaughtFish() || (Config.ShowLegendaryFish && bar.bossFish);
 
                 // determine value of showText value
                 showText = Config.ShowFishName;

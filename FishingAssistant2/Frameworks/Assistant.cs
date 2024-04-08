@@ -58,7 +58,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             _modEntry.ForgetPlayerPosition();
             
-            if (_config.RemoveEnchantmentWhenUnequipped) _fishingRod.ClearAddedEnchantments();
+            if (_config.RemoveWhenUnequipped) _fishingRod.ClearAddedEnchantments();
             
             _fishingRod = null;
         }
@@ -86,9 +86,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             if (_config.InstantFishBite) _fishingRod.InstantFishBite();
             
-            if (_config.AutoAttachBait) _fishingRod?.AutoAttachBait(_config.PreferBait, _config.InfiniteBait, _config.SpawnBaitIfDontHave, _config.BaitAmountToSpawn);
+            if (_config.AutoAttachBait) _fishingRod?.AutoAttachBait(_config.PreferredBait, _config.InfiniteBait, _config.SpawnBaitIfDontHave, _config.BaitAmountToSpawn);
             
-            if (_config.AutoAttachTackles) _fishingRod?.AutoAttachTackles(new []{_config.PreferTackle, _config.PreferAdvIridiumTackle} , _config.InfiniteTackle, _config.SpawnTackleIfDontHave);
+            if (_config.AutoAttachTackles) _fishingRod?.AutoAttachTackles(new []{_config.PreferredTackle, _config.PreferredAdvIridiumTackle} , _config.InfiniteTackle, _config.SpawnTackleIfDontHave);
 
             if (_bobberBar != null && _bobberBar.Instance.treasure) _fishingRod?.OverrideGoldenTreasureChance(_config.GoldenTreasureChance);
             
@@ -193,10 +193,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             _bobberBar.OverrideTreasureChance(_config.TreasureChance, _config.GoldenTreasureChance);
             
-            if (_config.InstantCatchTreasure || _config.InstantCatchFish) 
-                _bobberBar.InstantCatchTreasure(_modEntry.CatchTreasure);
-            
-            if (_config.InstantCatchFish) _bobberBar.InstantCatchFish();
+            if (_config.InstantCatchTreasure) _bobberBar.InstantCatchTreasure(_modEntry.CatchTreasure);
         }
 
         #endregion
@@ -414,15 +411,15 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             if (!_modEntry.ModEnable) return;
             
-            if (_config.AutoPauseFishing != PauseFishingBehaviour.Off.ToString()) AutoPauseFishing(_config.AutoPauseFishing, _config.NumToWarn);
+            if (_config.AutoPauseFishing != PauseFishingBehaviour.Off.ToString()) AutoPauseFishing(_config.AutoPauseFishing, _config.WarnCount);
         }
         
         private void AutoPauseFishing(string autoPauseFishing, int numToWarn)
         {
-            if (Game1.timeOfDay >= _config.PauseFishingTime * 100 && NumWarnThisDay < numToWarn)
+            if (Game1.timeOfDay >= _config.TimeToPause * 100 && NumWarnThisDay < numToWarn)
             {
                 NumWarnThisDay++;
-                CommonHelper.PushErrorNotification(I18n.HudMessage_AutoDisable(), Game1.getTimeOfDayString(_config.PauseFishingTime * 100));
+                CommonHelper.PushErrorNotification(I18n.HudMessage_AutoDisable(), Game1.getTimeOfDayString(_config.TimeToPause * 100));
                 if (autoPauseFishing == PauseFishingBehaviour.WarnAndPause.ToString())
                 {
                     _modEntry.ForceDisable();
