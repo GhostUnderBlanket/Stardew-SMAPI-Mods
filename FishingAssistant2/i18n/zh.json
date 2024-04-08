@@ -5,6 +5,8 @@
   "off" : "关闭",
   "left" : "左边",
   "right" : "右边",
+  "top" : "顶端",
+  "bottom" : "底部",
   "upper-left" : "左上",
   "upper-right" : "右上",
   "lower-left" : "左下",
@@ -25,10 +27,10 @@
   "skip-all" : "Skip All",
   "skip-only-caught" : "Skip Only Caught Fish",
 
-  "config-menu.page.general" : "General", //New
-  "config-menu.page.mini-game" : "Mini-Game", //New
-  "config-menu.page.fishing-rod" : "Fishing Rod", //New
-  "config-menu.title.go-to-page" : "Go To Pages", //New
+  "config-menu.page.general" : "常规设置", 
+  "config-menu.page.mini-game" : "小游戏设置", 
+  "config-menu.page.fishing-rod" : "鱼竿设置", 
+  "config-menu.title.go-to-page" : "跳转页面", 
   
   "config-menu.title.key-binding" : "按键绑定",
   "config-menu.option.toggle-automation" : "自动钓鱼开关",
@@ -37,9 +39,9 @@
   "config-menu.option.hud-position" : "HUD位置",
   
   "config-menu.title.fishing" : "钓鱼",
-  "config-menu.option.cast-power-percent" : "Cast Power Percent", //New
+  "config-menu.option.cast-power-percent" : "抛竿力量百分比", 
   "config-menu.option.instant-fish-bite" : "立刻上钩",
-  "config-menu.option.skip-fishing-mini-game" : "Skip Fishing Mini-Game", //New
+  "config-menu.option.skip-fishing-mini-game" : "跳过小游戏", 
   "config-menu.option.always-perfect" : "总是完美",
   "config-menu.option.always-max-fish-size" : "总是最大鱼尺寸",
   "config-menu.option.prefer-fish-amount" : "首选鱼数量", 
@@ -100,6 +102,7 @@
   "hud-message.inventory-full" : "背包已满",
   "hud-message.auto-disable" : "现在已经是 {0} 了，该回家了",
   "hud-message.auto-attach" : "自动将 {0} 挂到了 {1} 上",
-  "hud-message.auto-attach-spawned" : "Auto Attach Spawned {0} To {1}", //New
+  "hud-message.auto-attach-spawned" : "自动生成了 {0} 到 {1} 上", 
   "hud-message.auto-eat-food" : "自动吃掉了 {0}",
+  "hud-message.auto-trash-junk" : "自动丢掉了 {1} 个 {0} ",
 }
