@@ -24,8 +24,8 @@
   "iridium" : "铱星",
   "warn-only" : "警告",
   "warn-and-pause" : "警告并暂停",
-  "skip-all" : "Skip All",
-  "skip-only-caught" : "Skip Only Caught Fish",
+  "skip-all" : "Skip All", //New
+  "skip-only-caught" : "Skip Only Caught Fish", //New
 
   "config-menu.page.general" : "常规设置", 
   "config-menu.page.mini-game" : "小游戏设置", 
