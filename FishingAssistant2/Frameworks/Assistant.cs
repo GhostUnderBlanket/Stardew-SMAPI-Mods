@@ -1,7 +1,6 @@
 using ChibiKyu.StardewMods.Common;
 using FishingAssistant2;
 using Microsoft.Xna.Framework.Input;
-using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
 using StardewValley.Enchantments;
@@ -23,14 +22,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         private SBobberBar? _bobberBar;
         private SFishingRod? _fishingRod;
         private ItemGrabMenu? _treasureChestMenu;
-        private IList<Item> excludeItems = new List<Item>();
+        private readonly IList<Item> _excludeItems = new List<Item>();
         
         private int _autoCastDelay = 60;
         private int _autoClosePopupDelay = 30;
         private int _autoLootDelay = 30;
         private bool _catchingTreasure;
-        
-        private readonly IReflectedField<MouseState>? _currentMouseState = modEntry().Helper.Reflection.GetField<MouseState>(Game1.input, "_currentMouseState");
         
         #region FishingRod
 
@@ -56,10 +53,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             if (_fishingRod == null) return;
             
-            _modEntry.ForgetPlayerPosition();
-            
             if (_config.RemoveWhenUnequipped) _fishingRod.ClearAddedEnchantments();
             
+            _modEntry.ForgetPlayerPosition();
             _fishingRod = null;
         }
 
@@ -82,18 +78,20 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         private void DoFishingRodAssistantTask()
         {
+            if (_fishingRod == null) return;
+            
             _fishingRod.OverrideCastPower(_config.CastPowerPercent);
             
             if (_config.InstantFishBite) _fishingRod.InstantFishBite();
             
-            if (_config.AutoAttachBait) _fishingRod?.AutoAttachBait(_config.PreferredBait, _config.InfiniteBait, _config.SpawnBaitIfDontHave, _config.BaitAmountToSpawn);
+            if (_config.AutoAttachBait) _fishingRod.AutoAttachBait(_config.PreferredBait, _config.InfiniteBait, _config.SpawnBaitIfDontHave, _config.BaitAmountToSpawn);
             
-            if (_config.AutoAttachTackles) _fishingRod?.AutoAttachTackles(new []{_config.PreferredTackle, _config.PreferredAdvIridiumTackle} , _config.InfiniteTackle, _config.SpawnTackleIfDontHave);
+            if (_config.AutoAttachTackles) _fishingRod.AutoAttachTackles(new []{_config.PreferredTackle, _config.PreferredAdvIridiumTackle} , _config.InfiniteTackle, _config.SpawnTackleIfDontHave);
 
-            if (_bobberBar != null && _bobberBar.Instance.treasure) _fishingRod?.OverrideGoldenTreasureChance(_config.GoldenTreasureChance);
+            if (_bobberBar is { Instance.treasure: true }) _fishingRod.OverrideGoldenTreasureChance(_config.GoldenTreasureChance);
             
             if (!_modEntry.ModEnable) return;
-            
+
             if (_config.AutoCastFishingRod) AutoCastFishingRod(_modEntry.FacingDirection);
             
             if (_config.AutoHookFish) _fishingRod.AutoHook();
@@ -101,11 +99,10 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         private void AutoCastFishingRod(int playerFacingDirection)
         {
-            if (!_fishingRod.IsRodNotInUse() || Game1.player.isRidingHorse() || Game1.isFestival())
+            if (_fishingRod != null && !_fishingRod.IsRodNotInUse() || Game1.player.isRidingHorse() || Game1.isFestival())
                 return;
-            
-            if (_autoCastDelay-- > 0)
-                return;
+
+            if (_autoCastDelay-- > 0) return;
             _autoCastDelay = 60;
 
             bool lowStamina = _config.AutoEatFood
@@ -113,7 +110,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 : Game1.player.Stamina <= 8.0 - Game1.player.FishingLevel * 0.1;
             bool hasEnchantment = _fishingRod.Instance.hasEnchantmentOfType<EfficientToolEnchantment>();
             bool isInventoryFull = Game1.player.isInventoryFull();
-            
+
             if (lowStamina && !hasEnchantment)
             {
                 if (!_config.AutoEatFood || _config.AutoEatFood && !TryAutoEatFood())
@@ -122,48 +119,50 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                     _modEntry.ForceDisable();
                 }
             }
-            
+
             if (isInventoryFull)
             {
                 CommonHelper.PushErrorNotification(I18n.HudMessage_InventoryFull());
                 _modEntry.ForceDisable();
             }
-            
+
             if ((!lowStamina || hasEnchantment) && !isInventoryFull)
             {
                 Game1.player.faceDirection(playerFacingDirection);
                 Game1.pressUseToolButton();
             }
-        }
-        
-        private bool TryAutoEatFood()
-        {
-            var player = Game1.player;
-            if (!player.isEating && _fishingRod.IsRodNotInUse())
+            
+            return;
+            
+            bool TryAutoEatFood()
             {
-                IEnumerable<Object> items = player.Items.OfType<Object>();
-                Object bestItem = null;
+                var player = Game1.player;
+                if (!player.isEating && _fishingRod != null && _fishingRod.IsRodNotInUse())
+                {
+                    IEnumerable<Object> items = player.Items.OfType<Object>();
+                    Object? bestItem = null;
                 
-                foreach (var item in items)
-                {
-                    if (item.Edibility <= 0 || (item.Category == Object.FishCategory && !_config.AllowEatingFish))
-                        continue;
+                    foreach (var item in items)
+                    {
+                        if (item.Edibility <= 0 || (item.Category == Object.FishCategory && !_config.AllowEatingFish))
+                            continue;
 
-                    if (bestItem == null || bestItem.Edibility / bestItem.salePrice() < item.Edibility / item.salePrice())
-                        bestItem = item;
+                        if (bestItem == null || bestItem.Edibility / bestItem.salePrice() < item.Edibility / item.salePrice())
+                            bestItem = item;
+                    }
+
+                    if (bestItem != null)
+                    {
+                        player.eatObject(bestItem);
+                        bestItem.Stack--;
+                        if (bestItem.Stack == 0) player.removeItemFromInventory(bestItem);
+
+                        CommonHelper.PushWarnNotification(I18n.HudMessage_AutoEatFood(), ItemRegistry.GetData(bestItem.QualifiedItemId).DisplayName);
+                        return true;
+                    }
                 }
-
-                if (bestItem != null)
-                {
-                    player.eatObject(bestItem);
-                    bestItem.Stack--;
-                    if (bestItem.Stack == 0) player.removeItemFromInventory(bestItem);
-
-                    CommonHelper.PushWarnNotification(I18n.HudMessage_AutoEatFood(), ItemRegistry.GetData(bestItem.QualifiedItemId).DisplayName);
-                    return true;
-                }
+                return false;
             }
-            return false;
         }
 
         #endregion
@@ -187,6 +186,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         private void DoBobberBarAssistantTask()
         {
+            if (_bobberBar == null) return;
+            
             _bobberBar.HandleFishPreview(_config.DisplayFishPreview);
             
             _bobberBar.OverrideFishDifficult(_config.FishDifficultyMultiplier, _config.FishDifficultyAdditive);
@@ -213,8 +214,10 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         private void AutoPlayFishingMiniGame()
         {
-            var bar = _bobberBar?.Instance;
-            var rod = _fishingRod?.Instance;
+            if (_fishingRod == null || _bobberBar == null) return;
+            
+            var bar = _bobberBar.Instance;
+            var rod = _fishingRod.Instance;
             
             float fishPos = bar.bobberPosition;
             int bobberBarCenter = (bar.bobberBarHeight / 2);
@@ -223,65 +226,53 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             {
                 if (ShouldSkipMiniGame())
                 {
-                    _bobberBar?.InstantCatchFish();
-                    _bobberBar?.InstantCatchTreasure(_modEntry.CatchTreasure);
+                    _bobberBar.InstantCatchFish();
+                    _bobberBar.InstantCatchTreasure(_modEntry.CatchTreasure);
                 }
                 
-                _bobberBar?.AlwaysPerfect(_config.AlwaysPerfect);
-                _bobberBar?.OverrideFishQuality(_config.PreferFishQuality);
-                _bobberBar?.OverrideFishSize(_config.AlwaysMaxFishSize);
+                _bobberBar.AlwaysPerfect(_config.AlwaysPerfect);
+                _bobberBar.OverrideFishQuality(_config.PreferFishQuality);
+                _bobberBar.OverrideFishSize(_config.AlwaysMaxFishSize);
+                _fishingRod.OverrideNumberOfFishCaught(_config.PreferFishAmount, bar);
                 
                 bar.scale = 0.0f;
                 bar.fadeOut = false;
-                string qualifiedItemId = Game1.player.CurrentTool is FishingRod currentTool ? currentTool.GetBait()?.QualifiedItemId : (string) null;
-                int numCaught = bar.bossFish ? 1 : qualifiedItemId == "(O)774" && Game1.random.NextDouble() < 0.25 + Game1.player.DailyLuck / 2.0 ? 2 : _config.PreferFishAmount;
-                if (bar.challengeBaitFishes > 0)
-                    numCaught = bar.challengeBaitFishes;
-                if (bar.distanceFromCatching > 0.8999999761581421 && rod != null)
+                
+                if (bar.distanceFromCatching >= 0.8999f)
                 {
-                    rod.pullFishFromWater(
-                        bar.whichFish,
-                        bar.fishSize,
-                        bar.fishQuality,
-                        (int) bar.difficulty,
-                        bar.treasureCaught,
-                        bar.perfect,
-                        bar.fromFishPond,
-                        bar.setFlagOnCatch,
-                        bar.bossFish,
-                        numCaught);
+                    rod.pullFishFromWater(bar.whichFish, bar.fishSize, bar.fishQuality, (int) bar.difficulty, bar.treasureCaught,
+                        bar.perfect, bar.fromFishPond, bar.setFlagOnCatch, bar.bossFish, rod.numberOfFishCaught);
                 }
                 else
                 {
                     Game1.player.completelyStopAnimatingOrDoingAction();
-                    rod?.doneFishing(Game1.player, true);
+                    rod.doneFishing(Game1.player, true);
                 }
+                
                 Game1.exitActiveMenu();
                 Game1.setRichPresence("location", Game1.currentLocation.Name);
             }
-            
-            if (_catchingTreasure && bar.distanceFromCatching < 0.2f)
+            else if (_catchingTreasure && bar.distanceFromCatching < 0.2f)
             {
                 _catchingTreasure = false;
                 fishPos = bar.bobberPosition;
             }
-            else if (_modEntry.CatchTreasure && bar.treasure && !bar.treasureCaught && (bar.distanceFromCatching > 0.8f || _catchingTreasure))
+            else if (_modEntry.CatchTreasure && bar is { treasure: true, treasureCaught: false } && (bar.distanceFromCatching > 0.8f || _catchingTreasure))
             {
-                _catchingTreasure = true; 
+                _catchingTreasure = true;
                 fishPos = bar.treasurePosition;
             }
             
             fishPos += 25;
             bar.bobberBarSpeed = (fishPos - bar.bobberBarPos - bobberBarCenter) / 2;
+            
+            return;
 
             bool ShouldSkipMiniGame()
             {
-                if (_config.SkipFishingMiniGame == SkipFishingMiniGame.SkipAll.ToString())
-                {
-                    return true;
-                }
+                if (_config.SkipFishingMiniGame == Enum.GetName(SkipFishingMiniGame.SkipAll)) return true;
                 
-                return _config.SkipFishingMiniGame == SkipFishingMiniGame.SkipOnlyCaught.ToString() && AlreadyCaughtFish();
+                return _config.SkipFishingMiniGame == Enum.GetName(SkipFishingMiniGame.SkipOnlyCaught) && AlreadyCaughtFish();
             }
         }
 
@@ -293,39 +284,24 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                     return;
                 _autoClosePopupDelay = 30;
                 
-                SimulateLeftMouseClick();
-                _fishingRod.Instance.tickUpdate(Game1.currentGameTime, Game1.player);
-                _currentMouseState?.SetValue(new MouseState());
-                Game1.oldKBState = new KeyboardState(); 
+                SimulateUseToolPressed(() => _fishingRod.Instance.tickUpdate(Game1.currentGameTime, Game1.player));
             }
-
-            return;
-
-            void SimulateLeftMouseClick()
-            {
-                if (_currentMouseState == null) return;
             
+            return;
+            
+            void SimulateUseToolPressed(Action? callback = null)
+            {
                 foreach (var button in Game1.options.useToolButton)
                 {
-                    if (button.key != Keys.None) 
+                    if (button.key != Keys.None)
                     {
-                        Game1.oldKBState = new KeyboardState(button.key); 
-                    }
-                    
-                    if (button.mouseLeft)
-                    {
-                        _currentMouseState.SetValue(new MouseState(
-                            Game1.viewport.X / 2, 
-                            Game1.viewport.Y / 2, 
-                            0, 
-                            ButtonState.Pressed,
-                            ButtonState.Released, 
-                            ButtonState.Released,
-                            ButtonState.Released,
-                            ButtonState.Released,
-                            0));
+                        Game1.oldKBState = new KeyboardState(button.key);
                     }
                 }
+            
+                callback?.Invoke();
+            
+                Game1.oldKBState = new KeyboardState();
             }
         }
 
@@ -348,9 +324,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
             IList<Item> actualInventory = _treasureChestMenu.ItemsToGrabMenu.actualInventory;
             
-            if (actualInventory.Count == excludeItems.Count)
+            if (actualInventory.Count == _excludeItems.Count)
             {
-                excludeItems.Clear();
+                _excludeItems.Clear();
                 
                 if (actualInventory.Count == 0)
                 {
@@ -376,25 +352,25 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             }
             else
             {
-                Item obj = actualInventory[excludeItems.Count];
+                Item obj = actualInventory[_excludeItems.Count];
                 if (obj != null)
                 {
                     if (obj.QualifiedItemId == "(O)102")
                     {
                         Game1.player.foundArtifact(obj.QualifiedItemId, 1);
                         Game1.playSound("fireball");
-                        actualInventory.RemoveAt(excludeItems.Count);
+                        actualInventory.RemoveAt(_excludeItems.Count);
                     }
                     else
                     {
                         if (Game1.player.addItemToInventoryBool(obj))
                         {
                             Game1.playSound("coin");
-                            actualInventory.RemoveAt(excludeItems.Count);
+                            actualInventory.RemoveAt(_excludeItems.Count);
                         }
                         else
                         {
-                            excludeItems.Add(obj);
+                            _excludeItems.Add(obj);
                         }
                     }
                     
@@ -457,9 +433,13 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         #endregion
 
+        #region Conditionals
+
         internal bool AlreadyCaughtFish(int minCaught = 1)
         {
-            return _bobberBar.AlreadyCaughtFish(minCaught);
+            return _bobberBar != null && _bobberBar.AlreadyCaughtFish(minCaught);
         }
+
+        #endregion
     }
 }

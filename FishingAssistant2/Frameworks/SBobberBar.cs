@@ -24,13 +24,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             else if (treasureChance == TreasureChance.Never.ToString()) 
                 Instance.treasure = false;
 
-            if (Instance.treasure)
-            {
-                if (goldenTreasureChance == TreasureChance.Always.ToString())
-                    Instance.goldenTreasure = true;
-                else if (goldenTreasureChance == TreasureChance.Never.ToString()) 
-                    Instance.goldenTreasure = false;
-            }
+            if (!Instance.treasure) return;
+            
+            if (goldenTreasureChance == TreasureChance.Always.ToString())
+                Instance.goldenTreasure = true;
+            else if (goldenTreasureChance == TreasureChance.Never.ToString()) 
+                Instance.goldenTreasure = false;
         }
 
         internal void InstantCatchTreasure(bool catchTreasure)
@@ -49,6 +48,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             {
                 Instance.perfect = true;
                 Instance.fishShake = Vector2.Zero;
+                
+                if (Game1.isFestival()) Game1.CurrentEvent.perfectFishing();
             }
         }
 

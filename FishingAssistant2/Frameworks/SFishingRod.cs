@@ -3,6 +3,7 @@ using FishingAssistant2;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Enchantments;
+using StardewValley.Menus;
 using StardewValley.Tools;
 using Object = StardewValley.Object;
 
@@ -151,6 +152,27 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             Instance.castingPower = (castPower / 100.0f) + 0.01f;
         }
+
+        internal void OverrideNumberOfFishCaught(int numberOfFishCaught, BobberBar bar)
+        {
+            if (Game1.isFestival() || bar.bossFish)
+            {
+                numberOfFishCaught = 1;
+            }
+            else if (bar.challengeBaitFishes > 0)
+            {
+                numberOfFishCaught = bar.challengeBaitFishes;
+            }
+            else
+            {
+                bool isLucky = Instance.GetBait()?.QualifiedItemId == "(O)774" 
+                               && Game1.random.NextDouble() < 0.25 + Game1.player.DailyLuck / 2.0;
+                
+                numberOfFishCaught = isLucky ? 2 : numberOfFishCaught;
+            }
+
+            Instance.numberOfFishCaught = numberOfFishCaught;
+        }
         
         internal void InstantFishBite()
         {
@@ -180,7 +202,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         
         internal bool IsRodNotInUse()
         {
-            return Context.CanPlayerMove && Game1.activeClickableMenu == null && !Instance.inUse();
+            return Context.CanPlayerMove && !Instance.inUse();
         }
         
         private bool IsRodCanHook()
@@ -198,7 +220,17 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         internal bool IsRodShowingFish()
         {
-            return !Context.CanPlayerMove && Instance.fishCaught && Instance.inUse() && !Instance.isCasting && !Instance.isTimingCast && !Instance.isReeling && !Instance.pullingOutOfWater && !Instance.showingTreasure;
+            return !Context.CanPlayerMove 
+                   && Instance.fishCaught 
+                   && Instance.inUse() 
+                   && Instance is
+                   {
+                       isCasting: false, 
+                       isTimingCast: false, 
+                       isReeling: false, 
+                       pullingOutOfWater: false, 
+                       showingTreasure: false
+                   };
         }
     }
 }
