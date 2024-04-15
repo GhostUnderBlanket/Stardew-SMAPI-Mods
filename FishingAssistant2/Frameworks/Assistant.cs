@@ -39,9 +39,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 OnUnEquipFishingRod();
                 OverrideFishingRod(fishingRod);
             }
-
-            if (isModEnable) modEntry().CachePlayerPosition();
-            else modEntry().ForgetPlayerPosition();
             
             DoFishingRodAssistantTask();
         }
@@ -52,7 +49,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             if (modConfig().RemoveWhenUnequipped) _fishingRod.ClearAddedEnchantments();
             
-            modEntry().ForgetPlayerPosition();
             _fishingRod = null;
         }
 
@@ -89,14 +85,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             if (!modEntry().ModEnable) return;
 
-            if (modConfig().AutoCastFishingRod) AutoCastFishingRod(modEntry().FacingDirection);
+            if (modConfig().AutoCastFishingRod) AutoCastFishingRod();
             
             if (modConfig().AutoHookFish) _fishingRod.AutoHook();
         }
 
-        private void AutoCastFishingRod(int playerFacingDirection)
+        private void AutoCastFishingRod()
         {
-            if (_fishingRod != null && !_fishingRod.IsRodNotInUse() || Game1.player.isRidingHorse() || Game1.isFestival())
+            if (_fishingRod != null && (!_fishingRod.IsRodCanCast() || Game1.isFestival()))
                 return;
 
             if (_autoCastDelay-- > 0) return;
@@ -123,11 +119,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 modEntry().ForceDisable();
             }
 
-            if ((!lowStamina || hasEnchantment) && !isInventoryFull)
-            {
-                Game1.player.faceDirection(playerFacingDirection);
-                Game1.pressUseToolButton();
-            }
+            if (modEntry().ModEnable) Game1.pressUseToolButton();
             
             return;
             

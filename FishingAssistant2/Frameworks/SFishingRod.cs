@@ -1,5 +1,6 @@
 using ChibiKyu.StardewMods.Common;
 using FishingAssistant2;
+using Microsoft.Xna.Framework;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Enchantments;
@@ -203,6 +204,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         internal bool IsRodNotInUse()
         {
             return Context.CanPlayerMove && !Instance.inUse();
+        }
+
+        internal bool IsRodCanCast()
+        {
+            return IsRodNotInUse() && !Game1.player.isMoving() && !Game1.player.isRidingHorse();
         }
         
         private bool IsRodCanHook()

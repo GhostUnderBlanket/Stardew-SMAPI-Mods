@@ -20,9 +20,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         public bool ModEnable;
         public bool CatchTreasure;
         
-        public int FacingDirection;
-        private bool _facingDirectionCached;
-        
         public override void Entry(IModHelper helper)
         {
             I18n.Init(helper.Translation);
@@ -120,32 +117,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             {
                 ModEnable = !ModEnable;
                 Game1.playSound("coin");
-
-                if (!ModEnable) ForgetPlayerPosition();
             }
             
             if (e.Button == Config.CatchTreasureButton)
             {
                 CatchTreasure = !CatchTreasure;
                 Game1.playSound("dwop");
-            }
-        }
-        
-        public void CachePlayerPosition()
-        {
-            if (!_facingDirectionCached)
-            {
-                FacingDirection = Game1.player.getDirection() != -1 ? Game1.player.getDirection() : Game1.player.FacingDirection;
-                _facingDirectionCached = true;
-            }
-        }
-
-        public void ForgetPlayerPosition()
-        {
-            if (_facingDirectionCached)
-            {
-                FacingDirection = 0;
-                _facingDirectionCached = false;
             }
         }
         
