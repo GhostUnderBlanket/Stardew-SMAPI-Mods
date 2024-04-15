@@ -16,9 +16,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         internal bool IsInFishingMiniGame;
         private bool _isInTreasureChestMenu;
         
-        private readonly ModConfig _config = modConfig();
-        private readonly ModEntry _modEntry = modEntry();
-        
         private SBobberBar? _bobberBar;
         private SFishingRod? _fishingRod;
         private ItemGrabMenu? _treasureChestMenu;
@@ -43,8 +40,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 OverrideFishingRod(fishingRod);
             }
 
-            if (isModEnable) _modEntry.CachePlayerPosition();
-            else _modEntry.ForgetPlayerPosition();
+            if (isModEnable) modEntry().CachePlayerPosition();
+            else modEntry().ForgetPlayerPosition();
             
             DoFishingRodAssistantTask();
         }
@@ -53,9 +50,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             if (_fishingRod == null) return;
             
-            if (_config.RemoveWhenUnequipped) _fishingRod.ClearAddedEnchantments();
+            if (modConfig().RemoveWhenUnequipped) _fishingRod.ClearAddedEnchantments();
             
-            _modEntry.ForgetPlayerPosition();
+            modEntry().ForgetPlayerPosition();
             _fishingRod = null;
         }
 
@@ -63,16 +60,16 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             _fishingRod = new SFishingRod(fishingRod);
             
-            if (_config.AddAutoHookEnchantment && !fishingRod.hasEnchantmentOfType<AutoHookEnchantment>())
+            if (modConfig().AddAutoHookEnchantment && !fishingRod.hasEnchantmentOfType<AutoHookEnchantment>())
                 _fishingRod.AddEnchantment(new AutoHookEnchantment());
  
-            if (_config.AddEfficientEnchantment && !fishingRod.hasEnchantmentOfType<EfficientToolEnchantment>())
+            if (modConfig().AddEfficientEnchantment && !fishingRod.hasEnchantmentOfType<EfficientToolEnchantment>())
                 _fishingRod.AddEnchantment(new EfficientToolEnchantment());
 
-            if (_config.AddMasterEnchantment && !fishingRod.hasEnchantmentOfType<MasterEnchantment>())
+            if (modConfig().AddMasterEnchantment && !fishingRod.hasEnchantmentOfType<MasterEnchantment>())
                 _fishingRod.AddEnchantment(new MasterEnchantment());
 
-            if (_config.AddPreservingEnchantment && !fishingRod.hasEnchantmentOfType<PreservingEnchantment>())
+            if (modConfig().AddPreservingEnchantment && !fishingRod.hasEnchantmentOfType<PreservingEnchantment>())
                 _fishingRod.AddEnchantment(new PreservingEnchantment());
         }
 
@@ -80,21 +77,21 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             if (_fishingRod == null) return;
             
-            _fishingRod.OverrideCastPower(_config.CastPowerPercent);
+            _fishingRod.OverrideCastPower(modConfig().CastPowerPercent);
             
-            if (_config.InstantFishBite) _fishingRod.InstantFishBite();
+            if (modConfig().InstantFishBite) _fishingRod.InstantFishBite();
             
-            if (_config.AutoAttachBait) _fishingRod.AutoAttachBait(_config.PreferredBait, _config.InfiniteBait, _config.SpawnBaitIfDontHave, _config.BaitAmountToSpawn);
+            if (modConfig().AutoAttachBait) _fishingRod.AutoAttachBait(modConfig().PreferredBait, modConfig().InfiniteBait, modConfig().SpawnBaitIfDontHave, modConfig().BaitAmountToSpawn);
             
-            if (_config.AutoAttachTackles) _fishingRod.AutoAttachTackles(new []{_config.PreferredTackle, _config.PreferredAdvIridiumTackle} , _config.InfiniteTackle, _config.SpawnTackleIfDontHave);
+            if (modConfig().AutoAttachTackles) _fishingRod.AutoAttachTackles(new []{modConfig().PreferredTackle, modConfig().PreferredAdvIridiumTackle} , modConfig().InfiniteTackle, modConfig().SpawnTackleIfDontHave);
 
-            if (_bobberBar is { Instance.treasure: true }) _fishingRod.OverrideGoldenTreasureChance(_config.GoldenTreasureChance);
+            if (_bobberBar is { Instance.treasure: true }) _fishingRod.OverrideGoldenTreasureChance(modConfig().GoldenTreasureChance);
             
-            if (!_modEntry.ModEnable) return;
+            if (!modEntry().ModEnable) return;
 
-            if (_config.AutoCastFishingRod) AutoCastFishingRod(_modEntry.FacingDirection);
+            if (modConfig().AutoCastFishingRod) AutoCastFishingRod(modEntry().FacingDirection);
             
-            if (_config.AutoHookFish) _fishingRod.AutoHook();
+            if (modConfig().AutoHookFish) _fishingRod.AutoHook();
         }
 
         private void AutoCastFishingRod(int playerFacingDirection)
@@ -105,25 +102,25 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             if (_autoCastDelay-- > 0) return;
             _autoCastDelay = 60;
 
-            bool lowStamina = _config.AutoEatFood
-                ? (Game1.player.Stamina <= Game1.player.MaxStamina * (float)(_config.EnergyPercentToEat / 100f))
+            bool lowStamina = modConfig().AutoEatFood
+                ? (Game1.player.Stamina <= Game1.player.MaxStamina * (float)(modConfig().EnergyPercentToEat / 100f))
                 : Game1.player.Stamina <= 8.0 - Game1.player.FishingLevel * 0.1;
             bool hasEnchantment = _fishingRod.Instance.hasEnchantmentOfType<EfficientToolEnchantment>();
             bool isInventoryFull = Game1.player.isInventoryFull();
 
             if (lowStamina && !hasEnchantment)
             {
-                if (!_config.AutoEatFood || _config.AutoEatFood && !TryAutoEatFood())
+                if (!modConfig().AutoEatFood || modConfig().AutoEatFood && !TryAutoEatFood())
                 {
                     CommonHelper.PushErrorNotification(I18n.HudMessage_LowStamina());
-                    _modEntry.ForceDisable();
+                    modEntry().ForceDisable();
                 }
             }
 
             if (isInventoryFull)
             {
                 CommonHelper.PushErrorNotification(I18n.HudMessage_InventoryFull());
-                _modEntry.ForceDisable();
+                modEntry().ForceDisable();
             }
 
             if ((!lowStamina || hasEnchantment) && !isInventoryFull)
@@ -144,7 +141,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 
                     foreach (var item in items)
                     {
-                        if (item.Edibility <= 0 || (item.Category == Object.FishCategory && !_config.AllowEatingFish))
+                        if (item.Edibility <= 0 || (item.Category == Object.FishCategory && !modConfig().AllowEatingFish))
                             continue;
 
                         if (bestItem == null || bestItem.Edibility / bestItem.salePrice() < item.Edibility / item.salePrice())
@@ -188,13 +185,13 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             if (_bobberBar == null) return;
             
-            _bobberBar.HandleFishPreview(_config.DisplayFishPreview);
+            _bobberBar.HandleFishPreview(modConfig().DisplayFishPreview);
             
-            _bobberBar.OverrideFishDifficult(_config.FishDifficultyMultiplier, _config.FishDifficultyAdditive);
+            _bobberBar.OverrideFishDifficult(modConfig().FishDifficultyMultiplier, modConfig().FishDifficultyAdditive);
             
-            _bobberBar.OverrideTreasureChance(_config.TreasureChance, _config.GoldenTreasureChance);
+            _bobberBar.OverrideTreasureChance(modConfig().TreasureChance, modConfig().GoldenTreasureChance);
             
-            if (_config.InstantCatchTreasure) _bobberBar.InstantCatchTreasure(_modEntry.CatchTreasure);
+            if (modConfig().InstantCatchTreasure) _bobberBar.InstantCatchTreasure(modEntry().CatchTreasure);
         }
 
         #endregion
@@ -203,13 +200,13 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         internal void DoOnUpdateAssistantTask()
         {
-            if (!_modEntry.ModEnable) return;
+            if (!modEntry().ModEnable) return;
             
-            if (IsInFishingMiniGame && _config.AutoPlayMiniGame) AutoPlayFishingMiniGame();
+            if (IsInFishingMiniGame && modConfig().AutoPlayMiniGame) AutoPlayFishingMiniGame();
             
-            if (_config.AutoClosePopup) AutoCloseFishPopup();
+            if (modConfig().AutoClosePopup) AutoCloseFishPopup();
 
-            if (_isInTreasureChestMenu && _config.AutoLootTreasure) AutoLootTreasure();
+            if (_isInTreasureChestMenu && modConfig().AutoLootTreasure) AutoLootTreasure();
         }
 
         private void AutoPlayFishingMiniGame()
@@ -227,13 +224,13 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 if (ShouldSkipMiniGame())
                 {
                     _bobberBar.InstantCatchFish();
-                    _bobberBar.InstantCatchTreasure(_modEntry.CatchTreasure);
+                    _bobberBar.InstantCatchTreasure(modEntry().CatchTreasure);
                 }
                 
-                _bobberBar.AlwaysPerfect(_config.AlwaysPerfect);
-                _bobberBar.OverrideFishQuality(_config.PreferFishQuality);
-                _bobberBar.OverrideFishSize(_config.AlwaysMaxFishSize);
-                _fishingRod.OverrideNumberOfFishCaught(_config.PreferFishAmount, bar);
+                _bobberBar.AlwaysPerfect(modConfig().AlwaysPerfect);
+                _bobberBar.OverrideFishQuality(modConfig().PreferFishQuality);
+                _bobberBar.OverrideFishSize(modConfig().AlwaysMaxFishSize);
+                _fishingRod.OverrideNumberOfFishCaught(modConfig().PreferFishAmount, bar);
                 
                 bar.scale = 0.0f;
                 bar.fadeOut = false;
@@ -257,7 +254,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 _catchingTreasure = false;
                 fishPos = bar.bobberPosition;
             }
-            else if (_modEntry.CatchTreasure && bar is { treasure: true, treasureCaught: false } && (bar.distanceFromCatching > 0.8f || _catchingTreasure))
+            else if (modEntry().CatchTreasure && bar is { treasure: true, treasureCaught: false } && (bar.distanceFromCatching > 0.8f || _catchingTreasure))
             {
                 _catchingTreasure = true;
                 fishPos = bar.treasurePosition;
@@ -270,9 +267,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
             bool ShouldSkipMiniGame()
             {
-                if (_config.SkipFishingMiniGame == Enum.GetName(SkipFishingMiniGame.SkipAll)) return true;
+                if (modConfig().SkipFishingMiniGame == Enum.GetName(SkipFishingMiniGame.SkipAll)) return true;
                 
-                return _config.SkipFishingMiniGame == Enum.GetName(SkipFishingMiniGame.SkipOnlyCaught) && AlreadyCaughtFish();
+                return modConfig().SkipFishingMiniGame == Enum.GetName(SkipFishingMiniGame.SkipOnlyCaught) && AlreadyCaughtFish();
             }
         }
 
@@ -335,19 +332,19 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 }
                 else
                 {
-                    if (_config.ActionIfInventoryFull == ActionOnInventoryFull.Drop.ToString())
+                    if (modConfig().ActionIfInventoryFull == ActionOnInventoryFull.Drop.ToString())
                     {
                         _treasureChestMenu.DropRemainingItems();
                         _treasureChestMenu.exitThisMenu();
                     }
-                    else if (_config.ActionIfInventoryFull == ActionOnInventoryFull.Discard.ToString())
+                    else if (modConfig().ActionIfInventoryFull == ActionOnInventoryFull.Discard.ToString())
                     {
                         _treasureChestMenu.exitThisMenu();
                     }
 
                     _treasureChestMenu = null;
                     CommonHelper.PushErrorNotification(I18n.HudMessage_InventoryFull());
-                    _modEntry.ForceDisable();
+                    modEntry().ForceDisable();
                 }
             }
             else
@@ -385,20 +382,20 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         internal void DoOnTimeChangedAssistantTask()
         {
-            if (!_modEntry.ModEnable) return;
+            if (!modEntry().ModEnable) return;
             
-            if (_config.AutoPauseFishing != PauseFishingBehaviour.Off.ToString()) AutoPauseFishing(_config.AutoPauseFishing, _config.WarnCount);
+            if (modConfig().AutoPauseFishing != PauseFishingBehaviour.Off.ToString()) AutoPauseFishing(modConfig().AutoPauseFishing, modConfig().WarnCount);
         }
         
         private void AutoPauseFishing(string autoPauseFishing, int numToWarn)
         {
-            if (Game1.timeOfDay >= _config.TimeToPause * 100 && NumWarnThisDay < numToWarn)
+            if (Game1.timeOfDay >= modConfig().TimeToPause * 100 && NumWarnThisDay < numToWarn)
             {
                 NumWarnThisDay++;
-                CommonHelper.PushErrorNotification(I18n.HudMessage_AutoDisable(), Game1.getTimeOfDayString(_config.TimeToPause * 100));
+                CommonHelper.PushErrorNotification(I18n.HudMessage_AutoDisable(), Game1.getTimeOfDayString(modConfig().TimeToPause * 100));
                 if (autoPauseFishing == PauseFishingBehaviour.WarnAndPause.ToString())
                 {
-                    _modEntry.ForceDisable();
+                    modEntry().ForceDisable();
                     if (!Game1.IsMultiplayer) Game1.activeClickableMenu = new GameMenu();
                 }
             }
@@ -410,7 +407,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         internal void AutoTrashJunk(InventoryChangedEventArgs e)
         {
-            if (!_modEntry.ModEnable || !_config.AutoTrashJunk) return;
+            if (!modEntry().ModEnable || !modConfig().AutoTrashJunk) return;
             
             List<Item> changedItems = new List<Item>();
             changedItems.AddRange(e.Added);
@@ -421,8 +418,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 int sellToStorePrice = Utility.getSellToStorePriceOfItem(newItem, false);
                 
                 if (newItem.canBeTrashed() && (newItem.Category == Object.junkCategory 
-                                               || (newItem.Category != Object.FishCategory && sellToStorePrice <= _config.JunkHighestPrice) 
-                                               || (newItem.Category == Object.FishCategory && sellToStorePrice <= _config.JunkHighestPrice && _config.AllowTrashFish)))
+                                               || (newItem.Category != Object.FishCategory && sellToStorePrice <= modConfig().JunkHighestPrice) 
+                                               || (newItem.Category == Object.FishCategory && sellToStorePrice <= modConfig().JunkHighestPrice && modConfig().AllowTrashFish)))
                 {
                     Utility.trashItem(newItem);
                     e.Player.removeItemFromInventory(newItem);

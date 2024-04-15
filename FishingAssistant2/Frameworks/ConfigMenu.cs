@@ -112,12 +112,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_AddPreservingEnchantment, I18n.Tooltip_AddPreservingEnchantment, () => config().AddPreservingEnchantment, b => config().AddPreservingEnchantment = b);
             AddBool(I18n.ConfigMenu_Option_RemoveEnchantmentsWhenUnequipped, I18n.Tooltip_RemoveWhenUnequipped, () => config().RemoveWhenUnequipped, b => config().RemoveWhenUnequipped = b);
         }
-        
+
+        #region Dropdown Option
+
         private static string[] SkipMiniGameOptions()
         {
             return Enum.GetNames(typeof(SkipFishingMiniGame));
         }
-        
+
         private string ParseSkipMiniGame(string rawText)
         {
             if (!Enum.TryParse(rawText, out SkipFishingMiniGame text))
@@ -131,12 +133,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 _ => text.ToString()
             };
         }
-        
+
         private static string[] PauseFishingOptions()
         {
             return Enum.GetNames(typeof(PauseFishingBehaviour));
         }
-        
+
         private string ParsePauseFishing(string rawText)
         {
             if (!Enum.TryParse(rawText, out PauseFishingBehaviour text))
@@ -150,12 +152,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 _ => text.ToString()
             };
         }
-        
+
         private static string[] FishQualityOptions()
         {
             return Enum.GetNames(typeof(FishQuality));
         }
-        
+
         private string ParseFishQuality(string rawText)
         {
             if (!Enum.TryParse(rawText, out FishQuality text))
@@ -171,17 +173,17 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 _ => text.ToString()
             };
         }
-        
+
         private string ParseItemName(string rawText)
         {
             return rawText == "Any" ? I18n.Any() : ItemRegistry.GetData(rawText).DisplayName;
         }
-        
+
         private static string[] ActionOnInventoryFullOptions()
         {
             return Enum.GetNames(typeof(ActionOnInventoryFull));
         }
-        
+
         private string ParseActionOnInventoryFull(string rawText)
         {
             if (!Enum.TryParse(rawText, out ActionOnInventoryFull text))
@@ -195,7 +197,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 _ => text.ToString()
             };
         }
-        
+
         private static string[] TreasureChanceOptions()
         {
             return Enum.GetNames(typeof(TreasureChance));
@@ -214,12 +216,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 _ => text.ToString()
             };
         }
-        
+
         private static string[] HudPositionOptions()
         {
             return Enum.GetNames(typeof(HudPosition));
         }
-        
+
         private string ParseHudPosition(string rawText)
         {
             if (!Enum.TryParse(rawText, out HudPosition text))
@@ -233,6 +235,10 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             };
         }
 
+        #endregion
+
+        #region Warpper
+
         private void AddPage(Func<string> text, string pageTitle)
         {
             _configMenu?.AddPage(
@@ -240,7 +246,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 pageId: $"chibiKyu.FishingAssistant2.{pageTitle}",
                 pageTitle: text);
         }
-        
+
         private void AddPageLink(Func<string> text, string pageTitle)
         {
             _configMenu?.AddPageLink(
@@ -248,7 +254,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 pageId: $"chibiKyu.FishingAssistant2.{pageTitle}",
                 text: text);
         }
-        
+
         private void AddSectionTitle(Func<string> text)
         {
             _configMenu?.AddSectionTitle(
@@ -256,7 +262,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 text: text);
         }
 
-        private void AddKeyBind(Func<string> text, Func<SButton> getValue, Action<SButton> setValue, Func<string> tooltip)
+        private void AddKeyBind(Func<string> text, Func<SButton> getValue, Action<SButton> setValue,
+            Func<string> tooltip)
         {
             _configMenu?.AddKeybind(
                 mod: modManifest,
@@ -266,7 +273,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 tooltip: tooltip);
         }
 
-        private void AddDropDown(Func<string> name, Func<string> tooltip, string[] allowedValues, Func<string, string> formatAllowedValue,
+        private void AddDropDown(Func<string> name, Func<string> tooltip, string[] allowedValues,
+            Func<string, string> formatAllowedValue,
             Func<string> getValue, Action<string> setValue)
         {
             _configMenu?.AddTextOption(
@@ -288,7 +296,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 getValue: getValue,
                 setValue: setValue,
                 tooltip: tooltip
-                );
+            );
         }
 
         private void AddNumber(Func<string> name, Func<string> tooltip, Func<int> getValue, Action<int> setValue,
@@ -304,9 +312,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 interval: interval,
                 formatValue: formatValue,
                 tooltip: tooltip
-                );
+            );
         }
-        
+
         private void AddNumber(Func<string> name, Func<string> tooltip, Func<float> getValue, Action<float> setValue,
             float? min = null, float? max = null, float? interval = null, Func<float, string> formatValue = null)
         {
@@ -322,5 +330,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 tooltip: tooltip
             );
         }
+
+        #endregion
     }
 }
