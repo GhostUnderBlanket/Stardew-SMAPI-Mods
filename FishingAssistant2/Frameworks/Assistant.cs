@@ -28,7 +28,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         
         #region FishingRod
 
-        public void OnEquipFishingRod(FishingRod fishingRod)
+        public void OnEquipFishingRod(FishingRod fishingRod, bool isModEnable)
         {
             if (_fishingRod == null)
             {
@@ -40,6 +40,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 OverrideFishingRod(fishingRod);
             }
             
+            if (isModEnable && !Game1.player.isMoving()) 
+                modEntry().CachePlayerPosition();
+            else 
+                modEntry().ForgetPlayerPosition();
+            
             DoFishingRodAssistantTask();
         }
 
@@ -49,6 +54,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             if (modConfig().RemoveWhenUnequipped) _fishingRod.ClearAddedEnchantments();
             
+            modEntry().ForgetPlayerPosition();
             _fishingRod = null;
         }
 
@@ -119,7 +125,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 modEntry().ForceDisable();
             }
 
-            if (modEntry().ModEnable) Game1.pressUseToolButton();
+            if ((!lowStamina || hasEnchantment) && !isInventoryFull)
+            {
+                Game1.player.faceDirection(modEntry().FacingDirection);
+                Game1.pressUseToolButton();
+            }
             
             return;
             
@@ -150,6 +160,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                         return true;
                     }
                 }
+
                 return false;
             }
         }

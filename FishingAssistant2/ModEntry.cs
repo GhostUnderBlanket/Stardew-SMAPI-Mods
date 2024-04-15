@@ -22,6 +22,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         public bool ModEnable;
         public bool CatchTreasure;
         
+        public int FacingDirection;
+        private bool _facingDirectionCached;
+        
         public override void Entry(IModHelper helper)
         {
             I18n.Init(helper.Translation);
@@ -98,10 +101,10 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             if (!Context.IsWorldReady) return;
             
             if (Game1.player.CurrentTool is FishingRod fishingRod)
-                Assistant.OnEquipFishingRod(fishingRod);
+                Assistant.OnEquipFishingRod(fishingRod, ModEnable);
             if (Game1.player.CurrentTool is not FishingRod)
                 Assistant.OnUnEquipFishingRod();
-
+            
             Assistant.DoOnUpdateAssistantTask();
         }
 
@@ -136,6 +139,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             {
                 ModEnable = !ModEnable;
                 Game1.playSound("coin");
+                    
+                if (!ModEnable) ForgetPlayerPosition();
             }
             
             if (e.Button == Config.CatchTreasureButton)
@@ -147,6 +152,26 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             if (e.Button == Config.OpenConfigMenuButton && Config.OpenConfigMenuButton != SButton.None)
             {
                 ConfigMenu.OpenModMenu();
+            }
+        }
+        
+        public void CachePlayerPosition()
+        {
+            if (!_facingDirectionCached)
+            {
+                Monitor.Log("Facing direction cached");
+                FacingDirection = Game1.player.getDirection() != -1 ? Game1.player.getDirection() : Game1.player.FacingDirection;
+                _facingDirectionCached = true;
+            }
+        }
+
+        public void ForgetPlayerPosition()
+        {
+            if (_facingDirectionCached)
+            {
+                Monitor.Log("Facing direction cleared");
+                FacingDirection = 0;
+                _facingDirectionCached = false;
             }
         }
         
