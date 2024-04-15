@@ -308,6 +308,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         private void AutoLootTreasure()
         {
+            if (_treasureChestMenu == null) return;
+            
             if (_autoLootDelay-- > 0) return;
             _autoLootDelay = 30;
 
@@ -341,30 +343,27 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             }
             else
             {
-                Item obj = actualInventory[_excludeItems.Count];
-                if (obj != null)
+                Item item = actualInventory[_excludeItems.Count];
+                if (item.QualifiedItemId == "(O)102")
                 {
-                    if (obj.QualifiedItemId == "(O)102")
+                    Game1.player.foundArtifact(item.QualifiedItemId, 1);
+                    Game1.playSound("fireball");
+                    actualInventory.RemoveAt(_excludeItems.Count);
+                }
+                else
+                {
+                    if (Game1.player.addItemToInventoryBool(item))
                     {
-                        Game1.player.foundArtifact(obj.QualifiedItemId, 1);
-                        Game1.playSound("fireball");
+                        Game1.playSound("coin");
                         actualInventory.RemoveAt(_excludeItems.Count);
                     }
                     else
                     {
-                        if (Game1.player.addItemToInventoryBool(obj))
-                        {
-                            Game1.playSound("coin");
-                            actualInventory.RemoveAt(_excludeItems.Count);
-                        }
-                        else
-                        {
-                            _excludeItems.Add(obj);
-                        }
+                        _excludeItems.Add(item);
                     }
-                    
-                    _autoLootDelay = 10;
                 }
+                    
+                _autoLootDelay = 10;
             }
         }
 
