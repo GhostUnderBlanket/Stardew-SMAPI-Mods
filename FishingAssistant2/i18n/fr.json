@@ -87,6 +87,7 @@
 
   /// FISHING ROD ///
   "config-menu.title.fishing-rod" : "Fishing Rod", //New
+  "config-menu.option.start-with-fishing-rod" : "Start With Fishing Rod", //New
   "config-menu.option.auto-attach-bait" : "Auto Attach Bait", //New
   "config-menu.option.prefer-bait" : "Preferred Bait", //New
   "config-menu.option.infinite-bait" : "Infinite Bait", //New
@@ -154,6 +155,7 @@
   "tooltip.show-treasure" : "Toggle for showing treasure with fish info", // New
   "tooltip.show-uncaught-fish" : "Show a preview for all fish species, even those you have never caught", // New
   "tooltip.show-legendary-fish" : "Toggle for showing fish info if the current fish is legendary", // New
+  "tooltip.start-with-fishing-rod" : "Start the game at day 1 with fishing rod", //New
   "tooltip.auto-attach-bait" : "Toggle for automatically attaching bait if possible", // New
   "tooltip.preferred-bait" : "Preference for bait type", // New
   "tooltip.infinite-bait" : "Make your fishing bait last indefinitely", // New

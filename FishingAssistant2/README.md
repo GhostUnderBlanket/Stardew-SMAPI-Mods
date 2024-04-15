@@ -305,6 +305,14 @@ Show a preview for all fish species, even ones you have never caught.
 Toggle for always showing fish info if current fish is legendary.
 ```
 
+### StartWithFishingRod
+**Default value:** `None`
+**Possible values:** `None | Fishing rod qualified item ID eg. (T)TrainingRod`
+
+```
+Start the game at day 1 with selected fishing rod.
+```
+
 ### AutoAttachBait
 **Default value:** `false`
 **Possible values:** `true | false`

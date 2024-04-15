@@ -116,8 +116,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
         /// <summary>Toggle for showing fish info if the current fish is legendary</summary>
         public bool ShowLegendaryFish { get; set; } = false;
-        
+
         /// FISHING ROD ///
+        /// <summary>Start the game at day 1 with fishing rod</summary>
+        public string StartWithFishingRod { get; set; } = "None";
+        
         /// <summary>Toggle for auto attaching bait if possible</summary>
         public bool AutoAttachBait { get; set; } = false;
         

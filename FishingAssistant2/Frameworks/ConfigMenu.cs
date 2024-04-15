@@ -13,6 +13,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         
         private readonly List<string> _availableBaits = new List<string>();
         private readonly List<string> _availableTackles = new List<string>();
+        private readonly List<string> _availableFishingRods = new List<string>();
         
         public void RegisterModConfigMenu()
         {
@@ -23,6 +24,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             _availableBaits.Add("Any");
             _availableTackles.Add("Any");
+            _availableFishingRods.Add("None");
+            _availableFishingRods.Add("(T)TrainingRod");
+            _availableFishingRods.Add("(T)BambooPole");
             
             foreach (KeyValuePair<string, ObjectData> item in Game1.objectData)
             {
@@ -95,14 +99,15 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             // FishingRod Page
             AddPage(I18n.ConfigMenu_Page_General,"FishingRod");
             AddSectionTitle(I18n.ConfigMenu_Title_FishingRod);
+            AddDropDown(I18n.ConfigMenu_Option_StartWithFishingRod, I18n.Tooltip_StartWithFishingRod, _availableFishingRods.ToArray(), ParseFishingRodName, () => config().StartWithFishingRod, s => config().StartWithFishingRod = s);
             AddBool(I18n.ConfigMenu_Option_AutoAttachBait, I18n.Tooltip_AutoAttachBait, () => config().AutoAttachBait, b => config().AutoAttachBait = b);
-            AddDropDown(I18n.ConfigMenu_Option_PreferBait, I18n.Tooltip_PreferredBait, _availableBaits.ToArray(), ParseItemName, () => config().PreferredBait, s => config().PreferredBait = s);
+            AddDropDown(I18n.ConfigMenu_Option_PreferBait, I18n.Tooltip_PreferredBait, _availableBaits.ToArray(), ParseBaitAndTackleName, () => config().PreferredBait, s => config().PreferredBait = s);
             AddBool(I18n.ConfigMenu_Option_InfiniteBait, I18n.Tooltip_InfiniteBait, () => config().InfiniteBait, b => config().InfiniteBait = b);
             AddBool(I18n.ConfigMenu_Option_SpawnBaitIfDontHave, I18n.Tooltip_SpawnBaitIfDontHave, () => config().SpawnBaitIfDontHave, b => config().SpawnBaitIfDontHave = b);
             AddNumber(I18n.ConfigMenu_Option_BaitAmountToSpawn, I18n.Tooltip_BaitAmountToSpawn, () => config().BaitAmountToSpawn, i => config().BaitAmountToSpawn = i, min: 1, max: 999, interval: 1);
             AddBool(I18n.ConfigMenu_Option_AutoAttachTackles, I18n.Tooltip_AutoAttachTackles, () => config().AutoAttachTackles, b => config().AutoAttachTackles = b);
-            AddDropDown(I18n.ConfigMenu_Option_PreferTackle, I18n.Tooltip_PreferredTackle, _availableTackles.ToArray(), ParseItemName, () => config().PreferredTackle, s => config().PreferredTackle = s);
-            AddDropDown(I18n.ConfigMenu_Option_PreferAdvancedIridiumTackle, I18n.Tooltip_PreferredAdvIridiumTackle, _availableTackles.ToArray(), ParseItemName, () => config().PreferredAdvIridiumTackle, s => config().PreferredAdvIridiumTackle = s);
+            AddDropDown(I18n.ConfigMenu_Option_PreferTackle, I18n.Tooltip_PreferredTackle, _availableTackles.ToArray(), ParseBaitAndTackleName, () => config().PreferredTackle, s => config().PreferredTackle = s);
+            AddDropDown(I18n.ConfigMenu_Option_PreferAdvancedIridiumTackle, I18n.Tooltip_PreferredAdvIridiumTackle, _availableTackles.ToArray(), ParseBaitAndTackleName, () => config().PreferredAdvIridiumTackle, s => config().PreferredAdvIridiumTackle = s);
             AddBool(I18n.ConfigMenu_Option_InfiniteTackle, I18n.Tooltip_InfiniteTackle, () => config().InfiniteTackle, b => config().InfiniteTackle = b);
             AddBool(I18n.ConfigMenu_Option_SpawnTackleIfDontHave, I18n.Tooltip_SpawnTackleIfDontHave, () => config().SpawnTackleIfDontHave, b => config().SpawnTackleIfDontHave = b);
             
@@ -115,7 +120,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         }
 
         #region Dropdown Option
-
+        
         private static string[] SkipMiniGameOptions()
         {
             return Enum.GetNames(typeof(SkipFishingMiniGame));
@@ -175,9 +180,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             };
         }
 
-        private string ParseItemName(string rawText)
+        private string ParseBaitAndTackleName(string rawText)
         {
             return rawText == "Any" ? I18n.Any() : ItemRegistry.GetData(rawText).DisplayName;
+        }
+        
+        private string ParseFishingRodName(string rawText)
+        {
+            return rawText == "None" ? I18n.None () : ItemRegistry.GetData(rawText).DisplayName;
         }
 
         private static string[] ActionOnInventoryFullOptions()

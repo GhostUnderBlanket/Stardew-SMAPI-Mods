@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
+using StardewValley.ItemTypeDefinitions;
 using StardewValley.Menus;
 using StardewValley.Tools;
 using Object = StardewValley.Object;
@@ -28,6 +29,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             this.Config = helper.ReadConfig<ModConfig>();
             
             helper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
+            helper.Events.GameLoop.SaveLoaded += this.OnSaveLoaded;
             helper.Events.GameLoop.DayStarted += OnDayStarted;
             helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
             helper.Events.GameLoop.TimeChanged += OnTimeChanged;
@@ -60,6 +62,22 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             ConfigMenu.RegisterModConfigMenu();
         }
         
+        private void OnSaveLoaded(object? sender, SaveLoadedEventArgs e)
+        {
+            if (!Context.IsWorldReady || Game1.dayOfMonth != 1 || !ShouldGivePlayerFishingRod())
+                return;
+
+            var parsedItem = ItemRegistry.GetDataOrErrorItem(Config.StartWithFishingRod);
+            Game1.player.addItemByMenuIfNecessary(ItemRegistry.Create(parsedItem.QualifiedItemId));
+            
+            return;
+
+            bool ShouldGivePlayerFishingRod()
+            {
+                return !Game1.player.Items.OfType<FishingRod>().Any() && Config.StartWithFishingRod != "None";
+            }
+        }
+        
         private void OnDayStarted(object? sender, DayStartedEventArgs e)
         {
             Assistant.NumWarnThisDay = 0;
@@ -80,7 +98,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             if (!Context.IsWorldReady) return;
             
             if (Game1.player.CurrentTool is FishingRod fishingRod)
-                Assistant.OnEquipFishingRod(fishingRod, ModEnable);
+                Assistant.OnEquipFishingRod(fishingRod);
             if (Game1.player.CurrentTool is not FishingRod)
                 Assistant.OnUnEquipFishingRod();
 

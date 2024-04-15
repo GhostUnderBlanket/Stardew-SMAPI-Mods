@@ -87,6 +87,7 @@
 
   /// FISHING ROD ///
   "config-menu.title.fishing-rod" : "เบ็ดตกปลา",
+  "config-menu.option.start-with-fishing-rod" : "เริ่มเกมพร้อมเบ็ดตกปลา",
   "config-menu.option.auto-attach-bait" : "ใส่เหยื่ออัตโนมัติ",
   "config-menu.option.prefer-bait" : "เหยื่อที่ต้องการ",
   "config-menu.option.infinite-bait" : "เหยื่อไม่มีวันหมด",
@@ -154,6 +155,7 @@
   "tooltip.show-treasure" : "เปิด/ปิด การแสดงว่าในมินิเกมนั้นจะมีกล่องสมบัติหรือไม่",
   "tooltip.show-uncaught-fish" : "แสดงข้อมูลของปลาทั้งหมด ถึงแม้จะยังไม่เคยจับได้",
   "tooltip.show-legendary-fish" : "แสดงข้อมูลของปลาในตำนานเสมอ",
+  "tooltip.start-with-fishing-rod" : "เริ่มเกมวันแรกโดยมีเป็ดตกปลาอยู่ในกระเป๋า",
   "tooltip.auto-attach-bait" : "เปิด/ปิด การใส่เหยื่ออัตโนมัติหากเป็นไปได้",
   "tooltip.preferred-bait" : "ประเภทของเหยื่อที่ต้องการ หากเป็น 'อะไรก็ได้' จะใส่เหยื่อที่อยู่แรกสุดในกระเป๋า",
   "tooltip.infinite-bait" : "ทำให้เหยื่อเต็มเสมอไม่มีวันหมด",

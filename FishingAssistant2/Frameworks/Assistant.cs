@@ -28,7 +28,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         
         #region FishingRod
 
-        public void OnEquipFishingRod(FishingRod fishingRod, bool isModEnable)
+        public void OnEquipFishingRod(FishingRod fishingRod)
         {
             if (_fishingRod == null)
             {
