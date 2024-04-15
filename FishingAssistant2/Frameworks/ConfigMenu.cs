@@ -47,6 +47,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddSectionTitle(I18n.ConfigMenu_Title_KeyBinding);
             AddKeyBind(I18n.ConfigMenu_Option_ToggleAutomation, () => config().EnableAutomationButton, button => config().EnableAutomationButton = button, I18n.Tooltip_EnableAutomationButton);
             AddKeyBind(I18n.ConfigMenu_Option_CatchTreasure, () => config().CatchTreasureButton, button => config().CatchTreasureButton = button, I18n.Tooltip_CatchTreasureButton);
+            AddKeyBind(I18n.ConfigMenu_Option_OpenConfigMenu, () => config().OpenConfigMenuButton, button => config().OpenConfigMenuButton = button, I18n.Tooltip_OpenConfigMenu);
 
             AddSectionTitle(I18n.ConfigMenu_Title_Hud);
             AddDropDown(I18n.ConfigMenu_Option_HudPosition, I18n.Tooltip_ModStatusPosition, HudPositionOptions(), ParseHudPosition, () => config().ModStatusPosition, pos => config().ModStatusPosition = pos);
@@ -239,6 +240,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         #region Warpper
 
+        internal void OpenModMenu()
+        {
+            _configMenu?.OpenModMenu(modManifest);
+        }
+        
         private void AddPage(Func<string> text, string pageTitle)
         {
             _configMenu?.AddPage(

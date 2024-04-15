@@ -25,6 +25,14 @@ Button for toggling automation of this mod
 Button for toggling catch or ignore treasure in fishing mini-game.
 ```
 
+### OpenConfigMenuButton
+**Default value:** `Not set`
+**Possible values:** See `Modding:Player Guide/Key Bindings` on Stardew valley wiki. [Here](https://stardewcommunitywiki.com/Modding:Player_Guide/Key_Bindings#Button_codes)
+
+```
+Button for quickly open Fishing assistant2 GMCM in-game config menu.
+```
+
 ### ModStatusPosition
 **Default value:** `Left`
 **Possible values:** `Left | Right`

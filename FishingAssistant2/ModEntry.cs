@@ -16,6 +16,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
     {
         private ModConfig Config { get; set; }
         private Assistant Assistant { get; set; }
+        private ConfigMenu ConfigMenu { get; set; }
         
         public bool ModEnable;
         public bool CatchTreasure;
@@ -41,7 +42,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
         private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
         {
-            var configMenu = new ConfigMenu(
+            ConfigMenu = new ConfigMenu(
                 this.Helper.ModRegistry, 
                 this.ModManifest, 
                 () => this.Config,
@@ -56,7 +57,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
                     this.Config = this.Helper.ReadConfig<ModConfig>();
                 });
             
-            configMenu.RegisterModConfigMenu();
+            ConfigMenu.RegisterModConfigMenu();
         }
         
         private void OnDayStarted(object? sender, DayStartedEventArgs e)
@@ -123,6 +124,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             {
                 CatchTreasure = !CatchTreasure;
                 Game1.playSound("dwop");
+            }
+
+            if (e.Button == Config.OpenConfigMenuButton && Config.OpenConfigMenuButton != SButton.None)
+            {
+                ConfigMenu.OpenModMenu();
             }
         }
         

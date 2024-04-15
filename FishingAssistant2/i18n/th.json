@@ -38,6 +38,7 @@
   "config-menu.title.key-binding" : "การตั้งค่าปุ่ม",
   "config-menu.option.toggle-automation" : "ปุ่มระบบอัตโนมัติ",
   "config-menu.option.catch-treasure" : "ปุ่มจับสมบัติ",
+  "config-menu.option.open-config-menu" : "ปุ่มเปิดหน้าตั้งค่า",
 
   /// HUD ///
   "config-menu.title.hud" : "HUD",
@@ -119,6 +120,7 @@
   /// TOOLTIP ///
   "tooltip.enable-automation-button" : "ปุ่มสำหรับ เปิด/ปิด ระบบอัตโนมัติ",
   "tooltip.catch-treasure-button" : "ปุ่มสำหรับ จับ/ปล่อย สมบัติในมินิเกม",
+  "tooltip.open-config-menu" : "ปุ่มสำหรับเปิดหน้าตั้งค่าในเกมของ Fishing Assistant 2 อย่างรวดเร็ว", // New
   "tooltip.mod-status-position" : "ตำแหน่งที่จะแสดงสถานะ",
   "tooltip.auto-cast-fishing-rod" : "เปิด/ปิด การเหวี่ยงเบ็ดอัติโนมัติ",
   "tooltip.auto-hook-fish" : "เปิด/ปิด การดึงเบ็ดอัตโนมัติ",

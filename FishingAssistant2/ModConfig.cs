@@ -10,6 +10,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
         /// <summary>Button for toggling catch or ignore treasure in fishing mini-game</summary>
         public SButton CatchTreasureButton { get; set; } = SButton.F6;
+        
+        /// <summary>Button for quickly open Fishing assistant2 GMCM in-game config menu</summary>
+        public SButton OpenConfigMenuButton { get; set; } = SButton.None;
 
         /// HUD ///
         /// <summary>Position to display mod status</summary>

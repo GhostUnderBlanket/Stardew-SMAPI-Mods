@@ -38,6 +38,7 @@
   "config-menu.title.key-binding" : "Key Binding",
   "config-menu.option.toggle-automation" : "Toggle Automation Button",
   "config-menu.option.catch-treasure" : "Catch Treasure Button",
+  "config-menu.option.open-config-menu" : "Open Config Menu",
 
   /// HUD ///
   "config-menu.title.hud" : "HUD",
@@ -119,6 +120,7 @@
   /// TOOLTIP ///
   "tooltip.enable-automation-button" : "Button for toggling automation of this mod", // New
   "tooltip.catch-treasure-button" : "Button for toggling catch or ignore treasure in fishing mini-game", // New
+  "tooltip.open-config-menu" : "Button for quickly open Fishing assistant2 GMCM in-game config menu", // New
   "tooltip.mod-status-position" : "Position to display mod status", // New
   "tooltip.auto-cast-fishing-rod" : "Toggle for auto-casting fishing rod", // New
   "tooltip.auto-hook-fish" : "Toggle for auto-hooking fish", // New
