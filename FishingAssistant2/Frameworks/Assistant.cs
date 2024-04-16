@@ -439,13 +439,20 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 int sellToStorePrice = Utility.getSellToStorePriceOfItem(newItem, false);
                 
                 if (newItem.canBeTrashed() && (newItem.Category == Object.junkCategory 
-                                               || (newItem.Category != Object.FishCategory && sellToStorePrice <= modConfig().JunkHighestPrice) 
-                                               || (newItem.Category == Object.FishCategory && sellToStorePrice <= modConfig().JunkHighestPrice && modConfig().AllowTrashFish)))
+                                               || (newItem.Category == Object.FishCategory && sellToStorePrice <= modConfig().JunkHighestPrice && modConfig().AllowTrashFish)
+                                               || (newItem.Category != Object.FishCategory && sellToStorePrice <= modConfig().JunkHighestPrice && SaveToTrashed(newItem))))
                 {
                     Utility.trashItem(newItem);
                     e.Player.removeItemFromInventory(newItem);
-                    CommonHelper.PushWarnNotification(I18n.HudMessage_AutoTrashJunk(), newItem.DisplayName, newItem.Stack);
+                    CommonHelper.PushWarnNotification(I18n.HudMessage_AutoTrashJunk(), Object.GetCategoryDisplayName(newItem.Category), newItem.Stack);
                 }
+            }
+            
+            return;
+            
+            bool SaveToTrashed(Item itemToTrash)
+            {
+                return itemToTrash is not (MeleeWeapon or FishingRod or Pan or Slingshot);
             }
         }
 
