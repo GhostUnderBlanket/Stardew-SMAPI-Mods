@@ -212,8 +212,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             _bobberBar.OverrideFishDifficult(modConfig().FishDifficultyMultiplier, modConfig().FishDifficultyAdditive);
             
             _bobberBar.OverrideTreasureChance(modConfig().TreasureChance, modConfig().GoldenTreasureChance);
-            
-            if (modConfig().InstantCatchTreasure) _bobberBar.InstantCatchTreasure(modEntry().CatchTreasure);
         }
 
         #endregion
@@ -222,6 +220,51 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         internal void DoOnUpdateAssistantTask()
         {
+            if (_bobberBar != null && _fishingRod != null)
+            {
+                var bar = _bobberBar.Instance;
+                var rod = _fishingRod.Instance;
+                
+                _bobberBar.AlwaysPerfect(modConfig().AlwaysPerfect);
+            
+                _bobberBar.OverrideFishQuality(modConfig().PreferFishQuality);
+            
+                _bobberBar.OverrideFishSize(modConfig().AlwaysMaxFishSize);
+
+                if (modConfig().InstantCatchTreasure && bar.treasureScale >= 1.0f)
+                {
+                    _bobberBar.InstantCatchTreasure(modEntry().CatchTreasure);
+                }
+                
+                _fishingRod.OverrideNumberOfFishCaught(modConfig().PreferFishAmount, _bobberBar.Instance);
+                
+                if (bar is { fadeOut: true, scale: <= 0.1f } || ShouldSkipMiniGame())
+                {
+                    bar.scale = 0.0f;
+                    bar.fadeOut = false;
+                    
+                    if (ShouldSkipMiniGame())
+                    {
+                        _bobberBar.InstantCatchFish();
+                        _bobberBar.InstantCatchTreasure(modEntry().CatchTreasure);
+                    }
+                
+                    if (bar.distanceFromCatching >= 0.8999f)
+                    {
+                        rod.pullFishFromWater(bar.whichFish, bar.fishSize, bar.fishQuality, (int) bar.difficulty, bar.treasureCaught,
+                            bar.perfect, bar.fromFishPond, bar.setFlagOnCatch, bar.bossFish, rod.numberOfFishCaught);
+                    }
+                    else
+                    {
+                        Game1.player.completelyStopAnimatingOrDoingAction();
+                        rod.doneFishing(Game1.player, true);
+                    }
+                
+                    Game1.exitActiveMenu();
+                    Game1.setRichPresence("location", Game1.currentLocation.Name);
+                }
+            }
+            
             if (!modEntry().ModEnable) return;
             
             if (IsInFishingMiniGame && modConfig().AutoPlayMiniGame) AutoPlayFishingMiniGame();
@@ -236,42 +279,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             if (_fishingRod == null || _bobberBar == null) return;
             
             var bar = _bobberBar.Instance;
-            var rod = _fishingRod.Instance;
             
             float fishPos = bar.bobberPosition;
             int bobberBarCenter = (bar.bobberBarHeight / 2);
             
-            if (bar is { fadeOut: true, scale: <= 0.1f } || ShouldSkipMiniGame())
-            {
-                if (ShouldSkipMiniGame())
-                {
-                    _bobberBar.InstantCatchFish();
-                    _bobberBar.InstantCatchTreasure(modEntry().CatchTreasure);
-                }
-                
-                _bobberBar.AlwaysPerfect(modConfig().AlwaysPerfect);
-                _bobberBar.OverrideFishQuality(modConfig().PreferFishQuality);
-                _bobberBar.OverrideFishSize(modConfig().AlwaysMaxFishSize);
-                _fishingRod.OverrideNumberOfFishCaught(modConfig().PreferFishAmount, bar);
-                
-                bar.scale = 0.0f;
-                bar.fadeOut = false;
-                
-                if (bar.distanceFromCatching >= 0.8999f)
-                {
-                    rod.pullFishFromWater(bar.whichFish, bar.fishSize, bar.fishQuality, (int) bar.difficulty, bar.treasureCaught,
-                        bar.perfect, bar.fromFishPond, bar.setFlagOnCatch, bar.bossFish, rod.numberOfFishCaught);
-                }
-                else
-                {
-                    Game1.player.completelyStopAnimatingOrDoingAction();
-                    rod.doneFishing(Game1.player, true);
-                }
-                
-                Game1.exitActiveMenu();
-                Game1.setRichPresence("location", Game1.currentLocation.Name);
-            }
-            else if (_catchingTreasure && bar.distanceFromCatching < 0.2f)
+            if (_catchingTreasure && bar.distanceFromCatching < 0.2f)
             {
                 _catchingTreasure = false;
                 fishPos = bar.bobberPosition;
@@ -284,15 +296,13 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             
             fishPos += 25;
             bar.bobberBarSpeed = (fishPos - bar.bobberBarPos - bobberBarCenter) / 2;
-            
-            return;
-
-            bool ShouldSkipMiniGame()
-            {
-                if (modConfig().SkipFishingMiniGame == Enum.GetName(SkipFishingMiniGame.SkipAll)) return true;
+        }
+        
+        private bool ShouldSkipMiniGame()
+        {
+            if (modConfig().SkipFishingMiniGame == Enum.GetName(SkipFishingMiniGame.SkipAll)) return true;
                 
-                return modConfig().SkipFishingMiniGame == Enum.GetName(SkipFishingMiniGame.SkipOnlyCaught) && AlreadyCaughtFish();
-            }
+            return modConfig().SkipFishingMiniGame == Enum.GetName(SkipFishingMiniGame.SkipOnlyCaught) && AlreadyCaughtFish();
         }
 
         private void AutoCloseFishPopup()
@@ -444,7 +454,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 {
                     Utility.trashItem(newItem);
                     e.Player.removeItemFromInventory(newItem);
-                    CommonHelper.PushWarnNotification(I18n.HudMessage_AutoTrashJunk(), Object.GetCategoryDisplayName(newItem.Category), newItem.Stack);
+                    CommonHelper.PushWarnNotification(I18n.HudMessage_AutoTrashJunk(), newItem.DisplayName, newItem.Stack);
                 }
             }
             
