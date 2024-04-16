@@ -374,7 +374,7 @@ Preference for fishing rood cast power.
 **Possible values:** `true | false`
 
 ```
-Allow player to unlock and adjust casting power by holding left mouse for a second and next time mod will use that cast power instead of 'Cast Power Percent'.
+Allow player to unlock and adjust casting power by holding left mouse for a second and at the next cast mod will use this cast power instead of 'Cast Power Percent'.
 ```
 
 ### InfiniteBait

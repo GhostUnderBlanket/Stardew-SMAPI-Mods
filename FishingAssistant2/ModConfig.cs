@@ -142,7 +142,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         /// <summary>Start the game at day 1 with fishing rod</summary>
         public string StartWithFishingRod { get; set; } = "None";
         
-        /// <summary>Allow player to unlock and adjust casting power by holding left mouse for a second and next time mod will use that cast power instead of 'Cast Power Percent'</summary>
+        /// <summary>Allow player to unlock and adjust casting power by holding left mouse for a second and at the next cast mod will use this cast power instead of 'Cast Power Percent'</summary>
         public bool UseSmartCastPower { get; set; } = true;
         
         /// <summary>Preference for casting power</summary>

@@ -173,5 +173,5 @@
   "tooltip.add-master-enchantment" : "给手持的鱼竿添加精通附魔",
   "tooltip.add-preserving-enchantment" : "给手持的鱼竿添加耐用附魔",
   "tooltip.remove-when-unequipped" : "当未手持鱼竿时，移除鱼竿上的附魔",
-  "tooltip.use-smart-cast-power" : "Allow player to unlock and adjust casting power by holding left mouse for a second and next time mod will use that cast power instead of 'Cast Power Percent'" // New
+  "tooltip.use-smart-cast-power" : "Allow player to unlock and adjust casting power by holding left mouse for a second and at the next cast mod will use this cast power instead of 'Cast Power Percent'" // New
 }

@@ -173,5 +173,5 @@
   "tooltip.add-master-enchantment" : "Toggle for adding Master enchantment to fishing rod",
   "tooltip.add-preserving-enchantment" : "Toggle for adding Preserving enchantment to fishing rod",
   "tooltip.remove-when-unequipped" : "Toggle for removing enchantment when fishing rod is unequipped",
-  "tooltip.use-smart-cast-power" : "Allow player to unlock and adjust casting power by holding left mouse for a second and next time mod will use that cast power instead of 'Cast Power Percent'",
+  "tooltip.use-smart-cast-power" : "Allow player to unlock and adjust casting power by holding left mouse for a second and at the next cast mod will use this cast power instead of 'Cast Power Percent'",
 }
