@@ -25,8 +25,8 @@
   "iridium" : "铱星",
   "warn-only" : "警告",
   "warn-and-pause" : "警告并暂停",
-  "skip-all" : "Skip All", //New
-  "skip-only-caught" : "Skip Only Caught Fish", //New
+  "skip-all" : "跳过所有", //New
+  "skip-only-caught" : "仅跳过捕鱼", //New
 
   /// Config Menu ///
   "config-menu.page.general" : "常规设置", 
@@ -38,7 +38,7 @@
   "config-menu.title.key-binding" : "按键绑定",
   "config-menu.option.toggle-automation" : "自动钓鱼开关",
   "config-menu.option.catch-treasure" : "自动钓宝箱开关",
-  "config-menu.option.open-config-menu" : "Open Config Menu", //New
+  "config-menu.option.open-config-menu" : "设置菜单开关", //New
   
   /// HUD ///
   "config-menu.title.hud" : "HUD",
@@ -49,7 +49,7 @@
   "config-menu.option.auto-cast-fishing-rod" : "自动抛竿",
   "config-menu.option.auto-hook-fish" : "自动收竿",
   "config-menu.option.auto-play-mini-game" : "自动玩小游戏",
-  "config-menu.option.auto-close-popup" : "自动关闭窗口",
+  "config-menu.option.auto-close-popup" : "自动关闭渔获窗口",
   "config-menu.option.auto-loot-treasure" : "自动搜刮宝箱",
   "config-menu.option.action-if-inventory-full" : "背包装满时",
   "config-menu.option.auto-pause-fishing" : "暂停钓鱼",
@@ -87,7 +87,7 @@
 
   /// FISHING ROD ///
   "config-menu.title.fishing-rod" : "鱼竿",
-  "config-menu.option.start-with-fishing-rod" : "Start With Fishing Rod", //New
+  "config-menu.option.start-with-fishing-rod" : "开局携带鱼竿", //New
   "config-menu.option.auto-attach-bait" : "自动装备鱼饵(开启后关于鱼饵的修改才生效)",
   "config-menu.option.prefer-bait" : "首选鱼饵",
   "config-menu.option.infinite-bait" : "无限鱼饵",
@@ -119,56 +119,56 @@
   "hud-message.auto-trash-junk" : "自动丢掉了 {1} 个 {0} ",
 
   /// TOOLTIP ///
-  "tooltip.enable-automation-button" : "Button for toggling automation of this mod", // New
-  "tooltip.catch-treasure-button" : "Button for toggling catch or ignore treasure in fishing mini-game", // New
-  "tooltip.open-config-menu" : "Button for quickly open Fishing assistant2 GMCM in-game config menu", // New
-  "tooltip.mod-status-position" : "Position to display mod status", // New
-  "tooltip.auto-cast-fishing-rod" : "Toggle for auto-casting fishing rod", // New
-  "tooltip.auto-hook-fish" : "Toggle for auto-hooking fish", // New
-  "tooltip.auto-play-mini-game" : "Toggle for automatically playing fishing mini-game", // New
-  "tooltip.auto-close-popup" : "Toggle for automatically closing fish popup", // New
-  "tooltip.auto-loot-treasure" : "Toggle for automatically looting treasure", // New
-  "tooltip.action-if-inventory-full" : "Action to take if inventory is full while looting", // New
-  "tooltip.auto-trash-junk" : "Toggle for automatically trashing junk items when obtaining new items", // New
-  "tooltip.junk-highest-price" : "Items priced less than or equal to this are considered junk", // New
-  "tooltip.allow-trash-fish" : "Toggle for allowing trashing of fish with a sale price corresponding to 'JunkHighestPrice'", // New
-  "tooltip.auto-pause-fishing" : "Should the mod auto-pause fishing during nighttime", // New
-  "tooltip.time-to-pause" : "Time to trigger fishing pause", // New
-  "tooltip.warn-count" : "Number of warnings the mod will give if you continue fishing after reaching 'TimeToPause'", // New
-  "tooltip.auto-eat-food" : "Toggle to automatically eat food from inventory", // New
-  "tooltip.energy-percent-to-eat" : "Energy percentage considered low, and finding some food to eat", // New
-  "tooltip.allow-eating-fish" : "Toggle for allowing the eating of caught fish", // New
-  "tooltip.skip-fishing-mini-game" : "Toggle to instantly skip fishing mini-game", // New
-  "tooltip.cast-power-percent" : "Preference for casting power", // New
-  "tooltip.instant-fish-bite" : "Toggle for instantly making fish bite", // New
-  "tooltip.prefer-fish-amount" : "Preference for the amount of fish pulled from water", // New
-  "tooltip.prefer-fish-quality" : "Quality of caught fish", // New
-  "tooltip.always-perfect" : "Whether to consider every catch as perfect", // New
-  "tooltip.always-max-fish-size" : "Toggle to always catch fish at maximum size", // New
-  "tooltip.fish-difficulty-multiplier" : "Multiplier applied to fish difficulty", // New
-  "tooltip.fish-difficulty-additive" : "Value added to fish difficulty", // New
-  "tooltip.instant-catch-treasure" : "Instantly catch treasure when it appears", // New
-  "tooltip.treasure-chance" : "Chance of finding treasure while fishing", // New
-  "tooltip.golden-treasure-chance" : "Chance of finding golden treasure while fishing", // New
-  "tooltip.display-fish-preview" : "Toggle for displaying fish info while catching fish", // New
-  "tooltip.show-fish-name" : "Toggle for showing fish name with fish info", // New
-  "tooltip.show-treasure" : "Toggle for showing treasure with fish info", // New
-  "tooltip.show-uncaught-fish" : "Show a preview for all fish species, even those you have never caught", // New
-  "tooltip.show-legendary-fish" : "Toggle for showing fish info if the current fish is legendary", // New
-  "tooltip.start-with-fishing-rod" : "Start the game at day 1 with fishing rod", //New
-  "tooltip.auto-attach-bait" : "Toggle for automatically attaching bait if possible", // New
-  "tooltip.preferred-bait" : "Preference for bait type", // New
-  "tooltip.infinite-bait" : "Make your fishing bait last indefinitely", // New
-  "tooltip.spawn-bait-if-dont-have" : "Toggle for spawning bait if none is available", // New
-  "tooltip.bait-amount-to-spawn" : "Amount of bait to spawn", // New
-  "tooltip.auto-attach-tackles" : "Toggle for automatically attaching tackles if possible", // New
-  "tooltip.preferred-tackle" : "Preference for tackle type in the first slot", // New
-  "tooltip.preferred-adv-iridium-tackle" : "Preference for tackle type in the second slot of the Adv. iridium rod", // New
-  "tooltip.infinite-tackle" : "Make your tackle last indefinitely", // New
-  "tooltip.spawn-tackle-if-dont-have" : "Toggle for spawning tackle if none are available", // New
-  "tooltip.add-auto-hook-enchantment" : "Toggle for adding Auto-Hook enchantment to fishing rod", // New
-  "tooltip.add-efficient-enchantment" : "Toggle for adding Efficient enchantment to fishing rod", // New
-  "tooltip.add-master-enchantment" : "Toggle for adding Master enchantment to fishing rod", // New
-  "tooltip.add-preserving-enchantment" : "Toggle for adding Preserving enchantment to fishing rod", // New
-  "tooltip.remove-when-unequipped" : "Toggle for removing enchantment when fishing rod is unequipped" // New
+  "tooltip.enable-automation-button" : "用于开关自动钓鱼的按钮", // New
+  "tooltip.catch-treasure-button" : "用于开关钓鱼小游戏中自动抓取宝箱的按钮", // New
+  "tooltip.open-config-menu" : "用于打开钓鱼小帮手2游戏内配置菜单的按钮", // New
+  "tooltip.mod-status-position" : "显示自动钓鱼开关状态的位置", // New
+  "tooltip.auto-cast-fishing-rod" : "自动投掷鱼竿的开关", // New
+  "tooltip.auto-hook-fish" : "自动提起鱼竿的开关", // New
+  "tooltip.auto-play-mini-game" : "自动玩小游戏的开关", // New
+  "tooltip.auto-close-popup" : "自动关闭渔获弹出窗口的开关", // New
+  "tooltip.auto-loot-treasure" : "自动搜刮钓上来的宝箱的开关", // New
+  "tooltip.action-if-inventory-full" : "当搜刮宝箱时背包如果装满了如何行动", // New
+  "tooltip.auto-trash-junk" : "自动丢弃垃圾的开关", // New
+  "tooltip.junk-highest-price" : "价格小于等于此数值的物品被视为垃圾", // New
+  "tooltip.allow-trash-fish" : "自动丢弃鱼的开关，遵从上面设置的价格规则", // New
+  "tooltip.auto-pause-fishing" : "是否允许自动暂停钓鱼(注意多人游戏中时间并不会暂停)", // New
+  "tooltip.time-to-pause" : "自动暂停钓鱼的时间", // New
+  "tooltip.warn-count" : "如果在到达自动暂停钓鱼的时间后继续钓鱼，将弹出的警告次数", // New
+  "tooltip.auto-eat-food" : "自动吃掉背包里的食物的开关", // New
+  "tooltip.energy-percent-to-eat" : "当能量低于设定的百分比时，自动进食", // New
+  "tooltip.allow-eating-fish" : "是否允许自动进食吃掉背包里的鱼", // New
+  "tooltip.skip-fishing-mini-game" : "是否立即跳过小游戏的设定", // New
+  "tooltip.cast-power-percent" : "抛竿时以锁定的力量百分比抛出", // New
+  "tooltip.instant-fish-bite" : "抛竿后鱼立即上钩", // New
+  "tooltip.prefer-fish-amount" : "一次抛竿至少钓上多少条鱼", // New
+  "tooltip.prefer-fish-quality" : "对钓上来的鱼的质量固定设定", // New
+  "tooltip.always-perfect" : "是否让每一次钓鱼都是完美的", // New
+  "tooltip.always-max-fish-size" : "是否让每一条钓上的鱼都是最大尺寸", // New
+  "tooltip.fish-difficulty-multiplier" : "更改钓鱼难度的系数", // New
+  "tooltip.fish-difficulty-additive" : "额外的钓鱼难度系数", // New
+  "tooltip.instant-catch-treasure" : "当宝箱出现时立即捕获", // New
+  "tooltip.treasure-chance" : "钓鱼时发现宝箱的几率", // New
+  "tooltip.golden-treasure-chance" : "钓鱼时发现黄金宝箱的几率", // New
+  "tooltip.display-fish-preview" : "在小游戏阶段显示上钩的是什么鱼", // New
+  "tooltip.show-fish-name" : "是否显示鱼的名字", // New
+  "tooltip.show-treasure" : "是否显示宝箱", // New
+  "tooltip.show-uncaught-fish" : "是否显示你还没有钓到过的鱼", // New
+  "tooltip.show-legendary-fish" : "是否显示传说鱼王的信息", // New
+  "tooltip.start-with-fishing-rod" : "开始游戏的第一天携带鱼竿", //New
+  "tooltip.auto-attach-bait" : "当鱼竿没有鱼饵时是否自动装备背包里的鱼饵", // New
+  "tooltip.preferred-bait" : "优先装备哪一种鱼饵", // New
+  "tooltip.infinite-bait" : "使鱼竿上的鱼饵数量一直为999", // New
+  "tooltip.spawn-bait-if-dont-have" : "如果鱼竿和背包里都没有鱼饵，则自动生成鱼饵", // New
+  "tooltip.bait-amount-to-spawn" : "自动生成鱼饵的数量", // New
+  "tooltip.auto-attach-tackles" : "当鱼竿没有钓具时自动装备背包里的钓具", // New
+  "tooltip.preferred-tackle" : "优先装备哪一种钓具", // New
+  "tooltip.preferred-adv-iridium-tackle" : "高级铱金鱼竿的第二个钓具栏优先装备哪一种钓具", // New
+  "tooltip.infinite-tackle" : "使鱼竿上的钓具耐久不会降低", // New
+  "tooltip.spawn-tackle-if-dont-have" : "如果鱼竿和背包里都没有钓具，则自动生成钓具", // New
+  "tooltip.add-auto-hook-enchantment" : "给手持的鱼竿添加自动上钩附魔", // New
+  "tooltip.add-efficient-enchantment" : "给手持的鱼竿添加省力附魔", // New
+  "tooltip.add-master-enchantment" : "给手持的鱼竿添加精通附魔", // New
+  "tooltip.add-preserving-enchantment" : "给手持的鱼竿添加耐用附魔", // New
+  "tooltip.remove-when-unequipped" : "当未手持鱼竿时，移除鱼竿上的附魔" // New
 }
