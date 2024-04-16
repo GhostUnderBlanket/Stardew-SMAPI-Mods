@@ -61,11 +61,18 @@
   "config-menu.option.auto-eat-food" : "Auto Eat Food",
   "config-menu.option.energy-percent-to-eat" : "Energy Percent To Eat",
   "config-menu.option.allow-eating-fish" : "Allow Eating Fish",
+  "config-menu.option.auto-attach-bait" : "Auto Attach Bait",
+  "config-menu.option.prefer-bait" : "Preferred Bait",
+  "config-menu.option.spawn-bait-if-dont-have" : "Spawn Bait If Dont Have",
+  "config-menu.option.bait-amount-to-spawn" : "Bait Amount To Spawn",
+  "config-menu.option.auto-attach-tackles" : "Auto Attach Tackles",
+  "config-menu.option.prefer-tackle" : "Preferred Tackle",
+  "config-menu.option.prefer-advanced-iridium-tackle" : "Preferred Adv. Iridium Tackle",
+  "config-menu.option.spawn-tackle-if-dont-have" : "Spawn Tackle If Dont Have",
 
   /// FISHING ///
   "config-menu.title.fishing" : "Fishing",
   "config-menu.option.skip-fishing-mini-game" : "Skip Fishing Mini-Game",
-  "config-menu.option.cast-power-percent" : "Cast Power Percent",
   "config-menu.option.instant-fish-bite" : "Instant Fish Bite",
   "config-menu.option.prefer-fish-amount" : "Preferred Fish Amount",
   "config-menu.option.prefer-fish-quality" : "Preferred Fish Quality",
@@ -88,16 +95,10 @@
   /// FISHING ROD ///
   "config-menu.title.fishing-rod" : "Fishing Rod",
   "config-menu.option.start-with-fishing-rod" : "Start With Fishing Rod",
-  "config-menu.option.auto-attach-bait" : "Auto Attach Bait",
-  "config-menu.option.prefer-bait" : "Preferred Bait",
+  "config-menu.option.cast-power-percent" : "Cast Power Percent",
+  "config-menu.option.use-smart-cast-power" : "Use Smart Cast Power",
   "config-menu.option.infinite-bait" : "Infinite Bait",
-  "config-menu.option.spawn-bait-if-dont-have" : "Spawn Bait If Dont Have",
-  "config-menu.option.bait-amount-to-spawn" : "Bait Amount To Spawn",
-  "config-menu.option.auto-attach-tackles" : "Auto Attach Tackles",
-  "config-menu.option.prefer-tackle" : "Preferred Tackle",
-  "config-menu.option.prefer-advanced-iridium-tackle" : "Preferred Adv. Iridium Tackle",
   "config-menu.option.infinite-tackle" : "Infinite Tackle",
-  "config-menu.option.spawn-tackle-if-dont-have" : "Spawn Tackle If Dont Have",
 
   /// Enchantment ///
   "config-menu.title.enchantment" : "Enchantments",
@@ -117,58 +118,60 @@
   "hud-message.auto-attach-spawned" : "Auto Attach Spawned {0} To {1}",
   "hud-message.auto-eat-food" : "Auto Eat {0}",
   "hud-message.auto-trash-junk" : "Auto Trash {0} x{1}",
+  "hud-message.smart-cast-power-saved" : "Smart cast power saved",
 
   /// TOOLTIP ///
-  "tooltip.enable-automation-button" : "Button for toggling automation of this mod", // New
-  "tooltip.catch-treasure-button" : "Button for toggling catch or ignore treasure in fishing mini-game", // New
-  "tooltip.open-config-menu" : "Button for quickly open Fishing assistant2 GMCM in-game config menu", // New
-  "tooltip.mod-status-position" : "Position to display mod status", // New
-  "tooltip.auto-cast-fishing-rod" : "Toggle for auto-casting fishing rod", // New
-  "tooltip.auto-hook-fish" : "Toggle for auto-hooking fish", // New
-  "tooltip.auto-play-mini-game" : "Toggle for automatically playing fishing mini-game", // New
-  "tooltip.auto-close-popup" : "Toggle for automatically closing fish popup", // New
-  "tooltip.auto-loot-treasure" : "Toggle for automatically looting treasure", // New
-  "tooltip.action-if-inventory-full" : "Action to take if inventory is full while looting", // New
-  "tooltip.auto-trash-junk" : "Toggle for automatically trashing junk items when obtaining new items", // New
-  "tooltip.junk-highest-price" : "Items priced less than or equal to this are considered junk", // New
-  "tooltip.allow-trash-fish" : "Toggle for allowing trashing of fish with a sale price corresponding to 'JunkHighestPrice'", // New
-  "tooltip.auto-pause-fishing" : "Should the mod auto-pause fishing during nighttime", // New
-  "tooltip.time-to-pause" : "Time to trigger fishing pause", // New
-  "tooltip.warn-count" : "Number of warnings the mod will give if you continue fishing after reaching 'TimeToPause'", // New
-  "tooltip.auto-eat-food" : "Toggle to automatically eat food from inventory", // New
-  "tooltip.energy-percent-to-eat" : "Energy percentage considered low, and finding some food to eat", // New
-  "tooltip.allow-eating-fish" : "Toggle for allowing the eating of caught fish", // New
-  "tooltip.skip-fishing-mini-game" : "Toggle to instantly skip fishing mini-game", // New
-  "tooltip.cast-power-percent" : "Preference for casting power", // New
-  "tooltip.instant-fish-bite" : "Toggle for instantly making fish bite", // New
-  "tooltip.prefer-fish-amount" : "Preference for the amount of fish pulled from water", // New
-  "tooltip.prefer-fish-quality" : "Quality of caught fish", // New
-  "tooltip.always-perfect" : "Whether to consider every catch as perfect", // New
-  "tooltip.always-max-fish-size" : "Toggle to always catch fish at maximum size", // New
-  "tooltip.fish-difficulty-multiplier" : "Multiplier applied to fish difficulty", // New
-  "tooltip.fish-difficulty-additive" : "Value added to fish difficulty", // New
-  "tooltip.instant-catch-treasure" : "Instantly catch treasure when it appears", // New
-  "tooltip.treasure-chance" : "Chance of finding treasure while fishing", // New
-  "tooltip.golden-treasure-chance" : "Chance of finding golden treasure while fishing", // New
-  "tooltip.display-fish-preview" : "Toggle for displaying fish info while catching fish", // New
-  "tooltip.show-fish-name" : "Toggle for showing fish name with fish info", // New
-  "tooltip.show-treasure" : "Toggle for showing treasure with fish info", // New
-  "tooltip.show-uncaught-fish" : "Show a preview for all fish species, even those you have never caught", // New
-  "tooltip.show-legendary-fish" : "Toggle for showing fish info if the current fish is legendary", // New
-  "tooltip.start-with-fishing-rod" : "Start the game at day 1 with fishing rod", //New
-  "tooltip.auto-attach-bait" : "Toggle for automatically attaching bait if possible", // New
-  "tooltip.preferred-bait" : "Preference for bait type", // New
-  "tooltip.infinite-bait" : "Make your fishing bait last indefinitely", // New
-  "tooltip.spawn-bait-if-dont-have" : "Toggle for spawning bait if none is available", // New
-  "tooltip.bait-amount-to-spawn" : "Amount of bait to spawn", // New
-  "tooltip.auto-attach-tackles" : "Toggle for automatically attaching tackles if possible", // New
-  "tooltip.preferred-tackle" : "Preference for tackle type in the first slot", // New
-  "tooltip.preferred-adv-iridium-tackle" : "Preference for tackle type in the second slot of the Adv. iridium rod", // New
-  "tooltip.infinite-tackle" : "Make your tackle last indefinitely", // New
-  "tooltip.spawn-tackle-if-dont-have" : "Toggle for spawning tackle if none are available", // New
-  "tooltip.add-auto-hook-enchantment" : "Toggle for adding Auto-Hook enchantment to fishing rod", // New
-  "tooltip.add-efficient-enchantment" : "Toggle for adding Efficient enchantment to fishing rod", // New
-  "tooltip.add-master-enchantment" : "Toggle for adding Master enchantment to fishing rod", // New
-  "tooltip.add-preserving-enchantment" : "Toggle for adding Preserving enchantment to fishing rod", // New
-  "tooltip.remove-when-unequipped" : "Toggle for removing enchantment when fishing rod is unequipped" // New
+  "tooltip.enable-automation-button" : "Button for toggling automation of this mod",
+  "tooltip.catch-treasure-button" : "Button for toggling catch or ignore treasure in fishing mini-game",
+  "tooltip.open-config-menu" : "Button for quickly open Fishing assistant2 GMCM in-game config menu",
+  "tooltip.mod-status-position" : "Position to display mod status",
+  "tooltip.auto-cast-fishing-rod" : "Toggle for auto-casting fishing rod",
+  "tooltip.auto-hook-fish" : "Toggle for auto-hooking fish",
+  "tooltip.auto-play-mini-game" : "Toggle for automatically playing fishing mini-game",
+  "tooltip.auto-close-popup" : "Toggle for automatically closing fish popup",
+  "tooltip.auto-loot-treasure" : "Toggle for automatically looting treasure",
+  "tooltip.action-if-inventory-full" : "Action to take if inventory is full while looting",
+  "tooltip.auto-trash-junk" : "Toggle for automatically trashing junk items when obtaining new items",
+  "tooltip.junk-highest-price" : "Items priced less than or equal to this are considered junk",
+  "tooltip.allow-trash-fish" : "Toggle for allowing trashing of fish with a sale price corresponding to 'JunkHighestPrice'",
+  "tooltip.auto-pause-fishing" : "Should the mod auto-pause fishing during nighttime",
+  "tooltip.time-to-pause" : "Time to trigger fishing pause",
+  "tooltip.warn-count" : "Number of warnings the mod will give if you continue fishing after reaching 'TimeToPause'",
+  "tooltip.auto-eat-food" : "Toggle to automatically eat food from inventory",
+  "tooltip.energy-percent-to-eat" : "Energy percentage considered low, and finding some food to eat",
+  "tooltip.allow-eating-fish" : "Toggle for allowing the eating of caught fish",
+  "tooltip.skip-fishing-mini-game" : "Toggle to instantly skip fishing mini-game",
+  "tooltip.cast-power-percent" : "Preference for casting power",
+  "tooltip.instant-fish-bite" : "Toggle for instantly making fish bite",
+  "tooltip.prefer-fish-amount" : "Preference for the amount of fish pulled from water",
+  "tooltip.prefer-fish-quality" : "Quality of caught fish",
+  "tooltip.always-perfect" : "Whether to consider every catch as perfect",
+  "tooltip.always-max-fish-size" : "Toggle to always catch fish at maximum size",
+  "tooltip.fish-difficulty-multiplier" : "Multiplier applied to fish difficulty",
+  "tooltip.fish-difficulty-additive" : "Value added to fish difficulty",
+  "tooltip.instant-catch-treasure" : "Instantly catch treasure when it appears",
+  "tooltip.treasure-chance" : "Chance of finding treasure while fishing",
+  "tooltip.golden-treasure-chance" : "Chance of finding golden treasure while fishing",
+  "tooltip.display-fish-preview" : "Toggle for displaying fish info while catching fish",
+  "tooltip.show-fish-name" : "Toggle for showing fish name with fish info",
+  "tooltip.show-treasure" : "Toggle for showing treasure with fish info",
+  "tooltip.show-uncaught-fish" : "Show a preview for all fish species, even those you have never caught",
+  "tooltip.show-legendary-fish" : "Toggle for showing fish info if the current fish is legendary",
+  "tooltip.start-with-fishing-rod" : "Start the game at day 1 with fishing rod",
+  "tooltip.auto-attach-bait" : "Toggle for automatically attaching bait if possible",
+  "tooltip.preferred-bait" : "Preference for bait type",
+  "tooltip.infinite-bait" : "Make your fishing bait last indefinitely",
+  "tooltip.spawn-bait-if-dont-have" : "Toggle for spawning bait if none is available",
+  "tooltip.bait-amount-to-spawn" : "Amount of bait to spawn",
+  "tooltip.auto-attach-tackles" : "Toggle for automatically attaching tackles if possible",
+  "tooltip.preferred-tackle" : "Preference for tackle type in the first slot",
+  "tooltip.preferred-adv-iridium-tackle" : "Preference for tackle type in the second slot of the Adv. iridium rod",
+  "tooltip.infinite-tackle" : "Make your tackle last indefinitely",
+  "tooltip.spawn-tackle-if-dont-have" : "Toggle for spawning tackle if none are available",
+  "tooltip.add-auto-hook-enchantment" : "Toggle for adding Auto-Hook enchantment to fishing rod",
+  "tooltip.add-efficient-enchantment" : "Toggle for adding Efficient enchantment to fishing rod",
+  "tooltip.add-master-enchantment" : "Toggle for adding Master enchantment to fishing rod",
+  "tooltip.add-preserving-enchantment" : "Toggle for adding Preserving enchantment to fishing rod",
+  "tooltip.remove-when-unequipped" : "Toggle for removing enchantment when fishing rod is unequipped",
+  "tooltip.use-smart-cast-power" : "Allow player to unlock and adjust casting power by holding left mouse for a second and next time mod will use that cast power instead of 'Cast Power Percent'",
 }

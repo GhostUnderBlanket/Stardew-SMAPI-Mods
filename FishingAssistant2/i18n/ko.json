@@ -61,11 +61,18 @@
   "config-menu.option.auto-eat-food" : "자동 음식 먹기",
   "config-menu.option.energy-percent-to-eat" : "먹을 에너지 비율",
   "config-menu.option.allow-eating-fish" : "생선 먹기 허용",
+  "config-menu.option.auto-attach-bait" : "자동 미끼 끼우기",
+  "config-menu.option.prefer-bait" : "선호하는 미끼",
+  "config-menu.option.spawn-bait-if-dont-have" : "없으면 미끼 생성",
+  "config-menu.option.bait-amount-to-spawn" : "생성한 미끼 양",
+  "config-menu.option.auto-attach-tackles" : "자동 태클 끼우기",
+  "config-menu.option.prefer-tackle" : "선호하는 태클",
+  "config-menu.option.prefer-advanced-iridium-tackle" : "선호되는 고급 이리듐 태클",
+  "config-menu.option.spawn-tackle-if-dont-have" : "태클이 없는 경우 태클 생성",
 
   /// FISHING ///
   "config-menu.title.fishing" : "낚시",
   "config-menu.option.skip-fishing-mini-game" : "낚시 미니게임 건너뛰기",
-  "config-menu.option.cast-power-percent" : "던지기 힘 비율",
   "config-menu.option.instant-fish-bite" : "즉시 생선 물기",
   "config-menu.option.prefer-fish-amount" : "선호하는 물고기 양",
   "config-menu.option.prefer-fish-quality" : "선호하는 생선 품질",
@@ -88,16 +95,10 @@
   /// FISHING ROD ///
   "config-menu.title.fishing-rod" : "낚싯대",
   "config-menu.option.start-with-fishing-rod" : "낚싯대로 시작",
-  "config-menu.option.auto-attach-bait" : "자동 미끼 끼우기",
-  "config-menu.option.prefer-bait" : "선호하는 미끼",
+  "config-menu.option.cast-power-percent" : "던지기 힘 비율",
+  "config-menu.option.use-smart-cast-power" : "Use Smart Cast Power", //New
   "config-menu.option.infinite-bait" : "미끼 무한",
-  "config-menu.option.spawn-bait-if-dont-have" : "없으면 미끼 생성",
-  "config-menu.option.bait-amount-to-spawn" : "생성한 미끼 양",
-  "config-menu.option.auto-attach-tackles" : "자동 태클 끼우기",
-  "config-menu.option.prefer-tackle" : "선호하는 태클",
-  "config-menu.option.prefer-advanced-iridium-tackle" : "선호되는 고급 이리듐 태클",
   "config-menu.option.infinite-tackle" : "무한 태클",
-  "config-menu.option.spawn-tackle-if-dont-have" : "태클이 없는 경우 태클 생성",
 
   /// Enchantment ///
   "config-menu.title.enchantment" : "인챈트",
@@ -117,6 +118,7 @@
   "hud-message.auto-attach-spawned" : "생성된 {0}을(를) {1}에 자동 연결",
   "hud-message.auto-eat-food" : "{0} 자동 먹기",
   "hud-message.auto-trash-junk" : "자동 휴지통 {0} x{1}",
+  "hud-message.smart-cast-power-saved" : "Smart cast power saved", //New
 
   /// TOOLTIP ///
   "tooltip.enable-automation-button" : "이 모드의 자동화를 전환하는 버튼",
@@ -170,5 +172,6 @@
   "tooltip.add-efficient-enchantment" : "낚싯대에 효율적인 마법 부여를 추가하기 위한 토글",
   "tooltip.add-master-enchantment" : "낚싯대에 마스터 마법을 추가하기 위한 토글",
   "tooltip.add-preserving-enchantment" : "낚싯대에 보존 마법을 추가하기 위한 토글",
-  "tooltip.remove-when-unequipped" : "낚싯대가 장착 해제되었을 때 마법 부여 제거 토글"
+  "tooltip.remove-when-unequipped" : "낚싯대가 장착 해제되었을 때 마법 부여 제거 토글",
+  "tooltip.use-smart-cast-power" : "Allow player to unlock and adjust casting power by holding left mouse for a second and next time mod will use that cast power instead of 'Cast Power Percent'" // New
 }

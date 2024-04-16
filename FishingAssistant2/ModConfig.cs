@@ -64,12 +64,33 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         /// <summary>Toggle for allowing eating of caught fish</summary>
         public bool AllowEatingFish { get; set; } = false;
         
+        /// <summary>Toggle for auto attaching bait if possible</summary>
+        public bool AutoAttachBait { get; set; } = false;
+        
+        /// <summary>Preference for bait type</summary>
+        public string PreferredBait { get; set; } = "Any";
+        
+        /// <summary>Toggle for spawning bait if none is available</summary>
+        public bool SpawnBaitIfDontHave { get; set; } = false;
+        
+        /// <summary>Amount of bait to spawn</summary>
+        public int BaitAmountToSpawn { get; set; } = 10;
+        
+        /// <summary>Toggle for automatically attaching tackles if possible</summary>
+        public bool AutoAttachTackles { get; set; } = false;
+        
+        /// <summary>Preference for tackle type in the first slot</summary>
+        public string PreferredTackle { get; set; } = "Any";
+        
+        /// <summary>Preference for tackle type in the second slot of the Adv. iridium rod</summary>
+        public string PreferredAdvIridiumTackle { get; set; } = "Any";
+        
+        /// <summary>Toggle for spawning tackle if none are available</summary>
+        public bool SpawnTackleIfDontHave { get; set; } = false;
+        
         /// FISHING ///
         /// <summary>Toggle to instantly skip fishing mini-game</summary>
         public string SkipFishingMiniGame { get; set; } = "Off";
-        
-        /// <summary>Preference for casting power</summary>
-        public int CastPowerPercent { get; set; } = 100;
 
         /// <summary>Toggle for making fish bite instantly</summary>
         public bool InstantFishBite { get; set; } = false;
@@ -121,35 +142,17 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         /// <summary>Start the game at day 1 with fishing rod</summary>
         public string StartWithFishingRod { get; set; } = "None";
         
-        /// <summary>Toggle for auto attaching bait if possible</summary>
-        public bool AutoAttachBait { get; set; } = false;
+        /// <summary>Allow player to unlock and adjust casting power by holding left mouse for a second and next time mod will use that cast power instead of 'Cast Power Percent'</summary>
+        public bool UseSmartCastPower { get; set; } = true;
         
-        /// <summary>Preference for bait type</summary>
-        public string PreferredBait { get; set; } = "Any";
+        /// <summary>Preference for casting power</summary>
+        public int CastPowerPercent { get; set; } = 100;
         
         /// <summary>Make your fishing bait last indefinitely</summary>
         public bool InfiniteBait { get; set; } = false;
         
-        /// <summary>Toggle for spawning bait if none is available</summary>
-        public bool SpawnBaitIfDontHave { get; set; } = false;
-        
-        /// <summary>Amount of bait to spawn</summary>
-        public int BaitAmountToSpawn { get; set; } = 10;
-        
-        /// <summary>Toggle for automatically attaching tackles if possible</summary>
-        public bool AutoAttachTackles { get; set; } = false;
-        
-        /// <summary>Preference for tackle type in the first slot</summary>
-        public string PreferredTackle { get; set; } = "Any";
-        
-        /// <summary>Preference for tackle type in the second slot of the Adv. iridium rod</summary>
-        public string PreferredAdvIridiumTackle { get; set; } = "Any";
-        
         /// <summary>Make your tackle last indefinitely</summary>
         public bool InfiniteTackle { get; set; } = false;
-        
-        /// <summary>Toggle for spawning tackle if none are available</summary>
-        public bool SpawnTackleIfDontHave { get; set; } = false;
 
         /// Enchantment ///
         /// <summary>Toggle for adding Auto-Hook enchantment to fishing rod</summary>

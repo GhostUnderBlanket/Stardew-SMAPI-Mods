@@ -61,11 +61,18 @@
   "config-menu.option.auto-eat-food" : "Auto Eat Food", //New
   "config-menu.option.energy-percent-to-eat" : "Energy Percent To Eat", //New
   "config-menu.option.allow-eating-fish" : "Allow Eating Fish", //New
+  "config-menu.option.auto-attach-bait" : "Auto Attach Bait", //New
+  "config-menu.option.prefer-bait" : "Preferred Bait", //New
+  "config-menu.option.spawn-bait-if-dont-have" : "Spawn Bait If Dont Have", //New
+  "config-menu.option.bait-amount-to-spawn" : "Bait Amount To Spawn", //New
+  "config-menu.option.auto-attach-tackles" : "Auto Attach Tackles", //New
+  "config-menu.option.prefer-tackle" : "Preferred Tackle", //New
+  "config-menu.option.prefer-advanced-iridium-tackle" : "Preferred Adv. Iridium Tackle", //New
+  "config-menu.option.spawn-tackle-if-dont-have" : "Spawn Tackle If Dont Have", //New
 
   /// FISHING ///
   "config-menu.title.fishing" : "Fishing", //New
   "config-menu.option.skip-fishing-mini-game" : "Skip Fishing Mini-Game", //New
-  "config-menu.option.cast-power-percent" : "Cast Power Percent", //New
   "config-menu.option.instant-fish-bite" : "Instant Fish Bite", //New
   "config-menu.option.prefer-fish-amount" : "Preferred Fish Amount", //New
   "config-menu.option.prefer-fish-quality" : "Preferred Fish Quality", //New
@@ -88,16 +95,10 @@
   /// FISHING ROD ///
   "config-menu.title.fishing-rod" : "Fishing Rod", //New
   "config-menu.option.start-with-fishing-rod" : "Start With Fishing Rod", //New
-  "config-menu.option.auto-attach-bait" : "Auto Attach Bait", //New
-  "config-menu.option.prefer-bait" : "Preferred Bait", //New
+  "config-menu.option.cast-power-percent" : "Cast Power Percent", //New
+  "config-menu.option.use-smart-cast-power" : "Use Smart Cast Power", //New
   "config-menu.option.infinite-bait" : "Infinite Bait", //New
-  "config-menu.option.spawn-bait-if-dont-have" : "Spawn Bait If Dont Have", //New
-  "config-menu.option.bait-amount-to-spawn" : "Bait Amount To Spawn", //New
-  "config-menu.option.auto-attach-tackles" : "Auto Attach Tackles", //New
-  "config-menu.option.prefer-tackle" : "Preferred Tackle", //New
-  "config-menu.option.prefer-advanced-iridium-tackle" : "Preferred Adv. Iridium Tackle", //New
   "config-menu.option.infinite-tackle" : "Infinite Tackle", //New
-  "config-menu.option.spawn-tackle-if-dont-have" : "Spawn Tackle If Dont Have", //New
 
   /// Enchantment ///
   "config-menu.title.enchantment" : "Enchantments", //New
@@ -117,6 +118,7 @@
   "hud-message.auto-attach-spawned" : "Auto Attach Spawned {0} To {1}", //New
   "hud-message.auto-eat-food" : "Auto Eat {0}", //New
   "hud-message.auto-trash-junk" : "Auto Trash {0} x{1}", //New
+  "hud-message.smart-cast-power-saved" : "Smart cast power saved", //New
 
   /// TOOLTIP ///
   "tooltip.enable-automation-button" : "Button for toggling automation of this mod", // New
@@ -170,5 +172,6 @@
   "tooltip.add-efficient-enchantment" : "Toggle for adding Efficient enchantment to fishing rod", // New
   "tooltip.add-master-enchantment" : "Toggle for adding Master enchantment to fishing rod", // New
   "tooltip.add-preserving-enchantment" : "Toggle for adding Preserving enchantment to fishing rod", // New
-  "tooltip.remove-when-unequipped" : "Toggle for removing enchantment when fishing rod is unequipped" // New
+  "tooltip.remove-when-unequipped" : "Toggle for removing enchantment when fishing rod is unequipped", // New
+  "tooltip.use-smart-cast-power" : "Allow player to unlock and adjust casting power by holding left mouse for a second and next time mod will use that cast power instead of 'Cast Power Percent'", // New
 }

@@ -1,6 +1,7 @@
 using ChibiKyu.StardewMods.Common;
 using FishingAssistant2;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Enchantments;
@@ -15,7 +16,13 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         internal FishingRod Instance { get; set; } = instance;
         
         private readonly List<BaseEnchantment> _addedEnchantments = new List<BaseEnchantment>();
-        
+
+        private float _smartCastPower;
+        private float _discardSmartCastTimer = 60.0f;
+        private bool _smartCastPowerSaved;
+
+        #region Automation
+
         internal void AutoAttachBait(string preferBait, bool infiniteBait, bool spawnBaitIfDontHave, int baitAmountToSpawn)
         {
             if (IsRodNotInUse() && !Game1.isFestival())
@@ -137,7 +144,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 }
             }
         }
-
+        
         internal void AutoHook()
         {
             if (IsRodCanHook())
@@ -149,38 +156,43 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             }
         }
 
-        internal void OverrideCastPower(int castPower)
-        {
-            Instance.castingPower = (castPower / 100.0f) + 0.01f;
-        }
+        #endregion
 
-        internal void OverrideNumberOfFishCaught(int numberOfFishCaught, BobberBar bar)
+        #region Override
+
+        internal void OverrideCastPower(bool useSmartCastPower, int castPower)
         {
-            if (Game1.isFestival() || bar.bossFish)
+            if (useSmartCastPower && Instance.isTimingCast && _discardSmartCastTimer-- <= 0)
             {
-                numberOfFishCaught = 1;
+                _smartCastPower = Instance.castingPower;
+                _smartCastPowerSaved = true;
             }
-            else if (bar.challengeBaitFishes > 0)
+            
+            if (!useSmartCastPower && _smartCastPowerSaved)
             {
-                numberOfFishCaught = bar.challengeBaitFishes;
-            }
-            else
-            {
-                bool isLucky = Instance.GetBait()?.QualifiedItemId == "(O)774" 
-                               && Game1.random.NextDouble() < 0.25 + Game1.player.DailyLuck / 2.0;
-                
-                numberOfFishCaught = isLucky ? 2 : numberOfFishCaught;
+                ResetSmartCastPower();
             }
 
-            Instance.numberOfFishCaught = numberOfFishCaught;
+            if (Instance.castedButBobberStillInAir)
+            {
+                _discardSmartCastTimer = 60;
+            }
+            
+            Instance.castingPower = _smartCastPowerSaved ? _smartCastPower : (castPower / 100.0f) + 0.01f;
         }
         
-        internal void InstantFishBite()
+        internal void ResetSmartCastPower()
+        {
+            _smartCastPower = 0.0f;
+            _smartCastPowerSaved = false;
+        }
+        
+        internal void OverrideTimeUntilFishBite()
         {
             if (Instance.timeUntilFishingBite > 0)
                 Instance.timeUntilFishingBite = 0f;
         }
-
+        
         internal void OverrideGoldenTreasureChance(string goldenTreasureChance)
         {
             if (goldenTreasureChance == TreasureChance.Always.ToString())
@@ -188,7 +200,22 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             else if (goldenTreasureChance == TreasureChance.Never.ToString()) 
                 Instance.goldenTreasure = false;
         }
-        
+
+        internal void OverrideNumberOfFishCaught(int numberOfFishCaught, BobberBar bar)
+        {
+            bool isLucky = Instance.GetBait()?.QualifiedItemId == "(O)774" && Game1.random.NextDouble() < 0.25 + Game1.player.DailyLuck / 2.0;
+
+            numberOfFishCaught = (Game1.isFestival() || bar.bossFish) ? 1 : isLucky ? 2 : numberOfFishCaught;
+            
+            if (bar.challengeBaitFishes > 0) numberOfFishCaught = bar.challengeBaitFishes;
+
+            Instance.numberOfFishCaught = numberOfFishCaught;
+        }
+
+        #endregion
+
+        #region Enchantment
+
         internal void AddEnchantment(BaseEnchantment enchantment)
         {
             _addedEnchantments.Add(enchantment);
@@ -200,7 +227,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             foreach (BaseEnchantment enchantment in _addedEnchantments)
                 Instance.enchantments.Remove(enchantment);
         }
-        
+
+        #endregion
+
+        #region Conditional
+
         internal bool IsRodNotInUse()
         {
             return Context.CanPlayerMove && !Instance.inUse();
@@ -238,5 +269,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                        showingTreasure: false
                    };
         }
+
+        #endregion
     }
 }

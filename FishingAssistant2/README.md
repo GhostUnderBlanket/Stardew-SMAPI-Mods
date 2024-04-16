@@ -161,6 +161,70 @@ Energy percent to consider as low energy and find something to eat.
 Toggle for allowing eating of caught fish.
 ```
 
+### AutoAttachBait
+**Default value:** `false`
+**Possible values:** `true | false`
+
+```
+Toggle for auto attaching bait if possible.
+```
+
+### PreferBait
+**Default value:** `Any`
+**Possible values:** `Any | Bait Qualified Item ID`
+
+```
+Preference for bait type.
+```
+
+### SpawnBaitIfDontHave
+**Default value:** `false`
+**Possible values:** `true | false`
+
+```
+Toggle for spawning bait if none is available.
+```
+
+### BaitAmountToSpawn
+**Default value:** `10`
+**Possible values:** `1 - 999`
+
+```
+Amount of bait when spawned.
+```
+
+### AutoAttachTackles
+**Default value:** `false`
+**Possible values:** `true | false`
+
+```
+Toggle for auto attaching tackles if possible.
+```
+
+### PreferTackle
+**Default value:** `Any`
+**Possible values:** `Any | Tackle Qualified Item ID`
+
+```
+Preference for tackle type.
+```
+
+### PreferAdvIridiumTackle
+**Default value:** `Any`
+**Possible values:** `Any | Tackle Qualified Item ID`
+
+```
+Tackle type preference for Advance Iridium Rod.
+```
+
+### SpawnTackleIfDontHave
+**Default value:** `false`
+**Possible values:** `true | false`
+
+```
+Toggle for spawning tackle if none is available.
+```
+
 ### SkipFishingMiniGame
 **Default value:** `false`
 **Possible values:** `true | false`
@@ -169,28 +233,12 @@ Toggle for allowing eating of caught fish.
 Toggle for skip fishing mini-game instantly.
 ```
 
-### CastPowerPercent
-**Default value:** `50`
-**Possible values:** `0 - 100`
-
-```
-Preference for fishing rood cast power.
-```
-
 ### InstantFishBite
 **Default value:** `false`
 **Possible values:** `true | false`
 
 ```
 Toggle for making fish bite instantly.
-```
-
-### InstantCatchFish
-**Default value:** `false`
-**Possible values:** `true | false`
-
-```
-Instantly catch fish when fish hooked.
 ```
 
 ### PreferFishAmount
@@ -313,20 +361,20 @@ Toggle for always showing fish info if current fish is legendary.
 Start the game at day 1 with selected fishing rod.
 ```
 
-### AutoAttachBait
-**Default value:** `false`
+### CastPowerPercent
+**Default value:** `100`
+**Possible values:** `0 - 100`
+
+```
+Preference for fishing rood cast power.
+```
+
+### UseSmartCastPower
+**Default value:** `true`
 **Possible values:** `true | false`
 
 ```
-Toggle for auto attaching bait if possible.
-```
-
-### PreferBait
-**Default value:** `Any`
-**Possible values:** `Any | Bait Qualified Item ID`
-
-```
-Preference for bait type.
+Allow player to unlock and adjust casting power by holding left mouse for a second and next time mod will use that cast power instead of 'Cast Power Percent'.
 ```
 
 ### InfiniteBait
@@ -337,60 +385,12 @@ Preference for bait type.
 Make your fishing bait last long forever.
 ```
 
-### SpawnBaitIfDontHave
-**Default value:** `false`
-**Possible values:** `true | false`
-
-```
-Toggle for spawning bait if none is available.
-```
-
-### BaitAmountToSpawn
-**Default value:** `10`
-**Possible values:** `1 - 999`
-
-```
-Amount of bait when spawned.
-```
-
-### AutoAttachTackles
-**Default value:** `false`
-**Possible values:** `true | false`
-
-```
-Toggle for auto attaching tackles if possible.
-```
-
-### PreferTackle
-**Default value:** `Any`
-**Possible values:** `Any | Tackle Qualified Item ID`
-
-```
-Preference for tackle type.
-```
-
-### PreferAdvIridiumTackle
-**Default value:** `Any`
-**Possible values:** `Any | Tackle Qualified Item ID`
-
-```
-Tackle type preference for Advance Iridium Rod.
-```
-
 ### InfiniteTackle
 **Default value:** `false`
 **Possible values:** `true | false`
 
 ```
 Make your tackle last long forever.
-```
-
-### SpawnTackleIfDontHave
-**Default value:** `false`
-**Possible values:** `true | false`
-
-```
-Toggle for spawning tackle if none is available.
 ```
 
 ### AddAutoHookEnchantment

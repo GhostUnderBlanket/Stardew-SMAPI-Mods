@@ -44,28 +44,13 @@
   "config-menu.title.hud" : "HUD", //New
   "config-menu.option.hud-position" : "HUD Position", //New
 
-  /// AUTOMATION ///
-  "config-menu.title.automation" : "Automation", //New
-  "config-menu.option.auto-cast-fishing-rod" : "Auto Cast FishingRod", //New
-  "config-menu.option.auto-hook-fish" : "Auto Hook Fish", //New
-  "config-menu.option.auto-play-mini-game" : "Auto Play MiniGame", //New
-  "config-menu.option.auto-close-popup" : "Auto Close Popup", //New
-  "config-menu.option.auto-loot-treasure" : "Auto Loot Treasure", //New
-  "config-menu.option.action-if-inventory-full" : "Action If Inventory Full", //New
-  "config-menu.option.auto-trash-junk" : "Auto Trash Junk", //New
-  "config-menu.option.junk-highest-price" : "Junk Highest Price", //New
-  "config-menu.option.allow-trash-fish" : "Allow Trash Fish", //New
-  "config-menu.option.auto-pause-fishing" : "Auto Pause Fishing", //New
-  "config-menu.option.time-to-pause" : "Time To Pause", //New
-  "config-menu.option.warn-count" : "Warn Count", //New
-  "config-menu.option.auto-eat-food" : "Auto Eat Food", //New
+
   "config-menu.option.energy-percent-to-eat" : "Energy Percent To Eat", //New
   "config-menu.option.allow-eating-fish" : "Allow Eating Fish", //New
 
   /// FISHING ///
   "config-menu.title.fishing" : "Fishing", //New
   "config-menu.option.skip-fishing-mini-game" : "Skip Fishing Mini-Game", //New
-  "config-menu.option.cast-power-percent" : "Cast Power Percent", //New
   "config-menu.option.instant-fish-bite" : "Instant Fish Bite", //New
   "config-menu.option.prefer-fish-amount" : "Preferred Fish Amount", //New
   "config-menu.option.prefer-fish-quality" : "Preferred Fish Quality", //New
@@ -117,6 +102,7 @@
   "hud-message.auto-attach-spawned" : "Auto Attach Spawned {0} To {1}", //New
   "hud-message.auto-eat-food" : "Auto Eat {0}", //New
   "hud-message.auto-trash-junk" : "Auto Trash {0} x{1}", //New
+  "hud-message.smart-cast-power-saved" : "Smart cast power saved", //New
 
   /// TOOLTIP ///
   "tooltip.enable-automation-button" : "Button for toggling automation of this mod", // New
@@ -170,5 +156,6 @@
   "tooltip.add-efficient-enchantment" : "Toggle for adding Efficient enchantment to fishing rod", // New
   "tooltip.add-master-enchantment" : "Toggle for adding Master enchantment to fishing rod", // New
   "tooltip.add-preserving-enchantment" : "Toggle for adding Preserving enchantment to fishing rod", // New
-  "tooltip.remove-when-unequipped" : "Toggle for removing enchantment when fishing rod is unequipped" // New
+  "tooltip.remove-when-unequipped" : "Toggle for removing enchantment when fishing rod is unequipped", // New
+  "tooltip.use-smart-cast-power" : "Allow player to unlock and adjust casting power by holding left mouse for a second and next time mod will use that cast power instead of 'Cast Power Percent'", // New
 }

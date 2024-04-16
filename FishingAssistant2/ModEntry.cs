@@ -67,18 +67,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         
         private void OnSaveLoaded(object? sender, SaveLoadedEventArgs e)
         {
-            if (!Context.IsWorldReady || Game1.dayOfMonth != 1 || !ShouldGivePlayerFishingRod())
-                return;
-
-            var parsedItem = ItemRegistry.GetDataOrErrorItem(Config.StartWithFishingRod);
-            Game1.player.addItemByMenuIfNecessary(ItemRegistry.Create(parsedItem.QualifiedItemId));
+            if (!Context.IsWorldReady) return;
             
-            return;
-
-            bool ShouldGivePlayerFishingRod()
-            {
-                return !Game1.player.Items.OfType<FishingRod>().Any() && Config.StartWithFishingRod != "None";
-            }
+            Assistant.GiveStarterFishingRod(Config.StartWithFishingRod);
         }
         
         private void OnDayStarted(object? sender, DayStartedEventArgs e)
@@ -139,8 +130,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             {
                 ModEnable = !ModEnable;
                 Game1.playSound("coin");
-                    
-                if (!ModEnable) ForgetPlayerPosition();
+
+                if (!ModEnable)
+                {
+                    ForgetPlayerPosition();
+                    Assistant.OnAutomationDisabled();
+                }
             }
             
             if (e.Button == Config.CatchTreasureButton)
@@ -159,7 +154,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         {
             if (!_facingDirectionCached)
             {
-                Monitor.Log("Facing direction cached");
                 FacingDirection = Game1.player.getDirection() != -1 ? Game1.player.getDirection() : Game1.player.FacingDirection;
                 _facingDirectionCached = true;
             }
@@ -169,7 +163,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         {
             if (_facingDirectionCached)
             {
-                Monitor.Log("Facing direction cleared");
                 FacingDirection = 0;
                 _facingDirectionCached = false;
             }
@@ -179,6 +172,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         {
             Game1.playSound("coin");
             ModEnable = false;
+            
             CommonHelper.PushToggleNotification(ModEnable, I18n.HudMessage_AutomationToggle());
         }
 

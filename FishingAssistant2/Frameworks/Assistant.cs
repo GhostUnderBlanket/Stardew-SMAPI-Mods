@@ -39,10 +39,10 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 OnUnEquipFishingRod();
                 OverrideFishingRod(fishingRod);
             }
-            
-            if (isModEnable && !Game1.player.isMoving()) 
+
+            if (isModEnable && !Game1.player.isMoving())
                 modEntry().CachePlayerPosition();
-            else 
+            else
                 modEntry().ForgetPlayerPosition();
             
             DoFishingRodAssistantTask();
@@ -50,11 +50,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         public void OnUnEquipFishingRod()
         {
+            modEntry().ForgetPlayerPosition();
+            
             if (_fishingRod == null) return;
             
             if (modConfig().RemoveWhenUnequipped) _fishingRod.ClearAddedEnchantments();
             
-            modEntry().ForgetPlayerPosition();
+            _fishingRod.ResetSmartCastPower();
+            
             _fishingRod = null;
         }
 
@@ -79,9 +82,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             if (_fishingRod == null) return;
             
-            _fishingRod.OverrideCastPower(modConfig().CastPowerPercent);
+            _fishingRod.OverrideCastPower(modConfig().UseSmartCastPower, modConfig().CastPowerPercent);
             
-            if (modConfig().InstantFishBite) _fishingRod.InstantFishBite();
+            if (modConfig().InstantFishBite) _fishingRod.OverrideTimeUntilFishBite();
             
             if (modConfig().AutoAttachBait) _fishingRod.AutoAttachBait(modConfig().PreferredBait, modConfig().InfiniteBait, modConfig().SpawnBaitIfDontHave, modConfig().BaitAmountToSpawn);
             
@@ -162,6 +165,22 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 }
 
                 return false;
+            }
+        }
+        
+        internal void GiveStarterFishingRod(string startWithFishingRod)
+        { 
+            if (Game1.dayOfMonth != 1 || !ShouldGivePlayerFishingRod())
+                return;
+
+            var parsedItem = ItemRegistry.GetDataOrErrorItem(startWithFishingRod);
+            Game1.player.addItemByMenuIfNecessary(ItemRegistry.Create(parsedItem.QualifiedItemId));
+            
+            return;
+
+            bool ShouldGivePlayerFishingRod()
+            {
+                return !Game1.player.Items.OfType<FishingRod>().Any() && startWithFishingRod != "None";
             }
         }
 
@@ -432,8 +451,13 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         #endregion
 
-        #region Conditionals
+        #region Other
 
+        internal void OnAutomationDisabled()
+        {
+            _fishingRod?.ResetSmartCastPower();
+        }
+        
         internal bool AlreadyCaughtFish(int minCaught = 1)
         {
             return _bobberBar != null && _bobberBar.AlreadyCaughtFish(minCaught);

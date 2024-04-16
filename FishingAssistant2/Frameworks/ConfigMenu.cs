@@ -72,12 +72,19 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddBool(I18n.ConfigMenu_Option_AutoEatFood, I18n.Tooltip_AutoEatFood, () => config().AutoEatFood, b => config().AutoEatFood = b);
             AddNumber(I18n.ConfigMenu_Option_EnergyPercentToEat, I18n.Tooltip_EnergyPercentToEat, () => config().EnergyPercentToEat, i => config().EnergyPercentToEat = i, min: 5, max: 95, interval: 5);
             AddBool(I18n.ConfigMenu_Option_AllowEatingFish, I18n.Tooltip_AllowEatingFish, () => config().AllowEatingFish, b => config().AllowEatingFish = b);
+            AddBool(I18n.ConfigMenu_Option_AutoAttachBait, I18n.Tooltip_AutoAttachBait, () => config().AutoAttachBait, b => config().AutoAttachBait = b);
+            AddDropDown(I18n.ConfigMenu_Option_PreferBait, I18n.Tooltip_PreferredBait, _availableBaits.ToArray(), ParseBaitAndTackleName, () => config().PreferredBait, s => config().PreferredBait = s);
+            AddBool(I18n.ConfigMenu_Option_SpawnBaitIfDontHave, I18n.Tooltip_SpawnBaitIfDontHave, () => config().SpawnBaitIfDontHave, b => config().SpawnBaitIfDontHave = b);
+            AddNumber(I18n.ConfigMenu_Option_BaitAmountToSpawn, I18n.Tooltip_BaitAmountToSpawn, () => config().BaitAmountToSpawn, i => config().BaitAmountToSpawn = i, min: 1, max: 999, interval: 1);
+            AddBool(I18n.ConfigMenu_Option_AutoAttachTackles, I18n.Tooltip_AutoAttachTackles, () => config().AutoAttachTackles, b => config().AutoAttachTackles = b);
+            AddDropDown(I18n.ConfigMenu_Option_PreferTackle, I18n.Tooltip_PreferredTackle, _availableTackles.ToArray(), ParseBaitAndTackleName, () => config().PreferredTackle, s => config().PreferredTackle = s);
+            AddDropDown(I18n.ConfigMenu_Option_PreferAdvancedIridiumTackle, I18n.Tooltip_PreferredAdvIridiumTackle, _availableTackles.ToArray(), ParseBaitAndTackleName, () => config().PreferredAdvIridiumTackle, s => config().PreferredAdvIridiumTackle = s);
+            AddBool(I18n.ConfigMenu_Option_SpawnTackleIfDontHave, I18n.Tooltip_SpawnTackleIfDontHave, () => config().SpawnTackleIfDontHave, b => config().SpawnTackleIfDontHave = b);
             
             // MiniGame Page
             AddPage(I18n.ConfigMenu_Page_General,"MiniGame");
             AddSectionTitle(I18n.ConfigMenu_Title_Fishing);
             AddDropDown(I18n.ConfigMenu_Option_SkipFishingMiniGame, I18n.Tooltip_SkipFishingMiniGame, SkipMiniGameOptions(),ParseSkipMiniGame, () => config().SkipFishingMiniGame, option => config().SkipFishingMiniGame = option);
-            AddNumber(I18n.ConfigMenu_Option_CastPowerPercent, I18n.Tooltip_CastPowerPercent, () => config().CastPowerPercent, i => config().CastPowerPercent = i, min: 0, max: 100, interval: 5);
             AddBool(I18n.ConfigMenu_Option_InstantFishBite, I18n.Tooltip_InstantFishBite, () => config().InstantFishBite, b => config().InstantFishBite = b);
             AddNumber(I18n.ConfigMenu_Option_PreferFishAmount, I18n.Tooltip_PreferFishAmount, () => config().PreferFishAmount, i => config().PreferFishAmount = i, min: 1, max: 3);
             AddDropDown(I18n.ConfigMenu_Option_PreferFishQuality, I18n.Tooltip_PreferFishQuality, FishQualityOptions(), ParseFishQuality, () => config().PreferFishQuality, quality => config().PreferFishQuality = quality);
@@ -100,16 +107,10 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             AddPage(I18n.ConfigMenu_Page_General,"FishingRod");
             AddSectionTitle(I18n.ConfigMenu_Title_FishingRod);
             AddDropDown(I18n.ConfigMenu_Option_StartWithFishingRod, I18n.Tooltip_StartWithFishingRod, _availableFishingRods.ToArray(), ParseFishingRodName, () => config().StartWithFishingRod, s => config().StartWithFishingRod = s);
-            AddBool(I18n.ConfigMenu_Option_AutoAttachBait, I18n.Tooltip_AutoAttachBait, () => config().AutoAttachBait, b => config().AutoAttachBait = b);
-            AddDropDown(I18n.ConfigMenu_Option_PreferBait, I18n.Tooltip_PreferredBait, _availableBaits.ToArray(), ParseBaitAndTackleName, () => config().PreferredBait, s => config().PreferredBait = s);
+            AddNumber(I18n.ConfigMenu_Option_CastPowerPercent, I18n.Tooltip_CastPowerPercent, () => config().CastPowerPercent, i => config().CastPowerPercent = i, min: 0, max: 100, interval: 5);
+            AddBool(I18n.ConfigMenu_Option_UseSmartCastPower, I18n.Tooltip_UseSmartCastPower, () => config().UseSmartCastPower, b => config().UseSmartCastPower = b);
             AddBool(I18n.ConfigMenu_Option_InfiniteBait, I18n.Tooltip_InfiniteBait, () => config().InfiniteBait, b => config().InfiniteBait = b);
-            AddBool(I18n.ConfigMenu_Option_SpawnBaitIfDontHave, I18n.Tooltip_SpawnBaitIfDontHave, () => config().SpawnBaitIfDontHave, b => config().SpawnBaitIfDontHave = b);
-            AddNumber(I18n.ConfigMenu_Option_BaitAmountToSpawn, I18n.Tooltip_BaitAmountToSpawn, () => config().BaitAmountToSpawn, i => config().BaitAmountToSpawn = i, min: 1, max: 999, interval: 1);
-            AddBool(I18n.ConfigMenu_Option_AutoAttachTackles, I18n.Tooltip_AutoAttachTackles, () => config().AutoAttachTackles, b => config().AutoAttachTackles = b);
-            AddDropDown(I18n.ConfigMenu_Option_PreferTackle, I18n.Tooltip_PreferredTackle, _availableTackles.ToArray(), ParseBaitAndTackleName, () => config().PreferredTackle, s => config().PreferredTackle = s);
-            AddDropDown(I18n.ConfigMenu_Option_PreferAdvancedIridiumTackle, I18n.Tooltip_PreferredAdvIridiumTackle, _availableTackles.ToArray(), ParseBaitAndTackleName, () => config().PreferredAdvIridiumTackle, s => config().PreferredAdvIridiumTackle = s);
             AddBool(I18n.ConfigMenu_Option_InfiniteTackle, I18n.Tooltip_InfiniteTackle, () => config().InfiniteTackle, b => config().InfiniteTackle = b);
-            AddBool(I18n.ConfigMenu_Option_SpawnTackleIfDontHave, I18n.Tooltip_SpawnTackleIfDontHave, () => config().SpawnTackleIfDontHave, b => config().SpawnTackleIfDontHave = b);
             
             AddSectionTitle(I18n.ConfigMenu_Title_Enchantment);
             AddBool(I18n.ConfigMenu_Option_AddAutoHookEnchantment, I18n.Tooltip_AddAutoHookEnchantment, () => config().AddAutoHookEnchantment, b => config().AddAutoHookEnchantment = b);
