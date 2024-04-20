@@ -2,73 +2,73 @@
   "mod-name" : "Fishing Assistant 2", //New
 
   /// General ///
-  "on" : "On", //New
-  "off" : "Off", //New
-  "left" : "Left", //New
-  "right" : "Right", //New
-  "top" : "Top", //New
-  "bottom" : "Bottom", //New
-  "upper-left" : "Upper Left", //New
-  "upper-right" : "Upper Right", //New
-  "lower-left" : "Lower Left", //New
-  "lower-right" : "Lower Right", //New
-  "default" : "Default", //New
-  "always" : "Always", //New
-  "never" : "Never", //New
-  "stop-loot" : "Stop Loot", //New
-  "drop-remaining" : "Drop Remaining", //New
-  "discard-remaining" : "Discard Remaining", //New
-  "any" : "Any", //New
-  "none" : "None", //New
-  "silver" : "Silver", //New
-  "gold" : "Gold", //New
-  "iridium" : "Iridium", //New
-  "warn-only" : "Warn Only", //New
-  "warn-and-pause" : "Warn And Pause", //New
-  "skip-all" : "Skip All", //New
-  "skip-only-caught" : "Skip Only Caught Fish", //New
+  "on" : "Aktiviert",
+  "off" : "Deaktiviert",
+  "left" : "Links",
+  "right" : "Rechts",
+  "top" : "Oben",
+  "bottom" : "Unten",
+  "upper-left" : "Oben Links",
+  "upper-right" : "Oben Rechts",
+  "lower-left" : "Unten Links",
+  "lower-right" : "Unten Rechts",
+  "default" : "Standard",
+  "always" : "Immer",
+  "never" : "Niemals",
+  "stop-loot" : "Looten stoppen",
+  "drop-remaining" : "Verbleibende Beute fallenlassen",
+  "discard-remaining" : "Verbleibende Beute zerstören",
+  "any" : "Jeder",
+  "none" : "Keiner",
+  "silver" : "Silber",
+  "gold" : "Gold",
+  "iridium" : "Iridium",
+  "warn-only" : "Nur warnen",
+  "warn-and-pause" : "Warnen und Pause",
+  "skip-all" : "Alle überspringen",
+  "skip-only-caught" : "Nur Fischfang überspringen",
 
   /// Config Menu ///
-  "config-menu.page.general" : "General", //New
-  "config-menu.page.mini-game" : "Mini-Game", //New
-  "config-menu.page.fishing-rod" : "Fishing Rod", //New
-  "config-menu.title.go-to-page" : "Go To Pages", //New
+  "config-menu.page.general" : "Allgemein",
+  "config-menu.page.mini-game" : "Mini-Game",
+  "config-menu.page.fishing-rod" : "Angelrute",
+  "config-menu.title.go-to-page" : "Seitenauswahl",
 
   /// KEY BINDING ///
-  "config-menu.title.key-binding" : "Key Binding", //New
-  "config-menu.option.toggle-automation" : "Toggle Automation Button", //New
-  "config-menu.option.catch-treasure" : "Catch Treasure Button", //New
-  "config-menu.option.open-config-menu" : "Open Config Menu", //New
+  "config-menu.title.key-binding" : "Tastenbelegung",
+  "config-menu.option.toggle-automation" : "Taste zum Mod durchschalten",
+  "config-menu.option.catch-treasure" : "Schatz sammeln Taste",
+  "config-menu.option.open-config-menu" : "Konfigurationsmenü öffnen",
 
   /// HUD ///
-  "config-menu.title.hud" : "HUD", //New
-  "config-menu.option.hud-position" : "HUD Position", //New
+  "config-menu.title.hud" : "HUD",
+  "config-menu.option.hud-position" : "HUD Position",
 
   /// AUTOMATION ///
-  "config-menu.title.automation" : "Automation", //New
-  "config-menu.option.auto-cast-fishing-rod" : "Auto Cast FishingRod", //New
-  "config-menu.option.auto-hook-fish" : "Auto Hook Fish", //New
-  "config-menu.option.auto-play-mini-game" : "Auto Play MiniGame", //New
-  "config-menu.option.auto-close-popup" : "Auto Close Popup", //New
-  "config-menu.option.auto-loot-treasure" : "Auto Loot Treasure", //New
-  "config-menu.option.action-if-inventory-full" : "Action If Inventory Full", //New
-  "config-menu.option.auto-trash-junk" : "Auto Trash Junk", //New
-  "config-menu.option.junk-highest-price" : "Junk Highest Price", //New
-  "config-menu.option.allow-trash-fish" : "Allow Trash Fish", //New
-  "config-menu.option.auto-pause-fishing" : "Auto Pause Fishing", //New
-  "config-menu.option.time-to-pause" : "Time To Pause", //New
-  "config-menu.option.warn-count" : "Warn Count", //New
-  "config-menu.option.auto-eat-food" : "Auto Eat Food", //New
-  "config-menu.option.energy-percent-to-eat" : "Energy Percent To Eat", //New
-  "config-menu.option.allow-eating-fish" : "Allow Eating Fish", //New
-  "config-menu.option.auto-attach-bait" : "Auto Attach Bait", //New
-  "config-menu.option.prefer-bait" : "Preferred Bait", //New
-  "config-menu.option.spawn-bait-if-dont-have" : "Spawn Bait If Dont Have", //New
-  "config-menu.option.bait-amount-to-spawn" : "Bait Amount To Spawn", //New
-  "config-menu.option.auto-attach-tackles" : "Auto Attach Tackles", //New
-  "config-menu.option.prefer-tackle" : "Preferred Tackle", //New
-  "config-menu.option.prefer-advanced-iridium-tackle" : "Preferred Adv. Iridium Tackle", //New
-  "config-menu.option.spawn-tackle-if-dont-have" : "Spawn Tackle If Dont Have", //New
+  "config-menu.title.automation" : "Automatisierung",
+  "config-menu.option.auto-cast-fishing-rod" : "Automatisch Angel auswerfen",
+  "config-menu.option.auto-hook-fish" : "Automatische anbeißen des Fisches",
+  "config-menu.option.auto-play-mini-game" : "Automatisch MiniGame spielen",
+  "config-menu.option.auto-close-popup" : "Automatisch Popup schließen",
+  "config-menu.option.auto-loot-treasure" : "Automatisch Schatz einsammeln",
+  "config-menu.option.action-if-inventory-full" : "Aktion wenn Inventar voll",
+  "config-menu.option.auto-trash-junk" : "Automatisch Müll recyceln",
+  "config-menu.option.junk-highest-price" : "Höchster Wert des Müll",
+  "config-menu.option.allow-trash-fish" : "Fisch recyceln erlauben",
+  "config-menu.option.auto-pause-fishing" : "Auto Pause Fischen",
+  "config-menu.option.time-to-pause" : "Zeit für eine Pause",
+  "config-menu.option.warn-count" : "Anzahl der Warnungen",
+  "config-menu.option.auto-eat-food" : "Automatisch Nahrung essen",
+  "config-menu.option.energy-percent-to-eat" : "Ab wie viel Energieprozent Essen",
+  "config-menu.option.allow-eating-fish" : "Fisch essen erlauben",
+  "config-menu.option.auto-attach-bait" : "Köder autom. anbringen",
+  "config-menu.option.prefer-bait" : "Bevorzugter Köder",
+  "config-menu.option.spawn-bait-if-dont-have" : "Köder erzeugen wenn nicht vorhanden",
+  "config-menu.option.bait-amount-to-spawn" : "Welche Köderanzahl erzeugen",
+  "config-menu.option.auto-attach-tackles" : "Automatisch Zubehör anbringen",
+  "config-menu.option.prefer-tackle" : "Bevorzugtes Zubehör",
+  "config-menu.option.prefer-advanced-iridium-tackle" : "Bevorzugtes verb. Iridium Zubehör",
+  "config-menu.option.spawn-tackle-if-dont-have" : "Zubehör erzeugen wenn nicht vorhanden",
 
   /// FISHING ///
   "config-menu.title.fishing" : "Fishing", //New
