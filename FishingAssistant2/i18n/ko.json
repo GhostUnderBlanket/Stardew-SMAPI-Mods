@@ -26,12 +26,9 @@
   "warn-and-pause": "알림 및 일시 중지",
   "skip-all": "모두 건너뛰기",
   "skip-only-caught": "잡은 물고기만 건너뛰기",
-  "instant-unlock": "Instant Unlock",
-  //New
-  "never-unlock": "Never Unlock",
-  //New
-  "second": "{0} Second",
-  //New
+  "instant-unlock": "Instant Unlock", //New
+  "never-unlock": "Never Unlock", //New
+  "second": "{0} Second", //New
   /// Config Menu ///
   "config-menu.page.general": "일반",
   "config-menu.page.mini-game": "미니게임",
@@ -93,12 +90,9 @@
   /// FISHING ROD ///
   "config-menu.title.fishing-rod": "낚싯대",
   "config-menu.option.start-with-fishing-rod": "낚싯대로 시작",
-  "config-menu.option.default-cast-power": "Default Cast Power",
-  //New
-  "config-menu.option.unlock-cast-power-time": "Unlock Cast Power Time",
-  //New
-  "config-menu.option.reset-cast-power-to-default": "Reset Cast Power To Default",
-  //New
+  "config-menu.option.default-cast-power": "Default Cast Power", //New
+  "config-menu.option.unlock-cast-power-time": "Unlock Cast Power Time", //New
+  "config-menu.option.reset-cast-power-to-default": "Reset Cast Power To Default", //New
   "config-menu.option.infinite-bait": "미끼 무한",
   "config-menu.option.infinite-tackle": "무한 태클",
   /// Enchantment ///

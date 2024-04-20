@@ -26,12 +26,9 @@
   "warn-and-pause": "警告并暂停",
   "skip-all": "跳过所有",
   "skip-only-caught": "仅跳过捕鱼",
-  "instant-unlock": "Instant Unlock",
-  //New
-  "never-unlock": "Never Unlock",
-  //New
-  "second": "{0} Second",
-  //New
+  "instant-unlock": "Instant Unlock", //New
+  "never-unlock": "Never Unlock", //New
+  "second": "{0} Second", //New
   /// Config Menu ///
   "config-menu.page.general": "常规设置",
   "config-menu.page.mini-game": "小游戏设置",
@@ -93,12 +90,9 @@
   /// FISHING ROD ///
   "config-menu.title.fishing-rod": "鱼竿",
   "config-menu.option.start-with-fishing-rod": "开局携带鱼竿",
-  "config-menu.option.default-cast-power": "Default Cast Power",
-  //New
-  "config-menu.option.unlock-cast-power-time": "Unlock Cast Power Time",
-  //New
-  "config-menu.option.reset-cast-power-to-default": "Reset Cast Power To Default",
-  //New
+  "config-menu.option.default-cast-power": "Default Cast Power", //New
+  "config-menu.option.unlock-cast-power-time": "Unlock Cast Power Time", //New
+  "config-menu.option.reset-cast-power-to-default": "Reset Cast Power To Default", //New
   "config-menu.option.infinite-bait": "无限鱼饵",
   "config-menu.option.infinite-tackle": "无限钓具耐久",
   /// Enchantment ///
