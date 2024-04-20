@@ -33,9 +33,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 Instance.goldenTreasure = false;
         }
 
-        internal void InstantCatchTreasure(bool catchTreasure)
+        internal void InstantCatchTreasure(bool isAutomation, bool catchTreasure)
         {
-            if (Instance.treasure) Instance.treasureCaught = catchTreasure;
+            Instance.treasureCaught = Instance.treasure switch
+            {
+                true when isAutomation => catchTreasure,
+                true when Instance.treasureCatchLevel > 0.0 => true,
+                _ => Instance.treasureCaught
+            };
         }
 
         internal void InstantCatchFish()

@@ -43,7 +43,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         internal void AutoTrashJunk(InventoryChangedEventArgs e)
         {
-            if (!modEntry().ModEnable || !modConfig().AutoTrashJunk) return;
+            if (!modEntry().AutomationEnable || !modConfig().AutoTrashJunk) return;
 
             List<Item> changedItems = new();
             changedItems.AddRange(e.Added);
@@ -139,7 +139,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
             if (_bobberBar is { Instance.treasure: true }) _fishingRod.OverrideGoldenTreasureChance();
 
-            if (!modEntry().ModEnable) return;
+            if (!modEntry().AutomationEnable) return;
 
             if (modConfig().AutoCastFishingRod) AutoCastFishingRod();
 
@@ -277,7 +277,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
                 _bobberBar.OverrideFishSize(modConfig().AlwaysMaxFishSize);
 
-                if (modConfig().InstantCatchTreasure && bar.treasureScale >= 1.0f) _bobberBar.InstantCatchTreasure(modEntry().CatchTreasure);
+                if (modConfig().InstantCatchTreasure && bar.treasureScale >= 1.0f) _bobberBar.InstantCatchTreasure(modConfig().AutoPlayMiniGame, modEntry().CatchTreasure);
 
                 _fishingRod.OverrideNumberOfFishCaught(modConfig().PreferFishAmount, _bobberBar.Instance);
 
@@ -289,7 +289,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                     if (ShouldSkipMiniGame())
                     {
                         _bobberBar.InstantCatchFish();
-                        _bobberBar.InstantCatchTreasure(modEntry().CatchTreasure);
+                        _bobberBar.InstantCatchTreasure(true, modEntry().CatchTreasure);
                     }
 
                     if (bar.distanceFromCatching >= 0.8999f)
@@ -308,7 +308,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 }
             }
 
-            if (!modEntry().ModEnable) return;
+            if (!modEntry().AutomationEnable) return;
 
             if (IsInFishingMiniGame && modConfig().AutoPlayMiniGame) AutoPlayFishingMiniGame();
 
@@ -452,7 +452,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         internal void DoOnTimeChangedAssistantTask()
         {
-            if (!modEntry().ModEnable) return;
+            if (!modEntry().AutomationEnable) return;
 
             if (modConfig().AutoPauseFishing != PauseFishingBehaviour.Off.ToString()) AutoPauseFishing(modConfig().AutoPauseFishing, modConfig().WarnCount);
         }

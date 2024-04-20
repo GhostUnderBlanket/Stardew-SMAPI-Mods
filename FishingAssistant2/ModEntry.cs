@@ -39,7 +39,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
         public bool CatchTreasure;
 
-        public bool ModEnable;
+        public bool AutomationEnable;
 
         private ModConfig Config { get; set; }
 
@@ -70,9 +70,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         public void ForceDisable()
         {
             Game1.playSound("coin");
-            ModEnable = false;
+            AutomationEnable = false;
 
-            CommonHelper.PushToggleNotification(ModEnable, I18n.HudMessage_AutomationToggle());
+            CommonHelper.PushToggleNotification(AutomationEnable, I18n.HudMessage_AutomationToggle());
         }
 
         #region Events
@@ -120,7 +120,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             if (!Context.IsWorldReady) return;
 
             if (Game1.player.CurrentTool is FishingRod fishingRod)
-                Assistant.OnEquipFishingRod(fishingRod, ModEnable);
+                Assistant.OnEquipFishingRod(fishingRod, AutomationEnable);
 
             if (Game1.player.CurrentTool is not FishingRod)
                 Assistant.OnUnEquipFishingRod();
@@ -157,10 +157,10 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
             if (e.Button == Config.EnableAutomationButton)
             {
-                ModEnable = !ModEnable;
+                AutomationEnable = !AutomationEnable;
                 Game1.playSound("coin");
 
-                Assistant.OnAutomationStateChange(ModEnable);
+                Assistant.OnAutomationStateChange(AutomationEnable);
             }
 
             if (e.Button == Config.CatchTreasureButton)
@@ -178,7 +178,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
         private void DrawModStatus()
         {
-            if ((Game1.eventUp && !Game1.isFestival()) || (!ModEnable && !CatchTreasure))
+            if ((Game1.eventUp && !Game1.isFestival()) || (!AutomationEnable && !CatchTreasure))
                 return;
 
             float toolBarTransparency = 0;
@@ -222,7 +222,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
             IClickableMenu.drawTextureBox(Game1.spriteBatch, Game1.menuTexture, rectangles[0], boxPosX, boxPosY, boxSize, boxSize, Color.White * toolBarTransparency, drawShadow: false);
 
-            DrawIcon(ModEnable, rectangles[1], boxCenterX - iconSize / 2, boxPosY + offset, 2f);
+            DrawIcon(AutomationEnable, rectangles[1], boxCenterX - iconSize / 2, boxPosY + offset, 2f);
             DrawIcon(CatchTreasure, rectangles[2], boxCenterX - iconSize / 2, boxPosY + boxSize - offset - iconSize, 2f);
 
             return;
