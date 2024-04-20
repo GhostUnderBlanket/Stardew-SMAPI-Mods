@@ -92,7 +92,6 @@
   "config-menu.option.start-with-fishing-rod": "开局携带鱼竿",
   "config-menu.option.default-cast-power": "Default Cast Power", //New
   "config-menu.option.unlock-cast-power-time": "Unlock Cast Power Time", //New
-  "config-menu.option.reset-cast-power-to-default": "Reset Cast Power To Default", //New
   "config-menu.option.infinite-bait": "无限鱼饵",
   "config-menu.option.infinite-tackle": "无限钓具耐久",
   /// Enchantment ///
@@ -165,6 +164,5 @@
   "tooltip.add-master-enchantment": "给手持的鱼竿添加精通附魔",
   "tooltip.add-preserving-enchantment": "给手持的鱼竿添加耐用附魔",
   "tooltip.remove-when-unequipped": "当未手持鱼竿时，移除鱼竿上的附魔",
-  "tooltip.unlock-cast-power-time": "Time to hold cast button for X second to unlock cast power back to normal"
-  //New
+  "tooltip.unlock-cast-power-time": "Time to hold cast button for X second to unlock cast power back to normal", //New
 }

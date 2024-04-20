@@ -164,6 +164,5 @@
   "tooltip.add-master-enchantment": "Toggle for adding Master enchantment to fishing rod", //New
   "tooltip.add-preserving-enchantment": "Toggle for adding Preserving enchantment to fishing rod", //New
   "tooltip.remove-when-unequipped": "Toggle for removing enchantment when fishing rod is unequipped", //New
-  "tooltip.unlock-cast-power-time": "Time to hold cast button for X second to unlock cast power back to normal"
-  //New
+  "tooltip.unlock-cast-power-time": "Time to hold cast button for X second to unlock cast power back to normal", //New
 }

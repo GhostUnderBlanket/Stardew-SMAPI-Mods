@@ -165,6 +165,5 @@
   "tooltip.add-master-enchantment": "낚싯대에 마스터 마법을 추가하기 위한 토글",
   "tooltip.add-preserving-enchantment": "낚싯대에 보존 마법을 추가하기 위한 토글",
   "tooltip.remove-when-unequipped": "낚싯대가 장착 해제되었을 때 마법 부여 제거 토글",
-  "tooltip.unlock-cast-power-time": "Time to hold cast button for X second to unlock cast power back to normal"
-  //New
+  "tooltip.unlock-cast-power-time": "Time to hold cast button for X second to unlock cast power back to normal", //New
 }
