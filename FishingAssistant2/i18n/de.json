@@ -1,5 +1,5 @@
 {
-  "mod-name": "Fishing Assistant 2", //New
+  "mod-name": "Fishing Assistant 2",
   /// General ///
   "on": "Aktiviert",
   "off": "Deaktiviert",
@@ -26,9 +26,9 @@
   "warn-and-pause": "Warnen und Pause",
   "skip-all": "Alle überspringen",
   "skip-only-caught": "Nur Fischfang überspringen",
-  "instant-unlock": "Instant Unlock", //New
-  "never-unlock": "Never Unlock", //New
-  "second": "{0} Second", //New
+  "instant-unlock": "Sofort entsperren",
+  "never-unlock": "Niemals entsperren",
+  "second": "{0} Sekunden",
   /// Config Menu ///
   "config-menu.page.general": "Allgemein",
   "config-menu.page.mini-game": "Mini-Game",
@@ -90,8 +90,8 @@
   /// FISHING ROD ///
   "config-menu.title.fishing-rod": "Angelrute",
   "config-menu.option.start-with-fishing-rod": "Mit Angel beginnen",
-  "config-menu.option.default-cast-power": "Default Cast Power", //New
-  "config-menu.option.unlock-cast-power-time": "Unlock Cast Power Time", //New
+  "config-menu.option.default-cast-power": "Standard Auswurfstärke",
+  "config-menu.option.unlock-cast-power-time": "Zeit für Auswurfkraft freischalten",
   "config-menu.option.infinite-bait": "Unendlicher Köder",
   "config-menu.option.infinite-tackle": "Unendliches Zubehör",
   /// Enchantment ///
@@ -127,7 +127,7 @@
   "tooltip.allow-trash-fish": "Umschalten, um das Ausmisten von Fischen mit einem Verkaufspreis, der dem 'Höchster Wert des Müll' entspricht, zu erlauben",
   "tooltip.auto-pause-fishing": "Soll die Mod das Angeln während der Nacht automatisch unterbrechen?",
   "tooltip.time-to-pause": "Zeit, eine Angelpause auszulösen",
-  "tooltip.warn-count": "Anzahl der Warnungen, die die Mod ausgibt, wenn man nach Erreichen von 'Zeit für Pause' weiterfischt", // New
+  "tooltip.warn-count": "Anzahl der Warnungen, die die Mod ausgibt, wenn man nach Erreichen von 'Zeit für Pause' weiterfischt",
   "tooltip.auto-eat-food": "Umschalten, um automatisch Nahrung aus dem Inventar zu essen",
   "tooltip.energy-percent-to-eat": "Energieprozentsatz ist niedrig, und man muss etwas zu essen finden",
   "tooltip.allow-eating-fish": "Umschalten auf den Verzehr von gefangenem Fisch erlauben",
@@ -164,5 +164,5 @@
   "tooltip.add-master-enchantment": "Umschalten zum Hinzufügen der Meisterverzauberung zur Angelrute",
   "tooltip.add-preserving-enchantment": "Umschalten zum Hinzufügen der Bewahrungsverzauberung zur Angelrute",
   "tooltip.remove-when-unequipped": "Umschalten zum Entfernen der Verzauberung, wenn die Angelrute nicht ausgerüstet ist",
-  "tooltip.unlock-cast-power-time": "Time to hold cast button for X second to unlock cast power back to normal", //New
+  "tooltip.unlock-cast-power-time": "Die Zeit, wie lange die Auswurftaste in Sekunden gehalten wird, um die Auswurfstärke auf Standrad zurück zu setzen",
 }

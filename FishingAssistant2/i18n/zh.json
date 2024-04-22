@@ -25,10 +25,10 @@
   "warn-only": "警告",
   "warn-and-pause": "警告并暂停",
   "skip-all": "跳过所有",
-  "skip-only-caught": "仅跳过捕鱼",
-  "instant-unlock": "Instant Unlock", //New
-  "never-unlock": "Never Unlock", //New
-  "second": "{0} Second", //New
+  "skip-only-caught": "仅跳过捕获过的鱼",
+  "instant-unlock": "立即解锁", //New
+  "never-unlock": "从不解锁", //New
+  "second": "{0} 秒", //New
   /// Config Menu ///
   "config-menu.page.general": "常规设置",
   "config-menu.page.mini-game": "小游戏设置",
@@ -59,11 +59,11 @@
   "config-menu.option.auto-trash-junk": "自动丢弃垃圾",
   "config-menu.option.junk-highest-price": "低于多少价值的垃圾(鱼)会被丢弃",
   "config-menu.option.allow-trash-fish": "允许自动丢弃鱼",
-  "config-menu.option.auto-attach-bait": "自动装备鱼饵(开启后关于鱼饵的修改才生效)",
+  "config-menu.option.auto-attach-bait": "自动装备鱼饵",
   "config-menu.option.prefer-bait": "首选鱼饵",
   "config-menu.option.spawn-bait-if-dont-have": "没有鱼饵时凭空生成",
   "config-menu.option.bait-amount-to-spawn": "生成鱼饵的数量",
-  "config-menu.option.auto-attach-tackles": "自动装备钓具(开启后关于钓具的修改才生效)",
+  "config-menu.option.auto-attach-tackles": "自动装备钓具",
   "config-menu.option.prefer-tackle": "首选钓具",
   "config-menu.option.prefer-advanced-iridium-tackle": "高级铱金鱼竿额外钓具",
   "config-menu.option.spawn-tackle-if-dont-have": "没有钓具时凭空生成",
@@ -90,8 +90,8 @@
   /// FISHING ROD ///
   "config-menu.title.fishing-rod": "鱼竿",
   "config-menu.option.start-with-fishing-rod": "开局携带鱼竿",
-  "config-menu.option.default-cast-power": "Default Cast Power", //New
-  "config-menu.option.unlock-cast-power-time": "Unlock Cast Power Time", //New
+  "config-menu.option.default-cast-power": "默认抛竿力量", //New
+  "config-menu.option.unlock-cast-power-time": "解锁抛竿力量时间", //New
   "config-menu.option.infinite-bait": "无限鱼饵",
   "config-menu.option.infinite-tackle": "无限钓具耐久",
   /// Enchantment ///
@@ -164,5 +164,5 @@
   "tooltip.add-master-enchantment": "给手持的鱼竿添加精通附魔",
   "tooltip.add-preserving-enchantment": "给手持的鱼竿添加耐用附魔",
   "tooltip.remove-when-unequipped": "当未手持鱼竿时，移除鱼竿上的附魔",
-  "tooltip.unlock-cast-power-time": "Time to hold cast button for X second to unlock cast power back to normal", //New
+  "tooltip.unlock-cast-power-time": "按住抛竿键多少秒后解锁抛竿力度，使抛竿力度开始浮动(设置为立即解锁则手动抛竿为原版浮动力度抛竿，不影响自动抛竿力度)", //New
 }
