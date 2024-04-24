@@ -1,4 +1,5 @@
 using StardewModdingAPI;
+using StardewModdingAPI.Utilities;
 
 namespace ChibiKyu.StardewMods.FishingAssistant2
 {
@@ -45,6 +46,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
         /// <summary>Toggle for allowing trashing of fish with a sale price corresponding to 'JunkHighestPrice'</summary>
         public bool AllowTrashFish { get; set; } = false;
+
+        /// <summary>List of items to be excluded from automatic trash</summary>
+        public List<string> JunkIgnoreList { get; set; } = [];
 
         /// <summary>Should mod auto-pause fishing during nighttime</summary>
         public string AutoPauseFishing { get; set; } = "WarnAndPause";

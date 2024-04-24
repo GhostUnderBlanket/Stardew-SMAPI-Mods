@@ -58,6 +58,7 @@
   "config-menu.option.allow-eating-fish": "อนุญาตให้กินปลา",
   "config-menu.option.auto-trash-junk": "ทิ้งขยะอัตโนมัติ",
   "config-menu.option.junk-highest-price": "ราคาสุงสุดของขยะ",
+  "config-menu.option.junk-ignore-list": "รายการที่ละเว้น",
   "config-menu.option.allow-trash-fish": "อนุญาตให้ทิ้งปลา",
   "config-menu.option.auto-attach-bait": "ใส่เหยื่ออัตโนมัติ",
   "config-menu.option.prefer-bait": "เหยื่อที่ต้องการ",
@@ -110,7 +111,9 @@
   "hud-message.auto-attach": "ใส่ {0} ไปยัง {1} อัตโนมัติ",
   "hud-message.auto-attach-spawned": "เสก {0} ใส่ {1} อัตโนมัติ",
   "hud-message.auto-eat-food": "กิน {0} อัตโนมัติ",
-  "hud-message.auto-trash-junk": "ทิ้ง {0} x{1} อัตโนมัติ",
+  "hud-message.move-trash-to-junk": "ย้าย {0} x{1} ไปยังถังขยะแล้ว",
+  "hud-message.actual-trash-junk": "ทิ้ง {0} ราการในถังขยะแล้ว",
+  "hud-message.add-to-ignore-list": "ละเว้น {0} จากการทิ้งอัตโนมัติแล้ว",
   /// TOOLTIP ///
   "tooltip.enable-automation-button": "ปุ่มสำหรับ เปิด/ปิด ระบบอัตโนมัติ",
   "tooltip.catch-treasure-button": "ปุ่มสำหรับ จับ/ปล่อย สมบัติในมินิเกม",
@@ -164,5 +167,6 @@
   "tooltip.add-master-enchantment": "เพิ่มการตีบวก ปรมาจารย์ (Master) ไปยังเบ็ดตกปลาที่ถืออยู่",
   "tooltip.add-preserving-enchantment": "เพิ่มการตีบวก ทะนุถนอม (Preserving) ไปยังเบ็ดตกปลาที่ถืออยู่",
   "tooltip.remove-when-unequipped": "ลบการตีบวกออกเมื่อไม่ได้ถือเบ็ดตกปลาแล้ว",
-  "tooltip.unlock-cast-power-time": "ระยะเวลาที่ต้องกดเหวี่ยงเบ็ดค้างไว้ X วินาทีเพื่อปลดล็อดแรงเหวี่ยงเบ็ดให้เป็นแบบปกติ"
+  "tooltip.unlock-cast-power-time": "ระยะเวลาที่ต้องกดเหวี่ยงเบ็ดค้างไว้ X วินาทีเพื่อปลดล็อดแรงเหวี่ยงเบ็ดให้เป็นแบบปกติ",
+  "tooltip.junk-ignore-list": "รายการที่จะได้รับการยกเว้นจากกระบบบิ้งขยะอัตโนมัติ"
 }

@@ -52,6 +52,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             _configUtil.AddBool(_configUtil.AutoTrashJunk);
             _configUtil.AddNumber(_configUtil.JunkHighestPrice);
             _configUtil.AddBool(_configUtil.AllowTrashFish);
+            _configUtil.AddText(_configUtil.JunkIgnoreList);
             _configUtil.AddDropDown(_configUtil.AutoPauseFishing);
             _configUtil.AddNumber(_configUtil.TimeToPause);
             _configUtil.AddNumber(_configUtil.WarnCount);

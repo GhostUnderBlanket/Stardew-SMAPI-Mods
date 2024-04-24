@@ -129,6 +129,15 @@ The item that price that less than or equal to this will consider as junk.
 Toggle for allowing to trashed fish that sale price is corresponding to 'JunkHighestPrice'.
 ```
 
+### JunkIgnoreList
+
+**Default value:** `[]`
+**Possible values:** `Array of qualified item ID, for example ["(O)167","(O)388","(O)390","(O)771"]`
+
+```
+List of items to be excluded from automatic trash
+```
+
 ### AutoPauseFishing
 
 **Default value:** `WarnAndPause`

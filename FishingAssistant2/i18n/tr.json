@@ -53,6 +53,7 @@
   "config-menu.option.auto-trash-junk": "Auto Trash Junk", //New
   "config-menu.option.junk-highest-price": "Junk Highest Price", //New
   "config-menu.option.allow-trash-fish": "Allow Trash Fish", //New
+  "config-menu.option.junk-ignore-list": "Junk Ignore List", //New
   "config-menu.option.auto-pause-fishing": "Auto Pause Fishing", //New
   "config-menu.option.time-to-pause": "Time To Pause", //New
   "config-menu.option.warn-count": "Warn Count", //New
@@ -111,7 +112,9 @@
   "hud-message.auto-attach": "Auto Attach {0} To {1}", //New
   "hud-message.auto-attach-spawned": "Auto Attach Spawned {0} To {1}", //New
   "hud-message.auto-eat-food": "Auto Eat {0}", //New
-  "hud-message.auto-trash-junk": "Auto Trash {0} x{1}", //New
+  "hud-message.move-trash-to-junk": "Moved {0} x{1} to trash can", //New
+  "hud-message.actual-trash-junk": "Trashed {0} items in the trash can", //New
+  "hud-message.add-to-ignore-list": "Ignore {0} from auto trash", //New
   /// TOOLTIP ///
   "tooltip.enable-automation-button": "Button for toggling automation of this mod", //New
   "tooltip.catch-treasure-button": "Button for toggling catch or ignore treasure in fishing mini-game", //New
@@ -166,4 +169,5 @@
   "tooltip.add-preserving-enchantment": "Toggle for adding Preserving enchantment to fishing rod", //New
   "tooltip.remove-when-unequipped": "Toggle for removing enchantment when fishing rod is unequipped", //New
   "tooltip.unlock-cast-power-time": "Time to hold cast button for X second to unlock cast power back to normal", //New
+  "tooltip.junk-ignore-list": "List of items to be excluded from automatic trash", //New
 }

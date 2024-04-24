@@ -13,7 +13,17 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 {
     internal class Assistant(Func<ModEntry> modEntry, Func<ModConfig> modConfig)
     {
-        private readonly IList<Item> _excludeItems = new List<Item>();
+        private readonly IList<Item> _excludeItems = [];
+
+        private List<Item?> _itemsToTrash = [];
+
+        private SBobberBar? _bobberBar;
+
+        private SFishingRod? _fishingRod;
+
+        private ItemGrabMenu? _treasureChestMenu;
+
+        private InventoryPage? _inventoryPage;
 
         private int _autoCastDelay = 60;
 
@@ -21,57 +31,17 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         private int _autoLootDelay = 30;
 
-        private SBobberBar? _bobberBar;
-
         private bool _catchingTreasure;
 
         private int _facingDirection;
 
         private bool _facingDirectionCached;
 
-        private SFishingRod? _fishingRod;
-
         private bool _isInTreasureChestMenu;
-
-        private ItemGrabMenu? _treasureChestMenu;
 
         internal bool IsInFishingMiniGame;
 
         internal int NumWarnThisDay;
-
-        #region On Inventory Changed
-
-        internal void AutoTrashJunk(InventoryChangedEventArgs e)
-        {
-            if (!modEntry().AutomationEnable || !modConfig().AutoTrashJunk) return;
-
-            List<Item> changedItems = new();
-            changedItems.AddRange(e.Added);
-            changedItems.AddRange(e.QuantityChanged.Select(newStacks => newStacks.Item));
-
-            foreach (Item newItem in changedItems)
-            {
-                int sellToStorePrice = Utility.getSellToStorePriceOfItem(newItem, false);
-
-                if (newItem.canBeTrashed() && (newItem.Category == Object.junkCategory ||
-                                               (newItem.Category == Object.FishCategory && sellToStorePrice <= modConfig().JunkHighestPrice && modConfig().AllowTrashFish) ||
-                                               (newItem.Category != Object.FishCategory && sellToStorePrice <= modConfig().JunkHighestPrice && SaveToTrashed(newItem))))
-                {
-                    Utility.trashItem(newItem);
-                    e.Player.removeItemFromInventory(newItem);
-                    CommonHelper.PushWarnNotification(I18n.HudMessage_AutoTrashJunk(), newItem.DisplayName, newItem.Stack);
-                }
-            }
-
-            return;
-
-            bool SaveToTrashed(Item itemToTrash)
-            {
-                return itemToTrash is not (MeleeWeapon or FishingRod or Pan or Slingshot);
-            }
-        }
-
-        #endregion
 
         #region FishingRod
 
@@ -108,17 +78,24 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             _fishingRod = new SFishingRod(fishingRod, modConfig);
 
-            if (modConfig().AddAutoHookEnchantment && !_fishingRod.Instance.hasEnchantmentOfType<AutoHookEnchantment>())
-                _fishingRod.AddEnchantment(new AutoHookEnchantment());
+            AddEnchantments();
 
-            if (modConfig().AddEfficientEnchantment && !_fishingRod.Instance.hasEnchantmentOfType<EfficientToolEnchantment>())
-                _fishingRod.AddEnchantment(new EfficientToolEnchantment());
+            return;
 
-            if (modConfig().AddMasterEnchantment && !_fishingRod.Instance.hasEnchantmentOfType<MasterEnchantment>())
-                _fishingRod.AddEnchantment(new MasterEnchantment());
+            void AddEnchantments()
+            {
+                if (modConfig().AddAutoHookEnchantment && !_fishingRod.Instance.hasEnchantmentOfType<AutoHookEnchantment>())
+                    _fishingRod.AddEnchantment(new AutoHookEnchantment());
 
-            if (modConfig().AddPreservingEnchantment && !_fishingRod.Instance.hasEnchantmentOfType<PreservingEnchantment>())
-                _fishingRod.AddEnchantment(new PreservingEnchantment());
+                if (modConfig().AddEfficientEnchantment && !_fishingRod.Instance.hasEnchantmentOfType<EfficientToolEnchantment>())
+                    _fishingRod.AddEnchantment(new EfficientToolEnchantment());
+
+                if (modConfig().AddMasterEnchantment && !_fishingRod.Instance.hasEnchantmentOfType<MasterEnchantment>())
+                    _fishingRod.AddEnchantment(new MasterEnchantment());
+
+                if (modConfig().AddPreservingEnchantment && !_fishingRod.Instance.hasEnchantmentOfType<PreservingEnchantment>())
+                    _fishingRod.AddEnchantment(new PreservingEnchantment());
+            }
         }
 
         private void DoFishingRodAssistantTask()
@@ -266,47 +243,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         internal void DoOnUpdateAssistantTask()
         {
-            if (_bobberBar != null && _fishingRod != null)
-            {
-                BobberBar bar = _bobberBar.Instance;
-                FishingRod rod = _fishingRod.Instance;
+            DoPullFishFromWater();
 
-                _bobberBar.AlwaysPerfect(modConfig().AlwaysPerfect);
-
-                _bobberBar.OverrideFishQuality(modConfig().PreferFishQuality);
-
-                _bobberBar.OverrideFishSize(modConfig().AlwaysMaxFishSize);
-
-                if (modConfig().InstantCatchTreasure && bar.treasureScale >= 1.0f) _bobberBar.InstantCatchTreasure(modConfig().AutoPlayMiniGame, modEntry().CatchTreasure);
-
-                _fishingRod.OverrideNumberOfFishCaught(modConfig().PreferFishAmount, _bobberBar.Instance);
-
-                if (bar is { fadeOut: true, scale: <= 0.1f } || ShouldSkipMiniGame())
-                {
-                    bar.scale = 0.0f;
-                    bar.fadeOut = false;
-
-                    if (ShouldSkipMiniGame())
-                    {
-                        _bobberBar.InstantCatchFish();
-                        _bobberBar.InstantCatchTreasure(true, modEntry().CatchTreasure);
-                    }
-
-                    if (bar.distanceFromCatching >= 0.8999f)
-                    {
-                        rod.pullFishFromWater(bar.whichFish, bar.fishSize, bar.fishQuality, (int)bar.difficulty, bar.treasureCaught, bar.perfect, bar.fromFishPond, bar.setFlagOnCatch, bar.bossFish,
-                            rod.numberOfFishCaught);
-                    }
-                    else
-                    {
-                        Game1.player.completelyStopAnimatingOrDoingAction();
-                        rod.doneFishing(Game1.player, true);
-                    }
-
-                    Game1.exitActiveMenu();
-                    Game1.setRichPresence("location", Game1.currentLocation.Name);
-                }
-            }
+            DoTrashRecoveryMenu();
 
             if (!modEntry().AutomationEnable) return;
 
@@ -315,6 +254,96 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             if (modConfig().AutoClosePopup) AutoCloseFishPopup();
 
             if (_isInTreasureChestMenu && modConfig().AutoLootTreasure) AutoLootTreasure();
+        }
+
+        private void DoPullFishFromWater()
+        {
+            if (_bobberBar == null || _fishingRod == null) return;
+
+            BobberBar bar = _bobberBar.Instance;
+            FishingRod rod = _fishingRod.Instance;
+
+            _bobberBar.AlwaysPerfect(modConfig().AlwaysPerfect);
+
+            _bobberBar.OverrideFishQuality(modConfig().PreferFishQuality);
+
+            _bobberBar.OverrideFishSize(modConfig().AlwaysMaxFishSize);
+
+            if (modConfig().InstantCatchTreasure && bar.treasureScale >= 1.0f) _bobberBar.InstantCatchTreasure(modConfig().AutoPlayMiniGame, modEntry().CatchTreasure);
+
+            _fishingRod.OverrideNumberOfFishCaught(modConfig().PreferFishAmount, _bobberBar.Instance);
+
+            if (bar is { fadeOut: true, scale: <= 0.1f } || ShouldSkipMiniGame())
+            {
+                bar.scale = 0.0f;
+                bar.fadeOut = false;
+
+                if (ShouldSkipMiniGame())
+                {
+                    _bobberBar.InstantCatchFish();
+                    _bobberBar.InstantCatchTreasure(true, modEntry().CatchTreasure);
+                }
+
+                if (bar.distanceFromCatching >= 0.8999f)
+                {
+                    rod.pullFishFromWater(bar.whichFish, bar.fishSize, bar.fishQuality, (int)bar.difficulty, bar.treasureCaught, bar.perfect, bar.fromFishPond, bar.setFlagOnCatch, bar.bossFish,
+                        rod.numberOfFishCaught);
+                }
+                else
+                {
+                    Game1.player.completelyStopAnimatingOrDoingAction();
+                    rod.doneFishing(Game1.player, true);
+                }
+
+                Game1.exitActiveMenu();
+                Game1.setRichPresence("location", Game1.currentLocation.Name);
+            }
+
+            return;
+
+            bool ShouldSkipMiniGame()
+            {
+                if (modConfig().SkipFishingMiniGame == Enum.GetName(SkipFishingMiniGame.SkipAll)) return true;
+
+                return modConfig().SkipFishingMiniGame == Enum.GetName(SkipFishingMiniGame.SkipOnlyCaught) && AlreadyCaughtFish();
+            }
+        }
+
+        private void DoTrashRecoveryMenu()
+        {
+            if (!OnTrashCanReceiveRightClicked()) return;
+
+            if (Game1.activeClickableMenu != null && Game1.activeClickableMenu.readyToClose()) Game1.activeClickableMenu.exitThisMenu();
+
+            ItemGrabMenu.organizeItemsInList(_itemsToTrash);
+            ItemGrabMenu trashRecoveryMenu = new(_itemsToTrash, this);
+            trashRecoveryMenu.behaviorOnItemGrab += AddTrashToIgnoreList;
+            trashRecoveryMenu.exitFunction += OnExit;
+            Game1.activeClickableMenu = trashRecoveryMenu;
+
+            return;
+
+            bool OnTrashCanReceiveRightClicked()
+            {
+                return _inventoryPage != null && Game1.player.CursorSlotItem == null && Game1.input.GetMouseState().RightButton == ButtonState.Pressed &&
+                       _inventoryPage.trashCan.containsPoint(Game1.getMouseX(true), Game1.getMouseY(true));
+            }
+
+            void AddTrashToIgnoreList(Item item, Farmer who)
+            {
+                if (modConfig().JunkIgnoreList.Contains(item.QualifiedItemId)) return;
+
+                modConfig().JunkIgnoreList.Add(item.QualifiedItemId);
+                modEntry().Helper.WriteConfig(modConfig());
+
+                CommonHelper.PushWarnNotification(I18n.HudMessage_AddToIgnoreList(), item.DisplayName);
+            }
+
+            void OnExit()
+            {
+                _itemsToTrash = trashRecoveryMenu.ItemsToGrabMenu.actualInventory.ToList();
+                _itemsToTrash.RemoveAll(trash => trash == null);
+            }
         }
 
         private void AutoPlayFishingMiniGame()
@@ -341,24 +370,16 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             bar.bobberBarSpeed = (fishPos - bar.bobberBarPos - bobberBarCenter) / 2;
         }
 
-        private bool ShouldSkipMiniGame()
-        {
-            if (modConfig().SkipFishingMiniGame == Enum.GetName(SkipFishingMiniGame.SkipAll)) return true;
-
-            return modConfig().SkipFishingMiniGame == Enum.GetName(SkipFishingMiniGame.SkipOnlyCaught) && AlreadyCaughtFish();
-        }
-
         private void AutoCloseFishPopup()
         {
-            if (_fishingRod != null && _fishingRod.IsRodShowingFish() && !Game1.isFestival())
-            {
-                if (_autoClosePopupDelay-- > 0)
-                    return;
+            if (_fishingRod == null || !_fishingRod.IsRodShowingFish() || Game1.isFestival()) return;
 
-                _autoClosePopupDelay = 30;
+            if (_autoClosePopupDelay-- > 0)
+                return;
 
-                SimulateUseToolPressed(() => _fishingRod.Instance.tickUpdate(Game1.currentGameTime, Game1.player));
-            }
+            _autoClosePopupDelay = 30;
+
+            SimulateUseToolPressed(() => _fishingRod.Instance.tickUpdate(Game1.currentGameTime, Game1.player));
 
             return;
 
@@ -374,18 +395,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
                 Game1.oldKBState = new KeyboardState();
             }
-        }
-
-        internal void OnTreasureMenuOpen(ItemGrabMenu itemGrabMenu)
-        {
-            _treasureChestMenu = itemGrabMenu;
-            _isInTreasureChestMenu = true;
-        }
-
-        internal void OnTreasureMenuClose()
-        {
-            _isInTreasureChestMenu = false;
-            _treasureChestMenu = null;
         }
 
         private void AutoLootTreasure()
@@ -454,22 +463,73 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             if (!modEntry().AutomationEnable) return;
 
-            if (modConfig().AutoPauseFishing != PauseFishingBehaviour.Off.ToString()) AutoPauseFishing(modConfig().AutoPauseFishing, modConfig().WarnCount);
+            if (modConfig().AutoPauseFishing != Enum.GetName(PauseFishingBehaviour.Off)) AutoPauseFishing(modConfig().AutoPauseFishing, modConfig().WarnCount);
         }
 
         private void AutoPauseFishing(string autoPauseFishing, int numToWarn)
         {
-            if (Game1.timeOfDay >= modConfig().TimeToPause * 100 && NumWarnThisDay < numToWarn)
-            {
-                NumWarnThisDay++;
-                CommonHelper.PushErrorNotification(I18n.HudMessage_AutoDisable(), Game1.getTimeOfDayString(modConfig().TimeToPause * 100));
+            if (Game1.timeOfDay < modConfig().TimeToPause * 100 || NumWarnThisDay >= numToWarn) return;
 
-                if (autoPauseFishing == PauseFishingBehaviour.WarnAndPause.ToString())
-                {
-                    modEntry().ForceDisable();
-                    if (!Game1.IsMultiplayer) Game1.activeClickableMenu = new GameMenu();
-                }
+            NumWarnThisDay++;
+            CommonHelper.PushErrorNotification(I18n.HudMessage_AutoDisable(), Game1.getTimeOfDayString(modConfig().TimeToPause * 100));
+
+            if (autoPauseFishing != Enum.GetName(PauseFishingBehaviour.WarnAndPause)) return;
+
+            modEntry().ForceDisable();
+            if (!Game1.IsMultiplayer) Game1.activeClickableMenu = new GameMenu();
+        }
+
+        #endregion
+
+        #region On Inventory Changed
+
+        internal void AutoTrashJunk(InventoryChangedEventArgs e)
+        {
+            if (!modEntry().AutomationEnable || !modConfig().AutoTrashJunk) return;
+
+            List<Item> changedItems = [];
+            changedItems.AddRange(e.Added);
+            changedItems.AddRange(e.QuantityChanged.Select(newStacks => newStacks.Item));
+
+            foreach (Item newItem in changedItems.Where(newItem => CanTrashThisItem(newItem) && TrashConditionsMet(newItem)))
+            {
+                _itemsToTrash = _itemsToTrash.Prepend(newItem).ToList();
+                e.Player.removeItemFromInventory(newItem);
+                Game1.playSound("trashcan");
+                CommonHelper.PushWarnNotification(I18n.HudMessage_MoveTrashToJunk(), newItem.DisplayName, newItem.Stack);
             }
+
+            return;
+
+            bool CanTrashThisItem(Item itemToTrash)
+            {
+                return itemToTrash.canBeTrashed() && !modConfig().JunkIgnoreList.Contains(itemToTrash.QualifiedItemId);
+            }
+
+            bool TrashConditionsMet(Item itemToTrash)
+            {
+                int sellToStorePrice = Utility.getSellToStorePriceOfItem(itemToTrash, false);
+
+                return itemToTrash.Category == Object.junkCategory || (sellToStorePrice <= modConfig().JunkHighestPrice &&
+                                                                       ((itemToTrash.Category == Object.FishCategory && modConfig().AllowTrashFish) ||
+                                                                        (itemToTrash.Category != Object.FishCategory && SaveToTrashed(itemToTrash))));
+            }
+
+            bool SaveToTrashed(Item itemToTrash)
+            {
+                return itemToTrash is not (MeleeWeapon or FishingRod or Pan or Slingshot);
+            }
+        }
+
+        internal void ActualTrashJunk()
+        {
+            if (_itemsToTrash.Count <= 0) return;
+
+            CommonHelper.PushWarnNotification(I18n.HudMessage_ActualTrashJunk(), _itemsToTrash.Count);
+
+            foreach (Item? item in _itemsToTrash) Utility.trashItem(item);
+
+            _itemsToTrash.Clear();
         }
 
         #endregion
@@ -499,21 +559,34 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             else
                 ForgetPlayerPosition();
 
-            if (_fishingRod != null)
-            {
-                _fishingRod.UnlockCastPowerTimer = modConfig().ParsedUnlockCastPowerTime;
-                _fishingRod.SmartCastPower = 0;
-                _fishingRod.SmartCastPowerSaved = false;
-            }
+            _fishingRod?.ResetSmartCastPower();
+        }
+
+        internal void OnGameMenuOpen(GameMenu gameMenu)
+        {
+            _inventoryPage = gameMenu.pages[0] as InventoryPage;
+        }
+
+        internal void OnGameMenuClose()
+        {
+            _inventoryPage = null;
+        }
+
+        internal void OnTreasureMenuOpen(ItemGrabMenu itemGrabMenu)
+        {
+            _treasureChestMenu = itemGrabMenu;
+            _isInTreasureChestMenu = true;
+        }
+
+        internal void OnTreasureMenuClose()
+        {
+            _isInTreasureChestMenu = false;
+            _treasureChestMenu = null;
         }
 
         public void OnConfigSaved()
         {
-            if (_fishingRod == null) return;
-
-            _fishingRod.UnlockCastPowerTimer = modConfig().ParsedUnlockCastPowerTime;
-            _fishingRod.SmartCastPower = 0;
-            _fishingRod.SmartCastPowerSaved = false;
+            _fishingRod?.ResetSmartCastPower();
         }
 
         internal bool AlreadyCaughtFish(int minCaught = 1)

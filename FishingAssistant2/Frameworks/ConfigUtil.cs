@@ -83,6 +83,17 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             internal Func<string> Tooltip;
         }
 
+        internal class TextOption
+        {
+            internal Func<string> GetValue;
+
+            internal Action<string> SetValue;
+
+            internal Func<string> Name;
+
+            internal Func<string> Tooltip;
+        }
+
         #region Option Keybind
 
         internal readonly KeyBindOption CatchTreasure = new()
@@ -529,6 +540,18 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         #endregion
 
+        #region Option Text
+
+        internal readonly TextOption JunkIgnoreList = new()
+        {
+            Name = I18n.ConfigMenu_Option_JunkIgnoreList,
+            GetValue = () => string.Join(',', config().JunkIgnoreList),
+            SetValue = value => config().JunkIgnoreList = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Distinct().ToList(),
+            Tooltip = I18n.Tooltip_JunkIgnoreList
+        };
+
+        #endregion
+
         #region Options
 
         internal void AddKeyBind(KeyBindOption option)
@@ -556,6 +579,15 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         internal void AddNumber(FloatOption option)
         {
             configMenu?.AddNumberOption(modManifest, option.GetValue, option.SetValue, option.Name, min: option.Min, max: option.Max, interval: option.Interval, formatValue: option.FormatValue,
+                tooltip: option.Tooltip);
+        }
+
+        internal void AddText(TextOption option)
+        {
+            configMenu?.AddTextOption(modManifest,
+                getValue: option.GetValue,
+                setValue: option.SetValue,
+                name: option.Name,
                 tooltip: option.Tooltip);
         }
 

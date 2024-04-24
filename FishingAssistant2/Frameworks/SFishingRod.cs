@@ -21,6 +21,13 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         internal FishingRod Instance { get; set; } = instance;
 
+        internal void ResetSmartCastPower()
+        {
+            UnlockCastPowerTimer = modConfig().ParsedUnlockCastPowerTime;
+            SmartCastPower = 0;
+            SmartCastPowerSaved = false;
+        }
+
         #region Automation
 
         internal void AutoAttachBait()

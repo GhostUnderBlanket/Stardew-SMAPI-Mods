@@ -58,6 +58,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             helper.Events.GameLoop.DayStarted += OnDayStarted;
             helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
             helper.Events.GameLoop.TimeChanged += OnTimeChanged;
+            helper.Events.Player.Warped += OnWarped;
             helper.Events.Player.InventoryChanged += OnInventoryChanged;
             helper.Events.Display.RenderingHud += OnRenderingHud;
             helper.Events.Display.RenderedActiveMenu += OnRenderMenu;
@@ -110,6 +111,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             Assistant.DoOnTimeChangedAssistantTask();
         }
 
+        private void OnWarped(object? sender, WarpedEventArgs e)
+        {
+            Assistant.ActualTrashJunk();
+        }
+
         private void OnInventoryChanged(object? sender, InventoryChangedEventArgs e)
         {
             Assistant.AutoTrashJunk(e);
@@ -149,6 +155,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
                 Assistant.OnTreasureMenuOpen(itemGrabMenu);
             else if (e.OldMenu is ItemGrabMenu { source: ItemGrabMenu.source_fishingChest })
                 Assistant.OnTreasureMenuClose();
+
+            if (e.NewMenu is GameMenu gameMenu)
+                Assistant.OnGameMenuOpen(gameMenu);
+            else if (e.OldMenu is GameMenu)
+                Assistant.OnGameMenuClose();
         }
 
         private void OnButtonPressed(object? sender, ButtonPressedEventArgs e)
