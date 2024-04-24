@@ -73,7 +73,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             Game1.playSound("coin");
             AutomationEnable = false;
 
-            CommonHelper.PushToggleNotification(AutomationEnable, I18n.HudMessage_AutomationToggle());
+            CommonHelper.PushToggle(AutomationEnable, I18n.HudMessage_AutomationToggle());
         }
 
         #region Events

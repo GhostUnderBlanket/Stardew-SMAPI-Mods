@@ -51,7 +51,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
                     if (item.Stack == 0) Game1.player.removeItemFromInventory(item);
 
-                    CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), item.DisplayName, Instance.DisplayName);
+                    CommonHelper.PushWarning(Instance, I18n.HudMessage_AutoAttach(), item.DisplayName, Instance.DisplayName);
                 }
             }
             // Case where there is no bait attached. We simply attach the first instance of bait we see in the inventory onto the fishing rod.
@@ -63,7 +63,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
                     Instance.attachments[0] = (Object)item;
                     Game1.player.removeItemFromInventory(item);
-                    CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), item.DisplayName, Instance.DisplayName);
+                    CommonHelper.PushWarning(Instance, I18n.HudMessage_AutoAttach(), item.DisplayName, Instance.DisplayName);
 
                     break;
                 }
@@ -74,7 +74,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 if (modConfig().PreferredBait == "Any") modConfig().PreferredBait = "(O)685";
                 Object baits = ItemRegistry.Create<Object>(modConfig().PreferredBait, modConfig().BaitAmountToSpawn);
                 Instance.attachments[0] = baits;
-                CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttachSpawned(), baits.DisplayName, Instance.DisplayName);
+                CommonHelper.PushWarning(Instance, I18n.HudMessage_AutoAttachSpawned(), baits.DisplayName, Instance.DisplayName);
             }
         }
 
@@ -101,7 +101,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
                     Instance.attachments[attachmentSlot] = (Object)item;
                     Game1.player.removeItemFromInventory(item);
-                    CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttach(), item.DisplayName, Instance.DisplayName);
+                    CommonHelper.PushWarning(Instance, I18n.HudMessage_AutoAttach(), item.DisplayName, Instance.DisplayName);
 
                     break;
                 }
@@ -113,7 +113,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
                 Object tackle = ItemRegistry.Create<Object>(preferredTackle);
                 Instance.attachments[attachmentSlot] = tackle;
-                CommonHelper.PushNotification(HUDMessage.newQuest_type, I18n.HudMessage_AutoAttachSpawned(), tackle.DisplayName, Instance.DisplayName);
+                CommonHelper.PushWarning(Instance, I18n.HudMessage_AutoAttachSpawned(), tackle.DisplayName, Instance.DisplayName);
             }
         }
 

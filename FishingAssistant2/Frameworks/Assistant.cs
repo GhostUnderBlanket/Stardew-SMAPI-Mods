@@ -143,14 +143,14 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             {
                 if (!modConfig().AutoEatFood || (modConfig().AutoEatFood && !TryAutoEatFood()))
                 {
-                    CommonHelper.PushErrorNotification(I18n.HudMessage_LowStamina());
+                    CommonHelper.PushError(I18n.HudMessage_LowStamina());
                     modEntry().ForceDisable();
                 }
             }
 
             if (isInventoryFull)
             {
-                CommonHelper.PushErrorNotification(I18n.HudMessage_InventoryFull());
+                CommonHelper.PushError(I18n.HudMessage_InventoryFull());
                 modEntry().ForceDisable();
             }
 
@@ -185,7 +185,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 bestItem.Stack--;
                 if (bestItem.Stack == 0) player.removeItemFromInventory(bestItem);
 
-                CommonHelper.PushWarnNotification(I18n.HudMessage_AutoEatFood(), ItemRegistry.GetData(bestItem.QualifiedItemId).DisplayName);
+                CommonHelper.PushWarning(bestItem, I18n.HudMessage_AutoEatFood(), ItemRegistry.GetData(bestItem.QualifiedItemId).DisplayName);
 
                 return true;
             }
@@ -336,7 +336,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 modConfig().JunkIgnoreList.Add(item.QualifiedItemId);
                 modEntry().Helper.WriteConfig(modConfig());
 
-                CommonHelper.PushWarnNotification(I18n.HudMessage_AddToIgnoreList(), item.DisplayName);
+                CommonHelper.PushWarning(item, I18n.HudMessage_AddToIgnoreList(), item.DisplayName);
             }
 
             void OnExit()
@@ -426,7 +426,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                     else if (modConfig().ActionIfInventoryFull == ActionOnInventoryFull.Discard.ToString()) _treasureChestMenu.exitThisMenu();
 
                     _treasureChestMenu = null;
-                    CommonHelper.PushErrorNotification(I18n.HudMessage_InventoryFull());
+                    CommonHelper.PushError(I18n.HudMessage_InventoryFull());
                     modEntry().ForceDisable();
                 }
             }
@@ -471,7 +471,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             if (Game1.timeOfDay < modConfig().TimeToPause * 100 || NumWarnThisDay >= numToWarn) return;
 
             NumWarnThisDay++;
-            CommonHelper.PushErrorNotification(I18n.HudMessage_AutoDisable(), Game1.getTimeOfDayString(modConfig().TimeToPause * 100));
+            CommonHelper.PushError(I18n.HudMessage_AutoDisable(), Game1.getTimeOfDayString(modConfig().TimeToPause * 100));
 
             if (autoPauseFishing != Enum.GetName(PauseFishingBehaviour.WarnAndPause)) return;
 
@@ -496,7 +496,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 _itemsToTrash = _itemsToTrash.Prepend(newItem).ToList();
                 e.Player.removeItemFromInventory(newItem);
                 Game1.playSound("trashcan");
-                CommonHelper.PushWarnNotification(I18n.HudMessage_MoveTrashToJunk(), newItem.DisplayName, newItem.Stack);
+                CommonHelper.PushWarning(newItem, I18n.HudMessage_MoveTrashToJunk(), newItem.DisplayName, newItem.Stack);
             }
 
             return;
@@ -525,7 +525,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             if (_itemsToTrash.Count <= 0) return;
 
-            CommonHelper.PushWarnNotification(I18n.HudMessage_ActualTrashJunk(), _itemsToTrash.Count);
+            CommonHelper.PushWarning(I18n.HudMessage_ActualTrashJunk(), _itemsToTrash.Count);
 
             foreach (Item? item in _itemsToTrash) Utility.trashItem(item);
 
