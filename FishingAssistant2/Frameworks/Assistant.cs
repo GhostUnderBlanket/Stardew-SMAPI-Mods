@@ -496,7 +496,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
                 _itemsToTrash = _itemsToTrash.Prepend(newItem).ToList();
                 e.Player.removeItemFromInventory(newItem);
                 Game1.playSound("trashcan");
-                CommonHelper.PushWarning(newItem, I18n.HudMessage_MoveTrashToJunk(), newItem.DisplayName, newItem.Stack);
+                CommonHelper.PushWarning(newItem, I18n.HudMessage_MoveJunkToTrashCan(), newItem.DisplayName, newItem.Stack);
             }
 
             return;
@@ -527,7 +527,16 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
             CommonHelper.PushWarning(I18n.HudMessage_ActualTrashJunk(), _itemsToTrash.Count);
 
-            foreach (Item? item in _itemsToTrash) Utility.trashItem(item);
+            foreach (Item? item in _itemsToTrash)
+            {
+                if (item is Object && Game1.player.specialItems.Contains(item.ItemId))
+                    Game1.player.specialItems.Remove(item.ItemId);
+
+                if (Utility.getTrashReclamationPrice(item, Game1.player) > 0)
+                    Game1.player.Money += Utility.getTrashReclamationPrice(item, Game1.player);
+            }
+
+            Game1.playSound("trashcan");
 
             _itemsToTrash.Clear();
         }

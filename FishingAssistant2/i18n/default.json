@@ -112,7 +112,7 @@
   "hud-message.auto-attach": "Auto Attach {0} To {1}",
   "hud-message.auto-attach-spawned": "Auto Attach Spawned {0} To {1}",
   "hud-message.auto-eat-food": "Auto Eat {0}",
-  "hud-message.move-trash-to-junk": "Moved {0} x{1} to trash can",
+  "hud-message.move-junk-to-trash-can": "Moved {0} x{1} to trash can",
   "hud-message.actual-trash-junk": "Trashed {0} items in the trash can",
   "hud-message.add-to-ignore-list": "Ignore {0} from auto trash",
   /// TOOLTIP ///
@@ -169,5 +169,5 @@
   "tooltip.add-preserving-enchantment": "Toggle for adding Preserving enchantment to fishing rod",
   "tooltip.remove-when-unequipped": "Toggle for removing enchantment when fishing rod is unequipped",
   "tooltip.unlock-cast-power-time": "Time to hold cast button for X second to unlock cast power back to normal",
-  "tooltip.junk-ignore-list": "List of items to be excluded from automatic trash",
+  "tooltip.junk-ignore-list": "List of items to be excluded from automatic trash"
 }

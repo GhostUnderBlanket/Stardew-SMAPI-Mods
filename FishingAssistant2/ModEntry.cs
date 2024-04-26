@@ -37,6 +37,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
         private Object? _treasureSprite;
 
+        private readonly Rectangle[] _textureSource =
+        [
+            new Rectangle(20, 428, 10, 10), // Fishing Texture
+            new Rectangle(137, 412, 10, 11) // Treasure Texture
+        ];
+
         public bool CatchTreasure;
 
         public bool AutomationEnable;
@@ -224,25 +230,15 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             int boxCenterY = boxPosY + boxSize / 2;
             const int offset = boxSize / 4;
 
-            Rectangle[] rectangles =
-            {
-                new(0, 256, 60, 60), //Box Texture
-                new(20, 428, 10, 10), // Fishing Texture
-                new(137, 412, 10, 11) // Treasure Texture
-            };
-
-            IClickableMenu.drawTextureBox(Game1.spriteBatch, Game1.menuTexture, rectangles[0], boxPosX, boxPosY, boxSize, boxSize, Color.White * toolBarTransparency, drawShadow: false);
-
-            DrawIcon(AutomationEnable, rectangles[1], boxCenterX - iconSize / 2, boxPosY + offset, 2f);
-            DrawIcon(CatchTreasure, rectangles[2], boxCenterX - iconSize / 2, boxPosY + boxSize - offset - iconSize, 2f);
+            CommonHelper.DrawTextureBox(boxPosX, boxPosY, boxSize, Color.White * toolBarTransparency);
+            DrawToggleIcon(AutomationEnable, _textureSource[0], boxCenterX - iconSize / 2, boxPosY + offset);
+            DrawToggleIcon(CatchTreasure, _textureSource[1], boxCenterX - iconSize / 2, boxPosY + boxSize - offset - iconSize);
 
             return;
 
-            void DrawIcon(bool value, Rectangle source, int x, int y, float scale)
+            void DrawToggleIcon(bool value, Rectangle source, int x, int y, float scale = 2.0f)
             {
-                float iconTransparency = value ? 1 : 0.2f;
-                ClickableTextureComponent icon = new(new Rectangle(x, y, iconSize, iconSize), Game1.mouseCursors, source, scale);
-                icon.draw(Game1.spriteBatch, Color.White * toolBarTransparency * iconTransparency, 0);
+                CommonHelper.DrawToggleIcon(value, source, x, y, iconSize, scale);
             }
         }
 
@@ -311,7 +307,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
                 int textCenter = (int)(_textSize.X / 2);
 
                 // draw box of height and width at location
-                IClickableMenu.drawTextureBox(Game1.spriteBatch, Game1.menuTexture, new Rectangle(0, 256, 60, 60), x, y, _boxWidth, _boxHeight, Color.White, 1f, false);
+                CommonHelper.DrawTextureBox(x, y, _boxWidth, _boxHeight, Color.White, 1f, false);
 
                 Vector2 drawFishPos;
 
@@ -319,17 +315,17 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
                 {
                     //Calculate draw position for fish and draw at calculated position
                     drawFishPos = new Vector2(x + boxCenterX - spriteCenter, y + boxCenterY - spriteCenter - Margin);
-                    _fishSprite?.drawInMenu(Game1.spriteBatch, drawFishPos, spriteScale, 1.0f, 1.0f, StackDrawType.Hide, showFish ? Color.White : Color.Black * 0.8f, false);
+                    CommonHelper.DrawSprite(_fishSprite, drawFishPos, spriteScale, showFish ? Color.White : Color.Black * 0.8f);
 
                     // if showText, center the text x below the fish
-                    Game1.spriteBatch.DrawString(Game1.dialogueFont, _textValue, new Vector2(x + boxCenterX - textCenter, drawFishPos.Y + spriteSize), Color.Black, 0f, Vector2.Zero, TextScale,
-                        SpriteEffects.None, 0f);
+                    Vector2 textPos = new(x + boxCenterX - textCenter, drawFishPos.Y + spriteSize);
+                    CommonHelper.DrawString(_textValue, textPos, TextScale);
                 }
                 else
                 {
                     //Calculate draw position for fish and draw at calculated position
                     drawFishPos = new Vector2(x + boxCenterX - spriteCenter, y + boxCenterY - spriteCenter - Margin / 2);
-                    _fishSprite?.drawInMenu(Game1.spriteBatch, drawFishPos, spriteScale, 1.0f, 1.0f, StackDrawType.Hide, showFish ? Color.White : Color.Black * 0.8f, false);
+                    CommonHelper.DrawSprite(_fishSprite, drawFishPos, spriteScale, showFish ? Color.White : Color.Black * 0.8f);
                 }
 
                 // if show treasure draw treasure with fish icon
@@ -337,8 +333,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
                 {
                     _treasureSprite ??= new Object("693", 1);
 
-                    _treasureSprite.drawInMenu(Game1.spriteBatch, new Vector2(drawFishPos.X + TreasureOffsetX, drawFishPos.Y + TreasureOffsetY), 0.75f, 1.0f, 1.0f, StackDrawType.Hide, Color.White,
-                        false);
+                    Vector2 drawTreasurePos = new(drawFishPos.X + TreasureOffsetX, drawFishPos.Y + TreasureOffsetY);
+                    CommonHelper.DrawSprite(_treasureSprite, drawTreasurePos, 0.75f);
                 }
             }
         }

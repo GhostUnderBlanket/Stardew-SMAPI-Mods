@@ -111,7 +111,7 @@
   "hud-message.auto-attach": "ใส่ {0} ไปยัง {1} อัตโนมัติ",
   "hud-message.auto-attach-spawned": "เสก {0} ใส่ {1} อัตโนมัติ",
   "hud-message.auto-eat-food": "กิน {0} อัตโนมัติ",
-  "hud-message.move-trash-to-junk": "ย้าย {0} x{1} ไปยังถังขยะแล้ว",
+  "hud-message.move-junk-to-trash-can": "ย้าย {0} x{1} ไปยังถังขยะแล้ว",
   "hud-message.actual-trash-junk": "ทิ้ง {0} ราการในถังขยะแล้ว",
   "hud-message.add-to-ignore-list": "ละเว้น {0} จากการทิ้งอัตโนมัติแล้ว",
   /// TOOLTIP ///

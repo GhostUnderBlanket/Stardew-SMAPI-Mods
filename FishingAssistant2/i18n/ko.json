@@ -26,9 +26,12 @@
   "warn-and-pause": "알림 및 일시 중지",
   "skip-all": "모두 건너뛰기",
   "skip-only-caught": "잡은 물고기만 건너뛰기",
-  "instant-unlock": "Instant Unlock", //New
-  "never-unlock": "Never Unlock", //New
-  "second": "{0} Second", //New
+  "instant-unlock": "Instant Unlock",
+  //New
+  "never-unlock": "Never Unlock",
+  //New
+  "second": "{0} Second",
+  //New
   /// Config Menu ///
   "config-menu.page.general": "일반",
   "config-menu.page.mini-game": "미니게임",
@@ -53,7 +56,8 @@
   "config-menu.option.auto-trash-junk": "자동 쓰레기 휴지통",
   "config-menu.option.junk-highest-price": "쓰레기 최고 가격",
   "config-menu.option.allow-trash-fish": "쓰레기 허용",
-  "config-menu.option.junk-ignore-list": "Junk Ignore List", //New
+  "config-menu.option.junk-ignore-list": "Junk Ignore List",
+  //New
   "config-menu.option.auto-pause-fishing": "낚시 자동 일시 중지",
   "config-menu.option.time-to-pause": "시간 일시 중지",
   "config-menu.option.warn-count": "알림 횟수",
@@ -91,9 +95,12 @@
   /// FISHING ROD ///
   "config-menu.title.fishing-rod": "낚싯대",
   "config-menu.option.start-with-fishing-rod": "낚싯대로 시작",
-  "config-menu.option.default-cast-power": "Default Cast Power", //New
-  "config-menu.option.unlock-cast-power-time": "Unlock Cast Power Time", //New
-  "config-menu.option.reset-cast-power-to-default": "Reset Cast Power To Default", //New
+  "config-menu.option.default-cast-power": "Default Cast Power",
+  //New
+  "config-menu.option.unlock-cast-power-time": "Unlock Cast Power Time",
+  //New
+  "config-menu.option.reset-cast-power-to-default": "Reset Cast Power To Default",
+  //New
   "config-menu.option.infinite-bait": "미끼 무한",
   "config-menu.option.infinite-tackle": "무한 태클",
   /// Enchantment ///
@@ -112,9 +119,12 @@
   "hud-message.auto-attach": "{0}을(를) {1}에 자동 연결",
   "hud-message.auto-attach-spawned": "생성된 {0}을(를) {1}에 자동 연결",
   "hud-message.auto-eat-food": "{0} 자동 먹기",
-  "hud-message.move-trash-to-junk": "Moved {0} x{1} to trash can", //New
-  "hud-message.actual-trash-junk": "Trashed {0} items in the trash can", //New
-  "hud-message.add-to-ignore-list": "Ignore {0} from auto trash", //New
+  "hud-message.move-junk-to-trash-can": "Moved {0} x{1} to trash can",
+  //New
+  "hud-message.actual-trash-junk": "Trashed {0} items in the trash can",
+  //New
+  "hud-message.add-to-ignore-list": "Ignore {0} from auto trash",
+  //New
   /// TOOLTIP ///
   "tooltip.enable-automation-button": "이 모드의 자동화를 전환하는 버튼",
   "tooltip.catch-treasure-button": "낚시 미니 게임에서 보물 잡기 또는 무시를 전환하는 버튼",
@@ -168,6 +178,8 @@
   "tooltip.add-master-enchantment": "낚싯대에 마스터 마법을 추가하기 위한 토글",
   "tooltip.add-preserving-enchantment": "낚싯대에 보존 마법을 추가하기 위한 토글",
   "tooltip.remove-when-unequipped": "낚싯대가 장착 해제되었을 때 마법 부여 제거 토글",
-  "tooltip.unlock-cast-power-time": "Time to hold cast button for X second to unlock cast power back to normal", //New
-  "tooltip.junk-ignore-list": "List of items to be excluded from automatic trash", //New
+  "tooltip.unlock-cast-power-time": "Time to hold cast button for X second to unlock cast power back to normal",
+  //New
+  "tooltip.junk-ignore-list": "List of items to be excluded from automatic trash"
+  //New
 }
