@@ -10,10 +10,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         Func<ModConfig> config,
         Action reset,
         Action save,
-        Action onConfigSavedCallback)
+        Action<string, object> onFieldChangedCallback)
     {
-        internal readonly Action OnConfigSavedCallback = onConfigSavedCallback;
-
         private IGenericModConfigMenuApi? _configMenu;
 
         private ConfigUtil? _configUtil;
@@ -25,6 +23,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             if (_configMenu is null) return;
 
             _configMenu.Register(modManifest, reset, save);
+            _configMenu.OnFieldChanged(modManifest, OnFieldChanged);
 
             _configUtil = new ConfigUtil(_configMenu, modManifest, config);
 
@@ -69,7 +68,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             _configUtil.AddBool(_configUtil.SpawnTackleIfDontHave);
 
             // MiniGame Page
-            AddPage(I18n.ConfigMenu_Page_General, "MiniGame");
+            AddPage(I18n.ConfigMenu_Page_MiniGame, "MiniGame");
             AddSectionTitle(I18n.ConfigMenu_Title_Fishing);
             _configUtil.AddDropDown(_configUtil.SkipFishingMiniGame);
             _configUtil.AddBool(_configUtil.InstantFishBite);
@@ -91,7 +90,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             _configUtil.AddBool(_configUtil.ShowLegendaryFish);
 
             // FishingRod Page
-            AddPage(I18n.ConfigMenu_Page_General, "FishingRod");
+            AddPage(I18n.ConfigMenu_Page_FishingRod, "FishingRod");
             AddSectionTitle(I18n.ConfigMenu_Title_FishingRod);
             _configUtil.AddDropDown(_configUtil.StartWithFishingRod);
             _configUtil.AddNumber(_configUtil.DefaultCastPower);
@@ -105,6 +104,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             _configUtil.AddBool(_configUtil.AddMasterEnchantment);
             _configUtil.AddBool(_configUtil.AddPreservingEnchantment);
             _configUtil.AddBool(_configUtil.RemoveWhenUnequipped);
+        }
+
+        private void OnFieldChanged(string uniqueId, object changedValue)
+        {
+            onFieldChangedCallback?.Invoke(uniqueId, changedValue);
         }
 
         #region Warpper

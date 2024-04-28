@@ -53,8 +53,7 @@
   "config-menu.option.auto-trash-junk": "Automatisch Müll recyceln",
   "config-menu.option.junk-highest-price": "Höchster Wert des Müll",
   "config-menu.option.allow-trash-fish": "Fisch recyceln erlauben",
-  "config-menu.option.junk-ignore-list": "Junk Ignore List",
-  //New
+  "config-menu.option.junk-ignore-list": "Junk Ignore List", //New
   "config-menu.option.auto-pause-fishing": "Auto Pause Fischen",
   "config-menu.option.time-to-pause": "Zeit für Pause",
   "config-menu.option.warn-count": "Anzahl der Warnungen",
@@ -112,12 +111,9 @@
   "hud-message.auto-attach": "Automatisch anbringen {0} To {1}",
   "hud-message.auto-attach-spawned": "Automatisch Erzeugtes anbringen {0} To {1}",
   "hud-message.auto-eat-food": "Automatisch Essen {0}",
-  "hud-message.move-junk-to-trash-can": "Moved {0} x{1} to trash can",
-  //New
-  "hud-message.actual-trash-junk": "Trashed {0} items in the trash can",
-  //New
-  "hud-message.add-to-ignore-list": "Ignore {0} from auto trash",
-  //New
+  "hud-message.move-junk-to-trash-can": "Moved {0} x{1} to trash can", //New
+  "hud-message.actual-trash-junk": "Trashed {0} items in the trash can", //New
+  "hud-message.add-to-ignore-list": "Ignore {0} from auto trash", //New
   /// TOOLTIP ///
   "tooltip.enable-automation-button": "Taste zum Umschalten der Automatisierung dieses Mods",
   "tooltip.catch-treasure-button": "Taste zum Umschalten zwischen Fangen und Ignorieren von Schätzen im Angel-Minispiel",
@@ -172,6 +168,5 @@
   "tooltip.add-preserving-enchantment": "Umschalten zum Hinzufügen der Bewahrungsverzauberung zur Angelrute",
   "tooltip.remove-when-unequipped": "Umschalten zum Entfernen der Verzauberung, wenn die Angelrute nicht ausgerüstet ist",
   "tooltip.unlock-cast-power-time": "Die Zeit, wie lange die Auswurftaste in Sekunden gehalten wird, um die Auswurfstärke auf Standrad zurück zu setzen",
-  "tooltip.junk-ignore-list": "List of items to be excluded from automatic trash"
-  //New
+  "tooltip.junk-ignore-list": "List of items to be excluded from automatic trash", //New
 }

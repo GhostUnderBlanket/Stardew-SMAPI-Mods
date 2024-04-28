@@ -62,6 +62,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             internal Action<int> SetValue;
 
             internal Func<string> Tooltip;
+
+            internal string UniqueID = null;
         }
 
         internal class FloatOption
@@ -81,6 +83,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             internal Action<float> SetValue;
 
             internal Func<string> Tooltip;
+
+            internal string UniqueID = null;
         }
 
         internal class TextOption
@@ -532,10 +536,11 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             Tooltip = I18n.Tooltip_UnlockCastPowerTime,
             GetValue = () => config().UnlockCastPowerTime,
             SetValue = value => config().UnlockCastPowerTime = value,
-            Min = 0f,
-            Max = 3f,
-            Interval = 1f,
-            FormatValue = ParseUnlockCastPowerTime
+            Min = 0,
+            Max = 3,
+            Interval = 1,
+            FormatValue = ParseUnlockCastPowerTime,
+            UniqueID = "ChibiKyu.FishingAssistant2.UnlockCastPowerTime"
         };
 
         #endregion
@@ -579,16 +584,12 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         internal void AddNumber(FloatOption option)
         {
             configMenu?.AddNumberOption(modManifest, option.GetValue, option.SetValue, option.Name, min: option.Min, max: option.Max, interval: option.Interval, formatValue: option.FormatValue,
-                tooltip: option.Tooltip);
+                tooltip: option.Tooltip, fieldId: option.UniqueID);
         }
 
         internal void AddText(TextOption option)
         {
-            configMenu?.AddTextOption(modManifest,
-                getValue: option.GetValue,
-                setValue: option.SetValue,
-                name: option.Name,
-                tooltip: option.Tooltip);
+            configMenu?.AddTextOption(modManifest, option.GetValue, option.SetValue, option.Name, option.Tooltip);
         }
 
         #endregion
@@ -652,8 +653,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
         {
             return value switch
             {
-                <= 0.0f => I18n.InstantUnlock(),
-                >= 3.0f => I18n.NeverUnlock(),
+                <= 0 => I18n.InstantUnlock(),
+                >= 3 => I18n.NeverUnlock(),
                 _ => string.Format(I18n.Second(), value)
             };
         }

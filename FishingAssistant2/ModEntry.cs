@@ -37,12 +37,6 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
         private Object? _treasureSprite;
 
-        private readonly Rectangle[] _textureSource =
-        [
-            new Rectangle(20, 428, 10, 10), // Fishing Texture
-            new Rectangle(137, 412, 10, 11) // Treasure Texture
-        ];
-
         public bool CatchTreasure;
 
         public bool AutomationEnable;
@@ -59,6 +53,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
             Config = helper.ReadConfig<ModConfig>();
 
+            helper.Events.Multiplayer.ModMessageReceived += OnModMessageReceived;
+            helper.Events.Multiplayer.PeerConnected += OnPeerConnected;
+
             helper.Events.GameLoop.GameLaunched += OnGameLaunched;
             helper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
             helper.Events.GameLoop.DayStarted += OnDayStarted;
@@ -72,6 +69,24 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             helper.Events.Input.ButtonPressed += OnButtonPressed;
 
             Assistant = new Assistant(() => this, () => Config);
+        }
+
+        private void OnPeerConnected(object? sender, PeerConnectedEventArgs e)
+        {
+            foreach (IMultiplayerPeer peer in Helper.Multiplayer.GetConnectedPlayers())
+            {
+                if (peer is { HasSmapi: true, IsHost: true })
+                    Helper.Multiplayer.SendMessage("Test Hello World", "Notify", [ModManifest.UniqueID], [peer.PlayerID]);
+            }
+        }
+
+        private void OnModMessageReceived(object? sender, ModMessageReceivedEventArgs e)
+        {
+            if (e.FromModID == ModManifest.UniqueID && e.Type == "Notify")
+            {
+                string message = e.ReadAs<string>();
+                Monitor.Log($"message: {message}");
+            }
         }
 
         public void ForceDisable()
@@ -94,8 +109,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             {
                 Helper.WriteConfig(Config);
                 Config = Helper.ReadConfig<ModConfig>();
-                ConfigMenu.OnConfigSavedCallback?.Invoke();
-            }, Assistant.OnConfigSaved);
+            }, Assistant.OnFieldChanged);
 
             ConfigMenu.RegisterModConfigMenu();
         }
@@ -231,8 +245,8 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
             const int offset = boxSize / 4;
 
             CommonHelper.DrawTextureBox(boxPosX, boxPosY, boxSize, Color.White * toolBarTransparency);
-            DrawToggleIcon(AutomationEnable, _textureSource[0], boxCenterX - iconSize / 2, boxPosY + offset);
-            DrawToggleIcon(CatchTreasure, _textureSource[1], boxCenterX - iconSize / 2, boxPosY + boxSize - offset - iconSize);
+            DrawToggleIcon(AutomationEnable, TextureSource.Fishing, boxCenterX - iconSize / 2, boxPosY + offset);
+            DrawToggleIcon(CatchTreasure, TextureSource.Treasure, boxCenterX - iconSize / 2, boxPosY + boxSize - offset - iconSize);
 
             return;
 

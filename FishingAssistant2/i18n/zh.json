@@ -26,12 +26,9 @@
   "warn-and-pause": "警告并暂停",
   "skip-all": "跳过所有",
   "skip-only-caught": "仅跳过捕获过的鱼",
-  "instant-unlock": "立即解锁",
-  //New
-  "never-unlock": "从不解锁",
-  //New
-  "second": "{0} 秒",
-  //New
+  "instant-unlock": "立即解锁", //New
+  "never-unlock": "从不解锁", //New
+  "second": "{0} 秒", //New
   /// Config Menu ///
   "config-menu.page.general": "常规设置",
   "config-menu.page.mini-game": "小游戏设置",
@@ -62,8 +59,7 @@
   "config-menu.option.auto-trash-junk": "自动丢弃垃圾",
   "config-menu.option.junk-highest-price": "低于多少价值的垃圾(鱼)会被丢弃",
   "config-menu.option.allow-trash-fish": "允许自动丢弃鱼",
-  "config-menu.option.junk-ignore-list": "Junk Ignore List",
-  //New
+  "config-menu.option.junk-ignore-list": "Junk Ignore List", //New
   "config-menu.option.auto-attach-bait": "自动装备鱼饵",
   "config-menu.option.prefer-bait": "首选鱼饵",
   "config-menu.option.spawn-bait-if-dont-have": "没有鱼饵时凭空生成",
@@ -115,12 +111,9 @@
   "hud-message.auto-attach": "自动将 {0} 挂到了 {1} 上",
   "hud-message.auto-attach-spawned": "自动生成了 {0} 到 {1} 上",
   "hud-message.auto-eat-food": "自动吃掉了 {0}",
-  "hud-message.move-junk-to-trash-can": "Moved {0} x{1} to trash can",
-  //New
-  "hud-message.actual-trash-junk": "Trashed {0} items in the trash can",
-  //New
-  "hud-message.add-to-ignore-list": "Ignore {0} from auto trash",
-  //New
+  "hud-message.move-junk-to-trash-can": "Moved {0} x{1} to trash can", //New
+  "hud-message.actual-trash-junk": "Trashed {0} items in the trash can", //New
+  "hud-message.add-to-ignore-list": "Ignore {0} from auto trash", //New
   /// TOOLTIP ///
   "tooltip.enable-automation-button": "用于开关自动钓鱼的按钮",
   "tooltip.catch-treasure-button": "用于开关钓鱼小游戏中自动抓取宝箱的按钮",
@@ -175,6 +168,5 @@
   "tooltip.add-preserving-enchantment": "给手持的鱼竿添加耐用附魔",
   "tooltip.remove-when-unequipped": "当未手持鱼竿时，移除鱼竿上的附魔",
   "tooltip.unlock-cast-power-time": "按住抛竿键多少秒后解锁抛竿力度，使抛竿力度开始浮动(设置为立即解锁则手动抛竿为原版浮动力度抛竿，不影响自动抛竿力度)",
-  "tooltip.junk-ignore-list": "List of items to be excluded from automatic trash"
-  //New
+  "tooltip.junk-ignore-list": "List of items to be excluded from automatic trash", //New
 }

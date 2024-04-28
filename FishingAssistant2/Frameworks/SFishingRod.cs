@@ -13,19 +13,16 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
     {
         private readonly List<BaseEnchantment> _addedEnchantments = new();
 
-        internal float SmartCastPower;
+        private float? _smartCastPower;
 
-        internal bool SmartCastPowerSaved;
-
-        internal float UnlockCastPowerTimer = modConfig().ParsedUnlockCastPowerTime;
+        internal float _unlockCastPowerTimer = modConfig().UnlockCastPowerTime * 60;
 
         internal FishingRod Instance { get; set; } = instance;
 
-        internal void ResetSmartCastPower()
+        internal void ResetSmartCastPower(float changedValue = -1)
         {
-            UnlockCastPowerTimer = modConfig().ParsedUnlockCastPowerTime;
-            SmartCastPower = 0;
-            SmartCastPowerSaved = false;
+            _unlockCastPowerTimer = (changedValue != -1 ? changedValue : modConfig().UnlockCastPowerTime) * 60;
+            _smartCastPower = null;
         }
 
         #region Automation
@@ -133,16 +130,15 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
 
         internal void OverrideCastPower()
         {
-            if (Instance.isTimingCast && UnlockCastPowerTimer-- <= 0 && modConfig().UnlockCastPowerTime < 3f)
+            if (Instance.isTimingCast && _unlockCastPowerTimer-- <= 0 && modConfig().UnlockCastPowerTime < 3f)
             {
-                UnlockCastPowerTimer = 0;
-                SmartCastPower = Instance.castingPower;
-                SmartCastPowerSaved = true;
+                _unlockCastPowerTimer = 0;
+                _smartCastPower = Instance.castingPower;
             }
 
-            if (Instance.castedButBobberStillInAir) UnlockCastPowerTimer = modConfig().ParsedUnlockCastPowerTime;
+            if (Instance.castedButBobberStillInAir) _unlockCastPowerTimer = modConfig().UnlockCastPowerTime * 60;
 
-            Instance.castingPower = SmartCastPowerSaved ? SmartCastPower : modConfig().DefaultCastPower / 100.0f + 0.01f;
+            Instance.castingPower = _smartCastPower ?? modConfig().DefaultCastPower / 100.0f + 0.01f;
         }
 
         internal void OverrideTimeUntilFishBite()

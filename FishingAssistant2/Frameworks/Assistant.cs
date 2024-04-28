@@ -593,9 +593,9 @@ namespace ChibiKyu.StardewMods.FishingAssistant2.Frameworks
             _treasureChestMenu = null;
         }
 
-        public void OnConfigSaved()
+        public void OnFieldChanged(string uniquesId, object changedValue)
         {
-            _fishingRod?.ResetSmartCastPower();
+            if (uniquesId == "ChibiKyu.FishingAssistant2.UnlockCastPowerTime") _fishingRod?.ResetSmartCastPower((float)changedValue);
         }
 
         internal bool AlreadyCaughtFish(int minCaught = 1)

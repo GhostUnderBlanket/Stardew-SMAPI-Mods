@@ -10,8 +10,6 @@ namespace ChibiKyu.StardewMods.Common
 {
     public static class CommonHelper
     {
-        private static readonly Rectangle TextureBoxSource = new(0, 256, 60, 60);
-
         private static void PushNotification(int whatType, Item? item, string key, params object[] args)
         {
             if (!Context.IsWorldReady) return;
@@ -66,7 +64,14 @@ namespace ChibiKyu.StardewMods.Common
             obj?.drawInMenu(Game1.spriteBatch, drawPos, scale, 1.0f, 1.0f, StackDrawType.Hide, color, false);
         }
 
-        internal static void DrawToggleIcon(bool value, Rectangle source, int x, int y, int size = 20, float scale = 1.0f, float trueTrans = 1.0f, float falseTrans = 0.2f)
+        internal static void DrawToggleIcon(bool value,
+            Rectangle source,
+            int x,
+            int y,
+            int size = 20,
+            float scale = 1.0f,
+            float trueTrans = 1.0f,
+            float falseTrans = 0.2f)
         {
             ClickableTextureComponent icon = new(new Rectangle(x, y, size, size), Game1.mouseCursors, source, scale);
             float transparency = value ? trueTrans : falseTrans;
@@ -78,9 +83,15 @@ namespace ChibiKyu.StardewMods.Common
             DrawTextureBox(x, y, size, size, color, drawShadow: drawShadow);
         }
 
-        internal static void DrawTextureBox(int x, int y, int width, int height, Color color, float scale = 1f, bool drawShadow = false)
+        internal static void DrawTextureBox(int x,
+            int y,
+            int width,
+            int height,
+            Color color,
+            float scale = 1f,
+            bool drawShadow = false)
         {
-            IClickableMenu.drawTextureBox(Game1.spriteBatch, Game1.menuTexture, TextureBoxSource, x, y, width, height, color, scale, drawShadow);
+            IClickableMenu.drawTextureBox(Game1.spriteBatch, Game1.menuTexture, TextureSource.TextureBox, x, y, width, height, color, scale, drawShadow);
         }
     }
 }

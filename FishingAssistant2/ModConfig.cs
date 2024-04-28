@@ -150,7 +150,7 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
         public int DefaultCastPower { get; set; } = 100;
 
         /// <summary>Time to hold cast button for X second to unlock cast power back to normal</summary>
-        public float UnlockCastPowerTime { get; set; } = 1;
+        public float UnlockCastPowerTime { get; set; } = 1.0f;
 
         /// <summary>Make your fishing bait last indefinitely</summary>
         public bool InfiniteBait { get; set; } = false;
@@ -173,7 +173,5 @@ namespace ChibiKyu.StardewMods.FishingAssistant2
 
         /// <summary>Toggle for removing enchantment when fishing rod is unequipped</summary>
         public bool RemoveWhenUnequipped { get; set; } = true;
-
-        internal float ParsedUnlockCastPowerTime => UnlockCastPowerTime * 60;
     }
 }
